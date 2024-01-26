@@ -6,22 +6,18 @@
 				<img src="../../../assets/images/logo.svg" class="mb-5" alt="">
 				<div class="area-login px-4 mt-2">
 
-					<h1 class="title-login">Bem-vindo(a) de volta</h1>
-					<p>Preencha seus dados para acessar a sua conta</p>
+					<h1 class="title-login">Recuperação de senha</h1>
+					<p>Insira seu email para enviarmos as informações necessárias para recuperar a sua senha</p>
 
 					<form>
 						<div class="mb-3">
 							<label for="exampleInputEmail1" class="form-label">Email </label>
 							<input type="email" class="form-control" name="email" placeholder="">
 						</div>
-						<div class="mb-3">
-							<label for="exampleInputPassword1" class="form-label">Senha</label>
-							<input type="password" class="form-control" name="senha">
-						</div>
-						<button type="submit" class="btn btn-dark bot mt-4">Acessar sua conta</button>
+						<button type="submit" class="btn btn-dark bot mt-4">Recuperar senha</button>
 					</form>
-					<div class="login-links d-flex justify-content-between mt-5">
-						<a href="">Esqueci a senha</a><a href="" style="color: #C66976;">Ainda não tenho cadastro</a>
+					<div class="login-links d-flex justify-content-center mt-5">
+						<a href="">Já tenho uma conta</a>
 					</div>
 				</div>
 			</div>
@@ -39,6 +35,6 @@
 </template>
 <script>
 export default {
-	name: 'LoginView'
+	name: 'RecoveryView'
 }
 </script>
