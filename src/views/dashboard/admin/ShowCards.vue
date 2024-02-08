@@ -6,7 +6,7 @@
       <!-- Adicione mais itens de menu aqui, se necessário -->
     </Sidebar>
 
-    <div class="main p-3">
+    <div class="main p-3 bg-dark">
 
       <h1 class="text-center">teste de funcionamento</h1>
 

@@ -1,16 +1,16 @@
 <template>
-  <aside id="sidebar">
+  <aside id="sidebar" class="expand">
     <div class="box d-flex flex-column justify-content-center">
       <div class="d-flex">
         <button class="toggle-btn" type="button" @click="toggleSidebar">
-          <img src="brenner2.webp" alt="">
+          <i class="lni lni-grid-alt"></i>
         </button>
         <div class="sidebar-logo">
-          <span>Brenner</span>
+          <span>Olá, User</span>
         </div>
       </div>
-      <ul class="sidebar-nav">
-        <SidebarItem icon="lni-user" text="Profile" />
+      <ul class="sidebar-nav text-light">
+        <SidebarItem icon="../../../assets/images/icons/chart.svg" text="Profile" />
         <SidebarItem icon="lni-agenda" text="Task" />
         <!-- Adicione mais itens de menu aqui, se necessário -->
       </ul>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import SidebarItem from '@/components/SidebarItem.vue'; // Caminho para o arquivo SidebarItem.vue
+import SidebarItem from './SidebarItem.vue';
 
 export default {
   components: {

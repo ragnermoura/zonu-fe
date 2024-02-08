@@ -1,35 +1,33 @@
 <template>
-  <li class="sidebar-item">
+  <!-- <li class="sidebar-item">
     <a href="#" class="sidebar-link" @click="handleItemClick">
       <i :class="iconClass"></i>
       <span>{{ text }}</span>
     </a>
-  </li>
+  </li> -->
+
+  <li class="sidebar-item">
+  <a href="#" class="sidebar-link {{ isFirstItem ? ' active' : '' }}" @click="handleItemClick">
+    <img :src="icon" alt="Icon">
+    <span>{{ text }}</span>
+  </a>
+</li>
+
 </template>
 
 <script>
 export default {
   props: {
-    icon: String,
     text: String,
-    url: String // Adicionamos uma nova propriedade para receber a URL da página
-  },
-  computed: {
-    iconClass() {
-      return `lni ${this.icon}`;
-    }
+    isFirstItem: Boolean,
+    icon: String, // Adiciona a prop icon para receber o caminho da imagem do ícone
   },
   methods: {
     handleItemClick() {
-      // Aqui você pode definir o que acontece quando um item do menu é clicado
-      console.log("Item do menu clicado:", this.text);
-      if (this.url) {
-        // Se a propriedade url estiver definida, navega para a página correspondente
-        window.location.href = this.url;
-      }
+      // Aqui você pode definir o comportamento quando o item do sidebar for clicado
     }
   }
-};
+}
 </script>
 
 <style scoped>

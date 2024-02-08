@@ -4,6 +4,7 @@ import LetsGoView from '../views/auth/LetsGoView.vue'
 import CadEmpresaView from '../views/auth/CadEmpresaView.vue'
 import CadRespEmpresaView from '../views/auth/CadRespEmpresaView.vue'
 import RecoveryView from '../views/auth/RecoveryView.vue'
+import ShowCards from '../views/dashboard/admin/ShowCards.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/recuperar-senha',
       name: 'recuperar-senha',
       component: RecoveryView
+    },
+    {
+      path: '/listar',
+      name: 'listar-cards',
+      component: ShowCards
     },
     
   ]
