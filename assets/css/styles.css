@@ -62,3 +62,7 @@ body {
   border-radius:   5px 0 0 5px;
 } 
 
+
+.btn-group{
+  width: 100%;
+}
