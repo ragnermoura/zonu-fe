@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+
         <Sidebar />
         <div class="main">
             <Navbar />
@@ -176,18 +177,29 @@
                     </div>
                 </div>
             </main>
+            <Footer/>
         </div>
 
+       
     </div>
 </template>
 <script>
 import Sidebar from '../../components/sidebar/index.vue'
 import Navbar from '../../components/navbar/index.vue'
+import Footer from '../../components/footer/index.vue'
 export default {
     name: 'MainView',
+    data() {
+        return {
+            
+        }
+    },
     components: {
         Sidebar,
-        Navbar
-    }
+        Navbar,
+        Footer
+    },
+   
+
 }
 </script>
