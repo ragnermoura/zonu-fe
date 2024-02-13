@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/auth/LoginView.vue'
-import LetsGoView from '../views/auth/LetsGoView.vue'
-import CadEmpresaView from '../views/auth/CadEmpresaView.vue'
-import CadRespEmpresaView from '../views/auth/CadRespEmpresaView.vue'
+import CadastroView from '../views/auth/CadastroView.vue'
 import RecoveryView from '../views/auth/RecoveryView.vue'
+import MainView from '../views/dashboard/MainView.vue'
+import CadImovelView from '../views/dashboard/CadImovelView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,26 +14,25 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/vamos-comecar',
-      name: 'vamos-comecar',
-      component: LetsGoView
-    },    
+      path: '/cadastro',
+      name: 'cadastro',
+      component: CadastroView
+    },  
     {
-      path: '/cadastrar-empresa',
-      name: 'cadastrar-empresa',
-      component: CadEmpresaView
-    },    
-    {
-      path: '/cadastrar-responsavel',
-      name: 'cadastrar-responsavel',
-      component: CadRespEmpresaView
-    },
-    {
-      path: '/recuperar-senha',
-      name: 'recuperar-senha',
+      path: '/recovery',
+      name: 'recovery',
       component: RecoveryView
-    },
-    
+    },  
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: MainView
+    },  
+    {
+      path: '/novo-imovel',
+      name: 'novo-imovel',
+      component: CadImovelView
+    },  
   ]
 })
 

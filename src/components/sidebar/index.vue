@@ -1,0 +1,143 @@
+<template>
+    <nav id="sidebar" class="sidebar js-sidebar" :class="{ 'collapsed': isCollapsed }">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="index.html">
+                <span class="align-middle">
+                    <img src="../../../assets/images/logo.svg" class="logomin mb-3" alt="" srcset="">
+
+                </span>
+            </a>
+
+            <ul class="sidebar-nav" style="margin-top: -30px !important;">
+                <li class="sidebar-header">
+                    Administrador
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/dashboard">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/usuarios">
+                        <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Usuários <span
+                                class="badge text-bg-info">Admin Zonu</span>
+                        </span>
+                    </a>
+                </li>
+
+
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/clientes">
+                        <i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Clientes
+                        </span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/api-token-admin">
+                        <i class="align-middle" data-feather="code"></i> <span class="align-middle">Api <span
+                                class="badge text-bg-success">Tokens</span></span>
+                    </a>
+                </li>
+
+                <li class="sidebar-header">
+                    Gestão
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/dashboard-client">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-imovel">
+                        <i class="align-middle" data-feather="shield"></i> <span class="align-middle">Novo imóvel</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ui-forms.html">
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Meus
+                            históricos</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ui-cards.html">
+                        <i class="align-middle" data-feather="layers"></i> <span class="align-middle">Meu plano</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="pages-profile.html">
+                        <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Usuários <span
+                                class="badge text-bg-info">Plataforma</span>
+                        </span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="pages-sign-in.html">
+                        <i class="align-middle" data-feather="home"></i> <span class="align-middle">Meus imóveis</span>
+                    </a>
+                </li>
+
+
+
+            </ul>
+
+
+        </div>
+    </nav>
+</template>
+
+<script>
+
+
+export default {
+    name: 'SideBar',
+
+    data() {
+        return {
+            token: '',
+            isCollapsed: this.defaultCollapsed,
+        }
+    },
+  
+    created() {
+        if (this.$route.path === '/novo-imovel') {
+            this.isCollapsed = true;
+        }
+    },
+    mounted() {
+       
+        let token = localStorage.getItem('token');
+
+        // if (!token || token === 'null') {
+        //     window.location.href = "/";
+        // } else {
+        //     try {
+        //         let decode = jwtDecode(token);
+        //         this.token = decode;
+
+        //         if (decode.id_status == 2) {
+
+        //             console.log('Status do token inválido:', decode.id_status);
+        //             window.location.href = "/";
+
+        //         }
+        //     } catch (error) {
+        //         console.error('Erro ao decodificar token:', error);
+        //     }
+        // }
+    }
+
+
+
+}
+</script>        

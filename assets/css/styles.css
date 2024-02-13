@@ -1,11 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css);
 @import url(auth.css);
+@import url(skeleton.css);
+@import url(app.css);
 
-body{
+
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
+.logomin {
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.btn-active {
+  background-color: black !important;/* Fundo preto */
+  color: white; /* Texto branco */
+}
+
+.btn-inactive {
+  background-color: transparent; /* Fundo transparente */
+  color: black; /* Texto preto */
+  border: none; /* Opcional: adicione uma borda preta */
+}
+
+.vertical-hr {
+  height: 30px; /* Ajuste conforme a altura desejada */
+  width: 1px;
+  background-color: black;
+  margin-left: 6px;
+}
+
+.avatar-null {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #212e3c;
+  color: #FFF;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.btn-outline-danger, .btn-outline-success{
+  width: 100%;
+  padding-top: 12.9px;
+  padding-bottom: 12.9px;
+  background-color: #fff;
+}
+
+.btn-outline-danger{
+  border-radius:   0 5px 5px 0;
+}
+.btn-outline-success{
+  border-radius:   5px 0 0 5px;
+} 
 
