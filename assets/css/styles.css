@@ -82,3 +82,18 @@ body {
   width: 100px;
   margin-top: 20%;
 }
+
+
+input[type="file"] {
+  display: none;
+}
+label[for="formFile"] {
+  padding: 20px 10px;
+  width: 200px;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  border-radius: 5px;
+}
