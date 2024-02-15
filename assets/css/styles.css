@@ -70,6 +70,23 @@ body {
   border-radius: 5px 0 0 5px;
 }
 
+.selectDay .btn-outline-danger,
+.selectDay .btn-outline-success {
+  width: 100%;
+  padding-top: 12.9px;
+  padding-bottom: 12.9px;
+  background-color: #fff;
+}
+
+.selectDayMiddle {
+  border-radius: 0 !important;
+}
+
+.selectDaySuccess {
+  border-radius: 0 5px 5px 0 !important;
+}
+
+
 
 .btn-group {
   width: 100%;
