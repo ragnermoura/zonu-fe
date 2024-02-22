@@ -235,7 +235,416 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Proprietário
                                   <small class="text-danger">*
                                   </small><small>(Privado)</small>
+                                  <button type="button" class="btn btn-success" @click="handleprop()"
+                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    <i class="fa fa-plus"></i> Adicionar
+                                  </button>
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="selectProprietario">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-3 mt-2">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Corretor
+                                  Responsável <small class="text-danger">*
+                                  </small>
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="selectCorretor">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-3 mt-2">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Agenciador
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="selectAgenciador">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Tipo/Subtipo
+                                  <small class="text-danger">*
+                                  </small>
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="tipoImovel">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Perfil do
+                                  imóvel <small class="text-danger">*
+                                  </small>
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="perfilImovel">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Situação
+                                  <small
+                                      class="text-danger">*
+                                  </small>
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="situacaoImovel">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Ano da
+                                  construção <small class="text-danger">*
+                                  </small>
+                                </label>
+
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                       placeholder="Ex.: 2015" v-model="anoImovel"/>
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Incorporação
+                                  <small class="text-danger">*
+                                  </small>
+                                </label>
+
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                       placeholder="Digite..." v-model="incorporacao"/>
+
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Posição Solar
+                                  <small class="text-danger">*
+                                  </small>
+                                </label>
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="posicaoSolar">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Terreno
+                                  <small
+                                      class="text-danger">*
+                                  </small>
+                                </label>
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off"
+                                         value="Plano" name="selectTerreno" 
+                                         v-model="selectTerreno">
+                                  <label class="btn btn-outline-success" for="btnTerreno1">Plano</label>
+
+                                  <input type="radio" class="btn-check" id="btnTerreno2" autocomplete="off"
+                                         value="Aclive" name="selectTerreno" 
+                                         v-model="selectTerreno">
+                                  <label class="btn btn-outline-success" for="btnTerreno2">Aclive</label>
+
+                                  <input type="radio" class="btn-check" id="btnTerreno3" autocomplete="off"
+                                         value="Declive" name="selectTerreno"  v-model="selectTerreno">
+                                  <label class="btn btn-outline-success" for="btnTerreno3">Declive</label>
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Próximo ao
+                                  mar?<small class="text-danger">*
+                                  </small>
+                                </label>
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="proximoMar">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Averbado
+                                </label>
+
+                                <br>
+
+                                <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" name="selectAverbado" id="selectAverbado1"
+                                         autocomplete="off"
+                                         value="Sim" v-model="selectAverbado">
+                                  <label class="btn btn-outline-success" for="selectAverbado1">Sim</label>
+
+                                  <input type="radio" class="btn-check" value="Não" v-model="selectAverbado"
+                                         name="selectAverbado" id="selectAverbado2" autocomplete="off">
+                                  <label class="btn btn-outline-danger" for="selectAverbado2">Não</label>
+
+
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Escriturado
+                                </label>
+
+                                <br>
+
+                                <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" name="selectEscritura" id="selectEscritura1"
+                                         autocomplete="off"
+                                         value="Sim" v-model="selectEscritura">
+                                  <label class="btn btn-outline-success" for="selectEscritura1">Sim</label>
+
+                                  <input type="radio" class="btn-check" value="Não" v-model="selectEscritura"
+                                         name="selectEscritura" id="selectEscritura2" autocomplete="off">
+                                  <label class="btn btn-outline-danger" for="selectEscritura2">Não</label>
+
+
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Esquina
+                                </label>
+
+                                <br>
+
+                                <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" name="selectEsquina" id="selectEsquina1"
+                                         autocomplete="off"
+                                         value="Sim" v-model="selectEsquina">
+                                  <label class="btn btn-outline-success" for="selectEsquina1">Sim</label>
+
+                                  <input type="radio" class="btn-check" value="Não" v-model="selectEsquina"
+                                         name="selectEsquina" id="selectEsquina2" autocomplete="off">
+                                  <label class="btn btn-outline-danger" for="selectEsquina2">Não</label>
+
+
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Tem mobília
+                                </label>
+
+                                <br>
+
+                                <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" name="selectMobilia" id="selectMobilia1"
+                                         autocomplete="off"
+                                         value="Sim" v-model="selectMobilia">
+                                  <label class="btn btn-outline-success" for="selectMobilia1">Sim</label>
+
+                                  <input type="radio" class="btn-check" value="Não" v-model="selectMobilia"
+                                         name="selectMobilia" id="selectMobilia2" autocomplete="off">
+                                  <label class="btn btn-outline-danger" for="selectMobilia2">Não</label>
+
+
+                                </div>
+
+                              </div>
+                            </div>
+
+                          </div>
+
+
+                          <hr>
+                          <div class="row mt-3">
+                            <div class="col-md-6">
+                              <div class="d-grid gap-2 d-md-block">
+                                <button class="btn btn-secondary" type="button">Cancelar</button>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-success" @click="handleProximoComodo()" type="button">Próximo <i
+                                    class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="card" v-if="addProp">
+                      <div class="card-body">
+                        <div class="col mt-0">
+                          <h1 class="title-login mt-2">Add Proprietário 
+                            <button type="button" class="btn btn-danger" @click="handlepropclose()"
+                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    <i class="fa fa-arrow-circle-left"></i> Voltar
+                                  </button>
+
+                          </h1>
+                          <p>Defina as informações com precisão para os seus clientes.</p>
+                        </div>
+                        <div>
+
+                          <div class="row mt-4">
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Código de
+                                  referência <small class="text-danger">*</small>
+                                </label>
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                       v-model="codigoref" placeholder="Digite aqui...">
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
+                                       class="form-label">Condomínio/empreendimento?
+                                </label>
+
+                                <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" name="selectCondominio" id="selectCondominio1"
+                                         autocomplete="off"
+                                         value="Sim" v-model="selectCondominio">
+                                  <label class="btn btn-outline-success" for="selectCondominio1">Sim</label>
+
+                                  <input type="radio" class="btn-check" value="Não" v-model="selectCondominio"
+                                         name="selectCondominio" id="selectCondominio2" autocomplete="off">
+                                  <label class="btn btn-outline-danger" for="selectCondominio2">Não</label>
+
+
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-6">
+                              <div class="mb-3" v-if="inputCondominio">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
+                                       class="form-label">Condomínio/empreendimento? <small class="text-danger">*
+                                </small>
                                   <button type="button" class="btn btn-success"
+                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    <i class="fa fa-plus"></i> Adicionar condominio
+                                  </button>
+                                </label>
+
+                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                        v-model="condominioEmpreendimento">
+
+                                  <option selected disabled>Selecione</option>
+
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-4">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Proprietário
+                                  <small class="text-danger">*
+                                  </small><small>(Privado)</small>
+                                  <button type="button" class="btn btn-success" id="btnAbrirModal"
                                           style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar
                                   </button>
@@ -2376,8 +2785,10 @@
       </main>
       <Footer/>
     </div>
-
   </div>
+
+
+
 </template>
 <script>
 import Sidebar from '../../components/sidebar/index.vue'
@@ -2389,7 +2800,7 @@ export default {
   components: {
     Sidebar,
     Navbar,
-    Footer
+    Footer,
   },
   data() {
     return {
@@ -2412,6 +2823,7 @@ export default {
       complementoTab: false,
       imagemTab: false,
       publicacaoTab: false,
+      addProp: false,
 
       //Icons Lateriais de Progressão
       stepInfo: false,
@@ -2691,6 +3103,16 @@ export default {
   },
 
   methods: {
+
+    handleprop(){
+      this.addProp = true
+      this.infoTab = false
+    },
+    
+    handlepropclose(){
+      this.addProp = false
+      this.infoTab = true
+    },
 
     //Ação do botão Proximo de cada tab
     handleProximoComodo() {

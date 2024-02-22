@@ -4,6 +4,7 @@ import CadastroView from '../views/auth/CadastroView.vue'
 import RecoveryView from '../views/auth/RecoveryView.vue'
 import MainView from '../views/dashboard/MainView.vue'
 import CadImovelView from '../views/dashboard/CadImovelView.vue'
+import CadCondominioView from '../views/dashboard/CadCondominioView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/novo-imovel',
       name: 'novo-imovel',
       component: CadImovelView
+    },  
+    {
+      path: '/novo-condominio',
+      name: 'novo-condominio',
+      component: CadCondominioView
     },  
   ]
 })
