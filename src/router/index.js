@@ -5,6 +5,7 @@ import RecoveryView from '../views/auth/RecoveryView.vue'
 import MainView from '../views/dashboard/MainView.vue'
 import CadImovelView from '../views/dashboard/CadImovelView.vue'
 import CadCondominioView from '../views/dashboard/CadCondominioView.vue'
+import MyPlanView from '../views/dashboard/MyPlanView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/novo-condominio',
       name: 'novo-condominio',
       component: CadCondominioView
+    },  
+    {
+      path: '/meu-plano',
+      name: 'meu-plano',
+      component: MyPlanView
     },  
   ]
 })
