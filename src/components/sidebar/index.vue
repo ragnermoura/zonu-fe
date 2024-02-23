@@ -26,6 +26,12 @@
                         </span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="">
+                        <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Planos
+                        </span>
+                    </a>
+                </li>
 
 
 
@@ -35,6 +41,7 @@
                         </span>
                     </a>
                 </li>
+              
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/api-token-admin">
@@ -70,6 +77,12 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="ui-cards.html">
                         <i class="align-middle" data-feather="layers"></i> <span class="align-middle">Meu plano</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="">
+                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Condomínios</span>
                     </a>
                 </li>
 

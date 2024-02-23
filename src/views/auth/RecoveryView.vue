@@ -13,13 +13,23 @@
                     <div v-if="mostrarSkeleton" class="skeleton-title-subtitle"></div>
                     <p v-if="!mostrarSkeleton">Siga os passos que tudo correrá bem!</p>
 
+
+                    <div v-if="msgNotActivate" class="alert text-danger " role="alert">
+                        😞 <strong>Ooops...</strong> Você ainda não está ativo. Aguarde até que algum administrador ative
+                        sua conta.
+                    </div>
+
+                    <div v-if="msgEmailErro" class="alert text-danger" role="alert">
+                        😞 <strong>Ooops...</strong> Seu e-mail ou sua senha estão errados, tente outro.
+                    </div>
+
                     <div class="mt-4">
                         <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                         <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                         <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Informe o E-mail
                             cadastrado
                         </label>
-                        <input type="email" v-if="!mostrarSkeleton" class="form-control" v-model="cnpj"
+                        <input type="email" v-if="!mostrarSkeleton" class="form-control" v-model="emailRecovery"
                             placeholder="email@dominio.com">
                         <p v-if="msgSuccessEmail" class="text-success mt-2"><i class="fa fa-check"></i> Este e-mail está
                             em nossa base de dados.</p>
@@ -34,10 +44,10 @@
                         class="btn btn-dark bot mt-4">Avançar</button>
 
                     <a href="/">
-                        <button type="button" v-if="!mostrarSkeleton" href="/" class="btn btn-outline-dark bot mt-4">Voltar ao
+                        <button type="button" v-if="!mostrarSkeleton" href="/" class="btn btn-outline-dark bot mt-4">Voltar
+                            ao
                             login</button>
                     </a>
-
 
                 </div>
 
@@ -103,7 +113,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
 import _ from 'lodash';
 export default {
     name: 'RecoveryView',
@@ -116,13 +125,20 @@ export default {
             msgErrorSenha: false,
             msgSuccess: false,
             loading: false,
-
+            emailRecovery: '',
+            newsenha: '',
+            confimSenha: '',
+            emailTab: true,
+            passwordTab: false,
             email: '',
             senha: '',
-            confimSenha: '',
-
-            emailTab: true,
-            passwordTab: false
+            msgNotActivate: false,
+            autenticando: false,
+            textoBotao: "Acessar sua conta",
+            emailValid: null,
+            senhaValid: null,
+            emailVazio: null,
+            senhaVazio: null,
         }
     },
     mounted() {
@@ -133,8 +149,39 @@ export default {
     methods: {
 
         handleAvancar() {
-            this.emailTabTab = false
-            this.passwordTabTab = true
+            this.autenticando = true;
+            this.textoBotao = "Aguarde...";
+
+            let email = this.emailRecovery;
+
+            if (email == '' && senha == '') {
+                this.emailVazio = false;
+                this.senhaVazio = false;
+
+                setTimeout(() => {
+
+                    this.emailVazio = true;
+                    this.senhaVazio = true;
+
+                }, 4000)
+
+                setTimeout(() => {
+                    this.autenticando = false;
+                    this.textoBotao = "Acessar sua conta";
+                }, 2000)
+
+
+            } else {
+                api.recovery(newsenha).then((response) => {
+
+
+
+                }).catch(() => {
+
+                });
+            }
+
+
         },
         handleVoltar() {
             this.emailTabTab = true
