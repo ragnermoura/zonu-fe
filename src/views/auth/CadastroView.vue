@@ -32,11 +32,12 @@
                     <button v-if="!mostrarSkeleton" @click="handleAvancar()" type="submit" :disabled="!msgSuccessCnpj"
                         class="btn btn-dark bot mt-4">Avançar</button>
 
-                        <a href="/">
-                            <button v-if="!mostrarSkeleton" href="/" class="btn btn-outline-dark bot mt-4">Voltar ao login</button>
+                    <a href="/">
+                        <button v-if="!mostrarSkeleton" href="/" class="btn btn-outline-dark bot mt-4">Voltar ao
+                            login</button>
 
-                        </a>
-                        
+                    </a>
+
                 </div>
 
                 <div v-if="dadosTab" class="px-4">
@@ -45,6 +46,10 @@
 
                     <div v-if="mostrarSkeleton" class="skeleton-title-subtitle"></div>
                     <p v-if="!mostrarSkeleton">Agora preencha esses dados para entrar na sua plataforma.</p>
+
+                    <p v-if="campoNullError" class="text-warning mt-2"><i class="fa fa-circle-exclamation"></i> Não deixe
+                        campor vazios.</p>
+
 
                     <div class="area-dados">
                         <div class="mt-4">
@@ -86,7 +91,17 @@
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">E-mail
                                     </label>
                                     <input type="email" required v-if="!mostrarSkeleton" class="form-control"
-                                        v-model="email" placeholder="Digite um e-mail válido">
+                                        v-model="email" :required="true" placeholder="Digite um e-mail válido"
+                                        :class="{ 'is-invalid': emailValid === true || emailVazio === true }">
+
+                                    <p v-if="emailVazio === true" class="text-danger mt-2"><i
+                                            class="fa fa-circle-exclamation"></i>
+                                        <strong> Oops...</strong> o e-mail não pode ser em branco.
+                                    </p>
+                                    <p v-if="emailValid === true && emailVazio !== false" class="text-danger mt-2"><i
+                                            class="fa fa-circle-exclamation"></i>
+                                        Por favor, forneça um e-mail válido.
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -96,8 +111,14 @@
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Crie uma
                                         senha
                                     </label>
-                                    <input type="password" required v-if="!mostrarSkeleton" class="form-control" v-model="senha"
+                                    <input type="password" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="senha" :class="{ 'is-invalid': isEmailInvalid || emailVazio }"
                                         placeholder="Digite sua senha">
+
+                                    <p v-if="emailVazio" class="text-danger mt-2"><i class="fa fa-circle-exclamation"></i>
+                                        <strong> Eei...</strong> a senha não pode ser em branco.
+                                    </p>
+
                                 </div>
                             </div>
                             <div class="col-6">
@@ -110,11 +131,10 @@
                                     <input type="password" required v-if="!mostrarSkeleton" class="form-control"
                                         v-model="confimSenha" placeholder="Digite a senha novamente">
 
-                                    <p v-if="msgErrorSenha" class="text-danger mt-2"><small><i class="fa fa-ban"></i> As
-                                            senhas não conferem</small> </p>
-                                    <p v-if="msgSuccessSenha" class="text-success mt-2"><small><i class="fa fa-check"></i>
-                                            As
-                                            senhas conferem</small> </p>
+                                    <p class="text-danger mt-2" v-if="confimSenha && !passwordsMatch"><i
+                                            class="fa fa-ban"></i> As senhas não conferem!</p>
+                                    <p class="text-success mt-2" v-if="confimSenha && passwordsMatch"><i
+                                            class="fa fa-check"></i> As senhas conferem</p>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -146,14 +166,17 @@
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Endereço
                                     </label>
-                                    <input type="text" v-if="!mostrarSkeleton" class="form-control" v-model="endereco"
-                                        placeholder="Digite o endereço completo">
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="endereco" placeholder="Digite o endereço completo">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
-                    <button v-if="!mostrarSkeleton" @click="handleValidar()" type="submit" class="btn btn-dark bot mt-4">Salvar</button>
+                    <button v-if="!mostrarSkeleton" :disabled="autenticando" @click="handleValidar()" type="submit"
+                        class="btn btn-dark bot mt-4">{{ textoBotao }}
+                        <span v-if="autenticando" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span v-if="autenticando" class="visually-hidden">Aguarde...</span></button>
 
                     <button v-if="!mostrarSkeleton" @click="handleVoltar()" type="submit" :disabled="!msgSuccessCnpj"
                         class="btn btn-outline-dark bot mt-4">Voltar</button>
@@ -173,7 +196,8 @@
                     </div>
 
                     <div v-if="msgSuccess" class="alert alert-success mt-3" role="alert">
-                       <i class="fa fa-check"></i> Dados gravados com sucesso! Faça o login e use sua plataforma<strong> Zonu</strong> 
+                        <i class="fa fa-check"></i> Dados gravados com sucesso! Faça o login e use sua plataforma<strong>
+                            Zonu</strong>
                     </div>
 
                 </div>
@@ -194,6 +218,7 @@
 <script>
 import axios from 'axios'
 import _ from 'lodash';
+import api from '../../../service/api';
 export default {
     name: 'CadastroView',
     data() {
@@ -206,6 +231,11 @@ export default {
             msgSuccess: false,
             loading: false,
 
+            senhaVazio: true,
+            senhaValid: true,
+            emailValid: false,
+            emailVazio: false,
+
             cnpj: '',
             razao_social: '',
             nome: '',
@@ -216,10 +246,14 @@ export default {
             telefone: '',
             cep: '',
             endereco: '',
-
+            id_user: '',
+            campoNullError: false,
+            textoBotao: "Salvar",
+            autenticando: false,
             cnpjTab: true,
             dadosTab: false,
-            validationTab: false
+            validationTab: false,
+
         }
     },
     mounted() {
@@ -238,6 +272,11 @@ export default {
     created() {
         this.debouncedCheckCNPJ = _.debounce(this.consultarCNPJ, 500);
         this.debouncedCheckCEP = _.debounce(this.consultarCEP, 100);
+    },
+    computed: {
+        passwordsMatch() {
+            return this.cadsenha === this.confirmsenha;
+        },
     },
     methods: {
         aplicaMascaraCNPJ() {
@@ -280,32 +319,33 @@ export default {
             this.telefone = v;
         },
 
-
         async consultarCNPJ() {
             if (this.cnpj.length === 18) {
-                const cnpjNumeros = this.cnpj.replace(/\D/g, '');
-                try {
-                    const response = await axios.get(`https://brasilapi.com.br/api/cnpj/v1/${cnpjNumeros}`);
-                    //console.log(response.data.razao_social);
-                    this.razao_social = response.data.razao_social
-                    this.msgSuccessCnpj = true;
-                    this.msgErrorCnpj = false;
-                } catch (error) {
-                    //console.error("Erro ao consultar CNPJ: ", error);
-                    this.msgErrorCnpj = true;
-                    this.msgSuccessCnpj = false;
-                }
-            } else {
+                const cnpj = this.cnpj.replace(/\D/g, '');
 
-                this.msgErrorCnpj = false;
-                this.msgSuccessCnpj = false;
+                try {
+                    const response = await axios.get(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`);
+
+                    if (response.data.descricao_situacao_cadastral == "ATIVA") {
+                        this.razao_social = response.data.razao_social
+                        this.msgSuccessCnpj = true;
+                        this.msgErrorCnpj = false;
+                    } else {
+                        this.msgErrorCnpj = true;
+                        this.msgSuccessCnpj = false;
+                    }
+
+                } catch (error) {
+
+
+                }
             }
         },
-        async consultarCEP() {
+        consultarCEP() {
             if (this.cep.length === 9) {
                 const cepNumeros = this.cep.replace(/\D/g, '');
                 try {
-                    const response = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cepNumeros}`);
+                    const response = axios.get(`https://brasilapi.com.br/api/cep/v2/${cepNumeros}`);
                     //console.log(response.data);
 
                     let rua = response.data.street
@@ -325,7 +365,6 @@ export default {
             }
         },
 
-
         handleAvancar() {
             this.cnpjTab = false
             this.dadosTab = true
@@ -337,10 +376,73 @@ export default {
             this.validationTab = false
         },
         handleValidar() {
+            this.autenticando = true;
+            this.textoBotao = "Aguarde...";
+
+            let cnpj = this.cnpj
+            let razao_social = this.razao_social
+            let nome = this.nome
+            let sobrenome = this.sobrenome
+            let email = this.email
+            let senha = this.senha
+            let telefone = this.telefone
+            let cep = this.cep
+            let endereco = this.endereco
+
+
+            if (nome !== '' && sobrenome !== '' && email !== '' && senha !== '' && telefone && cep && endereco != '') {
+
+                this.emailVazio = false;
+
+
+                setTimeout(() => {
+                    this.emailVazio = true;
+                    this.senhaVazio = true;
+                }, 5000)
+
+                api.cadastro(nome, sobrenome, email, senha).then((res) => {
+                    if (res.status == 202) {
+                        this.id_user = res.data.usuarioCriado.id_user
+                        let id_user = this.id_user
+
+                        api.perfil(id_user, cnpj, razao_social, telefone, cep, endereco).then((res) => {
+                            if (res.data.status == 202) {
+                                this.validationTab = true
+
+                                setTimeout(() => {
+                                    this.lvalidationTab = false;
+                                }, 4000)
+
+                            }
+                        })
+                    } if (res.status == 409) {
+                        this.isEmailInvalid = false;
+                    }
+
+                })
+            } else {
+                this.campoNullError = true
+
+                setTimeout(() => {
+                    this.campoNullError = false
+                    this.autenticando = false;
+                    this.textoBotao = "Salvar";
+                }, 3000);
+                setTimeout(() => {
+                    this.campoNullError = false
+                }, 10000);
+
+
+            }
+
+
+
+
             this.cnpjTab = false
-            this.dadosTab = false
-            this.validationTab = true
+
+
         },
+
 
     },
 

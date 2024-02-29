@@ -76,8 +76,9 @@
 						<div class="row d-flex justify-content-center align-items-center">
 							<div class="col-md-2">
 								<div v-if="mostrarSkeleton" class="skeleton-button-social mt-3"></div>
-								<button v-if="!mostrarSkeleton" type="button" class="btn btn-google bot"><i
-										class="fa fa-google fa-2x" aria-hidden="true"></i> </button>
+								<button @click="loginWithGoogle()" v-if="!mostrarSkeleton" type="button"
+									class="btn btn-google bot"><i class="fa fa-google fa-2x" aria-hidden="true"></i>
+								</button>
 							</div>
 							<div class="col-md-2">
 								<div v-if="mostrarSkeleton" class="skeleton-button-social mt-3"></div>
@@ -108,6 +109,8 @@
 <script>
 import api from '../../../service/api/index'
 import { jwtDecode } from "jwt-decode";
+import { googleSdkLoaded } from "vue3-google-login"
+
 export default {
 	name: 'LoginView',
 	data() {
@@ -123,6 +126,7 @@ export default {
 			senhaValid: null,
 			emailVazio: null,
 			senhaVazio: null,
+			userInfo: null,
 		}
 	},
 	mounted() {
@@ -201,8 +205,27 @@ export default {
 					this.textoBotao = "Acessar sua conta";
 				});
 			}
+		},
+
+
+		async loginWithGoogle() {
+			googleSdkLoaded((google) => {
+				google.accounts.oauth2.initCodeClient({
+					client_id: '814680956804-ftruhh4hvgbh8c4e1narprmd1mvecn12.apps.googleusercontent.com',
+					scope: 'email profile openid',
+					callback: (response) => {
+						console.log("Handle the response", response)
+
+						let token_google = response.code
+						let decode_google = jwtDecode(token_google)
+
+						console.log('Aqui está os dado do usuário ==> ', decode_google);
+
+					}
+				}).requestCode()
+			})
 		}
 	}
-	
+
 }
 </script>
