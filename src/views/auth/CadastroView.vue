@@ -23,6 +23,7 @@
                                 v-model="cnpj" placeholder="00.000.000/0001-00">
                             <p v-if="msgSuccessCnpj" class="text-success mt-2"><i class="fa fa-check"></i> Seu CNPJ é
                                 válido.</p>
+
                             <p v-if="msgErrorCnpj" class="text-danger mt-2"><i class="fa fa-ban"></i> Seu CNPJ não é válido,
                                 tenho outro.</p>
                         </div>
@@ -49,6 +50,8 @@
 
                     <p v-if="campoNullError" class="text-warning mt-2"><i class="fa fa-circle-exclamation"></i> Não deixe
                         campor vazios.</p>
+
+                    <p v-if="msgCnpjActive" class="text-danger mt-2"><i class="fa fa-circle-exclamation"></i> Desculpe, mas já temos esse CNPJ em nossa base de dados. Volte e insira outro.</p>
 
 
                     <div class="area-dados">
@@ -90,16 +93,11 @@
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">E-mail
                                     </label>
-                                    <input type="email" required v-if="!mostrarSkeleton" class="form-control"
-                                        v-model="email" :required="true" placeholder="Digite um e-mail válido"
-                                        :class="{ 'is-invalid': emailValid === true || emailVazio === true }">
 
-                                    <p v-if="emailVazio === true" class="text-danger mt-2"><i
-                                            class="fa fa-circle-exclamation"></i>
-                                        <strong> Oops...</strong> o e-mail não pode ser em branco.
-                                    </p>
-                                    <p v-if="emailValid === true && emailVazio !== false" class="text-danger mt-2"><i
-                                            class="fa fa-circle-exclamation"></i>
+                                    <input type="email" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="email" placeholder="Digite um e-mail válido">
+
+                                    <p v-if="emailValid" class="text-danger mt-2"><i class="fa fa-circle-exclamation"></i>
                                         Por favor, forneça um e-mail válido.
                                     </p>
                                 </div>
@@ -112,12 +110,8 @@
                                         senha
                                     </label>
                                     <input type="password" required v-if="!mostrarSkeleton" class="form-control"
-                                        v-model="senha" :class="{ 'is-invalid': isEmailInvalid || emailVazio }"
+                                        v-model="senha" :class="{ 'is-invalid': isEmailInvalid }"
                                         placeholder="Digite sua senha">
-
-                                    <p v-if="emailVazio" class="text-danger mt-2"><i class="fa fa-circle-exclamation"></i>
-                                        <strong> Eei...</strong> a senha não pode ser em branco.
-                                    </p>
 
                                 </div>
                             </div>
@@ -223,18 +217,19 @@ export default {
     name: 'CadastroView',
     data() {
         return {
+            loading: false,
             mostrarSkeleton: true,
             msgErrorCnpj: false,
             msgSuccessCnpj: false,
             msgSuccessSenha: false,
             msgErrorSenha: false,
-            msgSuccess: false,
-            loading: false,
+            campoNullError: false,
+            msgErrorCep: false,
+            msgCnpjActive: false,
 
-            senhaVazio: true,
-            senhaValid: true,
+            msgSuccess: false,
+            senhaValid: false,
             emailValid: false,
-            emailVazio: false,
 
             cnpj: '',
             razao_social: '',
@@ -270,12 +265,12 @@ export default {
         },
     },
     created() {
-        this.debouncedCheckCNPJ = _.debounce(this.consultarCNPJ, 500);
+        this.debouncedCheckCNPJ = _.debounce(this.consultarCNPJ, 100);
         this.debouncedCheckCEP = _.debounce(this.consultarCEP, 100);
     },
     computed: {
         passwordsMatch() {
-            return this.cadsenha === this.confirmsenha;
+            return this.senha === this.confimSenha;
         },
     },
     methods: {
@@ -318,7 +313,6 @@ export default {
 
             this.telefone = v;
         },
-
         async consultarCNPJ() {
             if (this.cnpj.length === 18) {
                 const cnpj = this.cnpj.replace(/\D/g, '');
@@ -341,17 +335,17 @@ export default {
                 }
             }
         },
-        consultarCEP() {
+        async consultarCEP() {
             if (this.cep.length === 9) {
-                const cepNumeros = this.cep.replace(/\D/g, '');
-                try {
-                    const response = axios.get(`https://brasilapi.com.br/api/cep/v2/${cepNumeros}`);
-                    //console.log(response.data);
+                const cep = this.cep.replace(/\D/g, '');
 
-                    let rua = response.data.street
-                    let bairro = response.data.neighborhood
-                    let cidade = response.data.city
-                    let estado = response.data.state
+                try {
+                    const res = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cep}`);
+
+                    let rua = res.data.street
+                    let bairro = res.data.neighborhood
+                    let cidade = res.data.city
+                    let estado = res.data.state
 
                     this.endereco = rua + ', ' + bairro + ', ' + cidade + ' - ' + estado
 
@@ -389,16 +383,7 @@ export default {
             let cep = this.cep
             let endereco = this.endereco
 
-
             if (nome !== '' && sobrenome !== '' && email !== '' && senha !== '' && telefone && cep && endereco != '') {
-
-                this.emailVazio = false;
-
-
-                setTimeout(() => {
-                    this.emailVazio = true;
-                    this.senhaVazio = true;
-                }, 5000)
 
                 api.cadastro(nome, sobrenome, email, senha).then((res) => {
                     if (res.status == 202) {
@@ -406,17 +391,39 @@ export default {
                         let id_user = this.id_user
 
                         api.perfil(id_user, cnpj, razao_social, telefone, cep, endereco).then((res) => {
-                            if (res.data.status == 202) {
+
+                            if (res.status == 202) {
                                 this.validationTab = true
+                                this.textoBotao = "Sucesso, redirecionando...";
+
+                                api.sendNewAccount(email, nome).then((res) => {
+                                    console.log('Resposta do email ==> ', res)
+                                    })
 
                                 setTimeout(() => {
-                                    this.lvalidationTab = false;
-                                }, 4000)
+                                    window.location.href = '/'
+                                }, 3000)
+
+                            } if (res.status == 409) {
+
+                                this.autenticando = false;
+                                this.textoBotao = "Tentar Novamente";
+                                this.msgCnpjActive = true;
+
+                                setTimeout(() => {
+                                    this.msgCnpjActive = false;
+                                }, 10000)
 
                             }
                         })
                     } if (res.status == 409) {
-                        this.isEmailInvalid = false;
+                        this.emailValid = true
+                        this.autenticando = false;
+                        this.textoBotao = "Tentar Novamente";
+
+                        setTimeout(() => {
+                            this.emailValid = false;
+                        }, 4000)
                     }
 
                 })
@@ -426,19 +433,10 @@ export default {
                 setTimeout(() => {
                     this.campoNullError = false
                     this.autenticando = false;
-                    this.textoBotao = "Salvar";
+                    this.textoBotao = "Tentar Novamente";
                 }, 3000);
-                setTimeout(() => {
-                    this.campoNullError = false
-                }, 10000);
-
 
             }
-
-
-
-
-            this.cnpjTab = false
 
 
         },

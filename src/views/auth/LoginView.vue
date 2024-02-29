@@ -42,7 +42,7 @@
 							<div v-if="mostrarSkeleton" class="skeleton-label"></div>
 							<div v-if="mostrarSkeleton" class="skeleton-input"></div>
 							<label v-if="!mostrarSkeleton" for="exampleInputPassword1" class="form-label">Senha</label>
-							<input :class="{ 'is-invalid': senhaValid === false || senhaVazio === false }"
+							<input v-model="senha" :class="{ 'is-invalid': senhaValid === false || senhaVazio === false }"
 								placeholder="Digite aqui o sua senha" v-if="!mostrarSkeleton" type="password"
 								class="form-control" name="senha">
 							<div v-if="senhaVazio === false" class="invalid-feedback">
@@ -155,20 +155,25 @@ export default {
 
 				setTimeout(() => {
 					this.autenticando = false;
-					this.textoBotao = "Acessar sua conta";
+					this.textoBotao = "Tentar novamente...";
 				}, 2000)
 
 
 			} else {
 				api.login(email, senha).then((response) => {
 
+			
+
 					if (response.status == 200) {
 						const token = response.data.token;
 						const decode = jwtDecode(token);
 						let statusAccess = decode.id_status;
 
+						this.textoBotao = "Sucesso, redirecionando...";
+
 						if (statusAccess == 1) {
 							localStorage.setItem('token', token);
+							this.autenticando = false;
 							window.location.href = "/dashboard";
 
 						} else if (statusAccess == 2) {

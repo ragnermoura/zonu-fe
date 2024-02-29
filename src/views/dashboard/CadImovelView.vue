@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <Sidebar :defaultCollapsed="true"/>
+    <Sidebar :defaultCollapsed="true" />
     <div class="main">
-      <Navbar/>
+      <Navbar />
       <main class="content">
         <div class="container-fluid p-0">
 
@@ -24,10 +24,10 @@
                           </div>
                           <div class="row align-items-center">
                             <div class="col-12">
-															<span v-if="!stepInfo"><i class="fa fa-circle"></i>
-																Informações</span>
+                              <span v-if="!stepInfo"><i class="fa fa-circle"></i>
+                                Informações</span>
                               <span v-if="stepInfo" class="text-success"><i class="fa fa-check text-success"></i>
-																Informações</span>
+                                Informações</span>
                             </div>
 
                             <div class="col-auto">
@@ -36,10 +36,10 @@
 
 
                             <div class="col-12">
-															<span v-if="!stepComodos"><i class="fa fa-circle"></i>
-																Cômodos</span>
+                              <span v-if="!stepComodos"><i class="fa fa-circle"></i>
+                                Cômodos</span>
                               <span class="text-success" v-if="stepComodos"> <i class="fa fa-check text-success"></i>
-																Cômodos</span>
+                                Cômodos</span>
                             </div>
 
                             <div class="col-auto">
@@ -47,10 +47,10 @@
                             </div>
 
                             <div class="col-12">
-															<span v-if="!stepMedidas"> <i class="fa fa-circle"></i>
-																Medidas</span>
+                              <span v-if="!stepMedidas"> <i class="fa fa-circle"></i>
+                                Medidas</span>
                               <span class="text-success" v-if="stepMedidas"> <i class="fa fa-check text-success"></i>
-																Medidas</span>
+                                Medidas</span>
                             </div>
 
                             <div class="col-auto">
@@ -58,10 +58,10 @@
                             </div>
 
                             <div class="col-12">
-															<span v-if="!stepPreco"> <i class="fa fa-circle"></i>
-																Preço</span>
+                              <span v-if="!stepPreco"> <i class="fa fa-circle"></i>
+                                Preço</span>
                               <span class="text-success" v-if="stepPreco"> <i class="fa fa-check text-success"></i>
-																Preço</span>
+                                Preço</span>
                             </div>
 
                             <div class="col-auto">
@@ -69,33 +69,31 @@
                             </div>
 
                             <div class="col-12">
-															<span v-if="!stepCaracteristica"> <i class="fa fa-circle"></i>
-																Características</span>
+                              <span v-if="!stepCaracteristica"> <i class="fa fa-circle"></i>
+                                Características</span>
                               <span class="text-success" v-if="stepCaracteristica"> <i
                                   class="fa fa-check text-success"></i>
-																Características</span>
+                                Características</span>
                             </div>
 
                             <div class="col-auto">
                               <div class="vertical-hr"></div>
                             </div>
                             <div class="col-12">
-															<span v-if="!stepLocalizacao"> <i class="fa fa-circle"></i>
-																Localização</span>
-                              <span class="text-success" v-if="stepLocalizacao"> <i
-                                  class="fa fa-check text-success"></i>
-																Localização</span>
+                              <span v-if="!stepLocalizacao"> <i class="fa fa-circle"></i>
+                                Localização</span>
+                              <span class="text-success" v-if="stepLocalizacao"> <i class="fa fa-check text-success"></i>
+                                Localização</span>
                             </div>
 
                             <div class="col-auto">
                               <div class="vertical-hr"></div>
                             </div>
                             <div class="col-12">
-															<span v-if="!stepProximidades"> <i class="fa fa-circle"></i>
-																Proximidades</span>
-                              <span class="text-success" v-if="stepProximidades"> <i
-                                  class="fa fa-check text-success"></i>
-																Proximidades</span>
+                              <span v-if="!stepProximidades"> <i class="fa fa-circle"></i>
+                                Proximidades</span>
+                              <span class="text-success" v-if="stepProximidades"> <i class="fa fa-check text-success"></i>
+                                Proximidades</span>
                             </div>
 
                             <div class="col-auto">
@@ -103,10 +101,10 @@
                             </div>
 
                             <div class="col-12">
-															<span v-if="!stepDescricao"> <i class="fa fa-circle"></i>
-																Descrição</span>
+                              <span v-if="!stepDescricao"> <i class="fa fa-circle"></i>
+                                Descrição</span>
                               <span class="text-success" v-if="stepDescricao"> <i class="fa fa-check text-success"></i>
-																Descrição</span>
+                                Descrição</span>
                             </div>
 
                             <div class="col-auto">
@@ -114,21 +112,20 @@
                             </div>
 
                             <div class="col-12">
-															<span v-if="!stepComplemento"> <i class="fa fa-circle"></i>
-																Complementos</span>
-                              <span class="text-success" v-if="stepComplemento"> <i
-                                  class="fa fa-check text-success"></i>
-																Complementos</span>
+                              <span v-if="!stepComplemento"> <i class="fa fa-circle"></i>
+                                Complementos</span>
+                              <span class="text-success" v-if="stepComplemento"> <i class="fa fa-check text-success"></i>
+                                Complementos</span>
                             </div>
 
                             <div class="col-auto">
                               <div class="vertical-hr"></div>
                             </div>
                             <div class="col-12">
-															<span v-if="!stepImagens"> <i class="fa fa-circle"></i>
-																Imagens</span>
+                              <span v-if="!stepImagens"> <i class="fa fa-circle"></i>
+                                Imagens</span>
                               <span class="text-success" v-if="stepImagens"> <i class="fa fa-check text-success"></i>
-																Imagens</span>
+                                Imagens</span>
                             </div>
 
                             <div class="col-auto">
@@ -137,10 +134,10 @@
 
 
                             <div class="col-12">
-															<span v-if="!stepPublicacao"> <i class="fa fa-circle"></i>
-																Publicação</span>
+                              <span v-if="!stepPublicacao"> <i class="fa fa-circle"></i>
+                                Publicação</span>
                               <span class="text-success" v-if="stepPublicacao"> <i class="fa fa-check text-success"></i>
-																Publicação</span>
+                                Publicação</span>
                             </div>
 
                           </div>
@@ -176,7 +173,7 @@
                                   referência <small class="text-danger">*</small>
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="codigoref" placeholder="Digite aqui...">
+                                  v-model="codigoref" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -185,22 +182,20 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
-                                       class="form-label">Condomínio/empreendimento?
+                                  class="form-label">Condomínio/empreendimento?
                                 </label>
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectCondominio" id="selectCondominio1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectCondominio">
+                                    autocomplete="off" value="Sim" v-model="selectCondominio">
                                   <label class="btn btn-outline-success" for="selectCondominio1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectCondominio"
-                                         name="selectCondominio" id="selectCondominio2" autocomplete="off">
+                                    name="selectCondominio" id="selectCondominio2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectCondominio2">Não</label>
-
-
                                 </div>
 
                               </div>
@@ -211,16 +206,16 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
-                                       class="form-label">Condomínio/empreendimento? <small class="text-danger">*
-                                </small>
+                                  class="form-label">Condomínio/empreendimento? <small class="text-danger">*
+                                  </small>
                                   <button type="button" class="btn btn-success"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar condominio
                                   </button>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="condominioEmpreendimento">
+                                  v-model="condominioEmpreendimento">
 
                                   <option selected disabled>Selecione</option>
 
@@ -236,13 +231,13 @@
                                   <small class="text-danger">*
                                   </small><small>(Privado)</small>
                                   <button type="button" class="btn btn-success" @click="handleprop()"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar
                                   </button>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectProprietario">
+                                  v-model="selectProprietario">
 
                                   <option selected disabled>Selecione</option>
 
@@ -259,7 +254,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectCorretor">
+                                  v-model="selectCorretor">
 
                                   <option selected disabled>Selecione</option>
 
@@ -274,7 +269,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectAgenciador">
+                                  v-model="selectAgenciador">
 
                                   <option selected disabled>Selecione</option>
 
@@ -291,7 +286,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="tipoImovel">
+                                  v-model="tipoImovel">
 
                                   <option selected disabled>Selecione</option>
 
@@ -309,7 +304,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="perfilImovel">
+                                  v-model="perfilImovel">
 
                                   <option selected disabled>Selecione</option>
 
@@ -322,13 +317,12 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Situação
-                                  <small
-                                      class="text-danger">*
+                                  <small class="text-danger">*
                                   </small>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="situacaoImovel">
+                                  v-model="situacaoImovel">
 
                                   <option selected disabled>Selecione</option>
 
@@ -346,7 +340,7 @@
                                 </label>
 
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                       placeholder="Ex.: 2015" v-model="anoImovel"/>
+                                  placeholder="Ex.: 2015" v-model="anoImovel" />
                               </div>
                             </div>
 
@@ -360,7 +354,7 @@
                                 </label>
 
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       placeholder="Digite..." v-model="incorporacao"/>
+                                  placeholder="Digite..." v-model="incorporacao" />
 
 
                               </div>
@@ -375,7 +369,7 @@
                                   </small>
                                 </label>
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="posicaoSolar">
+                                  v-model="posicaoSolar">
 
                                   <option selected disabled>Selecione</option>
 
@@ -389,23 +383,20 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Terreno
-                                  <small
-                                      class="text-danger">*
+                                  <small class="text-danger">*
                                   </small>
                                 </label>
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off"
-                                         value="Plano" name="selectTerreno" 
-                                         v-model="selectTerreno">
+                                  <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off" value="Plano"
+                                    name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno1">Plano</label>
 
-                                  <input type="radio" class="btn-check" id="btnTerreno2" autocomplete="off"
-                                         value="Aclive" name="selectTerreno" 
-                                         v-model="selectTerreno">
+                                  <input type="radio" class="btn-check" id="btnTerreno2" autocomplete="off" value="Aclive"
+                                    name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno2">Aclive</label>
 
                                   <input type="radio" class="btn-check" id="btnTerreno3" autocomplete="off"
-                                         value="Declive" name="selectTerreno"  v-model="selectTerreno">
+                                    value="Declive" name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno3">Declive</label>
                                 </div>
 
@@ -421,7 +412,7 @@
                                   </small>
                                 </label>
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="proximoMar">
+                                  v-model="proximoMar">
 
                                   <option selected disabled>Selecione</option>
 
@@ -443,12 +434,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectAverbado" id="selectAverbado1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectAverbado">
+                                    autocomplete="off" value="Sim" v-model="selectAverbado">
                                   <label class="btn btn-outline-success" for="selectAverbado1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectAverbado"
-                                         name="selectAverbado" id="selectAverbado2" autocomplete="off">
+                                    name="selectAverbado" id="selectAverbado2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectAverbado2">Não</label>
 
 
@@ -470,12 +460,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEscritura" id="selectEscritura1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectEscritura">
+                                    autocomplete="off" value="Sim" v-model="selectEscritura">
                                   <label class="btn btn-outline-success" for="selectEscritura1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectEscritura"
-                                         name="selectEscritura" id="selectEscritura2" autocomplete="off">
+                                    name="selectEscritura" id="selectEscritura2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectEscritura2">Não</label>
 
 
@@ -497,12 +486,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEsquina" id="selectEsquina1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectEsquina">
+                                    autocomplete="off" value="Sim" v-model="selectEsquina">
                                   <label class="btn btn-outline-success" for="selectEsquina1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectEsquina"
-                                         name="selectEsquina" id="selectEsquina2" autocomplete="off">
+                                    name="selectEsquina" id="selectEsquina2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectEsquina2">Não</label>
 
 
@@ -524,12 +512,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectMobilia" id="selectMobilia1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectMobilia">
+                                    autocomplete="off" value="Sim" v-model="selectMobilia">
                                   <label class="btn btn-outline-success" for="selectMobilia1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectMobilia"
-                                         name="selectMobilia" id="selectMobilia2" autocomplete="off">
+                                    name="selectMobilia" id="selectMobilia2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectMobilia2">Não</label>
 
 
@@ -565,11 +552,11 @@
                     <div class="card" v-if="addProp">
                       <div class="card-body">
                         <div class="col mt-0">
-                          <h1 class="title-login mt-2">Add Proprietário 
+                          <h1 class="title-login mt-2">Add Proprietário
                             <button type="button" class="btn btn-danger" @click="handlepropclose()"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                    <i class="fa fa-arrow-circle-left"></i> Voltar
-                                  </button>
+                              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                              <i class="fa fa-arrow-circle-left"></i> Voltar
+                            </button>
 
                           </h1>
                           <p>Defina as informações com precisão para os seus clientes.</p>
@@ -585,7 +572,7 @@
                                   referência <small class="text-danger">*</small>
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="codigoref" placeholder="Digite aqui...">
+                                  v-model="codigoref" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -594,19 +581,18 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
-                                       class="form-label">Condomínio/empreendimento?
+                                  class="form-label">Condomínio/empreendimento?
                                 </label>
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectCondominio" id="selectCondominio1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectCondominio">
+                                    autocomplete="off" value="Sim" v-model="selectCondominio">
                                   <label class="btn btn-outline-success" for="selectCondominio1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectCondominio"
-                                         name="selectCondominio" id="selectCondominio2" autocomplete="off">
+                                    name="selectCondominio" id="selectCondominio2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectCondominio2">Não</label>
 
 
@@ -620,16 +606,16 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
-                                       class="form-label">Condomínio/empreendimento? <small class="text-danger">*
-                                </small>
+                                  class="form-label">Condomínio/empreendimento? <small class="text-danger">*
+                                  </small>
                                   <button type="button" class="btn btn-success"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar condominio
                                   </button>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="condominioEmpreendimento">
+                                  v-model="condominioEmpreendimento">
 
                                   <option selected disabled>Selecione</option>
 
@@ -645,13 +631,13 @@
                                   <small class="text-danger">*
                                   </small><small>(Privado)</small>
                                   <button type="button" class="btn btn-success" id="btnAbrirModal"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar
                                   </button>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectProprietario">
+                                  v-model="selectProprietario">
 
                                   <option selected disabled>Selecione</option>
 
@@ -668,7 +654,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectCorretor">
+                                  v-model="selectCorretor">
 
                                   <option selected disabled>Selecione</option>
 
@@ -683,7 +669,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectAgenciador">
+                                  v-model="selectAgenciador">
 
                                   <option selected disabled>Selecione</option>
 
@@ -700,7 +686,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="tipoImovel">
+                                  v-model="tipoImovel">
 
                                   <option selected disabled>Selecione</option>
 
@@ -718,7 +704,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="perfilImovel">
+                                  v-model="perfilImovel">
 
                                   <option selected disabled>Selecione</option>
 
@@ -731,13 +717,12 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Situação
-                                  <small
-                                      class="text-danger">*
+                                  <small class="text-danger">*
                                   </small>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="situacaoImovel">
+                                  v-model="situacaoImovel">
 
                                   <option selected disabled>Selecione</option>
 
@@ -755,7 +740,7 @@
                                 </label>
 
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                       placeholder="Ex.: 2015" v-model="anoImovel"/>
+                                  placeholder="Ex.: 2015" v-model="anoImovel" />
                               </div>
                             </div>
 
@@ -769,7 +754,7 @@
                                 </label>
 
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       placeholder="Digite..." v-model="incorporacao"/>
+                                  placeholder="Digite..." v-model="incorporacao" />
 
 
                               </div>
@@ -784,7 +769,7 @@
                                   </small>
                                 </label>
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="posicaoSolar">
+                                  v-model="posicaoSolar">
 
                                   <option selected disabled>Selecione</option>
 
@@ -798,23 +783,20 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Terreno
-                                  <small
-                                      class="text-danger">*
+                                  <small class="text-danger">*
                                   </small>
                                 </label>
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off"
-                                         value="Plano" name="selectTerreno" 
-                                         v-model="selectTerreno">
+                                  <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off" value="Plano"
+                                    name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno1">Plano</label>
 
-                                  <input type="radio" class="btn-check" id="btnTerreno2" autocomplete="off"
-                                         value="Aclive" name="selectTerreno" 
-                                         v-model="selectTerreno">
+                                  <input type="radio" class="btn-check" id="btnTerreno2" autocomplete="off" value="Aclive"
+                                    name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno2">Aclive</label>
 
                                   <input type="radio" class="btn-check" id="btnTerreno3" autocomplete="off"
-                                         value="Declive" name="selectTerreno"  v-model="selectTerreno">
+                                    value="Declive" name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno3">Declive</label>
                                 </div>
 
@@ -830,7 +812,7 @@
                                   </small>
                                 </label>
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="proximoMar">
+                                  v-model="proximoMar">
 
                                   <option selected disabled>Selecione</option>
 
@@ -852,12 +834,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectAverbado" id="selectAverbado1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectAverbado">
+                                    autocomplete="off" value="Sim" v-model="selectAverbado">
                                   <label class="btn btn-outline-success" for="selectAverbado1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectAverbado"
-                                         name="selectAverbado" id="selectAverbado2" autocomplete="off">
+                                    name="selectAverbado" id="selectAverbado2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectAverbado2">Não</label>
 
 
@@ -879,12 +860,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEscritura" id="selectEscritura1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectEscritura">
+                                    autocomplete="off" value="Sim" v-model="selectEscritura">
                                   <label class="btn btn-outline-success" for="selectEscritura1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectEscritura"
-                                         name="selectEscritura" id="selectEscritura2" autocomplete="off">
+                                    name="selectEscritura" id="selectEscritura2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectEscritura2">Não</label>
 
 
@@ -906,12 +886,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEsquina" id="selectEsquina1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectEsquina">
+                                    autocomplete="off" value="Sim" v-model="selectEsquina">
                                   <label class="btn btn-outline-success" for="selectEsquina1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectEsquina"
-                                         name="selectEsquina" id="selectEsquina2" autocomplete="off">
+                                    name="selectEsquina" id="selectEsquina2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectEsquina2">Não</label>
 
 
@@ -933,12 +912,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectMobilia" id="selectMobilia1"
-                                         autocomplete="off"
-                                         value="Sim" v-model="selectMobilia">
+                                    autocomplete="off" value="Sim" v-model="selectMobilia">
                                   <label class="btn btn-outline-success" for="selectMobilia1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectMobilia"
-                                         name="selectMobilia" id="selectMobilia2" autocomplete="off">
+                                    name="selectMobilia" id="selectMobilia2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectMobilia2">Não</label>
 
 
@@ -990,7 +968,7 @@
                                   Dormitório
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="dormitorio" placeholder="Digite aqui...">
+                                  v-model="dormitorio" placeholder="Digite aqui...">
                               </div>
                             </div>
                             <div class="col-3">
@@ -1001,7 +979,7 @@
                                   Sendo suíte
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="suite"
-                                       placeholder="Digite aqui...">
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
                             <div class="col-3">
@@ -1012,7 +990,7 @@
                                   Banheiro
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="banheiro" placeholder="Digite aqui...">
+                                  v-model="banheiro" placeholder="Digite aqui...">
                               </div>
                             </div>
                             <div class="col-3">
@@ -1022,9 +1000,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Garagem
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="garagem"
-                                       placeholder="Digite aqui...">
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="garagem"
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1040,11 +1017,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="garagemCoberta" id="selectGaragemCobertura1"
-                                         autocomplete="off" value="Sim" v-model="selectGaragemCobertura">
+                                    autocomplete="off" value="Sim" v-model="selectGaragemCobertura">
                                   <label class="btn btn-outline-success" for="selectGaragemCobertura1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectGaragemCobertura"
-                                         name="garagemCoberta" id="selectGaragemCobertura2" autocomplete="off">
+                                    name="garagemCoberta" id="selectGaragemCobertura2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectGaragemCobertura2">Não</label>
                                 </div>
 
@@ -1063,11 +1040,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="boxGaragem" id="boxGaragemY"
-                                         autocomplete="off" value="Sim" v-model="selectBoxGaragem">
+                                    autocomplete="off" value="Sim" v-model="selectBoxGaragem">
                                   <label class="btn btn-outline-success" for="boxGaragemY">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectBoxGaragem"
-                                         name="boxGaragem" id="boxGaragemN" autocomplete="off">
+                                    name="boxGaragem" id="boxGaragemN" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="boxGaragemN">Não</label>
 
 
@@ -1083,9 +1060,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Sala de TV
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="salaTv"
-                                       placeholder="Digite aqui...">
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="salaTv"
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1097,7 +1073,7 @@
                                   Sala de jantar
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="salaJantar" placeholder="Digite aqui...">
+                                  v-model="salaJantar" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1109,7 +1085,7 @@
                                   Sala de estar
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="salaEstar" placeholder="Digite aqui...">
+                                  v-model="salaEstar" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1120,9 +1096,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Lavabo
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="lavabo"
-                                       placeholder="Digite aqui...">
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="lavabo"
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1134,7 +1109,7 @@
                                   Área de serviço
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="areaServico" placeholder="Digite aqui...">
+                                  v-model="areaServico" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1145,9 +1120,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Cozinha
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="cozinha"
-                                       placeholder="Digite aqui...">
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="cozinha"
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1158,9 +1132,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Closet
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="closet"
-                                       placeholder="Digite aqui...">
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="closet"
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1172,7 +1145,7 @@
                                   Escritório
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="escritorio" placeholder="Digite aqui...">
+                                  v-model="escritorio" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1184,7 +1157,7 @@
                                   Dependência para empregada
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="depEmpregada" placeholder="Digite aqui...">
+                                  v-model="depEmpregada" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1196,7 +1169,7 @@
                                   Copa
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="salaJantar" placeholder="Digite aqui...">
+                                  v-model="salaJantar" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1247,7 +1220,7 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                         v-model="areaConstruida" placeholder="Digite aqui...">
+                                    v-model="areaConstruida" placeholder="Digite aqui...">
                                   <span class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -1262,7 +1235,7 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                         v-model="areaPrivativa" placeholder="Digite aqui...">
+                                    v-model="areaPrivativa" placeholder="Digite aqui...">
                                   <span class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -1277,7 +1250,7 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                         v-model="areaTotal" placeholder="Digite aqui...">
+                                    v-model="areaTotal" placeholder="Digite aqui...">
                                   <span class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -1329,7 +1302,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="tipoNegocio">
+                                  v-model="tipoNegocio">
 
                                   <option selected disabled>Selecione</option>
 
@@ -1346,7 +1319,7 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                         v-model="precoImovel" placeholder="Digite aqui...">
+                                    v-model="precoImovel" placeholder="Digite aqui...">
                                   <span class="input-group-text">R$</span>
                                 </div>
                               </div>
@@ -1364,11 +1337,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="precoNoSite" id="btnradio1"
-                                         autocomplete="off" value="Sim" v-model="precoNoSite">
+                                    autocomplete="off" value="Sim" v-model="precoNoSite">
                                   <label class="btn btn-outline-success" for="btnradio1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="precoNoSite"
-                                         name="precoNoSite" id="btnradio2" autocomplete="off">
+                                    name="precoNoSite" id="btnradio2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="btnradio2">Não</label>
                                 </div>
                               </div>
@@ -1382,7 +1355,7 @@
                                   Mostrar no lugar do preço:
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="precoNoSite" placeholder="Consulte...">
+                                  v-model="precoNoSite" placeholder="Consulte...">
                               </div>
                             </div>
 
@@ -1395,7 +1368,7 @@
                                   Preço do IPTU
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="precoIptu" placeholder="Consulte...">
+                                  v-model="precoIptu" placeholder="Consulte...">
                               </div>
                             </div>
 
@@ -1411,11 +1384,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="periodo" id="periodo1" autocomplete="off"
-                                         value="Anual" v-model="periodoIptu">
+                                    value="Anual" v-model="periodoIptu">
                                   <label class="btn btn-outline-success" for="periodo1">Anual</label>
 
                                   <input type="radio" class="btn-check" value="Mensal" v-model="periodoIptu"
-                                         name="periodo" id="periodo2" autocomplete="off">
+                                    name="periodo" id="periodo2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="periodo2">Mensal</label>
                                 </div>
                               </div>
@@ -1429,7 +1402,7 @@
                                   Preço Condomínio
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="precoCondominio" placeholder="Digite aqui...">
+                                  v-model="precoCondominio" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1445,11 +1418,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="estaFinanciado" id="estaFinanciado1"
-                                         autocomplete="off" value="Sim" v-model="estaFinanciado">
+                                    autocomplete="off" value="Sim" v-model="estaFinanciado">
                                   <label class="btn btn-outline-success" for="estaFinanciado1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="estaFinanciado"
-                                         name="estaFinanciado" id="estaFinanciado2" autocomplete="off">
+                                    name="estaFinanciado" id="estaFinanciado2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="estaFinanciado2">Não</label>
                                 </div>
                               </div>
@@ -1468,12 +1441,12 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="aceitaFinanciamento"
-                                         id="aceitaFinanciamento1" autocomplete="off" value="Sim"
-                                         v-model="aceitaFinanciamento">
+                                    id="aceitaFinanciamento1" autocomplete="off" value="Sim"
+                                    v-model="aceitaFinanciamento">
                                   <label class="btn btn-outline-success" for="aceitaFinanciamento1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="aceitaFinanciamento"
-                                         name="aceitaFinanciamento" id="aceitaFinanciamento2" autocomplete="off">
+                                    name="aceitaFinanciamento" id="aceitaFinanciamento2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="aceitaFinanciamento2">Não</label>
                                 </div>
                               </div>
@@ -1491,12 +1464,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mCasaMVida" id="mCasaMVida1"
-                                         autocomplete="off" value="Sim" v-model="mCasaMVida">
+                                    autocomplete="off" value="Sim" v-model="mCasaMVida">
                                   <label class="btn btn-outline-success" for="mCasaMVida1">Sim</label>
 
-                                  <input type="radio" class="btn-check" value="Não" v-model="mCasaMVida"
-                                         name="mCasaMVida"
-                                         id="mCasaMVida2" autocomplete="off">
+                                  <input type="radio" class="btn-check" value="Não" v-model="mCasaMVida" name="mCasaMVida"
+                                    id="mCasaMVida2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mCasaMVida2">Não</label>
                                 </div>
                               </div>
@@ -1510,7 +1482,7 @@
                                   Total mensal em taxas (se houver)
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="taxasTotal" placeholder="Digite aqui...">
+                                  v-model="taxasTotal" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1522,7 +1494,7 @@
                                   Descrição das Taxas
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="taxasDescricao" placeholder="Digite aqui...">
+                                  v-model="taxasDescricao" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -1538,11 +1510,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="aceitaPermuta" id="aceitaPermuta1"
-                                         autocomplete="off" value="Sim" v-model="aceitaPermuta">
+                                    autocomplete="off" value="Sim" v-model="aceitaPermuta">
                                   <label class="btn btn-outline-success" for="aceitaPermuta1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="aceitaPermuta"
-                                         name="aceitaPermuta" id="aceitaPermuta2" autocomplete="off">
+                                    name="aceitaPermuta" id="aceitaPermuta2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="aceitaPermuta2">Não</label>
                                 </div>
                               </div>
@@ -1556,7 +1528,7 @@
                                   Descrição das Permutas
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="permutaDescricao" placeholder="Digite aqui...">
+                                  v-model="permutaDescricao" placeholder="Digite aqui...">
                               </div>
                             </div>
                           </div>
@@ -1575,7 +1547,7 @@
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn btn-success" @click="handleProximoCaracteristica()"
-                                        type="button">Próximo
+                                  type="button">Próximo
                                   <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                               </div>
                             </div>
@@ -1606,9 +1578,8 @@
 
 
                                 <div class="form-check">
-                                  <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox"
-                                         value=""
-                                         id="flexCheckDefault">
+                                  <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox" value=""
+                                    id="flexCheckDefault">
                                   <label class="form-check-label" for="flexCheckDefault">
                                     Default checkbox
                                   </label>
@@ -1625,8 +1596,7 @@
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
                                 <button @click="handleAnteriorCaracteristica()" class="btn btn-secondary" type="button">
-                                  <i
-                                      class="fa fa-arrow-left" aria-hidden="true"></i>
+                                  <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
                               </div>
@@ -1665,10 +1635,9 @@
                                   CEP
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="Digite aqui..."
-                                         v-model="buscarCEP"
-                                         required v-if="!mostrarSkeleton" aria-label="Example text with button addon"
-                                         aria-describedby="button-addon1">
+                                  <input type="text" class="form-control" placeholder="Digite aqui..." v-model="buscarCEP"
+                                    required v-if="!mostrarSkeleton" aria-label="Example text with button addon"
+                                    aria-describedby="button-addon1">
                                   <button class="btn btn-success px-3" type="button" id="button-addon1">Buscar</button>
                                 </div>
                               </div>
@@ -1682,7 +1651,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectPais">
+                                  v-model="selectPais">
 
                                   <option selected disabled>Selecione</option>
 
@@ -1698,7 +1667,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectEstado">
+                                  v-model="selectEstado">
 
                                   <option selected disabled>Selecione</option>
 
@@ -1715,7 +1684,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectCidade">
+                                  v-model="selectCidade">
 
                                   <option selected disabled>Selecione</option>
 
@@ -1731,7 +1700,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectBairro">
+                                  v-model="selectBairro">
 
                                   <option selected disabled>Selecione</option>
 
@@ -1747,7 +1716,7 @@
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectZona">
+                                  v-model="selectZona">
 
                                   <option selected disabled>Selecione</option>
 
@@ -1764,7 +1733,7 @@
                                   Logradouro
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="logradouro" placeholder="Consulte...">
+                                  v-model="logradouro" placeholder="Consulte...">
                               </div>
                             </div>
                             <div class="col-2">
@@ -1775,7 +1744,7 @@
                                   Número
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="nLogradouro" placeholder="Consulte...">
+                                  v-model="nLogradouro" placeholder="Consulte...">
                               </div>
                             </div>
                             <div class="col-5">
@@ -1786,7 +1755,7 @@
                                   Complemento
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="complemento" placeholder="Consulte...">
+                                  v-model="complemento" placeholder="Consulte...">
                               </div>
                             </div>
 
@@ -1799,7 +1768,7 @@
                                   Nº ou identificação da Unidade
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="idUnidade" placeholder="Consulte...">
+                                  v-model="idUnidade" placeholder="Consulte...">
                               </div>
                             </div>
                             <div class="col-2">
@@ -1810,7 +1779,7 @@
                                   Andar
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="selectAndar" placeholder="Consulte...">
+                                  v-model="selectAndar" placeholder="Consulte...">
                               </div>
                             </div>
                             <div class="col-2">
@@ -1821,7 +1790,7 @@
                                   Unidades por andar
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="undPorAndar" placeholder="Consulte...">
+                                  v-model="undPorAndar" placeholder="Consulte...">
                               </div>
                             </div>
                             <div class="col-2">
@@ -1832,7 +1801,7 @@
                                   Total de andares
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="totalAndares" placeholder="Consulte...">
+                                  v-model="totalAndares" placeholder="Consulte...">
                               </div>
                             </div>
                             <div class="col-2">
@@ -1843,7 +1812,7 @@
                                   Total de torres
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="totalTorres" placeholder="Consulte...">
+                                  v-model="totalTorres" placeholder="Consulte...">
                               </div>
                             </div>
 
@@ -1862,11 +1831,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mostrarAndar" id="mostrarAndar1"
-                                         autocomplete="off" value="Sim" v-model="mostrarAndar">
+                                    autocomplete="off" value="Sim" v-model="mostrarAndar">
                                   <label class="btn btn-outline-success" for="mostrarAndar1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarAndar"
-                                         name="mostrarAndar" id="mostrarAndar2" autocomplete="off">
+                                    name="mostrarAndar" id="mostrarAndar2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarAndar2">Não</label>
                                 </div>
 
@@ -1884,11 +1853,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mostrarNUnidade" id="mostrarNUnidade1"
-                                         autocomplete="off" value="Sim" v-model="mostrarNUnidade">
+                                    autocomplete="off" value="Sim" v-model="mostrarNUnidade">
                                   <label class="btn btn-outline-success" for="mostrarNUnidade1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarNUnidade"
-                                         name="mostrarNUnidade" id="mostrarNUnidade2" autocomplete="off">
+                                    name="mostrarNUnidade" id="mostrarNUnidade2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarNUnidade2">Não</label>
                                 </div>
 
@@ -1906,11 +1875,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mostrarLogradouro" id="mostrarLogradouro1"
-                                         autocomplete="off" value="Sim" v-model="mostrarLogradouro">
+                                    autocomplete="off" value="Sim" v-model="mostrarLogradouro">
                                   <label class="btn btn-outline-success" for="mostrarLogradouro1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarLogradouro"
-                                         name="mostrarLogradouro" id="mostrarLogradouro2" autocomplete="off">
+                                    name="mostrarLogradouro" id="mostrarLogradouro2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarLogradouro2">Não</label>
                                 </div>
 
@@ -1928,11 +1897,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mostrarBairro" id="mostrarBairro1"
-                                         autocomplete="off" value="Sim" v-model="mostrarBairro">
+                                    autocomplete="off" value="Sim" v-model="mostrarBairro">
                                   <label class="btn btn-outline-success" for="mostrarBairro1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarBairro"
-                                         name="mostrarBairro" id="mostrarBairro2" autocomplete="off">
+                                    name="mostrarBairro" id="mostrarBairro2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarBairro2">Não</label>
                                 </div>
 
@@ -1949,13 +1918,12 @@
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" name="mostrarComplemento"
-                                         id="mostrarComplemento1"
-                                         autocomplete="off" value="Sim" v-model="mostrarComplemento">
+                                  <input type="radio" class="btn-check" name="mostrarComplemento" id="mostrarComplemento1"
+                                    autocomplete="off" value="Sim" v-model="mostrarComplemento">
                                   <label class="btn btn-outline-success" for="mostrarComplemento1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarComplemento"
-                                         name="mostrarComplemento" id="mostrarComplemento2" autocomplete="off">
+                                    name="mostrarComplemento" id="mostrarComplemento2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarComplemento2">Não</label>
                                 </div>
 
@@ -1973,11 +1941,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mostrarNumero" id="mostrarNumero1"
-                                         autocomplete="off" value="Sim" v-model="mostrarNumero">
+                                    autocomplete="off" value="Sim" v-model="mostrarNumero">
                                   <label class="btn btn-outline-success" for="mostrarNumero1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarNumero"
-                                         name="mostrarNumero" id="mostrarNumero2" autocomplete="off">
+                                    name="mostrarNumero" id="mostrarNumero2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarNumero2">Não</label>
                                 </div>
 
@@ -1995,11 +1963,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mostrarNCondo" id="mostrarNCondo1"
-                                         autocomplete="off" value="Sim" v-model="mostrarNCondo">
+                                    autocomplete="off" value="Sim" v-model="mostrarNCondo">
                                   <label class="btn btn-outline-success" for="mostrarNCondo1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mostrarNCondo"
-                                         name="mostrarNCondo" id="mostrarNCondo2" autocomplete="off">
+                                    name="mostrarNCondo" id="mostrarNCondo2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mostrarNCondo2">Não</label>
                                 </div>
 
@@ -2020,11 +1988,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mapaCondo" id="mapaCondo1"
-                                         autocomplete="off" value="Sim" v-model="mapaCondo">
+                                    autocomplete="off" value="Sim" v-model="mapaCondo">
                                   <label class="btn btn-outline-success" for="mapaCondo1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="mapaCondo" name="mapaCondo"
-                                         id="mapaCondo2" autocomplete="off">
+                                    id="mapaCondo2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="mapaCondo2">Não</label>
                                 </div>
 
@@ -2033,10 +2001,9 @@
 
                             <div class="col-12" v-if='mostrarMapa'>
                               <iframe
-                                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14725.435606724364!2d-43.2618207!3d-22.6776796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1707888543130!5m2!1spt-BR!2sbr"
-                                  width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
-                                  class="my-3"
-                                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14725.435606724364!2d-43.2618207!3d-22.6776796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1707888543130!5m2!1spt-BR!2sbr"
+                                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" class="my-3"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                               <div class="row">
                                 <div class="col-3">
@@ -2051,11 +2018,11 @@
 
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                       <input type="radio" class="btn-check" name="selectMapSite" id="selectMapSite1"
-                                             autocomplete="off" value="Sim" v-model="selectMapSite">
+                                        autocomplete="off" value="Sim" v-model="selectMapSite">
                                       <label class="btn btn-outline-success" for="selectMapSite1">Sim</label>
 
                                       <input type="radio" class="btn-check" value="Não" v-model="selectMapSite"
-                                             name="selectMapSite" id="selectMapSite2" autocomplete="off">
+                                        name="selectMapSite" id="selectMapSite2" autocomplete="off">
                                       <label class="btn btn-outline-danger" for="selectMapSite2">Não</label>
                                     </div>
 
@@ -2073,11 +2040,11 @@
 
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                       <input type="radio" class="btn-check" name="selectLocalSite" id="selectLocalSite1"
-                                             autocomplete="off" value="Sim" v-model="selectLocalSite">
+                                        autocomplete="off" value="Sim" v-model="selectLocalSite">
                                       <label class="btn btn-outline-success" for="selectLocalSite1">Sim</label>
 
                                       <input type="radio" class="btn-check" value="Não" v-model="selectLocalSite"
-                                             name="selectLocalSite" id="selectLocalSite2" autocomplete="off">
+                                        name="selectLocalSite" id="selectLocalSite2" autocomplete="off">
                                       <label class="btn btn-outline-danger" for="selectLocalSite2">Não</label>
                                     </div>
 
@@ -2095,11 +2062,11 @@
 
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                       <input type="radio" class="btn-check" name="mapaStreetV" id="mapaStreetV1"
-                                             autocomplete="off" value="Sim" v-model="mapaStreetV">
+                                        autocomplete="off" value="Sim" v-model="mapaStreetV">
                                       <label class="btn btn-outline-success" for="mapaStreetV1">Sim</label>
 
                                       <input type="radio" class="btn-check" value="Não" v-model="mapaStreetV"
-                                             name="mapaStreetV" id="mapaStreetV2" autocomplete="off">
+                                        name="mapaStreetV" id="mapaStreetV2" autocomplete="off">
                                       <label class="btn btn-outline-danger" for="mapaStreetV2">Não</label>
                                     </div>
 
@@ -2108,9 +2075,9 @@
 
                                 <div class="col-12" v-if='mostrarStreetV'>
                                   <iframe class="my-3"
-                                          src="https://www.google.com/maps/embed?pb=!4v1707889331429!6m8!1m7!1sa0-XByQp0pchr1GOj9xQ8A!2m2!1d-22.92151936264778!2d-43.23568712578175!3f238.24871274054573!4f-29.797796874639346!5f0.7820865974627469"
-                                          width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
-                                          referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    src="https://www.google.com/maps/embed?pb=!4v1707889331429!6m8!1m7!1sa0-XByQp0pchr1GOj9xQ8A!2m2!1d-22.92151936264778!2d-43.23568712578175!3f238.24871274054573!4f-29.797796874639346!5f0.7820865974627469"
+                                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                                   <div class="col-3">
                                     <div class="mb-3">
@@ -2123,13 +2090,13 @@
                                       <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                       <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="selectStreetVSite" id="selectStreetVSite1"
-                                               autocomplete="off" value="Sim" v-model="selectStreetVSite">
+                                        <input type="radio" class="btn-check" name="selectStreetVSite"
+                                          id="selectStreetVSite1" autocomplete="off" value="Sim"
+                                          v-model="selectStreetVSite">
                                         <label class="btn btn-outline-success" for="selectStreetVSite1">Sim</label>
 
-                                        <input type="radio" class="btn-check" value="Não"
-                                               v-model="selectStreetVSite"
-                                               name="selectStreetVSite" id="selectStreetVSite2" autocomplete="off">
+                                        <input type="radio" class="btn-check" value="Não" v-model="selectStreetVSite"
+                                          name="selectStreetVSite" id="selectStreetVSite2" autocomplete="off">
                                         <label class="btn btn-outline-danger" for="selectStreetVSite2">Não</label>
                                       </div>
 
@@ -2192,7 +2159,7 @@
 
                                 <div class="form-check">
                                   <input class="form-check-input" v-model="proximidades" type="checkbox" value=""
-                                         id="flexCheckDefault">
+                                    id="flexCheckDefault">
                                   <label class="form-check-label" for="flexCheckDefault">
                                     Default checkbox
                                   </label>
@@ -2245,7 +2212,7 @@
                                   Titulo da página de detalhamento do imóvel
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="titleImovel" placeholder="Digite aqui...">
+                                  v-model="titleImovel" placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -2258,7 +2225,7 @@
                                 </label>
 
                                 <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoImovel"
-                                          style="height:100px" placeholder="Digite aqui..."></textarea>
+                                  style="height:100px" placeholder="Digite aqui..."></textarea>
                               </div>
                             </div>
 
@@ -2307,12 +2274,12 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Vídeo do Imóvel: Insira a URL do seu vídeo no Youtube
                                   <button type="button" class="btn btn-danger ms-2"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-trash me-2"></i> Remover Vídeo
                                   </button>
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="urlYT"
-                                       placeholder="Digite aqui...">
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -2323,13 +2290,12 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Apresentação 360°: Insira a URL 360° do seu imóvel
                                   <button type="button" class="btn btn-danger ms-2"
-                                          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-trash me-2"></i> Remover 360°
                                   </button>
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="url360"
-                                       placeholder="Digite aqui...">
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="url360"
+                                  placeholder="Digite aqui...">
                               </div>
                             </div>
 
@@ -2401,7 +2367,7 @@
                                   Enviar
                                   fotos </label>
                                 <input v-if="!mostrarSkeleton" class="form-control d-none" type="file" id="formFile"
-                                       multiple>
+                                  multiple>
 
                               </div>
                             </div>
@@ -2457,11 +2423,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectImovelSite" id="selectImovelSite1"
-                                         autocomplete="off" value="Sim" v-model="selectImovelSite">
+                                    autocomplete="off" value="Sim" v-model="selectImovelSite">
                                   <label class="btn btn-outline-success" for="selectImovelSite1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectImovelSite"
-                                         name="selectImovelSite" id="selectImovelSite2" autocomplete="off">
+                                    name="selectImovelSite" id="selectImovelSite2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectImovelSite2">Não</label>
                                 </div>
 
@@ -2481,11 +2447,11 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectPageInit" id="selectPageInit1"
-                                         autocomplete="off" value="Sim" v-model="selectPageInit">
+                                    autocomplete="off" value="Sim" v-model="selectPageInit">
                                   <label class="btn btn-outline-success" for="selectPageInit1">Sim</label>
 
                                   <input type="radio" class="btn-check" value="Não" v-model="selectPageInit"
-                                         name="selectPageInit" id="selectPageInit2" autocomplete="off">
+                                    name="selectPageInit" id="selectPageInit2" autocomplete="off">
                                   <label class="btn btn-outline-danger" for="selectPageInit2">Não</label>
                                 </div>
 
@@ -2507,7 +2473,7 @@
                                       Texto da tarja
                                     </label>
                                     <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                           v-model="textoTarja" placeholder="Em construção">
+                                      v-model="textoTarja" placeholder="Em construção">
                                   </div>
                                 </div>
                                 <div class="col-4">
@@ -2517,9 +2483,8 @@
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                       Cor da tarja
                                     </label>
-                                    <input type="color" v-if="!mostrarSkeleton" v-model="corTarja"
-                                           class="form-control " id="exampleColorInput" value="#563d7c"
-                                           title="Escolha a cor">
+                                    <input type="color" v-if="!mostrarSkeleton" v-model="corTarja" class="form-control "
+                                      id="exampleColorInput" value="#563d7c" title="Escolha a cor">
                                   </div>
                                 </div>
 
@@ -2544,17 +2509,18 @@
                                     <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                      <input type="radio" class="btn-check" name="enviarLinkProprietario" id="enviarLinkProprietario1"
-                                             autocomplete="off" value="Sim" v-model="enviarLinkProprietario">
+                                      <input type="radio" class="btn-check" name="enviarLinkProprietario"
+                                        id="enviarLinkProprietario1" autocomplete="off" value="Sim"
+                                        v-model="enviarLinkProprietario">
                                       <label class="btn btn-outline-success" for="enviarLinkProprietario1">Sim</label>
 
                                       <input type="radio" class="btn-check" value="Não" v-model="enviarLinkProprietario"
-                                             name="enviarLinkProprietario" id="enviarLinkProprietario2" autocomplete="off">
+                                        name="enviarLinkProprietario" id="enviarLinkProprietario2" autocomplete="off">
                                       <label class="btn btn-outline-danger" for="enviarLinkProprietario2">Não</label>
                                     </div>
 
                                   </div>
-                                </div>   
+                                </div>
 
                                 <div class="col-12">
                                   <div class="mb-3">
@@ -2564,7 +2530,9 @@
                                       Texto que acompanhará o link do imóvel
                                     </label>
 
-                                    <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoImovel" style="height:100px" placeholder="Seu imóvel foi cadastrado em nosso site, e contamos com a sua ajuda para revisar todos os dados de cadastro"></textarea>
+                                    <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoImovel"
+                                      style="height:100px"
+                                      placeholder="Seu imóvel foi cadastrado em nosso site, e contamos com a sua ajuda para revisar todos os dados de cadastro"></textarea>
 
                                     <div class="row mx-1 mt-3">
                                       <a href="#" class="col-2 py-2 btn btn-success me-2">
@@ -2573,13 +2541,13 @@
                                       <a href="#" class="col-2 py-2 btn btn-dark">
                                         <i class="far fa-envelope me-2"></i>Enviar
                                       </a>
-                                    </div> 
+                                    </div>
 
                                   </div>
-                                </div>  
+                                </div>
 
                               </div>
-                            </div>                           
+                            </div>
 
                             <hr>
 
@@ -2599,75 +2567,83 @@
                                     <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                      <input type="radio" class="btn-check" name="enviarEmailProprietario" id="enviarEmailProprietario1"
-                                             autocomplete="off" value="Sim" v-model="enviarEmailProprietario">
+                                      <input type="radio" class="btn-check" name="enviarEmailProprietario"
+                                        id="enviarEmailProprietario1" autocomplete="off" value="Sim"
+                                        v-model="enviarEmailProprietario">
                                       <label class="btn btn-outline-success" for="enviarEmailProprietario1">Sim</label>
 
                                       <input type="radio" class="btn-check" value="Não" v-model="enviarEmailProprietario"
-                                             name="enviarEmailProprietario" id="enviarEmailProprietario2" autocomplete="off">
+                                        name="enviarEmailProprietario" id="enviarEmailProprietario2" autocomplete="off">
                                       <label class="btn btn-outline-danger" for="enviarEmailProprietario2">Não</label>
                                     </div>
 
                                   </div>
-                                </div>   
+                                </div>
 
-                                <div class="col-12"><div class="row">
-                                  <div class="col-6">
-                                    <div class="mb-3">
-                                      <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                      <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                      <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                        Qual e-mail para envio recorrente?
-                                      </label>
-                                      <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                             v-model="emailProprietario" placeholder="email@doproprietário">
-                                    </div>
-                                  </div>
-
-                                  <div class="col-6">
-                                    <div class="">
-                                      <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                      <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                      <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                        Qual o período (dias) de envio desejado?
-                                      </label>
-
-                                      <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="periodoEnvio" id="periodoEnvio1"
-                                               autocomplete="off" value="Sim" v-model="periodoEnvioperiodoEnvio">
-                                        <label class="btn btn-outline-success me-1" for="periodoEnvio1">+30</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                               name="periodoEnvio" id="periodoEnvio2" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDayMiddle me-1" for="periodoEnvio2">+60</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                               name="periodoEnvio" id="periodoEnvio3" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDayMiddle me-1" for="periodoEnvio3">+90</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                               name="periodoEnvio" id="periodoEnvio4" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDayMiddle me-1" for="periodoEnvio4">+120</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                               name="periodoEnvio" id="periodoEnvio5" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDayMiddle me-1" for="periodoEnvio5">+150</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                               name="periodoEnvio" id="periodoEnvio6" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDaySuccess" for="periodoEnvio6">+180</label>
+                                <div class="col-12">
+                                  <div class="row">
+                                    <div class="col-6">
+                                      <div class="mb-3">
+                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
+                                          Qual e-mail para envio recorrente?
+                                        </label>
+                                        <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                          v-model="emailProprietario" placeholder="email@doproprietário">
                                       </div>
+                                    </div>
 
+                                    <div class="col-6">
+                                      <div class="">
+                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
+                                          Qual o período (dias) de envio desejado?
+                                        </label>
+
+                                        <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                          <input type="radio" class="btn-check" name="periodoEnvio" id="periodoEnvio1"
+                                            autocomplete="off" value="Sim" v-model="periodoEnvioperiodoEnvio">
+                                          <label class="btn btn-outline-success me-1" for="periodoEnvio1">+30</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
+                                            name="periodoEnvio" id="periodoEnvio2" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
+                                            for="periodoEnvio2">+60</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
+                                            name="periodoEnvio" id="periodoEnvio3" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
+                                            for="periodoEnvio3">+90</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
+                                            name="periodoEnvio" id="periodoEnvio4" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
+                                            for="periodoEnvio4">+120</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
+                                            name="periodoEnvio" id="periodoEnvio5" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
+                                            for="periodoEnvio5">+150</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
+                                            name="periodoEnvio" id="periodoEnvio6" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDaySuccess"
+                                            for="periodoEnvio6">+180</label>
+                                        </div>
+
+                                      </div>
                                     </div>
                                   </div>
-                                </div></div>
+                                </div>
 
                               </div>
                             </div>
@@ -2691,62 +2667,66 @@
 
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                       <input type="radio" class="btn-check" name="revisarCadastro" id="revisarCadastro1"
-                                             autocomplete="off" value="Sim" v-model="revisarCadastro">
+                                        autocomplete="off" value="Sim" v-model="revisarCadastro">
                                       <label class="btn btn-outline-success" for="revisarCadastro1">Sim</label>
 
                                       <input type="radio" class="btn-check" value="Não" v-model="revisarCadastro"
-                                             name="revisarCadastro" id="revisarCadastro2" autocomplete="off">
+                                        name="revisarCadastro" id="revisarCadastro2" autocomplete="off">
                                       <label class="btn btn-outline-danger" for="revisarCadastro2">Não</label>
                                     </div>
 
                                   </div>
-                                </div>   
+                                </div>
 
-                                <div class="col-12"><div class="row">
-                                  <div class="col-6">
-                                    <div class="mb-3">
-                                      <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                      <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                      <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                        Próxima data de revisão
-                                      </label>
-                                      <input type="date" required v-if="!mostrarSkeleton" class="form-control"
-                                             v-model="textoTarja" placeholder="">
-                                    </div>
-                                  </div>
-
-                                  <div class="col-6">
-                                    <div class="">
-                                      <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                      <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                      <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                        Qual o período (dias) de envio desejado?
-                                      </label>
-
-                                      <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="periodoRevisao" id="periodoRevisao1"
-                                               autocomplete="off" value="Sim" v-model="periodoRevisao">
-                                        <label class="btn btn-outline-success me-1" for="periodoRevisao1">+30</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoRevisao"
-                                               name="periodoRevisao" id="periodoRevisao2" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDayMiddle me-1" for="periodoRevisao2">+60</label>
-
-
-                                        <input type="radio" class="btn-check" value="Não" v-model="periodoRevisao"
-                                               name="periodoRevisao" id="periodoRevisao3" autocomplete="off">
-                                        <label class=" btn btn-outline-success selectDaySuccess" for="periodoRevisao3">+90</label>
+                                <div class="col-12">
+                                  <div class="row">
+                                    <div class="col-6">
+                                      <div class="mb-3">
+                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
+                                          Próxima data de revisão
+                                        </label>
+                                        <input type="date" required v-if="!mostrarSkeleton" class="form-control"
+                                          v-model="textoTarja" placeholder="">
                                       </div>
+                                    </div>
 
+                                    <div class="col-6">
+                                      <div class="">
+                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
+                                          Qual o período (dias) de envio desejado?
+                                        </label>
+
+                                        <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
+
+                                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                          <input type="radio" class="btn-check" name="periodoRevisao" id="periodoRevisao1"
+                                            autocomplete="off" value="Sim" v-model="periodoRevisao">
+                                          <label class="btn btn-outline-success me-1" for="periodoRevisao1">+30</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoRevisao"
+                                            name="periodoRevisao" id="periodoRevisao2" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
+                                            for="periodoRevisao2">+60</label>
+
+
+                                          <input type="radio" class="btn-check" value="Não" v-model="periodoRevisao"
+                                            name="periodoRevisao" id="periodoRevisao3" autocomplete="off">
+                                          <label class=" btn btn-outline-success selectDaySuccess"
+                                            for="periodoRevisao3">+90</label>
+                                        </div>
+
+                                      </div>
                                     </div>
                                   </div>
-                                </div></div>
+                                </div>
 
                               </div>
-                            </div>                           
+                            </div>
 
 
                           </div>
@@ -2783,17 +2763,17 @@
           </div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   </div>
-
-
-
 </template>
 <script>
 import Sidebar from '../../components/sidebar/index.vue'
 import Navbar from '../../components/navbar/index.vue'
 import Footer from '../../components/footer/index.vue'
+import { jwtDecode } from "jwt-decode";
+
+import api from '../../../service/api/index.js'
 
 export default {
   name: 'CadImoveisView',
@@ -2804,6 +2784,8 @@ export default {
   },
   data() {
     return {
+
+      id_user: '',
       home: '',
       comodos: '',
       inputCondominio: false,
@@ -2842,7 +2824,7 @@ export default {
       // TABINFO
       codigoref: '',
       selectCondominio: 'Não',
-      condominioEmpreendimento: '',
+      idCondominio: '',
       selectProprietario: '',
       selectCorretor: '',
       selectAgenciador: '',
@@ -2938,7 +2920,7 @@ export default {
 
 
       // TAB DESCRIÇÃO
-      titleImovel: '', 
+      titleImovel: '',
       apresentacaoImovel: '',
 
 
@@ -2960,11 +2942,24 @@ export default {
       periodoEnvio: '+30',
       revisarCadastro: 'Não',
       proximaDataRevisao: '',
-      periodoRevisao: '+30'
+      periodoRevisao: '+30',
 
 
+      idInfo: '',
+      idComodos: '',
+      idMedidas: '',
+      idPreco: '',
+      idCaracteristica: '',
+      idLocalizacao: '',
+      idProximidades: '',
+      idDescricao: '',
+      idComplemento: '',
 
     }
+
+
+
+
   },
 
 
@@ -2978,119 +2973,119 @@ export default {
       }
     },
 
-    mapaCondo(newValue){
-      if(newValue == 'Sim'){
-        this.mostrarMapa = true       
-      }else{ this.mostrarMapa = false}
+    mapaCondo(newValue) {
+      if (newValue == 'Sim') {
+        this.mostrarMapa = true
+      } else { this.mostrarMapa = false }
     },
 
-    mapaStreetV(newValue){
-      if(newValue == 'Sim'){
+    mapaStreetV(newValue) {
+      if (newValue == 'Sim') {
         this.mostrarStreetV = true
-      }else{
+      } else {
         this.mostrarStreetV = false
       }
     },
 
 
     // INFO
-    selectAverbado(y){
+    selectAverbado(y) {
       this.selectAverbado = y
       console.log(this.selectAverbado)
     },
-    selectEscritura(y){
+    selectEscritura(y) {
       this.selectEscritura = y
       console.log(this.selectEscritura)
     },
-    selectEsquina(y){
+    selectEsquina(y) {
       this.selectEsquina = y
       console.log(this.selectEsquina)
     },
-    selectMobilia(y){
+    selectMobilia(y) {
       this.selectMobilia = y
       console.log(this.selectMobilia)
     },
-    selectTerreno(y){
+    selectTerreno(y) {
       this.selectTerreno = y
       console.log(this.selectTerreno)
     },
 
     // COMODOS
-    selectGaragemCobertura(y){
+    selectGaragemCobertura(y) {
       this.selectGaragemCobertura = y
       console.log(this.selectGaragemCobertura)
     },
-    selectBoxGaragem(y){
+    selectBoxGaragem(y) {
       this.selectBoxGaragem = y
       console.log(this.selectBoxGaragem)
     },
 
 
     // PREÇOS
-    precoNoSite(y){
+    precoNoSite(y) {
       this.precoNoSite = y
       console.log(this.precoNoSite)
     },
-    periodoIptu(y){
+    periodoIptu(y) {
       this.periodoIptu = y
       console.log(this.periodoIptu)
     },
-    estaFinanciado(y){
+    estaFinanciado(y) {
       this.estaFinanciado = y
       console.log(this.estaFinanciado)
     },
-    aceitaFinanciamento(y){
+    aceitaFinanciamento(y) {
       this.aceitaFinanciamento = y
       console.log(this.aceitaFinanciamento)
     },
-    mCasaMVida(y){
+    mCasaMVida(y) {
       this.mCasaMVida = y
       console.log(this.mCasaMVida)
     },
-    aceitaPermuta(y){
+    aceitaPermuta(y) {
       this.aceitaPermuta = y
       console.log(this.aceitaPermuta)
     },
 
 
     // LOCALIZAÇÃO
-    mostrarAndar(y){
+    mostrarAndar(y) {
       this.mostrarAndar = y
       console.log(this.mostrarAndar)
     },
-    mostrarNUnidade(y){
+    mostrarNUnidade(y) {
       this.mostrarNUnidade = y
       console.log(this.mostrarNUnidade)
     },
-    mostrarLogradouro(y){
+    mostrarLogradouro(y) {
       this.mostrarLogradouro = y
       console.log(this.mostrarLogradouro)
     },
-    mostrarBairro(y){
+    mostrarBairro(y) {
       this.mostrarBairro = y
       console.log(this.mostrarBairro)
     },
-    mostrarComplemento(y){
+    mostrarComplemento(y) {
       this.mostrarComplemento = y
       console.log(this.mostrarComplemento)
     },
-    mostrarNumero(y){
+    mostrarNumero(y) {
       this.mostrarNumero = y
       console.log(this.mostrarNumero)
     },
-    mostrarNCondo(y){
+    mostrarNCondo(y) {
       this.mostrarNCondo = y
       console.log(this.mostrarNCondo)
     },
-    selectMapSite(y){
+    selectMapSite(y) {
       this.selectMapSite = y
       console.log(this.selectMapSite)
     },
-    selectLocalSite(y){
+    selectLocalSite(y) {
       this.selectLocalSite = y
       console.log(this.selectLocalSite)
     },
-    selectStreetVSite(y){
+    selectStreetVSite(y) {
       this.selectStreetVSite = y
       console.log(this.selectStreetVSite)
     },
@@ -3100,16 +3095,27 @@ export default {
     setTimeout(() => {
       this.mostrarSkeleton = false;
     }, 2000)
+
+
+    let token = localStorage.getItem('token')
+    this.token = token;
+    let decode = jwtDecode(token);
+
+    this.id_user = decode.avatar
+    this.nome = decode.nome
+    this.sobrenome = decode.sobrenome
+    this.email = decode.email
+
   },
 
   methods: {
 
-    handleprop(){
+    handleprop() {
       this.addProp = true
       this.infoTab = false
     },
-    
-    handlepropclose(){
+
+    handlepropclose() {
       this.addProp = false
       this.infoTab = true
     },
@@ -3237,6 +3243,201 @@ export default {
       this.stepComplemento = true
       this.stepImagens = true
       this.stepPublicacao = true
+    },
+
+
+    handleFinish() {
+
+      let id_user = this.id_user
+      let selectCondominio = this.selectCondominio
+      let idCondominio = this.idCondominio
+
+      let codigoref = this.codigoref
+      let selectProprietario = this.selectProprietario
+      let selectCorretor = this.selectCorretor
+      let selectAgenciador = this.selectAgenciador
+      let tipoImovel = this.tipoImovel
+      let perfilImovel = this.perfilImovel
+      let situacaoImovel = this.situacaoImovel
+      let anoImovel = this.anoImovel
+      let incorporacao = this.incorporacao
+      let posicaoSolar = this.posicaoSolar
+      let selectTerreno = this.selectTerreno
+      let proximoMar = this.proximoMar
+      let selectAverbado = this.selectAverbado
+      let selectEscritura = this.selectEscritura
+      let selectEsquina = this.selectEsquina
+      let selectMobilia = this.selectMobilia
+
+      let dormitorio = this.dormitorio
+      let suite = this.suite
+      let banheiro = this.banheiro
+      let garagem = this.garagem
+      let selectGaragemCobertura = this.selectGaragemCobertura
+      let selectBoxGaragem = this.selectBoxGaragem
+      let salaTv = this.salaTv
+      let salaJantar = this.salaJantar
+      let salaEstar = this.salaEstar
+      let lavabo = this.lavabo
+      let areaServico = this.areaServico
+      let cozinha = this.cozinha
+      let closet = this.closet
+      let escritorio = this.escritorio
+      let depEmpregada = this.depEmpregada
+      let copa = this.copa
+
+      let areaConstruida = this.areaConstruida
+      let areaPrivativa = this.areaPrivativa
+      let areaTotal = this.areaTotal
+
+      let tipoNegocio = this.tipoNegocio
+      let precoImovel = this.precoImovel
+      let precoNoSite = this.precoNoSite
+      let precoIptu = this.precoIptu
+      let periodoIptu = this.periodoIptu
+      let precoCondominio = this.precoCondominio
+      let estaFinanciado = this.estaFinanciado
+      let aceitaFinanciamento = this.aceitaFinanciamento
+      let mCasaMVida = this.mCasaMVida
+      let taxasTotal = this.taxasTotal
+      let taxasDescricao = this.taxasDescricao
+      let aceitaPermuta = this.aceitaPermuta
+      let permutaDescricao = this.permutaDescricao
+
+      let caracteristicaImovel = this.caracteristicaImovel
+
+      let buscarCEP = this.buscarCEP
+      let selectPais = this.selectPais
+      let selectEstado = this.selectEstado
+      let selectCidade = this.selectCidade
+      let selectBairro = this.selectBairro
+      let selectZona = this.selectZona
+      let logradouro = this.logradouro
+      let nLogradouro = this.nLogradouro
+      let complemento = this.complemento
+      let idUnidade = this.idUnidade
+      let selectAndar = this.selectAndar
+      let undPorAndar = this.undPorAndar
+      let totalAndares = this.totalAndares
+      let totalTorres = this.totalTorres
+      let mostrarAndar = this.mostrarAndar
+      let mostrarNUnidade = this.mostrarNUnidade
+      let mostrarLogradouro = this.mostrarLogradouro
+      let mostrarBairro = this.mostrarBairro
+      let mostrarComplemento = this.mostrarComplemento
+      let mostrarNumero = this.mostrarNumero
+      let mostrarNCondo = this.mostrarNCondo
+      let mapaCondo = this.mapaCondo
+      let selectMapSite = this.selectMapSite
+      let selectLocalSite = this.selectLocalSite
+
+      let proximidades = this.proximidades
+
+      let titleImovel = this.titleImovel
+      let apresentacaoImovel = this.apresentacaoImovel
+
+      let urlYT = this.apresentacaoImovel
+      let url360 = this.apresentacaoImovel
+
+      let id_info = this.id_info
+      let id_comodos = this.id_comodos
+      let id_medidas = this.id_medidas
+      let id_preco = this.id_preco
+      let id_caracteristica = this.id_caracteristica
+      let id_localizacao = this.id_localizacao
+      let id_proximidades = this.id_proximidades
+      let id_descricao = this.id_descricao
+      let id_complemento = this.id_complemento
+
+
+
+      api.tabInfo(codigoref, selectProprietario, selectCorretor, selectAgenciador, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia, id_user).then(res => {
+
+        if (res.status == 201) {
+          this.idInfo = res.data.id_info;
+
+          api.tabComodos(dormitorio, suite, banheiro, garagem, selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, salaEstar, lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa, id_user).then(res => {
+
+            if (res.status == 201) {
+              this.idComodos = res.data.id_comodos;
+
+              api.tabMedidas(areaConstruida, areaPrivativa, areaTotal, id_user).then(res => {
+                if (res.status == 201) {
+                  this.idMedidas = res.data.id_medidas;
+
+                  api.tabPreco(tipoNegocio, precoImovel, precoNoSite, precoIptu, periodoIptu, precoCondominio, estaFinanciado, aceitaFinanciamento, mCasaMVida, taxasTotal, taxasTotal, taxasDescricao, aceitaPermuta, permutaDescricao, id_user).then(res => {
+
+                    if (res.status == 201) {
+                      this.idPreco = res.data.id_preco;
+
+                      api.tabCaracteristica(caracteristicaImovel, id_user).then(res => {
+
+                        if (res.status == 201) {
+                          this.idCaracteristica = res.data.id_caracteristica;
+
+                          api.tabLocalizacao(buscarCEP, selectPais, selectEstado, selectCidade, selectCidade, selectBairro, selectZona, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, mapaCondo, mapaCondo, selectMapSite, selectLocalSite, selectLocalSite, id_user).then(res => {
+
+                            if (res.status == 201) {
+                              this.idLocalizacao = res.data.id_localizacao;
+
+                              api.tabProximidades(proximidades, id_user).then(res => {
+
+                                if (res.status == 201) {
+                                  this.idProximidades = res.data.id_proximidades;
+
+                                  api.tabDescricao(titleImovel, apresentacaoImovel, id_user).then(res => {
+                                    if (res.status == 201) {
+                                      this.idDescricao = res.data.id_descricao;
+
+                                      api.tabComplemento(urlYT, url360, id_user).then(res => {
+
+                                        if (res.status == 201) {
+                                          this.idComplemento = res.data.id_complemento;
+
+                                          api.novoImovel(id_info, selectCondominio, idCondominio, idProprietario, id_comodos, id_medidas, id_preco, id_caracteristica, id_localizacao, id_proximidades, id_descricao, id_complemento, id_user).then(res => {
+                                            if (res.status == 201) {
+
+                                              //Imagem aqui 
+
+                                            }
+
+                                          })
+                                        }
+                                      });
+
+                                    }
+
+                                  })
+                                }
+
+                              })
+
+                            }
+
+                          });
+
+                        }
+                      })
+                    }
+                  })
+                }
+              })
+
+
+            }
+          })
+        }
+      })
+
+
+
+
+
+
+
+
+
+
     },
 
 

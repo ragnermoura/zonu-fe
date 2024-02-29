@@ -104,30 +104,31 @@
     </nav>
 </template>
 <script>
+import { jwtDecode } from "jwt-decode";
 
 export default {
     name: 'NavBar',
     data() {
         return {
             image: null,
-            nome: 'Willian',
-            sobrenome: 'Ragner',
-            email: 'ragnermoura@gmail.com',
-            iniciais: 'WR',
+            nome: '',
+            sobrenome: '',
+            email: '',
+            iniciais: '',
         }
     },
     mounted() {
-        // let token = localStorage.getItem('token')
-        // this.token = token;
-        // let decode = jwtDecode(token);
+        let token = localStorage.getItem('token')
+        this.token = token;
+        let decode = jwtDecode(token);
 
-        // this.image = decode.avatar
-        // this.nome = decode.nome
-        // this.sobrenome = decode.sobrenome
-        // this.email = decode.email
+        this.image = decode.avatar
+        this.nome = decode.nome
+        this.sobrenome = decode.sobrenome
+        this.email = decode.email
 
-        // const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
-        // this.iniciais = iniciais
+        const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
+        this.iniciais = iniciais
 
 
     },
