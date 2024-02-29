@@ -3375,7 +3375,7 @@ export default {
                         if (res.status == 201) {
                           this.idCaracteristica = res.data.id_caracteristica;
 
-                          api.tabLocalizacao(buscarCEP, selectPais, selectEstado, selectCidade, selectCidade, selectBairro, selectZona, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, mapaCondo, mapaCondo, selectMapSite, selectLocalSite, selectLocalSite, id_user).then(res => {
+                          api.tabLocalizacao(buscarCEP, selectPais, selectEstado, selectCidade, selectBairro, selectZona, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, selectMapSite, selectLocalSite, selectLocalSite, id_user).then(res => {
 
                             if (res.status == 201) {
                               this.idLocalizacao = res.data.id_localizacao;
