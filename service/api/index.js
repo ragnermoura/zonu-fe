@@ -132,27 +132,12 @@ export default {
         }
     },
 
-    tabInfo: async (codigoref, selectCondominio, idCondominio, selectProprietario, selectCorretor, selectAgenciador, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia, id_user) => {
+    novaCaracteristica: async (caracteristica) => {
         try {
             const response = await http.post(
-                "/info/cadastro",
+                "/caracteristica/cadastro",
                 {
-                    cod_referencia: codigoref,
-                    corretor: ,
-                    agenciador:
-                    tipo:
-                    perfil_imovel:
-                    situacao_imovel:
-                    ano_construcao:
-                    incorporacao:
-                    posicao_solar: 
-                    terreno:
-                    proximo_mar:
-                    averbado:
-                    escriturado:
-                    esquina:
-                    mobilia:
-                    id_user: id_user
+                    nome_caracteristica: caracteristica,
                 },
                 {
                     headers: {
@@ -170,13 +155,54 @@ export default {
         }
     },
 
-    tabComodos: async ( id_user) => {
+    caracteristicalist: async () => {
+        try {
+            const response = await http.get(
+                "/caracteristica/",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+    caracteristicaDelete: async (id_caracteristica) => {
+        try {
+            const response = await http.delete(
+                `/caracteristica/${id_caracteristica}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+    novoPlano: async (plano, valor, descricao) => {
         try {
             const response = await http.post(
-                "/info/cadastro",
+                "/plano/cadastrar",
                 {
-             
-                    id_user: id_user,
+                    nome_plano: plano,
+                    valor_plano: valor,
+                    descricao: descricao
                 },
                 {
                     headers: {
@@ -194,16 +220,10 @@ export default {
         }
     },
 
-    tabMedidas: async (areaConstruida, areaPrivativa, areaTotal, id_user) => {
+    planolist: async () => {
         try {
-            const response = await http.post(
-                "/info/cadastro",
-                {
-                    area_contruida: areaConstruida,
-                    area_privativa: areaPrivativa,
-                    area_total: areaTotal,
-                    id_user: id_user,
-                },
+            const response = await http.get(
+                "/plano/",
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -219,6 +239,29 @@ export default {
             return error.response || error.message || error;
         }
     },
+
+    planoDelete: async (id_plano) => {
+        try {
+            const response = await http.delete(
+                `/plano/delete/${id_plano}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+    
+
+
 
 
 

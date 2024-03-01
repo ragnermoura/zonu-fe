@@ -274,6 +274,7 @@ export default {
         },
     },
     methods: {
+        
         aplicaMascaraCNPJ() {
             let v = this.cnpj;
 

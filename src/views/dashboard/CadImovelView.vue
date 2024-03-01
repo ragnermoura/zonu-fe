@@ -386,7 +386,8 @@
                                   <small class="text-danger">*
                                   </small>
                                 </label>
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off" value="Plano"
                                     name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno1">Plano</label>
@@ -432,7 +433,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectAverbado" id="selectAverbado1"
                                     autocomplete="off" value="Sim" v-model="selectAverbado">
                                   <label class="btn btn-outline-success" for="selectAverbado1">Sim</label>
@@ -458,7 +460,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEscritura" id="selectEscritura1"
                                     autocomplete="off" value="Sim" v-model="selectEscritura">
                                   <label class="btn btn-outline-success" for="selectEscritura1">Sim</label>
@@ -484,7 +487,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEsquina" id="selectEsquina1"
                                     autocomplete="off" value="Sim" v-model="selectEsquina">
                                   <label class="btn btn-outline-success" for="selectEsquina1">Sim</label>
@@ -510,7 +514,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectMobilia" id="selectMobilia1"
                                     autocomplete="off" value="Sim" v-model="selectMobilia">
                                   <label class="btn btn-outline-success" for="selectMobilia1">Sim</label>

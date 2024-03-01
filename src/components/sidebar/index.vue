@@ -14,7 +14,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="/dashboard">
+                    <a class="sidebar-link" :to="MainView">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                     </a>
                 </li>
@@ -27,7 +27,14 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="">
+                    <a class="sidebar-link" href="/cad-caracteristica">
+                        <i class="align-middle" data-feather="globe"></i> <span class="align-middle">Caracteristicas <span
+                                class="badge text-bg-warning">{{ totalCaracteristicas }}</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-plano">
                         <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Planos
                         </span>
                     </a>
@@ -110,7 +117,8 @@
 </template>
 
 <script>
-
+import api from '../../../service/api/index'
+import { jwtDecode } from "jwt-decode";
 
 export default {
     name: 'SideBar',
@@ -119,6 +127,7 @@ export default {
         return {
             token: '',
             isCollapsed: this.defaultCollapsed,
+            totalCaracteristicas: 0,
         }
     },
   
@@ -131,23 +140,30 @@ export default {
        
         let token = localStorage.getItem('token');
 
-        // if (!token || token === 'null') {
-        //     window.location.href = "/";
-        // } else {
-        //     try {
-        //         let decode = jwtDecode(token);
-        //         this.token = decode;
+        if (!token || token === 'null') {
+            window.location.href = "/";
+        } else {
+            try {
+                let decode = jwtDecode(token);
+                this.token = decode;
 
-        //         if (decode.id_status == 2) {
+                if (decode.id_status == 2) {
 
-        //             console.log('Status do token inválido:', decode.id_status);
-        //             window.location.href = "/";
+                    console.log('Status do token inválido:', decode.id_status);
+                    window.location.href = "/";
 
-        //         }
-        //     } catch (error) {
-        //         console.error('Erro ao decodificar token:', error);
-        //     }
-        // }
+                }
+            } catch (error) {
+                console.error('Erro ao decodificar token:', error);
+            }
+        }
+
+
+        api.caracteristicalist().then(res => {
+            this.totalCaracteristicas = res.data.response.length
+        })
+
+
     }
 
 
