@@ -132,39 +132,38 @@ export default {
         }
     },
 
-    tabInfo: async (codigoref, selectCorretor, selectAgenciador, tipoImovel,
-    perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar,
-    selectTerreno, proximoMar, selectAverbado, selectEscritura,
-    selectEsquina, selectMobilia, id_user) => { try { const response = await
-    http.post(
-                "/info/cadastro",
-                {
-                    cod_referencia: codigoref,
-                    corretor:  selectCorretor,
-                    agenciador: selectAgenciador,
-                    tipo: tipoImovel,
-                    perfil_imovel: perfilImovel,
-                    situacao_imovel: situacaoImovel,
-                    ano_construcao: anoImovel,
-                    incorporacao: incorporacao,
-                    posicao_solar:  posicaoSolar,
-                    terreno: selectTerreno,
-                    proximo_mar: proximoMar,
-                    averbado: selectAverbado,
-                    escriturado: selectEscritura,
-                    esquina: selectEsquina,
-                    mobilia: selectMobilia,
-                    id_user: id_user
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                        "Access-Control-Allow-Headers": "*",
-                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    tabInfo: async (codigoref, selectCorretor, selectAgenciador, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia, id_user) => {
+        try {
+            const response = await
+                http.post(
+                    "/info/cadastro",
+                    {
+                        cod_referencia: codigoref,
+                        corretor: selectCorretor,
+                        agenciador: selectAgenciador,
+                        tipo: tipoImovel,
+                        perfil_imovel: perfilImovel,
+                        situacao_imovel: situacaoImovel,
+                        ano_construcao: anoImovel,
+                        incorporacao: incorporacao,
+                        posicao_solar: posicaoSolar,
+                        terreno: selectTerreno,
+                        proximo_mar: proximoMar,
+                        averbado: selectAverbado,
+                        escriturado: selectEscritura,
+                        esquina: selectEsquina,
+                        mobilia: selectMobilia,
+                        id_user: id_user
                     },
-                }
-            );
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                            "Access-Control-Allow-Headers": "*",
+                            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                        },
+                    }
+                );
 
             return response;
         } catch (error) {
@@ -172,10 +171,9 @@ export default {
         }
     },
 
-    tabComodos: async ( dormitorio, suite, banheiro, garagem,
-    selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, salaEstar,
-    lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa,
-    id_user) => { try { const response = await http.post(
+    tabComodos: async (dormitorio, suite, banheiro, garagem, selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, salaEstar, lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa, id_user) => {
+        try {
+            const response = await http.post(
                 "/info/cadastro",
                 {
                     dormitorio: dormitorio,
@@ -238,10 +236,9 @@ export default {
         }
     },
 
-    tabPreco: async (tipoNegocio, precoImovel, precoNoSite, precoIptu,
-    periodoIptu, precoCondominio, estaFinanciado, aceitaFinanciamento,
-    mCasaMVida, taxasTotal, taxasTotal, taxasDescricao, aceitaPermuta,
-    permutaDescricao, id_user) => { try { const response = await http.post(
+    tabPreco: async (tipoNegocio, precoImovel, precoNoSite, precoIptu, periodoIptu, precoCondominio, estaFinanciado, aceitaFinanciamento, mCasaMVida, taxasTotal, taxasDescricao, aceitaPermuta, permutaDescricao, id_user) => {
+        try {
+            const response = await http.post(
                 "/info/cadastro",
                 {
                     tipo_negocio: tipoNegocio,
@@ -254,11 +251,10 @@ export default {
                     financiado: aceitaFinanciamento,
                     aceita_financiamento: mCasaMVida,
                     minhacasa_minhavisa: taxasTotal,
-                    total_mensal_taxas: taxasTotal,
                     descricao_taxas: taxasDescricao,
                     aceita_permuta: aceitaPermuta,
                     descricao_permuta: permutaDescricao,
-                    id_user: id_user,
+                    id_user: id_user
                 },
                 {
                     headers: {
@@ -275,7 +271,6 @@ export default {
             return error.response || error.message || error;
         }
     },
-
 
     tabCaracteristica: async (caracteristicaImovel, id_user) => {
         try {
@@ -301,15 +296,9 @@ export default {
         }
     },
 
-
-
-    tabLocalizacao: async (buscarCEP, selectPais, selectEstado, selectCidade,
-    selectBairro, selectZona, logradouro, nLogradouro,
-    complemento, idUnidade, selectAndar, undPorAndar, totalAndares,
-    totalTorres, mostrarAndar, mostrarNUnidade, 
-    mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero,
-    mostrarNCondo, selectMapSite, selectLocalSite,
-    selectLocalSite, id_user) => { try { const response = await http.post(
+    tabLocalizacao: async (buscarCEP, selectPais, selectEstado, selectCidade, selectBairro, selectZona, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, selectMapSite, selectLocalSite, id_user) => {
+        try {
+            const response = await http.post(
                 "/info/cadastro",
                 {
                     cep: buscarCEP,
@@ -320,12 +309,12 @@ export default {
                     zona: selectZona,
                     logradouro: logradouro,
                     numero: nLogradouro,
-                    complemento:  complemento,
-                    numero_unidade:  idUnidade,
-                    andar:  selectAndar,
-                    unidade_por_andar:  undPorAndar,
-                    total_andar:  totalAndares,
-                    total_torres:  totalTorres,
+                    complemento: complemento,
+                    numero_unidade: idUnidade,
+                    andar: selectAndar,
+                    unidade_por_andar: undPorAndar,
+                    total_andar: totalAndares,
+                    total_torres: totalTorres,
                     mostrar_andar_site: mostrarAndar,
                     mostrar_numero_unidade_site: mostrarNUnidade,
                     mostrar_logradouro_site: mostrarLogradouro,
@@ -334,7 +323,7 @@ export default {
                     mostrar_numero_site: mostrarNumero,
                     mostrar_nome_condominio_site: mostrarNCondo,
                     mostrar_mapa_site: selectMapSite,
-                    mostrar_localizacao_site: selectLocalSite,                   
+                    mostrar_localizacao_site: selectLocalSite,
                     id_user: id_user,
                 },
                 {
@@ -353,9 +342,9 @@ export default {
         }
     },
 
-
-    tabProximidades: async (proximidades, id_user)
-    => { try { const response = await http.post(
+    tabProximidades: async (proximidades, id_user) => {
+        try {
+            const response = await http.post(
                 "/proximidades/cadastro",
                 {
                     nome_proximidade: proximidades,
@@ -377,8 +366,9 @@ export default {
         }
     },
 
-    tabDescricao: async (titleImovel, apresentacaoImovel, id_user)
-    => { try { const response = await http.post(
+    tabDescricao: async (titleImovel, apresentacaoImovel, id_user) => {
+        try {
+            const response = await http.post(
                 "/descricao/cadastro",
                 {
                     titulo: titleImovel,
@@ -401,9 +391,9 @@ export default {
         }
     },
 
-
-    tabComplemento: async (urlYT, url360, id_user)
-    => { try { const response = await http.post(
+    tabComplemento: async (urlYT, url360, id_user) => {
+        try {
+            const response = await http.post(
                 "/complemento/cadastro",
                 {
                     link_youtube: urlYT,
@@ -426,12 +416,11 @@ export default {
         }
     },
 
-
-
     novoImovel: async (id_info, selectCondominio, idCondominio,
-    idProprietario, id_comodos, id_medidas, id_preco, id_caracteristica,
-    id_localizacao, id_proximidades, id_descricao, id_complemento, id_user)
-    => { try { const response = await http.post(
+        idProprietario, id_comodos, id_medidas, id_preco, id_caracteristica,
+        id_localizacao, id_proximidades, id_descricao, id_complemento, id_user) => {
+        try {
+            const response = await http.post(
                 "/info/cadastro",
                 {
                     id_info: id_info,
