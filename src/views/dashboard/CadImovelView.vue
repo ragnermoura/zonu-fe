@@ -208,10 +208,10 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                   class="form-label">Condomínio/empreendimento? <small class="text-danger">*
                                   </small>
-                                  <button type="button" class="btn btn-success"
+                                  <a href="/novo-condominio" type="button" class="btn btn-success"
                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar condominio
-                                  </button>
+                                  </a>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"

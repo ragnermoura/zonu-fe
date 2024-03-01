@@ -68,6 +68,12 @@
                 </li>
 
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-condominio">
+                        <i class="align-middle" data-feather="shield"></i> <span class="align-middle">Novo condomínio</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="ui-forms.html">
                         <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Meus
                             históricos</span>

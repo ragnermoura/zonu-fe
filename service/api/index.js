@@ -132,8 +132,7 @@ export default {
         }
     },
 
-    tabInfo: async (codigoref, selectCondominio, idCondominio,
-    selectProprietario, selectCorretor, selectAgenciador, tipoImovel,
+    tabInfo: async (codigoref, selectCorretor, selectAgenciador, tipoImovel,
     perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar,
     selectTerreno, proximoMar, selectAverbado, selectEscritura,
     selectEsquina, selectMobilia, id_user) => { try { const response = await
@@ -141,20 +140,20 @@ export default {
                 "/info/cadastro",
                 {
                     cod_referencia: codigoref,
-                    corretor: ,
-                    agenciador:
-                    tipo:
-                    perfil_imovel:
-                    situacao_imovel:
-                    ano_construcao:
-                    incorporacao:
-                    posicao_solar: 
-                    terreno:
-                    proximo_mar:
-                    averbado:
-                    escriturado:
-                    esquina:
-                    mobilia:
+                    corretor:  selectCorretor,
+                    agenciador: selectAgenciador,
+                    tipo: tipoImovel,
+                    perfil_imovel: perfilImovel,
+                    situacao_imovel: situacaoImovel,
+                    ano_construcao: anoImovel,
+                    incorporacao: incorporacao,
+                    posicao_solar:  posicaoSolar,
+                    terreno: selectTerreno,
+                    proximo_mar: proximoMar,
+                    averbado: selectAverbado,
+                    escriturado: selectEscritura,
+                    esquina: selectEsquina,
+                    mobilia: selectMobilia,
                     id_user: id_user
                 },
                 {
@@ -357,7 +356,7 @@ export default {
 
     tabProximidades: async (proximidades, id_user)
     => { try { const response = await http.post(
-                "/info/cadastro",
+                "/proximidades/cadastro",
                 {
                     nome_proximidade: proximidades,
                     id_user: id_user,
@@ -380,7 +379,7 @@ export default {
 
     tabDescricao: async (titleImovel, apresentacaoImovel, id_user)
     => { try { const response = await http.post(
-                "/info/cadastro",
+                "/descricao/cadastro",
                 {
                     titulo: titleImovel,
                     apresentacao: apresentacaoImovel,
@@ -405,7 +404,7 @@ export default {
 
     tabComplemento: async (urlYT, url360, id_user)
     => { try { const response = await http.post(
-                "/info/cadastro",
+                "/complemento/cadastro",
                 {
                     link_youtube: urlYT,
                     link_apresentacao: url360,
@@ -464,6 +463,7 @@ export default {
             return error.response || error.message || error;
         }
     },
+
 
 
 
