@@ -51,7 +51,7 @@
                 <div class="w-100">
                   <div class="row">
 
-                    <div class="card" v-if="infoTab">
+                    <div class="card">
                       <div class="card-body">
                       
                         <div class="col mt-0">
@@ -73,7 +73,7 @@
                                   Nome do condomínio/empreendimento
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="logradouro" placeholder="Consulte...">
+                                       v-model="condNome" placeholder="Consulte...">
                               </div>
                             </div>
 
@@ -248,7 +248,7 @@
 
 
                                 <div class="form-check">
-                                  <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox"
+                                  <input class="form-check-input" v-model="caracteristicaCond" type="checkbox"
                                          value=""
                                          id="flexCheckDefault">
                                   <label class="form-check-label" for="flexCheckDefault">
@@ -287,7 +287,7 @@
 
 
                                 <div class="form-check">
-                                  <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox"
+                                  <input class="form-check-input" v-model="proximidadeCond" type="checkbox"
                                          value=""
                                          id="flexCheckDefault">
                                   <label class="form-check-label" for="flexCheckDefault">
@@ -324,7 +324,7 @@
                                   Texto sobre o condomínio/empreendimento
                                 </label>
 
-                                <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoImovel"
+                                <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoCond"
                                           style="height:100px" placeholder="Digite aqui..."></textarea>
                               </div>
                             </div>
@@ -390,163 +390,21 @@ export default {
   },
   data() {
     return {
-      home: '',
-      comodos: '',
-      inputCondominio: false,
-      mostrarMapa: false,
-      mostrarStreetV: false,
-
       mostrarSkeleton: true,
 
-      //Tabs - para ativar, mude de FALSE para TRUE
-      infoTab: true,
-      comodosTab: false,
-      medidaTab: false,
-      precoTab: false,
-      caracteristicaTab: false,
-      localizacaoTab: false,
-      proximidadesTab: false,
-      complementoTab: false,
-      imagemTab: false,
-      publicacaoTab: false,
-      addProp: false,
-
-      //Icons Lateriais de Progressão
-      stepInfo: false,
-      stepComodos: false,
-      stepMedidas: false,
-      stepPreco: false,
-      stepCaracteristica: false,
-      stepLocalizacao: false,
-      stepProximidades: false,
-      stepDescricao: false,
-      stepComplemento: false,
-      stepImagens: false,
-      stepPublicacao: false,
-
-
-      // TABINFO
-      codigoref: '',
-      selectCondominio: 'Não',
-      condominioEmpreendimento: '',
-      selectProprietario: '',
-      selectCorretor: '',
-      selectAgenciador: '',
-      tipoImovel: '',
-      perfilImovel: '',
-      situacaoImovel: '',
-      anoImovel: '',
-      incorporacao: '',
-      posicaoSolar: '',
-      selectTerreno: '',
-      proximoMar: '',
-      selectAverbado: 'Não',
-      selectEscritura: 'Não',
-      selectEsquina: 'Não',
-      selectMobilia: 'Não',
-
-
-      // TAB COMODOS
-      dormitorio: '',
-      suite: '',
-      banheiro: '',
-      garagem: '',
-      selectGaragemCobertura: '',
-      selectBoxGaragem: '',
-      salaTv: '',
-      salaJantar: '',
-      salaEstar: '',
-      lavabo: '',
-      areaServico: '',
-      cozinha: '',
-      closet: '',
-      escritorio: '',
-      depEmpregada: '',
-
-
-      // TAB MEDIDAS
-      areaConstruida: '',
-      areaPrivativa: '',
-      areaTotal: '',
-
-
-      // TAB PREÇOS
-      tipoNegocio: '',
-      precoImovel: '',
-      precoNoSite: 'Sim',
-      precoIptu: '',
-      periodoIptu: 'Anual',
-      precoCondominio: '',
-      estaFinanciado: 'Não',
-      aceitaFinanciamento: 'Não',
-      mCasaMVida: '',
-      taxasTotal: '',
-      taxasDescricao: '',
-      aceitaPermuta: 'Não',
-      permutaDescricao: '',
-
-
-      //TAB CARACTERISTICA
-      caracteristicaImovel: false,
-
-
-      // TAB LOCALIZAÇÃO
-      buscarCEP: '',
-      selectPais: '',
-      selectEstado: '',
-      selectCidade: '',
-      selectBairro: '',
-      selectZona: '',
-      logradouro: '',
-      nLogradouro: '',
-      complemento: '',
-      idUnidade: '',
-      selectAndar: '',
-      undPorAndar: '',
-      totalAndares: '',
-      totalTorres: '',
-      mostrarAndar: 'Não',
-      mostrarNUnidade: 'Não',
-      mostrarLogradouro: 'Não',
-      mostrarBairro: 'Não',
-      mostrarComplemento: 'Não',
-      mostrarNumero: 'Não',
-      mostrarNCondo: 'Não',
-      mapaCondo: 'Não',
-      selectMapSite: 'Não',
-      selectLocalSite: 'Não',
-      mapaStreetV: 'Não',
-      selectStreetVSite: 'Não',
-
-
-      // TAB PROXIMIDADES
-      proximidades: false,
-
-
-      // TAB DESCRIÇÃO
-      titleImovel: '', 
-      apresentacaoImovel: '',
-
-
-      // TAB COMPLEMENTOS
-      urlYT: '',
-      url360: '',
-
-
-      // TAB IMAGEM
-
-
-      // TAB PUBLICAÇÃO
-      selectImovelSite: 'Sim',
-      selectPageInit: 'Sim',
-      textoTarja: 'Em construção',
-      corTarja: '#563d7c',
-      enviarLinkProprietario: 'Não',
-      emailProprietario: '',
-      periodoEnvio: '+30',
-      revisarCadastro: 'Não',
-      proximaDataRevisao: '',
-      periodoRevisao: '+30'
+      // NOVO CONDOMINIO
+      condNome : '',
+      buscarCEP : '',
+      selectPais : 'não',
+      selectEstado : 'não',
+      selectCidade : 'não',
+      selectBairro : 'não',
+      selectZona : 'não',
+      logradouro : '',
+      nLogradouro : '',
+      caracteristicaCond : '',
+      proximidadeCond : '',
+      apresentacaoCond : '',
 
 
 
@@ -556,131 +414,6 @@ export default {
 
   //Aqui está o MOSTRA e ESCONDE dos INPUTS do dashboard
   watch: {
-    selectCondominio(newValue) {
-      if (newValue == 'Sim') {
-        this.inputCondominio = true
-      } else {
-        this.inputCondominio = false
-      }
-    },
-
-    mapaCondo(newValue){
-      if(newValue == 'Sim'){
-        this.mostrarMapa = true       
-      }else{ this.mostrarMapa = false}
-    },
-
-    mapaStreetV(newValue){
-      if(newValue == 'Sim'){
-        this.mostrarStreetV = true
-      }else{
-        this.mostrarStreetV = false
-      }
-    },
-
-
-    // INFO
-    selectAverbado(y){
-      this.selectAverbado = y
-      console.log(this.selectAverbado)
-    },
-    selectEscritura(y){
-      this.selectEscritura = y
-      console.log(this.selectEscritura)
-    },
-    selectEsquina(y){
-      this.selectEsquina = y
-      console.log(this.selectEsquina)
-    },
-    selectMobilia(y){
-      this.selectMobilia = y
-      console.log(this.selectMobilia)
-    },
-    selectTerreno(y){
-      this.selectTerreno = y
-      console.log(this.selectTerreno)
-    },
-
-    // COMODOS
-    selectGaragemCobertura(y){
-      this.selectGaragemCobertura = y
-      console.log(this.selectGaragemCobertura)
-    },
-    selectBoxGaragem(y){
-      this.selectBoxGaragem = y
-      console.log(this.selectBoxGaragem)
-    },
-
-
-    // PREÇOS
-    precoNoSite(y){
-      this.precoNoSite = y
-      console.log(this.precoNoSite)
-    },
-    periodoIptu(y){
-      this.periodoIptu = y
-      console.log(this.periodoIptu)
-    },
-    estaFinanciado(y){
-      this.estaFinanciado = y
-      console.log(this.estaFinanciado)
-    },
-    aceitaFinanciamento(y){
-      this.aceitaFinanciamento = y
-      console.log(this.aceitaFinanciamento)
-    },
-    mCasaMVida(y){
-      this.mCasaMVida = y
-      console.log(this.mCasaMVida)
-    },
-    aceitaPermuta(y){
-      this.aceitaPermuta = y
-      console.log(this.aceitaPermuta)
-    },
-
-
-    // LOCALIZAÇÃO
-    mostrarAndar(y){
-      this.mostrarAndar = y
-      console.log(this.mostrarAndar)
-    },
-    mostrarNUnidade(y){
-      this.mostrarNUnidade = y
-      console.log(this.mostrarNUnidade)
-    },
-    mostrarLogradouro(y){
-      this.mostrarLogradouro = y
-      console.log(this.mostrarLogradouro)
-    },
-    mostrarBairro(y){
-      this.mostrarBairro = y
-      console.log(this.mostrarBairro)
-    },
-    mostrarComplemento(y){
-      this.mostrarComplemento = y
-      console.log(this.mostrarComplemento)
-    },
-    mostrarNumero(y){
-      this.mostrarNumero = y
-      console.log(this.mostrarNumero)
-    },
-    mostrarNCondo(y){
-      this.mostrarNCondo = y
-      console.log(this.mostrarNCondo)
-    },
-    selectMapSite(y){
-      this.selectMapSite = y
-      console.log(this.selectMapSite)
-    },
-    selectLocalSite(y){
-      this.selectLocalSite = y
-      console.log(this.selectLocalSite)
-    },
-    selectStreetVSite(y){
-      this.selectStreetVSite = y
-      console.log(this.selectStreetVSite)
-    },
-
   },
   mounted() {
     setTimeout(() => {
@@ -689,156 +422,6 @@ export default {
   },
 
   methods: {
-
-    handleprop(){
-      this.addProp = true
-      this.infoTab = false
-    },
-    
-    handlepropclose(){
-      this.addProp = false
-      this.infoTab = true
-    },
-
-    //Ação do botão Proximo de cada tab
-    handleProximoComodo() {
-      this.infoTab = false
-      this.comodosTab = true
-      this.stepInfo = true
-    },
-    handleProximoMedida() {
-
-      this.comodosTab = false
-      this.medidaTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-    },
-    handleProximoPreco() {
-
-      this.medidaTab = false
-      this.precoTab = true
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-    },
-    handleProximoCaracteristica() {
-      this.precoTab = false
-      this.caracteristicaTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-    },
-    handleProximoLocalizacao() {
-      this.caracteristicaTab = false
-      this.localizacaoTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-    },
-    handleProximoProximidades() {
-      this.localizacaoTab = false
-      this.proximidadesTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-      this.stepLocalizacao = true
-    },
-    handleProximoDescricao() {
-      this.proximidadesTab = false
-      this.descricaoTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-      this.stepLocalizacao = true
-      this.stepProximidades = true
-    },
-    handleProximoComplemento() {
-      this.descricaoTab = false
-      this.complementoTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-      this.stepLocalizacao = true
-      this.stepProximidades = true
-      this.stepDescricao = true
-    },
-    handleProximoImagem() {
-      this.complementoTab = false
-      this.imagemTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-      this.stepLocalizacao = true
-      this.stepProximidades = true
-      this.stepDescricao = true
-      this.stepComplemento = true
-    },
-    handleProximoPublicacao() {
-      this.imagemTab = false
-      this.publicacaoTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-      this.stepLocalizacao = true
-      this.stepProximidades = true
-      this.stepDescricao = true
-      this.stepComplemento = true
-      this.stepImagens = true
-    },
-
-    //Evento de enviar para a API
-    handleProximoFinish() {
-      this.imagemTab = false
-      this.publicacaoTab = true
-
-      this.stepInfo = true
-      this.stepComodos = true
-      this.stepMedidas = true
-      this.stepPreco = true
-      this.stepCaracteristica = true
-      this.stepLocalizacao = true
-      this.stepProximidades = true
-      this.stepDescricao = true
-      this.stepComplemento = true
-      this.stepImagens = true
-      this.stepPublicacao = true
-    },
-
-
-    //Evento do botão Voltar (Imcompleto)
-    handleAnteriorInfo() {
-      this.infoTab = true
-      this.comodosTab = false
-    },
-    handleAnteriorComodos() {
-      this.comodosTab = true
-      this.medidaTab = false
-    },
-    handleAnteriorPreco() {
-      this.precoTab = false
-      this.medidaTab = true
-    }
   }
 
 
