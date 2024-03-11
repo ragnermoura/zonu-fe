@@ -171,6 +171,33 @@ export default {
         }
     },
 
+    tabProprietario: async (clienteNome, clienteEmail, clienteDocumento, clienteTel, id_user) => {
+        try {
+            const response = await http.post(
+                "/info/cadastro",
+                {
+                    nome: clienteNome,
+                    email: clienteEmail,
+                    documento: clienteDocumento,
+                    telefone: clienteTel,
+                    id_user:  id_user,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
     tabComodos: async (dormitorio, suite, banheiro, garagem, selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, salaEstar, lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa, id_user) => {
         try {
             const response = await http.post(

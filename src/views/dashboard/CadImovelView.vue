@@ -2958,6 +2958,11 @@ export default {
       let selectEsquina = this.selectEsquina
       let selectMobilia = this.selectMobilia
 
+      let clienteNome = this.clienteNome
+      let clienteEmail = this.clienteEmail
+      let clienteDocumento = this.clienteDocumento
+      let clienteTel = this.clienteTel
+
       let dormitorio = this.dormitorio
       let suite = this.suite
       let banheiro = this.banheiro
