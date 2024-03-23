@@ -6,6 +6,7 @@ import MainView from '../views/dashboard/MainView.vue'
 import CadImovelView from '../views/dashboard/CadImovelView.vue'
 import CadCondominioView from '../views/dashboard/CadCondominioView.vue'
 import MyPlanView from '../views/dashboard/MyPlanView.vue'
+import CaracteristicaView from '../views/dashboard/CaracteristicaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,11 @@ const router = createRouter({
       component: CadImovelView
     },  
     {
+      path: '/caracteristica',
+      name: 'caracteristica',
+      component: CaracteristicaView
+    },  
+    {
       path: '/novo-condominio',
       name: 'novo-condominio',
       component: CadCondominioView
@@ -47,5 +53,20 @@ const router = createRouter({
     },  
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+
+  const publicPages = ['/', '/recovery', '/code'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('token');
+
+  if (authRequired && !loggedIn) {
+    return next('/');
+  }
+
+  next();
+});
+
 
 export default router

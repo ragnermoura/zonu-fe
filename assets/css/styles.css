@@ -204,3 +204,7 @@ label[for="formFile"] {
   font-weight: 600;
   padding: 9px 0; 
 }
+
+.alert-success{
+  color: #12d362;
+}

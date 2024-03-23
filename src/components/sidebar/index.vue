@@ -27,6 +27,11 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="/caracteristica">
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Caracteristica</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="">
                         <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Planos
                         </span>
