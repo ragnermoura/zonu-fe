@@ -50,7 +50,7 @@ export default {
         }
     },
 
-    cadastro: async (nome, sobrenome, email, senha, id_user, cnpj, razao_social, telefone, cep, endereco) => {
+    cadastro: async (nome, sobrenome, email, senha, razao_social, cnpj, telefone, cep, endereco) => {
         try {
             const response = await http.post(
                 "/usuarios/cadastro",
@@ -62,7 +62,13 @@ export default {
                     avatar: '',
                     nivel: 1,
                     status: 1,
-                    id_plano: 1
+                    id_plano: 1,
+                    razao_social: razao_social,
+                    cnpj: cnpj,
+                    telefone: telefone,
+                    cep: cep,
+                    endereco: endereco,
+                    
                 },
                 {
                     headers: {
