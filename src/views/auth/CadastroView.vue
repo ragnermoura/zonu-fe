@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6 d-flex flex-column justify-content-center align-items-center px-5">
+            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center p-5">
                 <div v-if="mostrarSkeleton" class=" mb-5 skeleton-logo"></div>
                 <img v-if="!mostrarSkeleton" src="../../../assets/images/logo.svg" class="mb-2" alt="">
 
@@ -41,7 +41,7 @@
 
                 </div>
 
-                <div v-if="dadosTab" class="px-4">
+                <div v-if="dadosTab" class="">
                     <div v-if="mostrarSkeleton" class="skeleton-title"></div>
                     <h1 v-if="!mostrarSkeleton" class="title-login mt-5">Muito bom...</h1>
 
@@ -54,7 +54,7 @@
                     <p v-if="msgCnpjActive" class="text-danger mt-2"><i class="fa fa-circle-exclamation"></i> Desculpe, mas já temos esse CNPJ em nossa base de dados. Volte e insira outro.</p>
 
 
-                    <div class="area-dados">
+                    <div class="area-dados px-2">
                         <div class="mt-4">
                             <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
@@ -198,7 +198,7 @@
 
             </div>
 
-            <div class="col-6 p-0">
+            <div class="col-lg-6 p-0 d-none d-lg-block">
                 <div class="bg-login">
                     <div class="gradient d-flex flex-column justify-content-center align-items-center px-5">
                         <img src="../../../assets/images/logo-transparente2.png" class="img-fluid" alt="">

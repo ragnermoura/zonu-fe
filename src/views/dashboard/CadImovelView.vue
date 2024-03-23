@@ -208,7 +208,7 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                   class="form-label">Condomínio/empreendimento? <small class="text-danger">*
                                   </small>
-                                  <a href="/novo-condominio" type="button" class="btn btn-success"
+                                  <a href="/novo-condominio" type="button" class="ms-2 text-success"
                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar condominio
                                   </a>
@@ -230,10 +230,10 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Proprietário
                                   <small class="text-danger">*
                                   </small><small>(Privado)</small>
-                                  <button type="button" class="btn btn-success" @click="handleprop()"
+                                  <a type="button" class="ms-2 text-success" @click="handleprop()"
                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                     <i class="fa fa-plus"></i> Adicionar
-                                  </button>
+                                  </a>
                                 </label>
 
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
@@ -244,7 +244,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="col-3 mt-2">
+                            <!-- <div class="col-3 mt-2">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -275,8 +275,8 @@
 
                                 </select>
                               </div>
-                            </div>
-                            <div class="col-2 mt-2">
+                            </div> -->
+                            <div class="col-2">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -807,7 +807,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -819,7 +819,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -831,7 +831,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -843,7 +843,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1156,7 +1156,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-6">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1168,7 +1168,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-12">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1309,7 +1309,7 @@
 
                           <div class="row mt-4">
 
-                            <div class="col-4">
+                            <div class="col-3">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1325,7 +1325,7 @@
                               </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-3">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1341,7 +1341,7 @@
                               </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-3">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1358,7 +1358,7 @@
                             </div>
 
 
-                            <div class="col-4">
+                            <div class="col-3">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1390,24 +1390,8 @@
                               </div>
                             </div>
 
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Zona
-                                </label>
 
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectZona">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-
-
-                            <div class="col-5">
+                            <div class="col-6">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1429,7 +1413,7 @@
                                   v-model="nLogradouro" placeholder="Consulte...">
                               </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-6">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1464,7 +1448,7 @@
                                   v-model="selectAndar" placeholder="Consulte...">
                               </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1475,7 +1459,7 @@
                                   v-model="undPorAndar" placeholder="Consulte...">
                               </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1486,7 +1470,7 @@
                                   v-model="totalAndares" placeholder="Consulte...">
                               </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1501,7 +1485,7 @@
 
                             <hr>
 
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1523,7 +1507,7 @@
 
                               </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1545,7 +1529,7 @@
 
                               </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1567,7 +1551,7 @@
 
                               </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1589,7 +1573,7 @@
 
                               </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1611,7 +1595,7 @@
 
                               </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1633,7 +1617,7 @@
 
                               </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1658,7 +1642,7 @@
 
 
                             <hr>
-                            <div class="col-3">
+                            <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1688,7 +1672,7 @@
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                               <div class="row">
-                                <div class="col-3">
+                                <div class="col-4">
                                   <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1710,29 +1694,9 @@
 
                                   </div>
                                 </div>
-                                <div class="col-3">
-                                  <div class="mb-3">
-                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                      Mostrar localização exata?
-                                    </label>
+                                
 
-                                    <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                      <input type="radio" class="btn-check" name="selectLocalSite" id="selectLocalSite1"
-                                        autocomplete="off" value="Sim" v-model="selectLocalSite">
-                                      <label class="btn btn-outline-success" for="selectLocalSite1">Sim</label>
-
-                                      <input type="radio" class="btn-check" value="Não" v-model="selectLocalSite"
-                                        name="selectLocalSite" id="selectLocalSite2" autocomplete="off">
-                                      <label class="btn btn-outline-danger" for="selectLocalSite2">Não</label>
-                                    </div>
-
-                                  </div>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                   <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1759,9 +1723,16 @@
                                   <iframe class="my-3"
                                     src="https://www.google.com/maps/embed?pb=!4v1707889331429!6m8!1m7!1sa0-XByQp0pchr1GOj9xQ8A!2m2!1d-22.92151936264778!2d-43.23568712578175!3f238.24871274054573!4f-29.797796874639346!5f0.7820865974627469"
                                     width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                  </iframe>
 
-                                  <div class="col-3">
+                                  
+
+                                  <div class="col-12 mb-3">
+                                    <small>* As imagens são extraídas do google e podem estar desatualizadas</small>
+                                  </div>
+
+                                  <div class="col-4">
                                     <div class="mb-3">
                                       <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                       <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1834,9 +1805,6 @@
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <!-- <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Mostrar preço no site?
-                                </label> -->
 
 
                                 <div class="form-check">
@@ -2025,9 +1993,6 @@
                               <li class="nav-item">
                                 <a class="btn btn-outline-dark" aria-current="page" href="#">PLANTAS DO IMÓVEL</a>
                               </li>
-                              <li class="nav-item">
-                                <a class="btn btn-outline-dark" href="#">FOTOS PRIVADAS</a>
-                              </li>
                             </ul>
 
 
@@ -2116,29 +2081,7 @@
                               </div>
                             </div>
 
-                            <div class="col-3">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Mostrar na Página Inicial?
-                                  <p><small>Defina se aparecerá na sessão de “imóveis em destaque”.</small></p>
-                                </label>
 
-                                <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" name="selectPageInit" id="selectPageInit1"
-                                    autocomplete="off" value="Sim" v-model="selectPageInit">
-                                  <label class="btn btn-outline-success" for="selectPageInit1">Sim</label>
-
-                                  <input type="radio" class="btn-check" value="Não" v-model="selectPageInit"
-                                    name="selectPageInit" id="selectPageInit2" autocomplete="off">
-                                  <label class="btn btn-outline-danger" for="selectPageInit2">Não</label>
-                                </div>
-
-                              </div>
-                            </div>
 
 
                             <div class="col-6">
@@ -2172,244 +2115,6 @@
 
                               </div>
                             </div>
-
-                            <hr>
-
-                            <div class="col-12">
-                              <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                Enviar link da publicação do imóvel para o proprietário?
-                              </label>
-
-                              <div class="row">
-                                <div class="col-3">
-                                  <div class="mb-3">
-                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                    </label>
-
-                                    <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                      <input type="radio" class="btn-check" name="enviarLinkProprietario"
-                                        id="enviarLinkProprietario1" autocomplete="off" value="Sim"
-                                        v-model="enviarLinkProprietario">
-                                      <label class="btn btn-outline-success" for="enviarLinkProprietario1">Sim</label>
-
-                                      <input type="radio" class="btn-check" value="Não" v-model="enviarLinkProprietario"
-                                        name="enviarLinkProprietario" id="enviarLinkProprietario2" autocomplete="off">
-                                      <label class="btn btn-outline-danger" for="enviarLinkProprietario2">Não</label>
-                                    </div>
-
-                                  </div>
-                                </div>
-
-                                <div class="col-12">
-                                  <div class="mb-3">
-                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                      Texto que acompanhará o link do imóvel
-                                    </label>
-
-                                    <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoImovel"
-                                      style="height:100px"
-                                      placeholder="Seu imóvel foi cadastrado em nosso site, e contamos com a sua ajuda para revisar todos os dados de cadastro"></textarea>
-
-                                    <div class="row mx-1 mt-3">
-                                      <a href="#" class="col-2 py-2 btn btn-success me-2">
-                                        <i class="fab fa-whatsapp me-2"></i>Enviar
-                                      </a>
-                                      <a href="#" class="col-2 py-2 btn btn-dark">
-                                        <i class="far fa-envelope me-2"></i>Enviar
-                                      </a>
-                                    </div>
-
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-
-                            <hr>
-
-                            <div class="col-12">
-                              <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                Enviar e-mail recorrente para o proprietário?
-                              </label>
-
-                              <div class="row">
-                                <div class="col-3">
-                                  <div class="mb-3">
-                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                    </label>
-
-                                    <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                      <input type="radio" class="btn-check" name="enviarEmailProprietario"
-                                        id="enviarEmailProprietario1" autocomplete="off" value="Sim"
-                                        v-model="enviarEmailProprietario">
-                                      <label class="btn btn-outline-success" for="enviarEmailProprietario1">Sim</label>
-
-                                      <input type="radio" class="btn-check" value="Não" v-model="enviarEmailProprietario"
-                                        name="enviarEmailProprietario" id="enviarEmailProprietario2" autocomplete="off">
-                                      <label class="btn btn-outline-danger" for="enviarEmailProprietario2">Não</label>
-                                    </div>
-
-                                  </div>
-                                </div>
-
-                                <div class="col-12">
-                                  <div class="row">
-                                    <div class="col-6">
-                                      <div class="mb-3">
-                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                          Qual e-mail para envio recorrente?
-                                        </label>
-                                        <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                          v-model="emailProprietario" placeholder="email@doproprietário">
-                                      </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                      <div class="">
-                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                          Qual o período (dias) de envio desejado?
-                                        </label>
-
-                                        <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                          <input type="radio" class="btn-check" name="periodoEnvio" id="periodoEnvio1"
-                                            autocomplete="off" value="Sim" v-model="periodoEnvioperiodoEnvio">
-                                          <label class="btn btn-outline-success me-1" for="periodoEnvio1">+30</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                            name="periodoEnvio" id="periodoEnvio2" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
-                                            for="periodoEnvio2">+60</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                            name="periodoEnvio" id="periodoEnvio3" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
-                                            for="periodoEnvio3">+90</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                            name="periodoEnvio" id="periodoEnvio4" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
-                                            for="periodoEnvio4">+120</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                            name="periodoEnvio" id="periodoEnvio5" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
-                                            for="periodoEnvio5">+150</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoEnvio"
-                                            name="periodoEnvio" id="periodoEnvio6" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDaySuccess"
-                                            for="periodoEnvio6">+180</label>
-                                        </div>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-
-                            <hr>
-
-                            <div class="col-12">
-                              <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                Gostaria de ser notificado para revisar este cadastro?
-                              </label>
-
-                              <div class="row">
-                                <div class="col-3">
-                                  <div class="mb-3">
-                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                    </label>
-
-                                    <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                      <input type="radio" class="btn-check" name="revisarCadastro" id="revisarCadastro1"
-                                        autocomplete="off" value="Sim" v-model="revisarCadastro">
-                                      <label class="btn btn-outline-success" for="revisarCadastro1">Sim</label>
-
-                                      <input type="radio" class="btn-check" value="Não" v-model="revisarCadastro"
-                                        name="revisarCadastro" id="revisarCadastro2" autocomplete="off">
-                                      <label class="btn btn-outline-danger" for="revisarCadastro2">Não</label>
-                                    </div>
-
-                                  </div>
-                                </div>
-
-                                <div class="col-12">
-                                  <div class="row">
-                                    <div class="col-6">
-                                      <div class="mb-3">
-                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                          Próxima data de revisão
-                                        </label>
-                                        <input type="date" required v-if="!mostrarSkeleton" class="form-control"
-                                          v-model="textoTarja" placeholder="">
-                                      </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                      <div class="">
-                                        <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                        <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                        <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                          Qual o período (dias) de envio desejado?
-                                        </label>
-
-                                        <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
-
-                                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                          <input type="radio" class="btn-check" name="periodoRevisao" id="periodoRevisao1"
-                                            autocomplete="off" value="Sim" v-model="periodoRevisao">
-                                          <label class="btn btn-outline-success me-1" for="periodoRevisao1">+30</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoRevisao"
-                                            name="periodoRevisao" id="periodoRevisao2" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDayMiddle me-1"
-                                            for="periodoRevisao2">+60</label>
-
-
-                                          <input type="radio" class="btn-check" value="Não" v-model="periodoRevisao"
-                                            name="periodoRevisao" id="periodoRevisao3" autocomplete="off">
-                                          <label class=" btn btn-outline-success selectDaySuccess"
-                                            for="periodoRevisao3">+90</label>
-                                        </div>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-
 
                           </div>
 

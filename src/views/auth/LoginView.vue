@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-6 d-flex flex-column justify-content-center align-items-center px-5">
+			<div class="col-lg-6 d-flex flex-column justify-content-center align-items-center p-5">
 				<div v-if="mostrarSkeleton" class=" mb-5 skeleton-logo"></div>
 				<img v-if="!mostrarSkeleton" src="../../../assets/images/logo.svg" class="mb-2" alt="">
 
@@ -95,9 +95,9 @@
 				</div>
 			</div>
 
-			<div class="col-6 p-0">
+			<div class="col-lg-6 p-0 d-none d-lg-block">
 				<div class="bg-login">
-					<div class="gradient d-flex flex-column justify-content-center align-items-center px-5">
+					<div class="gradient px-5">
 						<img src="../../../assets/images/logo-transparente2.png" class="img-fluid" alt="">
 					</div>
 				</div>

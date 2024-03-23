@@ -80,13 +80,12 @@
 
                           </div>
 
-                          <hr>
 
                         </div>
 
 
                         <!-- Localização -->
-                        <div class="col mt-4">
+                        <!-- <div class="col mt-4">
                           <h1 class="title-login mt-2">Localização</h1>
                           <p>Adicione a localização deste imóvel e defina o que será mostrado ou
                             não em seu site.</p>
@@ -232,9 +231,9 @@
                           <p>
                             Defina as características deste condomínio/empreendimento
                           </p>
-                        </div>
+                        </div> -->
 
-                        <div>
+                        <!-- <div>
 
                           <div class="row mt-4">
 
@@ -242,9 +241,6 @@
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <!-- <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Mostrar preço no site?
-                                </label> -->
 
 
                                 <div class="form-check">
@@ -263,17 +259,17 @@
 
                           <hr>
 
-                        </div>
+                        </div> -->
 
 
-                        <div class="col mt-4">
+                        <!-- <div class="col mt-4">
                           <h1 class="title-login mt-2">Proximidades</h1>
                           <p>
                             Defina os estabelecimentos próximos a este condomínio/empreendimento
                           </p>
-                        </div>
+                        </div> -->
 
-                        <div>
+                        <!-- <div>
 
                           <div class="row mt-4">
 
@@ -281,9 +277,6 @@
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <!-- <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Mostrar preço no site?
-                                </label> -->
 
 
                                 <div class="form-check">
@@ -302,10 +295,10 @@
 
                           <hr>
 
-                        </div>
+                        </div> -->
 
 
-                        <div class="col mt-4">
+                        <!-- <div class="col mt-4">
                           <h1 class="title-login mt-2">Descrição</h1>
                           <p>
                             Descreva os pontos fortes do condomínio/empreendimento
@@ -354,7 +347,7 @@
 
                           </div>
 
-                        </div>
+                        </div> -->
 
 
 
