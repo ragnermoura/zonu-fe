@@ -68,7 +68,7 @@ export default {
                     telefone: telefone,
                     cep: cep,
                     endereco: endereco,
-                    
+
                 },
                 {
                     headers: {
@@ -117,7 +117,7 @@ export default {
                 {
                     nome_caracteristica: nome_caracteristica,
                     id_user: id_user,
-                 
+
                 },
                 {
                     headers: {
@@ -158,7 +158,7 @@ export default {
     deletecaracteristica: async (id_caracteristica) => {
         try {
             const response = await http.delete(
-                `/caracteristica/cadastro${id_caracteristica}`,
+                `/caracteristica/delete/${id_caracteristica}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -175,5 +175,70 @@ export default {
         }
     },
 
-    
+    proximidades: async (nome_proximidade, id_user) => {
+        try {
+            const response = await http.post(
+                "/proximidades/cadastro",
+                {
+                    nome_proximidade: nome_proximidade,
+                    id_user: id_user,
+
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+    listproximidade: async () => {
+        try {
+            const response = await http.get(
+                "/proximidades/",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+    deleteproximidade: async (id_proximidade) => {
+        try {
+            const response = await http.delete(
+                `/proximidades/delete/${id_proximidade}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+
 }

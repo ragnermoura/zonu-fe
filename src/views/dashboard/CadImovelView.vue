@@ -244,38 +244,7 @@
                                 </select>
                               </div>
                             </div>
-                            <!-- <div class="col-3 mt-2">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Corretor
-                                  Responsável <small class="text-danger">*
-                                  </small>
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectCorretor">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-3 mt-2">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Agenciador
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectAgenciador">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div> -->
+                           
                             <div class="col-2">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
@@ -386,7 +355,7 @@
                                   <small class="text-danger">*
                                   </small>
                                 </label>
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div   v-if="!mostrarSkeleton" class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off" value="Plano"
                                     name="selectTerreno" v-model="selectTerreno">
                                   <label class="btn btn-outline-success" for="btnTerreno1">Plano</label>
@@ -432,7 +401,7 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectAverbado" id="selectAverbado1"
                                     autocomplete="off" value="Sim" v-model="selectAverbado">
                                   <label class="btn btn-outline-success" for="selectAverbado1">Sim</label>
@@ -458,7 +427,7 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEscritura" id="selectEscritura1"
                                     autocomplete="off" value="Sim" v-model="selectEscritura">
                                   <label class="btn btn-outline-success" for="selectEscritura1">Sim</label>
@@ -484,7 +453,7 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectEsquina" id="selectEsquina1"
                                     autocomplete="off" value="Sim" v-model="selectEsquina">
                                   <label class="btn btn-outline-success" for="selectEsquina1">Sim</label>
@@ -510,7 +479,7 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="selectMobilia" id="selectMobilia1"
                                     autocomplete="off" value="Sim" v-model="selectMobilia">
                                   <label class="btn btn-outline-success" for="selectMobilia1">Sim</label>
@@ -532,7 +501,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button class="btn btn-secondary" type="button">Cancelar</button>
+                                <a href="/dashboard"  class="btn btn-secondary" type="button">Cancelar</a>
                               </div>
                             </div>
 

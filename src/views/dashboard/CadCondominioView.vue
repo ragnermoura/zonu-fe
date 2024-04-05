@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <Sidebar :defaultCollapsed="true"/>
+    <Sidebar :defaultCollapsed="true" />
     <div class="main">
-      <Navbar/>
+      <Navbar />
       <main class="content">
         <div class="container-fluid p-0">
 
@@ -11,32 +11,56 @@
 
           <div class="row d-flex flex-row justify-content-between">
 
-            <div style="width: 19%; margin-right: 1%;">
+
+
+            <!-- Aqui começa as TABS. Copie e cole da INFOTAB -->
+            <div style="width: 49%; margin-left: 1%;">
               <div class="col-xl-12 col-xxl-12 d-flex">
                 <div class="w-100">
                   <div class="row">
 
                     <div class="card">
                       <div class="card-body">
-                        <div class="row">
-                          <div class="card-header">
-                            <h3 class="card-title mb-0">Passo a passo</h3>
-                          </div>
-                          <div class="row align-items-center">
-                            <div class="col-12">
-															<span v-if="!stepInfo"><i class="fa fa-circle"></i>
-																Informações</span>
-                              <span v-if="stepInfo" class="text-success"><i class="fa fa-check text-success"></i>
-																Informações</span>
-                            </div>
 
-                            <div class="col-auto">
-                              <div class="vertical-hr"></div>
-                            </div>
-
-
-                          </div>
+                        <div class="col mt-0">
+                          <h1 class="title-login mt-2">Cadastro de condomínio/empreendimento</h1>
+                          <p>
+                            Ao cadastrar um imóvel, será possível selecionar um condomínio/empreendimento para
+                            reaproveitamento de dados e fotos
+                          </p>
                         </div>
+
+                        <div>
+
+                          <div class="row mt-4">
+
+                            <div class="col-12">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
+                                  Nome do condomínio/empreendimento
+                                </label>
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="condNome" placeholder="Digite...">
+                              </div>
+                            </div>
+
+                            <div class="col-md-12">
+                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button v-if="!mostrarSkeleton" class="btn btn-success" @click="handleSalvar()"
+                                  type="button">
+                                  Salvar
+                                </button>
+                              </div>
+                            </div>
+
+
+                          </div>
+
+
+                        </div>
+
                       </div>
                     </div>
 
@@ -45,315 +69,71 @@
               </div>
             </div>
 
-            <!-- Aqui começa as TABS. Copie e cole da INFOTAB -->
-            <div style="width: 79%; margin-left: 1%;">
+            <div style="width: 49%; margin-left: 1%">
               <div class="col-xl-12 col-xxl-12 d-flex">
                 <div class="w-100">
                   <div class="row">
-
                     <div class="card">
                       <div class="card-body">
-                      
                         <div class="col mt-0">
-                          <h1 class="title-login mt-2">Cadastro de condomínio/empreendimento</h1>
-                          <p>
-                            Ao cadastrar um imóvel, será possível selecionar um condomínio/empreendimento para reaproveitamento de dados e fotos
-                          </p>
+                          <h1 class="title-login mt-2">Lista de Condomínios</h1>
                         </div>
-
+                        <div v-if="msgSuccessDelete" class="alert alert-success alert-dismissible fade show"
+                          role="alert">
+                          <strong><i class="fa fa-check"></i> Sucesso!</strong> Condomínio
+                          excluído com sucesso.
+                        </div>
                         <div>
-
                           <div class="row mt-4">
-
-                            <div class="col-6">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Nome do condomínio/empreendimento
-                                </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="condNome" placeholder="Consulte...">
-                              </div>
-                            </div>
-
-
-                          </div>
-
-
-                        </div>
-
-
-                        <!-- Localização -->
-                        <!-- <div class="col mt-4">
-                          <h1 class="title-login mt-2">Localização</h1>
-                          <p>Adicione a localização deste imóvel e defina o que será mostrado ou
-                            não em seu site.</p>
-                        </div>
-
-                        <div>
-
-                          <div class="row mt-4">
-
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  CEP
-                                </label>
-                                <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="Digite aqui..."
-                                         v-model="buscarCEP"
-                                         required v-if="!mostrarSkeleton" aria-label="Example text with button addon"
-                                         aria-describedby="button-addon1">
-                                  <button class="btn btn-success px-3" type="button" id="button-addon1">Buscar</button>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">País
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectPais">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Estado
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectEstado">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-
-
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Cidade
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectCidade">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Bairro
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectBairro">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Zona
-                                </label>
-
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                        v-model="selectZona">
-
-                                  <option selected disabled>Selecione</option>
-
-                                </select>
-                              </div>
-                            </div>
-
-
-                            <div class="col-5">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Logradouro
-                                </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="logradouro" placeholder="Consulte...">
-                              </div>
-                            </div>
-                            <div class="col-2">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Número
-                                </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                       v-model="nLogradouro" placeholder="Consulte...">
-                              </div>
-                            </div>
-
-
-
-                          </div>
-
-                          <hr>
-
-                        </div>
-
-                                              
-                        <div class="col mt-4">
-                          <h1 class="title-login mt-2">Características do condomínio/empreendimento</h1>
-                          <p>
-                            Defina as características deste condomínio/empreendimento
-                          </p>
-                        </div> -->
-
-                        <!-- <div>
-
-                          <div class="row mt-4">
-
-                            <div class="col-3">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-
-
-                                <div class="form-check">
-                                  <input class="form-check-input" v-model="caracteristicaCond" type="checkbox"
-                                         value=""
-                                         id="flexCheckDefault">
-                                  <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
-                                  </label>
-                                </div>
-
-                              </div>
-                            </div>
-
-                          </div>
-
-                          <hr>
-
-                        </div> -->
-
-
-                        <!-- <div class="col mt-4">
-                          <h1 class="title-login mt-2">Proximidades</h1>
-                          <p>
-                            Defina os estabelecimentos próximos a este condomínio/empreendimento
-                          </p>
-                        </div> -->
-
-                        <!-- <div>
-
-                          <div class="row mt-4">
-
-                            <div class="col-3">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-
-
-                                <div class="form-check">
-                                  <input class="form-check-input" v-model="proximidadeCond" type="checkbox"
-                                         value=""
-                                         id="flexCheckDefault">
-                                  <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
-                                  </label>
-                                </div>
-
-                              </div>
-                            </div>
-
-                          </div>
-
-                          <hr>
-
-                        </div> -->
-
-
-                        <!-- <div class="col mt-4">
-                          <h1 class="title-login mt-2">Descrição</h1>
-                          <p>
-                            Descreva os pontos fortes do condomínio/empreendimento
-                          </p>
-                        </div>
-
-                        <div>
-
-                          <div class="row mt-4">
-
                             <div class="col-12">
                               <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Texto sobre o condomínio/empreendimento
-                                </label>
+                                <input type="text" placeholder="Pesquise aqui" class="form-control mb-3"
+                                  aria-describedby="passwordHelpBlock" v-model="searchCondominio" />
+                                <table class="table">
+                                  <div class="container">
 
-                                <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoCond"
-                                          style="height:100px" placeholder="Digite aqui..."></textarea>
-                              </div>
-                            </div>
-
-                          </div>
-
-                          <hr>
-
-                          <div class="row mt-3">
-                            <div class="col-md-6">
-                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button  class="btn btn-secondary" type="button"><i
-                                    class="fa fa-caret-square-right me-2" aria-hidden="true"></i>
-                                  Salvar e continuar
-                                </button>
-                              </div>
-                            </div>
-
-                            <div class="col-md-6">
-                              <div class="d-grid gap-2 d-md-block">
-                                <button class="btn btn-success"  type="button">
-                                  <i class="fa fa-save me-2" aria-hidden="true"></i>
-                                  Salvar e finalizar
+                                  </div>
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Condomínio</th>
+                                      <th scope="col">Ação</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="item in CondominioOnCurrentPage" :key="item.id_condominio">
+                                      <td>{{ item.nome_condominio }}</td>
+                                      <td>
+                                        <button @click="handleDelete(
+      item.id_condominio
+    )
+      " type="button" class="btn btn-danger" style="
+                                                                                        --bs-btn-padding-y: 0.25rem;
+                                                                                        --bs-btn-padding-x: 0.5rem;
+                                                                                        --bs-btn-font-size: 0.75rem;
+                                                                                    ">
+                                          <i class="fa fa-trash"></i>
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <div class="d-grid mt-3 mb-3 gap-2 d-md-flex justify-content-md-end">
+                                  <button class="btn btn-dark btn-sm" @click="previousPageCondominio()"
+                                    :disabled="currentPageCondominio <= 1">
+                                    Anterior
                                   </button>
+                                  <button class=" btn btn-dark btn-sm" style="margin-right: 3% !important;"
+                                    @click="nextPageCondominio()"
+                                    :disabled="currentPageCondominio >= totalPagesCondominio">
+                                    Proximo
+                                  </button>
+                                </div>
                               </div>
                             </div>
-
                           </div>
-
-                        </div> -->
-
-
-
+                        </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -362,7 +142,7 @@
           </div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   </div>
 
@@ -384,30 +164,14 @@ export default {
   data() {
     return {
       mostrarSkeleton: true,
-
-      // NOVO CONDOMINIO
-      condNome : '',
-      buscarCEP : '',
-      selectPais : 'não',
-      selectEstado : 'não',
-      selectCidade : 'não',
-      selectBairro : 'não',
-      selectZona : 'não',
-      logradouro : '',
-      nLogradouro : '',
-      caracteristicaCond : '',
-      proximidadeCond : '',
-      apresentacaoCond : '',
-
-
-
+      condNome: '',
+      currentPageCondominio: 1,
+      perPageCondominio: 5,
+      searchCondominio: '',
+      msgSuccess: false,    
     }
   },
 
-
-  //Aqui está o MOSTRA e ESCONDE dos INPUTS do dashboard
-  watch: {
-  },
   mounted() {
     setTimeout(() => {
       this.mostrarSkeleton = false;
@@ -415,6 +179,86 @@ export default {
   },
 
   methods: {
+
+    handleSalvar() {
+      let nome_condominio = this.condNome;
+      let id_user = this.id_user;
+
+      api.condominio(nome_condominio, id_user).then((res) => {
+
+        if (res.status == 201) {
+          this.msgSuccess = true;
+          this.condNome = "";
+          this.fetchList();
+
+          setTimeout(() => {
+            this.msgSuccess = false;
+          }, 3000);
+        }
+
+
+      });
+    },
+
+    previousPageCondominio() {
+      if (this.currentPageCondominio > 1) {
+        this.currentPageCondominio -= 1
+      }
+    },
+    nextPageCondominio() {
+      if (this.currentPageCondominio < this.totalPagesCondominio) {
+        this.currentPageCondominio += 1
+      }
+    },
+
+    handleDelete(id) {
+      let id_condominio = id;
+
+      api.deletecondominio(id_condominio).then((res) => {
+
+
+        if (res.status == 200) {
+          this.msgSuccessDelete = true;
+          this.fetchList();
+
+          setTimeout(() => {
+            this.msgSuccessDelete = false;
+          }, 3000);
+        }
+
+
+      });
+    },
+
+    fetchList() {
+      api.listcondominio().then((res) => {
+        this.lists = res.data.response; 
+      });
+    },
+  },
+
+  computed: {
+    CondominioOnCurrentPage() {
+      const startIndex = (this.currentPageCondominio - 1) * this.perPageCondominio
+      const endIndex = startIndex + this.perPageCondominio
+      return this.lists
+        .filter((item) => {
+          return item.nome_condominio
+            .toLowerCase()
+            .includes(this.searchCondominio.toLowerCase())
+        })
+        .slice(startIndex, endIndex)
+    },
+    totalPagesCondominio() {
+      return Math.ceil(
+        this.lists.filter((item) => {
+          this.currentPageCondominio = 1
+          return item.nome_condominio
+            .toLowerCase()
+            .includes(this.searchCondominio.toLowerCase())
+        }).length / this.perPageCondominio,
+      )
+    },
   }
 
 

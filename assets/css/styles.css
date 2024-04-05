@@ -208,3 +208,11 @@ label[for="formFile"] {
 .alert-success{
   color: #12d362;
 }
+
+.alert-warning{
+  color: #d3a312;
+}
+
+.alert-danger{
+  color: #a82323;
+}

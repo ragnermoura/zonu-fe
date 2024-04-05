@@ -5,7 +5,7 @@
             <Navbar />
             <main class="content">
                 <div class="container-fluid p-0">
-                    <h1 class="h3 mb-3"><strong>Cadastro |</strong> Características</h1>
+                    <h1 class="h3 mb-3"><strong>Cadastro |</strong> Proximidades</h1>
 
                     <div class="row d-flex flex-row justify-content-between">
                         <div style="width: 49%; margin-right: 1%">
@@ -15,13 +15,13 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="col mt-0">
-                                                    <h1 class="title-login mt-2">Cadastro de Características</h1>
+                                                    <h1 class="title-login mt-2">Cadastro de Proximidades</h1>
 
                                                     <div v-if="msgSuccess"
                                                         class="alert alert-success alert-dismissible fade show"
                                                         role="alert">
                                                         <strong><i class="fa fa-check"></i> Sucesso!</strong> Nova
-                                                        característica cadastrada.
+                                                        proximidade cadastrada.
                                                     </div>
                                                 </div>
 
@@ -35,10 +35,10 @@
                                                                 </div>
                                                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                                                     class="form-label">
-                                                                    Nova característica
+                                                                    Nova Proximidade
                                                                 </label>
                                                                 <input type="text" required v-if="!mostrarSkeleton"
-                                                                    class="form-control" v-model="caracteristica"
+                                                                    class="form-control" v-model="proximidade"
                                                                     placeholder="Digite aqui..." />
                                                             </div>
                                                         </div>
@@ -67,12 +67,12 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="col mt-0">
-                                                    <h1 class="title-login mt-2">Lista de Características</h1>
+                                                    <h1 class="title-login mt-2">Lista de Proximidades</h1>
                                                 </div>
                                                 <div v-if="msgSuccessDelete"
                                                     class="alert alert-success alert-dismissible fade show"
                                                     role="alert">
-                                                    <strong><i class="fa fa-check"></i> Sucesso!</strong> Característica
+                                                    <strong><i class="fa fa-check"></i> Sucesso!</strong> Proximidade
                                                     excluída com sucesso.
                                                 </div>
                                                 <div>
@@ -82,30 +82,29 @@
                                                                 <input type="text" placeholder="Pesquise aqui"
                                                                     class="form-control mb-3"
                                                                     aria-describedby="passwordHelpBlock"
-                                                                    v-model="searchCaracteristica" />
+                                                                    v-model="searchProximidade" />
                                                                 <table class="table">
                                                                     <div class="container">
 
                                                                     </div>
                                                                     <thead>
                                                                         <tr>
-                                                                            <th scope="col">Caracteristica</th>
+                                                                            <th scope="col">Proximidades</th>
                                                                             <th scope="col">Ação</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr v-for="item in CaracteristicaOnCurrentPage"
-                                                                            :key="item.id_caracteristica">
-                                                                            <td>{{ item.nome_caracteristica }}</td>
+                                                                        <tr v-for="item in ProximidadeOnCurrentPage"
+                                                                            :key="item.id_proximidade">
+                                                                            <td>{{ item.nome_proximidade }}</td>
                                                                             <td>
-                                                                                <button @click="handleDelete(
-            item.id_caracteristica
-        )
-            " type="button" class="btn btn-danger" style="
+                                                                                <button
+                                                                                    @click="handleDelete(item.id_proximidade)"
+                                                                                    type="button" class="btn btn-danger"
+                                                                                    style="
                                                                                         --bs-btn-padding-y: 0.25rem;
                                                                                         --bs-btn-padding-x: 0.5rem;
-                                                                                        --bs-btn-font-size: 0.75rem;
-                                                                                    ">
+                                                                                        --bs-btn-font-size: 0.75rem;">
                                                                                     <i class="fa fa-trash"></i>
                                                                                 </button>
                                                                             </td>
@@ -115,14 +114,14 @@
                                                                 <div
                                                                     class="d-grid mt-3 mb-3 gap-2 d-md-flex justify-content-md-end">
                                                                     <button class="btn btn-dark btn-sm"
-                                                                        @click="previousPageCaracteristica()"
+                                                                        @click="previousPageProximidade()"
                                                                         :disabled="currentPageFrase <= 1">
                                                                         Anterior
                                                                     </button>
                                                                     <button class=" btn btn-dark btn-sm"
                                                                         style="margin-right: 3% !important;"
-                                                                        @click="nextPageCaracteristica()"
-                                                                        :disabled="currentPageCaracteristica >= totalPagesCaracteristica">
+                                                                        @click="nextPageProximidade()"
+                                                                        :disabled="currentPageProximidade >= totalPagesProximidade">
                                                                         Proximo
                                                                     </button>
                                                                 </div>
@@ -151,7 +150,7 @@ import api from "../../../service/api/index";
 import { jwtDecode } from "jwt-decode";
 
 export default {
-    name: "CaracteristicaView",
+    name: "ProximidadesView",
     components: {
         Sidebar,
         Navbar,
@@ -160,16 +159,16 @@ export default {
     data() {
         return {
             mostrarSkeleton: true,
-            caracteristica: "",
+            proximidade: "",
             msgSuccess: false,
             lists: [],
             token: localStorage.getItem("token"),
             id_user: "",
             msgSuccessDelete: false,
 
-            currentPageCaracteristica: 1,
-            perPageCaracteristica: 5,
-            searchCaracteristica: '',
+            currentPageProximidade: 1,
+            perPageProximidade: 5,
+            searchProximidade: '',
         };
     },
     mounted() {
@@ -179,24 +178,21 @@ export default {
         let decode = jwtDecode(token);
         this.id_user = decode.id_user;
 
-
-
         setTimeout(() => {
             this.mostrarSkeleton = false;
         }, 2000);
     },
     methods: {
         handleSalvar() {
-            let nome_caracteristica = this.caracteristica;
+            let nome_proximidade = this.proximidade;
             let id_user = this.id_user;
 
-            api.caracteristica(nome_caracteristica, id_user).then((res) => {
-
-
+            api.proximidades(nome_proximidade, id_user).then((res) => {
 
                 if (res.status == 201) {
                     this.msgSuccess = true;
-                    this.caracteristica = "";
+                    this.proximidade = "";
+
                     this.fetchList();
 
                     setTimeout(() => {
@@ -208,22 +204,21 @@ export default {
             });
         },
 
-        previousPageCaracteristica() {
-            if (this.currentPageCaracteristica > 1) {
-                this.currentPageCaracteristica -= 1
+        previousPageProximidade() {
+            if (this.currentPageProximidade > 1) {
+                this.currentPageProximidade -= 1
             }
         },
-        nextPageCaracteristica() {
-            if (this.currentPageCaracteristica < this.totalPagesCaracteristica) {
-                this.currentPageCaracteristica += 1
+        nextPageProximidade() {
+            if (this.currentPageProximidade < this.totalPagesProximidade) {
+                this.currentPageProximidade += 1
             }
         },
 
         handleDelete(id) {
-            let id_caracteristica = id;
+            let id_proximidade = id;
 
-            api.deletecaracteristica(id_caracteristica).then((res) => {
-                console.log(res);
+            api.deleteproximidade(id_proximidade).then((res) => {
 
                 if (res.status == 200) {
                     this.msgSuccessDelete = true;
@@ -239,34 +234,32 @@ export default {
         },
 
         fetchList() {
-            api.listcaracteristica().then((res) => {
+            api.listproximidade().then((res) => {
                 this.lists = res.data.response;
-
-                console.log(this.lists);
             });
         },
     },
 
     computed: {
-        CaracteristicaOnCurrentPage() {
-            const startIndex = (this.currentPageCaracteristica - 1) * this.perPageCaracteristica
-            const endIndex = startIndex + this.perPageCaracteristica
+        ProximidadeOnCurrentPage() {
+            const startIndex = (this.currentPageProximidade - 1) * this.perPageProximidade
+            const endIndex = startIndex + this.perPageProximidade
             return this.lists
                 .filter((item) => {
-                    return item.nome_caracteristica
+                    return item.nome_proximidade
                         .toLowerCase()
-                        .includes(this.searchCaracteristica.toLowerCase())
+                        .includes(this.searchProximidade.toLowerCase())
                 })
                 .slice(startIndex, endIndex)
         },
-        totalPagesCaracteristica() {
+        totalPagesProximidade() {
             return Math.ceil(
                 this.lists.filter((item) => {
-                    this.currentPageCaracteristica = 1
-                    return item.nome_caracteristica
+                    this.currentPageProximidade = 1
+                    return item.nome_proximidade
                         .toLowerCase()
-                        .includes(this.searchCaracteristica.toLowerCase())
-                }).length / this.perPageCaracteristica,
+                        .includes(this.searchProximidade.toLowerCase())
+                }).length / this.perPageProximidade,
             )
         },
     }

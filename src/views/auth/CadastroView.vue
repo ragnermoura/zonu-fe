@@ -16,35 +16,29 @@
                         <div class="mb-3">
                             <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                             <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                            <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                >Informe seu CNPJ
+                            <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Informe seu CNPJ
                             </label>
-                            <input
-                                type="text"
-                                v-if="!mostrarSkeleton"
-                                class="form-control"
-                                @input="aplicaMascaraCNPJ"
-                                v-model="cnpj"
-                                placeholder="00.000.000/0001-00"
-                            />
+                            <input type="text" v-if="!mostrarSkeleton" class="form-control" @input="aplicaMascaraCNPJ"
+                                v-model="cnpj" placeholder="00.000.000/0001-00" />
                             <p v-if="msgSuccessCnpj" class="text-success mt-2">
                                 <i class="fa fa-check"></i> Seu CNPJ é válido.
                             </p>
 
-                            <p v-if="msgErrorCnpj" class="text-danger mt-2">
-                                <i class="fa fa-ban"></i> Seu CNPJ não é válido, tenho outro.
-                            </p>
+
+
+                            <div v-if="msgErrorCnpj" class="alert alert-danger alert-dismissible fade show"
+                                role="alert">
+                                <strong><i class="fa fa-ban"></i> Lamentamos...</strong> Seu CNPJ não é válido, tenho
+                                outro.
+                            </div>
+
+
                         </div>
                     </div>
 
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
-                    <button
-                        v-if="!mostrarSkeleton"
-                        @click="handleAvancar()"
-                        type="submit"
-                        :disabled="!msgSuccessCnpj"
-                        class="btn btn-dark bot mt-4"
-                    >
+                    <button v-if="!mostrarSkeleton" @click="handleAvancar()" type="submit" :disabled="!msgSuccessCnpj"
+                        class="btn btn-dark bot mt-4">
                         Avançar
                     </button>
 
@@ -71,21 +65,24 @@
                         dados. Volte e insira outro.
                     </p>
 
+                    <div v-if="emailValid" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><i class="fa fa-bell"></i> Atenção!</strong> Já temos esse E-mail cadastrado.
+                    </div>
+
+                    <div v-if="erro" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><i class="fa fa-ban"></i> Desculpe!</strong> Houve um problema ao cadastrar, tente
+                        novamente!
+                    </div>
+
                     <div class="area-dados px-2">
                         <div class="mt-4">
                             <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                    >Razão Social
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Razão Social
                                 </label>
-                                <input
-                                    type="text"
-                                    v-if="!mostrarSkeleton"
-                                    class="form-control"
-                                    v-model="razao_social"
-                                    disabled
-                                />
+                                <input type="text" v-if="!mostrarSkeleton" class="form-control" v-model="razao_social"
+                                    disabled />
                             </div>
                         </div>
 
@@ -94,52 +91,31 @@
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Seu nome
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Seu nome
                                     </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="nome"
-                                        placeholder="Digite seu nome"
-                                    />
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="nome" placeholder="Digite seu nome" />
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Sobrenome
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Sobrenome
                                     </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="sobrenome"
-                                        placeholder="Digite seu sobrenome"
-                                    />
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="sobrenome" placeholder="Digite seu sobrenome" />
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >E-mail
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">E-mail
                                     </label>
 
-                                    <input
-                                        type="email"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="email"
-                                        placeholder="Digite um e-mail válido"
-                                    />
+                                    <input type="email" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="email" placeholder="Digite um e-mail válido" />
 
                                     <p v-if="emailValid" class="text-danger mt-2">
                                         <i class="fa fa-circle-exclamation"></i>
@@ -151,35 +127,23 @@
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Crie uma senha
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Crie uma
+                                        senha
                                     </label>
-                                    <input
-                                        type="password"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="senha"
-                                        :class="{'is-invalid': isEmailInvalid}"
-                                        placeholder="Digite sua senha"
-                                    />
+                                    <input type="password" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="senha" :class="{ 'is-invalid': isEmailInvalid }"
+                                        placeholder="Digite sua senha" />
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Confirme a senha
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Confirme
+                                        a senha
                                     </label>
-                                    <input
-                                        type="password"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="confimSenha"
-                                        placeholder="Digite a senha novamente"
-                                    />
+                                    <input type="password" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="confimSenha" placeholder="Digite a senha novamente" />
 
                                     <p class="text-danger mt-2" v-if="confimSenha && !passwordsMatch">
                                         <i class="fa fa-ban"></i> As senhas não conferem!
@@ -193,36 +157,20 @@
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Telefone
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Telefone
                                     </label>
-                                    <input
-                                        type="text"
-                                        @input="aplicaMascaraTelefone"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="telefone"
-                                        placeholder="(00) 0000-0000"
-                                    />
+                                    <input type="text" @input="aplicaMascaraTelefone" required v-if="!mostrarSkeleton"
+                                        class="form-control" v-model="telefone" placeholder="(00) 0000-0000" />
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Cep
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Cep
                                     </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        @input="aplicaMascaraCEP"
-                                        class="form-control"
-                                        v-model="cep"
-                                        placeholder="000000-000"
-                                    />
+                                    <input type="text" required v-if="!mostrarSkeleton" @input="aplicaMascaraCEP"
+                                        class="form-control" v-model="cep" placeholder="000000-000" />
                                     <p v-if="msgErrorCep" class="text-danger mt-2">
                                         <small><i class="fa fa-check"></i> Cep inválido</small>
                                     </p>
@@ -233,41 +181,24 @@
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label"
-                                        >Endereço
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Endereço
                                     </label>
-                                    <input
-                                        type="text"
-                                        required
-                                        v-if="!mostrarSkeleton"
-                                        class="form-control"
-                                        v-model="endereco"
-                                        placeholder="Digite o endereço completo"
-                                    />
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="endereco" placeholder="Digite o endereço completo" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
-                    <button
-                        v-if="!mostrarSkeleton"
-                        :disabled="autenticando"
-                        @click="handleValidar()"
-                        type="submit"
-                        class="btn btn-dark bot mt-4"
-                    >
+                    <button v-if="!mostrarSkeleton" :disabled="autenticando" @click="handleValidar()" type="submit"
+                        class="btn btn-dark bot mt-4">
                         {{ textoBotao }}
                         <span v-if="autenticando" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                         <span v-if="autenticando" class="visually-hidden">Aguarde...</span>
                     </button>
 
-                    <button
-                        v-if="!mostrarSkeleton"
-                        @click="handleVoltar()"
-                        type="submit"
-                        :disabled="!msgSuccessCnpj"
-                        class="btn btn-outline-dark bot mt-4"
-                    >
+                    <button v-if="!mostrarSkeleton" @click="handleVoltar()" type="submit" :disabled="!msgSuccessCnpj"
+                        class="btn btn-outline-dark bot mt-4">
                         Voltar
                     </button>
                 </div>
@@ -284,9 +215,9 @@
                     </div>
 
                     <div v-if="msgSuccess" class="alert alert-success mt-3" role="alert">
-                        <i class="fa fa-check"></i> Dados gravados com sucesso! Faça o login e use sua plataforma<strong>
-                            Zonu</strong
-                        >
+                        <i class="fa fa-check"></i> Dados gravados com sucesso! Faça o login e use sua
+                        plataforma<strong>
+                            Zonu</strong>
                     </div>
                 </div>
             </div>
@@ -340,6 +271,7 @@ export default {
             cnpjTab: true,
             dadosTab: false,
             validationTab: false,
+            erro: false,
 
         }
     },
@@ -419,10 +351,13 @@ export default {
                         this.msgErrorCnpj = true;
                         this.msgSuccessCnpj = false;
                     }
-
+                } catch (error) {
+                    this.msgErrorCnpj = true;
+                    this.msgSuccessCnpj = false;
                 }
-            },
 
+            }
+        },
         async consultarCEP() {
             if (this.cep.length === 9) {
                 const cep = this.cep.replace(/\D/g, '');
@@ -443,7 +378,6 @@ export default {
                 }
             }
         },
-
         handleAvancar() {
             this.cnpjTab = false
             this.dadosTab = true
@@ -468,8 +402,77 @@ export default {
             let cep = this.cep
             let endereco = this.endereco
 
-            if (nome !== '' && sobrenome !== '' && email !== '' && senha !== '' && telefone && cep && endereco != '') {}
+            if (nome !== '' && sobrenome !== '' && email !== '' && senha !== '' && telefone && cep && endereco != '') {
+
+                api.cadastro(nome, sobrenome, email, senha, razao_social, cnpj, telefone, cep, endereco).then((response) => {
+                    if (response.status == 202) {
+                        this.msgSuccess = true;
+                        this.autenticando = false;
+                        this.textoBotao = "Sucesso, redirecionando...";
+
+                        api.login(email, senha).then((res) => {
+
+                            let token = res.data.token;
+                            localStorage.setItem('token', token);
+
+                            setTimeout(() => {
+                                this.msgSuccess = false;
+                                this.autenticando = false;
+                                this.textoBotao = "Salvar";
+                                window.location.href = "/dashboard";
+                            }, 5000);
+
+                        })
+
+
+                    } else if (response.status == 409) {
+                        this.emailValid = true;
+                        this.autenticando = false;
+                        this.textoBotao = "Houve um problema....";
+
+                        setTimeout(() => {
+                            this.emailValid = false;
+                            this.autenticando = false;
+                            this.textoBotao = "Tente novamente...";
+                        }, 5000);
+                    } else if (response.status == 401) {
+                        this.msgCnpjActive = true
+                        this.autenticando = false;
+                        this.textoBotao = "Salvar";
+
+                        setTimeout(() => {
+                            this.msgCnpjActive = false;
+                            this.autenticando = false;
+                            this.textoBotao = "Salvar";
+                        }, 5000);
+                    } else {
+                        this.autenticando = false;
+                        this.textoBotao = "Houve um erro";
+                        this.erro = true;
+
+                        setTimeout(() => {
+                            this.erro = false;
+                            this.autenticando = false;
+                            this.textoBotao = "Tente novamente...";
+                        }, 5000)
+                    }
+                }).catch(() => {
+                    this.autenticando = false;
+                    this.textoBotao = "Salvar";
+                });
+            } else {
+                this.campoNullError = true;
+                this.autenticando = false;
+                this.textoBotao = "Salvar";
+
+                setTimeout(() => {
+                    this.campoNullError = false;
+                    this.autenticando = false;
+                    this.textoBotao = "Salvar";
+                }, 5000);
+            }
         }
     }
+}
 
 </script>

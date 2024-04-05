@@ -27,6 +27,11 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="/proximidades"> 
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="/caracteristica">
                         <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Caracteristica</span>
                     </a>
@@ -122,7 +127,7 @@
 
 <script>
 
-
+import { jwtDecode } from "jwt-decode";
 export default {
     name: 'SideBar',
 
@@ -142,23 +147,23 @@ export default {
        
         let token = localStorage.getItem('token');
 
-        // if (!token || token === 'null') {
-        //     window.location.href = "/";
-        // } else {
-        //     try {
-        //         let decode = jwtDecode(token);
-        //         this.token = decode;
+        if (!token || token === 'null') {
+            window.location.href = "/";
+        } else {
+            try {
+                let decode = jwtDecode(token);
+                this.token = decode;
 
-        //         if (decode.id_status == 2) {
+                if (decode.id_status == 2) {
 
-        //             console.log('Status do token inválido:', decode.id_status);
-        //             window.location.href = "/";
+                    console.log('Status do token inválido:', decode.id_status);
+                    window.location.href = "/";
 
-        //         }
-        //     } catch (error) {
-        //         console.error('Erro ao decodificar token:', error);
-        //     }
-        // }
+                }
+            } catch (error) {
+                console.error('Erro ao decodificar token:', error);
+            }
+        }
     }
 
 

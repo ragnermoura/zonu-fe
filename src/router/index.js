@@ -7,6 +7,7 @@ import CadImovelView from '../views/dashboard/CadImovelView.vue'
 import CadCondominioView from '../views/dashboard/CadCondominioView.vue'
 import MyPlanView from '../views/dashboard/MyPlanView.vue'
 import CaracteristicaView from '../views/dashboard/CaracteristicaView.vue'
+import ProximidadesView from '../views/dashboard/ProximidadesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/novo-condominio',
       name: 'novo-condominio',
       component: CadCondominioView
+    },  
+    {
+      path: '/proximidades',
+      name: 'proximidades',
+      component: ProximidadesView
     },  
     {
       path: '/meu-plano',
