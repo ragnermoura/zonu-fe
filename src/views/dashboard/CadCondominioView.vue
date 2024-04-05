@@ -5,35 +5,29 @@
       <Navbar />
       <main class="content">
         <div class="container-fluid p-0">
-
-
           <h1 class="h3 mb-3"><strong>Cadastro |</strong> Novo Condomínio</h1>
 
           <div class="row d-flex flex-row justify-content-between">
-
-
-
             <!-- Aqui começa as TABS. Copie e cole da INFOTAB -->
-            <div style="width: 49%; margin-left: 1%;">
+            <div style="width: 49%; margin-left: 1%">
               <div class="col-xl-12 col-xxl-12 d-flex">
                 <div class="w-100">
                   <div class="row">
-
                     <div class="card">
                       <div class="card-body">
-
                         <div class="col mt-0">
-                          <h1 class="title-login mt-2">Cadastro de condomínio/empreendimento</h1>
+                          <h1 class="title-login mt-2">
+                            Cadastro de condomínio/empreendimento
+                          </h1>
                           <p>
-                            Ao cadastrar um imóvel, será possível selecionar um condomínio/empreendimento para
-                            reaproveitamento de dados e fotos
+                            Ao cadastrar um imóvel, será possível selecionar um
+                            condomínio/empreendimento para reaproveitamento de dados e
+                            fotos
                           </p>
                         </div>
 
                         <div>
-
                           <div class="row mt-4">
-
                             <div class="col-12">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
@@ -42,7 +36,7 @@
                                   Nome do condomínio/empreendimento
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="condNome" placeholder="Digite...">
+                                  v-model="condNome" placeholder="Digite..." />
                               </div>
                             </div>
 
@@ -54,16 +48,10 @@
                                 </button>
                               </div>
                             </div>
-
-
                           </div>
-
-
                         </div>
-
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -80,8 +68,8 @@
                         </div>
                         <div v-if="msgSuccessDelete" class="alert alert-success alert-dismissible fade show"
                           role="alert">
-                          <strong><i class="fa fa-check"></i> Sucesso!</strong> Condomínio
-                          excluído com sucesso.
+                          <strong><i class="fa fa-check"></i> Sucesso!</strong>
+                          Condomínio excluído com sucesso.
                         </div>
                         <div>
                           <div class="row mt-4">
@@ -90,9 +78,7 @@
                                 <input type="text" placeholder="Pesquise aqui" class="form-control mb-3"
                                   aria-describedby="passwordHelpBlock" v-model="searchCondominio" />
                                 <table class="table">
-                                  <div class="container">
-
-                                  </div>
+                                  <div class="container"></div>
                                   <thead>
                                     <tr>
                                       <th scope="col">Condomínio</th>
@@ -101,16 +87,14 @@
                                   </thead>
                                   <tbody>
                                     <tr v-for="item in CondominioOnCurrentPage" :key="item.id_condominio">
-                                      <td>{{ item.nome_condominio }}</td>
+                                      <td>{{item.nome_condominio}}</td>
                                       <td>
-                                        <button @click="handleDelete(
-      item.id_condominio
-    )
-      " type="button" class="btn btn-danger" style="
-                                                                                        --bs-btn-padding-y: 0.25rem;
-                                                                                        --bs-btn-padding-x: 0.5rem;
-                                                                                        --bs-btn-font-size: 0.75rem;
-                                                                                    ">
+                                        <button @click="handleDelete(item.id_condominio)" type="button"
+                                          class="btn btn-danger" style="
+                                            --bs-btn-padding-y: 0.25rem;
+                                            --bs-btn-padding-x: 0.5rem;
+                                            --bs-btn-font-size: 0.75rem;
+                                          ">
                                           <i class="fa fa-trash"></i>
                                         </button>
                                       </td>
@@ -122,9 +106,10 @@
                                     :disabled="currentPageCondominio <= 1">
                                     Anterior
                                   </button>
-                                  <button class=" btn btn-dark btn-sm" style="margin-right: 3% !important;"
-                                    @click="nextPageCondominio()"
-                                    :disabled="currentPageCondominio >= totalPagesCondominio">
+                                  <button class="btn btn-dark btn-sm" style="margin-right: 3% !important"
+                                    @click="nextPageCondominio()" :disabled="
+                                      currentPageCondominio >= totalPagesCondominio
+                                    ">
                                     Proximo
                                   </button>
                                 </div>
@@ -138,129 +123,127 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </main>
       <Footer />
     </div>
   </div>
-
-
-
 </template>
 <script>
-import Sidebar from '../../components/sidebar/index.vue'
-import Navbar from '../../components/navbar/index.vue'
-import Footer from '../../components/footer/index.vue'
+  import Sidebar from "../../components/sidebar/index.vue";
+  import Navbar from "../../components/navbar/index.vue";
+  import Footer from "../../components/footer/index.vue";
 
-export default {
-  name: 'CadCondominioView',
-  components: {
-    Sidebar,
-    Navbar,
-    Footer,
-  },
-  data() {
-    return {
-      mostrarSkeleton: true,
-      condNome: '',
-      currentPageCondominio: 1,
-      perPageCondominio: 5,
-      searchCondominio: '',
-      msgSuccess: false,    
+  import api from "../../../service/api/index.js";
+
+  export default {
+    name: "CadCondominioView",
+    components: {
+      Sidebar,
+      Navbar,
+      Footer,
+    },
+    data() {
+      return {
+        mostrarSkeleton: true,
+        condNome: "",
+
+        currentPageCondominio: 1,
+        perPageCondominio: 5,
+        searchCondominio: "",
+        id_user: '',
+        msgSuccess: false,
+        lists: [],
+      };
+    },
+
+    mounted() {
+      setTimeout(() => {
+        this.mostrarSkeleton = false;
+      }, 2000);
+    },
+
+    methods: {
+      handleSalvar() {
+        let nome_condominio = this.condNome;
+        let id_user = this.id_user;
+
+        api.novoCondominio(nome_condominio, id_user).then((res) => {
+          if (res.status == 201) {
+            this.msgSuccess = true;
+            this.condNome = "";
+            this.fetchList();
+
+            setTimeout(() => {
+              this.msgSuccess = false;
+            }, 3000);
+          }
+        });
+      },
+
+      previousPageCondominio() {
+        if (this.currentPageCondominio > 1) {
+          this.currentPageCondominio -= 1;
+        }
+      },
+    
+      nextPageCondominio() {
+        if (this.currentPageCondominio < this.totalPagesCondominio) {
+          this.currentPageCondominio += 1;
+        }
+      },
+
+      handleDelete(id) {
+        let id_condominio = id;
+
+        api.deletecondominio(id_condominio).then((res) => {
+          if (res.status == 200) {
+            this.msgSuccessDelete = true;
+            this.fetchList();
+
+            setTimeout(() => {
+              this.msgSuccessDelete = false;
+            }, 3000);
+          }
+        });
+
+      },
+
+      fetchList() {
+
+        let id_user = this.id_user;
+        api.listcondominio(id_user).then((res) => {
+          this.lists = res.data.reponse;
+        });
+
+      },
+    },
+
+    computed: {
+
+      CondominioOnCurrentPage() {
+        const startIndex = (this.currentPageCondominio - 1) * this.perPageCondominio
+        const endIndex = startIndex + this.perPageCondominio
+        return this.lists
+          .filter((item) => {
+            return item.nome_condominio
+              .toLowerCase()
+              .includes(this.searchCondominio.toLowerCase())
+          })
+          .slice(startIndex, endIndex)
+      },
+
+      totalPagesCondominio() {
+        return Math.ceil(
+          this.lists.filter((item) => {
+            this.currentPageCondominio = 1
+            return item.nome_condominio
+              .toLowerCase()
+              .includes(this.searchCondominio.toLowerCase())
+          }).length / this.perPageCondominio,
+        )
+      },
     }
-  },
-
-  mounted() {
-    setTimeout(() => {
-      this.mostrarSkeleton = false;
-    }, 2000)
-  },
-
-  methods: {
-
-    handleSalvar() {
-      let nome_condominio = this.condNome;
-      let id_user = this.id_user;
-
-      api.condominio(nome_condominio, id_user).then((res) => {
-
-        if (res.status == 201) {
-          this.msgSuccess = true;
-          this.condNome = "";
-          this.fetchList();
-
-          setTimeout(() => {
-            this.msgSuccess = false;
-          }, 3000);
-        }
-
-
-      });
-    },
-
-    previousPageCondominio() {
-      if (this.currentPageCondominio > 1) {
-        this.currentPageCondominio -= 1
-      }
-    },
-    nextPageCondominio() {
-      if (this.currentPageCondominio < this.totalPagesCondominio) {
-        this.currentPageCondominio += 1
-      }
-    },
-
-    handleDelete(id) {
-      let id_condominio = id;
-
-      api.deletecondominio(id_condominio).then((res) => {
-
-
-        if (res.status == 200) {
-          this.msgSuccessDelete = true;
-          this.fetchList();
-
-          setTimeout(() => {
-            this.msgSuccessDelete = false;
-          }, 3000);
-        }
-
-
-      });
-    },
-
-    fetchList() {
-      api.listcondominio().then((res) => {
-        this.lists = res.data.response; 
-      });
-    },
-  },
-
-  computed: {
-    CondominioOnCurrentPage() {
-      const startIndex = (this.currentPageCondominio - 1) * this.perPageCondominio
-      const endIndex = startIndex + this.perPageCondominio
-      return this.lists
-        .filter((item) => {
-          return item.nome_condominio
-            .toLowerCase()
-            .includes(this.searchCondominio.toLowerCase())
-        })
-        .slice(startIndex, endIndex)
-    },
-    totalPagesCondominio() {
-      return Math.ceil(
-        this.lists.filter((item) => {
-          this.currentPageCondominio = 1
-          return item.nome_condominio
-            .toLowerCase()
-            .includes(this.searchCondominio.toLowerCase())
-        }).length / this.perPageCondominio,
-      )
-    },
-  }
-
-
-}
+  };
 </script>

@@ -240,5 +240,90 @@ export default {
         }
     },
 
+    novoCondominio: async (nome_condominio, id_user) => {
+        try {
+            const response = await http.post(
+                "/condominio/cadastro",
+                {
+                    nome_condominio: nome_condominio,
+                    id_user: id_user,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+    listcondominio: async (id_user) => {
+        try {
+            const response = await http.get(
+                `/condominio/${id_user}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+
+    novoImovel: async (codRef, selecteCond, selectProprietario, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia) => {
+        try {
+            const response = await http.post(
+                "/usuarios/cadastro",
+                {
+                    cod_referencia: codRef,
+                    corretor: selecteCond,
+                    agenciador: selectProprietario,
+                    tipo: tipoImovel,
+                    perfil_imovel: perfilImovel,
+                    situacao_imovel: situacaoImovel,
+                    ano_construcao: anoImovel,
+                    incorporacao: incorporacao,
+                    posicao_solar: posicaoSolar,
+                    terreno: selectTerreno,
+                    proximo_mar: proximoMar,
+                    averbado: selectAverbado,
+                    escriturado: selectEscritura,
+                    esquina: selectEsquina,
+                    mobilia: selectMobilia,
+
+
+
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+
 
 }
