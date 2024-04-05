@@ -194,6 +194,7 @@
         }
       },
 
+
       handleDelete(id) {
         let id_condominio = id;
 
