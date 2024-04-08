@@ -42,7 +42,8 @@
                             <i class="align-middle" data-feather="message-square"></i>
                         </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                        aria-labelledby="messagesDropdown">
                         <div class="dropdown-menu-header">
                             <div class="position-relative">
                                 0 Novas mensagens
@@ -63,7 +64,7 @@
                                     </div>
                                 </div>
                             </a> -->
-                  
+
                         </div>
                         <div class="dropdown-menu-footer">
                             <a href="#" class="text-muted">Mostrar todas as Mensagens</a>
@@ -77,10 +78,10 @@
 
                     <a v-if="image == !null" class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                         data-bs-toggle="dropdown">
-                        <img :src="`https://trustchecker.com.br/api${image}`" class="avatar img-fluid rounded me-1"
+                        <img :src="`https://www.zonu.com.br/api/public${image}`" class="avatar img-fluid rounded me-1"
                             alt="Imagem de perfil" /> <span class="text-dark">{{ nome }} {{ sobrenome }}</span>
                     </a>
-                    <a v-if="image == null" class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                    <a v-if="image == null || image == '/avatar/default-avatar.png'" class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                         data-bs-toggle="dropdown">
                         <div class="avatar-null img-fluid rounded me-1" alt="Avatar">{{ iniciais }}</div>
                         <span class="text-dark">{{ nome }} {{ sobrenome }}</span>
@@ -91,9 +92,11 @@
                         <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i>
                             Meus Créditos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i>
+                        <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
+                                data-feather="settings"></i>
                             Configuração & Privacidade</a>
-                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help
+                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i>
+                            Help
                             Center</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" @click="handleLogout" href="#">Log out</a>
@@ -102,6 +105,11 @@
             </ul>
         </div>
     </nav>
+
+<div class="msgPerfil">
+<h6 class="text-perfil"><img src="../../../assets/images/icons/iconStars.png" width="25" alt=""> Seu perfil não está completo <a><i class="iconClose fa fa-close"></i></a> </h6>
+</div>
+   
 </template>
 <script>
 import { jwtDecode } from "jwt-decode";
@@ -115,12 +123,12 @@ export default {
             sobrenome: '',
             email: '',
             iniciais: '',
+            token: localStorage.getItem('token')
+
         }
     },
     mounted() {
-        let token = localStorage.getItem('token')
-        this.token = token;
-        let decode = jwtDecode(token);
+        let decode = jwtDecode(this.token);
 
         this.image = decode.avatar
         this.nome = decode.nome

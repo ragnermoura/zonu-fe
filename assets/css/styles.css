@@ -104,6 +104,7 @@ body {
 input[type="file"] {
   display: none;
 }
+
 label[for="formFile"] {
   padding: 20px 10px;
   width: 200px;
@@ -117,13 +118,12 @@ label[for="formFile"] {
 
 
 /* PRICE CARDS */
-.pricing-table{
-}
+.pricing-table {}
 
 .pricing-table .block-heading {
   padding-top: 50px;
   margin-bottom: 40px;
-  text-align: center; 
+  text-align: center;
 }
 
 .pricing-table .block-heading h2 {
@@ -134,13 +134,13 @@ label[for="formFile"] {
   text-align: center;
   max-width: 420px;
   margin: auto;
-  opacity: 0.7; 
+  opacity: 0.7;
 }
 
 .pricing-table .heading {
   text-align: center;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .pricing-table .item {
@@ -149,15 +149,15 @@ label[for="formFile"] {
   border-top: 2px solid #5ea4f3;
   padding: 30px;
   overflow: hidden;
-  position: relative; 
+  position: relative;
 }
 
 .pricing-table .col-md-5:not(:last-child) .item {
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .pricing-table .item button {
-  font-weight: 600; 
+  font-weight: 600;
 }
 
 .pricing-table .ribbon {
@@ -173,46 +173,161 @@ label[for="formFile"] {
   position: absolute;
   right: -42px;
   top: 20px;
-  padding-top: 7px; 
+  padding-top: 7px;
 }
 
 .pricing-table .item p {
   text-align: center;
   margin-top: 20px;
-  opacity: 0.7; 
+  opacity: 0.7;
 }
 
 .pricing-table .features .feature {
-  font-weight: 600; }
+  font-weight: 600;
+}
 
 .pricing-table .features h4 {
   text-align: center;
   font-size: 18px;
-  padding: 5px; 
+  padding: 5px;
 }
 
 .pricing-table .price h4 {
   margin: 15px 0;
   font-size: 45px;
   text-align: center;
-  color: #2288f9; 
+  color: #2288f9;
 }
 
 .pricing-table .buy-now button {
   text-align: center;
   margin: auto;
   font-weight: 600;
-  padding: 9px 0; 
+  padding: 9px 0;
 }
 
-.alert-success{
+.alert-success {
   color: #12d362;
 }
 
-.alert-warning{
+.alert-warning {
   color: #d3a312;
 }
 
-.alert-danger{
+.alert-danger {
   color: #a82323;
+}
+
+.area_capa {
+  width: 100% !important;
+}
+
+.capa {
+  width: 100vw;
+  height: 70vh;
+  position: absolute;
+
+
+
+}
+
+.linhacomplete {
+  border: 3px solid #212e3c;
+}
+
+.iconCheck {
+  width: 50px !important;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.thumb-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2%;
+}
+
+.thumb {
+  width: 100px;
+  border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
+  border: 5px solid #212e3c;
+}
+
+.msgPerfil {
+
+  width: 20%;
+  margin-left: 2%;
+  margin-top: 2%;
+  padding: 5px;
+  border-radius: 50px;
+  background-color: #212e3c;
+  color: #FFF !important;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.text-perfil {
+  margin-top: 10px;
+  color: #FFF;
+  font-size: 16px;
+  margin-left: 2px;
+}
+
+.iconClose {
+  float: inline-end;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+
+.logoArea {
+  width: 100px;
+  height: 100px;
+  border-radius: 10%;
+  overflow: hidden;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #929292;
+  margin-bottom: 10%;
+
+}
+
+.logoEmpresa {
+  width: 100px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.msgContato {
+  width: 15%;
+  right: 0;
+  position: fixed;
+  bottom: 0;
+  margin-top: 5% !important;
+  margin-bottom: 3% !important;
+  padding: 5px;
+  border-radius: 50px;
+  background-color: #0ec55a;
+  color: #FFF !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-contato {
+  margin-top: 10px;
+  color: #FFF;
+  font-size: 16px;
+  margin-left: 2px;
+  text-align: center;
 }

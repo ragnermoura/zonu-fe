@@ -8,7 +8,7 @@
                     <h1 class="h3 mb-3"><strong>Cadastro |</strong> Características</h1>
 
                     <div class="row d-flex flex-row justify-content-between">
-                        <div style="width: 49%; margin-right: 1%">
+                        <div style="width: 59%; margin-right: 1%">
                             <div class="col-xl-12 col-xxl-12 d-flex">
                                 <div class="w-100">
                                     <div class="row">
@@ -60,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div style="width: 49%; margin-left: 1%">
+                        <div style="width: 39%; margin-left: 1%">
                             <div class="col-xl-12 col-xxl-12 d-flex">
                                 <div class="w-100">
                                     <div class="row">
@@ -99,9 +99,9 @@
                                                                             <td>{{ item.nome_caracteristica }}</td>
                                                                             <td>
                                                                                 <button @click="handleDelete(
-            item.id_caracteristica
-        )
-            " type="button" class="btn btn-danger" style="
+                                                                                    item.id_caracteristica
+                                                                                )
+                                                                                    " type="button" class="btn btn-danger" style="
                                                                                         --bs-btn-padding-y: 0.25rem;
                                                                                         --bs-btn-padding-x: 0.5rem;
                                                                                         --bs-btn-font-size: 0.75rem;
@@ -179,8 +179,6 @@ export default {
         let decode = jwtDecode(token);
         this.id_user = decode.id_user;
 
-
-
         setTimeout(() => {
             this.mostrarSkeleton = false;
         }, 2000);
@@ -191,8 +189,6 @@ export default {
             let id_user = this.id_user;
 
             api.caracteristica(nome_caracteristica, id_user).then((res) => {
-
-
 
                 if (res.status == 201) {
                     this.msgSuccess = true;

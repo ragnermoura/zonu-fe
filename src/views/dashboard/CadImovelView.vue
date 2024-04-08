@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <Sidebar:defaultCollapsed="true" />
+
+    <Sidebar :defaultCollapsed="true" />
+
     <div class="main">
       <Navbar />
       <main class="content">
@@ -151,10 +153,11 @@
             </div>
 
             <!-- Aqui começa as TABS. Copie e cole da INFOTAB -->
-            <div style="width: 79%; margin-left: 1%">
+            <div style="width: 79%; margin-left: 1%; margin-bottom: 4%;">
               <div class="col-xl-12 col-xxl-12 d-flex">
                 <div class="w-100">
                   <div class="row">
+
                     <div class="card" v-if="infoTab">
                       <div class="card-body">
                         <div class="col mt-0">
@@ -222,6 +225,8 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="condominioEmpreendimento">
                                   <option selected disabled>Selecione</option>
+                                  <option v-for="item in listsCondominios" :value="item.id_condominio">{{
+                                    item.nome_condominio }}</option>
                                 </select>
                               </div>
                             </div>
@@ -244,6 +249,8 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="selectProprietario">
                                   <option selected disabled>Selecione</option>
+                                  <option v-for="item in listsProprietarios" :value="item.id_proprietario">{{ item.nome
+                                    }}</option>
                                 </select>
                               </div>
                             </div>
@@ -259,6 +266,7 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="tipoImovel">
                                   <option selected disabled>Selecione</option>
+                                  <option value="Tipo/Subtipo">Tipo/Subtipo</option>
                                 </select>
                               </div>
                             </div>
@@ -275,6 +283,7 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="perfilImovel">
                                   <option selected disabled>Selecione</option>
+                                  <option value="Perfil do imóvel">Perfil do imóvel</option>
                                 </select>
                               </div>
                             </div>
@@ -290,6 +299,7 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="situacaoImovel">
                                   <option selected disabled>Selecione</option>
+                                  <option value="Situação">Situação</option>
                                 </select>
                               </div>
                             </div>
@@ -320,7 +330,7 @@
                                   <small class="text-danger">* </small>
                                 </label>
 
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="date" required v-if="!mostrarSkeleton" class="form-control"
                                   placeholder="Digite..." v-model="incorporacao" />
 
                                 <small v-if="msgNull" class="text-danger">
@@ -339,6 +349,10 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="posicaoSolar">
                                   <option selected disabled>Selecione</option>
+                                  <option value="posicao1">Posicao 1</option>
+                                  <option value="posicao2">Posicao 2</option>
+                                  <option value="posicao3">Posicao 3</option>
+
                                 </select>
                               </div>
                             </div>
@@ -380,6 +394,9 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="proximoMar">
                                   <option selected disabled>Selecione</option>
+                                  <option value="Sim">Sim</option>
+                                  <option value="Não">Não</option>
+
                                 </select>
                               </div>
                             </div>
@@ -517,8 +534,16 @@
                           </h1>
                         </div>
                         <div>
-                          <div class="row mt-4">
-                            <div class="col-6">
+                          <div class="row mt-2">
+                            <div class="col-12 mt-4 mb-4">
+
+                              <div v-if="msgSuccessProprietario" class="alert alert-success alert-dismissible fade show"
+                                role="alert">
+                                <strong><i class="fa fa-check"></i> Sucesso!</strong> Um novo proprietário foi
+                                cadastrado.
+                              </div>
+                            </div>
+                            <div class="col-6 ">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -526,8 +551,12 @@
                                     class="text-danger">*</small>
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="clienteNome" placeholder="Digite aqui..." />
+                                  v-model="proprietarioNome" placeholder="Digite aqui..." />
+
+
                               </div>
+                              <p v-if="msgNullPropietario" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-6">
@@ -537,8 +566,10 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Email <small
                                     class="text-danger">*</small>
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="clienteEmail" placeholder="Digite aqui..." />
+                                <input type="email" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="proprietarioEmail" placeholder="Digite aqui..." />
+                                <p v-if="msgNullPropietario" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                    deixe este campo vazio!</small></p>
                               </div>
                             </div>
 
@@ -550,7 +581,9 @@
                                   <small class="text-danger">*</small>
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="clienteDocumento" placeholder="Digite aqui..." />
+                                  v-model="proprietarioDocumento" placeholder="Digite aqui..." />
+                                <p v-if="msgNullPropietario" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                    deixe este campo vazio!</small></p>
                               </div>
                             </div>
 
@@ -561,27 +594,29 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Telefone
                                   <small class="text-danger">*</small>
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="clienteTel" placeholder="Digite aqui..." />
+                                <input @input="aplicaMascaraTelefone" type="text" required v-if="!mostrarSkeleton"
+                                  class="form-control" v-model="proprietarioTelefone" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullPropietario" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
                           </div>
 
                           <hr />
                           <div class="row mt-3">
                             <div class="col-md-6">
-                              <div class="d-grid gap-2 d-md-block">
-                                <button class="btn btn-secondary" type="button">
-                                  Cancelar
-                                </button>
-                              </div>
+
                             </div>
 
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn btn-success" @click="handleProximoComodo()" type="button">
-                                  Próximo
-                                  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <button :disabled="autenticando" class="btn btn-success" @click="handlePropietario()"
+                                  type="button">
+                                  {{ textoBotaoProprietario }}
+                                  <i class="fa fa-plus" aria-hidden="true"></i>
+                                  <span v-if="autenticando" class="spinner-border spinner-border-sm"
+                                    aria-hidden="true"></span>
+                                  <span v-if="autenticando" class="visually-hidden">Aguarde...</span>
                                 </button>
                               </div>
                             </div>
@@ -609,6 +644,8 @@
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="dormitorio" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
                             <div class="col-3">
                               <div class="mb-3">
@@ -620,6 +657,8 @@
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="suite"
                                   placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
                             <div class="col-3">
                               <div class="mb-3">
@@ -631,6 +670,8 @@
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="banheiro" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
                             <div class="col-3">
                               <div class="mb-3">
@@ -642,6 +683,8 @@
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="garagem" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-3">
@@ -696,9 +739,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Sala de TV
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="salaTv" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-3">
@@ -708,9 +753,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Sala de jantar
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="salaJantar" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-3">
@@ -720,9 +767,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Sala de estar
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="salaEstar" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-3">
@@ -732,9 +781,10 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Lavabo
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="lavabo" placeholder="Digite aqui..." />
                               </div>
+
                             </div>
 
                             <div class="col-3">
@@ -744,9 +794,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Área de serviço
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="areaServico" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-3">
@@ -756,9 +808,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Cozinha
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="cozinha" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-4">
@@ -771,6 +825,8 @@
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="closet" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-4">
@@ -780,9 +836,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Escritório
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="escritorio" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-4">
@@ -792,9 +850,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Dependência para empregada
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
                                   v-model="depEmpregada" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
 
                             <div class="col-4">
@@ -804,9 +864,11 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Copa
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="salaJantar" placeholder="Digite aqui..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="salaCopa" placeholder="Digite aqui..." />
                               </div>
+                              <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
                             </div>
                           </div>
 
@@ -934,6 +996,8 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="tipoNegocio">
                                   <option selected disabled>Selecione</option>
+                                  <option value="Aluguel">Aluguel</option>
+                                  <option value="Venda">Venda</option>
                                 </select>
                               </div>
                             </div>
@@ -943,7 +1007,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  ÁPreço Imóvel
+                                  Preço Imóvel
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
@@ -964,12 +1028,12 @@
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" name="precoNoSite" id="btnradio1"
-                                    autocomplete="off" value="Sim" v-model="precoNoSite" />
+                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" name="precoNoSite"
+                                    id="btnradio1" autocomplete="off" value="Sim" v-model="precoNoSite" />
                                   <label class="btn btn-outline-success" for="btnradio1">Sim</label>
 
-                                  <input type="radio" class="btn-check" value="Não" v-model="precoNoSite"
-                                    name="precoNoSite" id="btnradio2" autocomplete="off" />
+                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" value="Não"
+                                    v-model="precoNoSite" name="precoNoSite" id="btnradio2" autocomplete="off" />
                                   <label class="btn btn-outline-danger" for="btnradio2">Não</label>
                                 </div>
                               </div>
@@ -1200,11 +1264,16 @@
               </label> -->
 
                                 <div class="form-check">
-                                  <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox"
-                                    value="" id="flexCheckDefault" />
-                                  <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
-                                  </label>
+                                  <div class="form-check" v-for="caracteristica in listcaracteristicas"
+                                    :key="caracteristica.id_caracteristica">
+                                    <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox"
+                                      :value="caracteristica.id_caracteristica"
+                                      :id="'flexCheck' + caracteristica.id_caracteristica" />
+                                    <label class="form-check-label"
+                                      :for="'flexCheck' + caracteristica.id_caracteristica">
+                                      {{ caracteristica.nome_caracteristica }}
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -2035,6 +2104,7 @@
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -2047,536 +2117,721 @@
   </div>
 </template>
 <script>
-  import Sidebar from "../../components/sidebar/index.vue";
-  import Navbar from "../../components/navbar/index.vue";
-  import Footer from "../../components/footer/index.vue";
-  import { jwtDecode } from "jwt-decode";
+import Sidebar from "../../components/sidebar/index.vue";
+import Navbar from "../../components/navbar/index.vue";
+import Footer from "../../components/footer/index.vue";
+import api from "../../../service/api/index.js";
+import { jwtDecode } from "jwt-decode";
 
-  import api from "../../../service/api/index.js";
 
-  export default {
-    name: "CadImoveisView",
-    components: {
-      Sidebar,
-      Navbar,
-      Footer,
+export default {
+  name: "CadImoveisView",
+  components: {
+    Sidebar,
+    Navbar,
+    Footer,
+  },
+  data() {
+    return {
+      id_user: "",
+      home: "",
+      comodos: "",
+      inputCondominio: false,
+      mostrarMapa: false,
+      mostrarStreetV: false,
+      msgNull: false,
+      mostrarSkeleton: true,
+      token: localStorage.getItem("token"),
+      listsCondominios: [],
+      listsProprietarios: [],
+      autenticando: false,
+      textoBotaoProprietario: "Add Proprietário",
+      msgSuccessProprietario: false,
+
+      proprietarioNome: '',
+      proprietarioTelefone: '',
+      proprietarioEmail: '',
+      proprietarioDocumento: '',
+      msgNullPropietario: false,
+
+      //Tabs - para ativar, mude de FALSE para TRUE
+      infoTab: false,
+      comodosTab: false,
+      medidaTab: false,
+      precoTab: false,
+      caracteristicaTab: true,
+      localizacaoTab: false,
+      proximidadesTab: false,
+      complementoTab: false,
+      imagemTab: false,
+      publicacaoTab: false,
+      addProp: false,
+
+      //Icons Lateriais de Progressão
+      stepInfo: false,
+      stepComodos: false,
+      stepMedidas: false,
+      stepPreco: false,
+      stepCaracteristica: false,
+      stepLocalizacao: false,
+      stepProximidades: false,
+      stepDescricao: false,
+      stepComplemento: false,
+      stepImagens: false,
+      stepPublicacao: false,
+
+      // TABINFO
+      codigoref: "",
+      selectCondominio: "Não",
+      idCondominio: "",
+      selectProprietario: "",
+      tipoImovel: "",
+      perfilImovel: "",
+      situacaoImovel: "",
+      anoImovel: "",
+      incorporacao: "",
+      posicaoSolar: "",
+      selectTerreno: "",
+      proximoMar: "",
+      selectAverbado: "Não",
+      selectEscritura: "Não",
+      selectEsquina: "Não",
+      selectMobilia: "Não",
+      msgNullComodos: false,
+
+
+      // ADD PROPRIETARIO
+      clienteNome: "",
+      clienteEmail: "",
+      clienteDocumento: "",
+      clienteTel: "",
+
+      // TAB COMODOS
+      dormitorio: "",
+      suite: "",
+      banheiro: "",
+      garagem: "",
+      selectGaragemCobertura: "",
+      selectBoxGaragem: "",
+      salaTv: "",
+      salaJantar: "",
+      salaEstar: "",
+      lavabo: "",
+      areaServico: "",
+      cozinha: "",
+      closet: "",
+      escritorio: "",
+      depEmpregada: "",
+      salaCopa: "",
+
+      // TAB MEDIDAS
+      areaConstruida: "",
+      areaPrivativa: "",
+      areaTotal: "",
+
+      // TAB PREÇOS
+      tipoNegocio: "",
+      precoImovel: "",
+      precoNoSite: "Sim",
+      precoIptu: "",
+      periodoIptu: "Anual",
+      precoCondominio: "",
+      estaFinanciado: "Não",
+      aceitaFinanciamento: "Não",
+      mCasaMVida: "",
+      taxasTotal: "",
+      taxasDescricao: "",
+      aceitaPermuta: "Não",
+      permutaDescricao: "",
+
+      //TAB CARACTERISTICA
+      listcaracteristicas: [],
+      caracteristicaImovel: [],
+
+      // TAB LOCALIZAÇÃO
+      buscarCEP: "",
+      selectPais: "",
+      selectEstado: "",
+      selectCidade: "",
+      selectBairro: "",
+      selectZona: "",
+      logradouro: "",
+      nLogradouro: "",
+      complemento: "",
+      idUnidade: "",
+      selectAndar: "",
+      undPorAndar: "",
+      totalAndares: "",
+      totalTorres: "",
+      mostrarAndar: "Não",
+      mostrarNUnidade: "Não",
+      mostrarLogradouro: "Não",
+      mostrarBairro: "Não",
+      mostrarComplemento: "Não",
+      mostrarNumero: "Não",
+      mostrarNCondo: "Não",
+      mapaCondo: "Não",
+      selectMapSite: "Não",
+      selectLocalSite: "Não",
+      mapaStreetV: "Não",
+      selectStreetVSite: "Não",
+
+      // TAB PROXIMIDADES
+      proximidades: false,
+
+      // TAB DESCRIÇÃO
+      titleImovel: "",
+      apresentacaoImovel: "",
+
+      // TAB COMPLEMENTOS
+      urlYT: "",
+      url360: "",
+
+      // TAB IMAGEM
+
+      // TAB PUBLICAÇÃO
+      selectImovelSite: "Sim",
+      selectPageInit: "Sim",
+      textoTarja: "Em construção",
+      corTarja: "#563d7c",
+      enviarLinkProprietario: "Não",
+      emailProprietario: "",
+      periodoEnvio: "+30",
+      revisarCadastro: "Não",
+      proximaDataRevisao: "",
+      periodoRevisao: "+30",
+
+      idInfo: "",
+      idComodos: "",
+      idMedidas: "",
+      idPreco: "",
+      idCaracteristica: "",
+      idLocalizacao: "",
+      idProximidades: "",
+      idDescricao: "",
+      idComplemento: "",
+    };
+  },
+
+  //Aqui está o MOSTRA e ESCONDE dos INPUTS do dashboard
+  watch: {
+    selectCondominio(newValue) {
+      if (newValue == "Sim") {
+        this.inputCondominio = true;
+      } else {
+        this.inputCondominio = false;
+      }
     },
-    data() {
-      return {
-        id_user: "",
-        home: "",
-        comodos: "",
-        inputCondominio: false,
-        mostrarMapa: false,
-        mostrarStreetV: false,
-        msgNull: false,
-        mostrarSkeleton: true,
 
-        //Tabs - para ativar, mude de FALSE para TRUE
-        infoTab: true,
-        comodosTab: false,
-        medidaTab: false,
-        precoTab: false,
-        caracteristicaTab: false,
-        localizacaoTab: false,
-        proximidadesTab: false,
-        complementoTab: false,
-        imagemTab: false,
-        publicacaoTab: false,
-        addProp: false,
-
-        //Icons Lateriais de Progressão
-        stepInfo: false,
-        stepComodos: false,
-        stepMedidas: false,
-        stepPreco: false,
-        stepCaracteristica: false,
-        stepLocalizacao: false,
-        stepProximidades: false,
-        stepDescricao: false,
-        stepComplemento: false,
-        stepImagens: false,
-        stepPublicacao: false,
-
-        // TABINFO
-        codigoref: "",
-        selectCondominio: "Não",
-        idCondominio: "",
-        selectProprietario: "",
-        tipoImovel: "",
-        perfilImovel: "",
-        situacaoImovel: "",
-        anoImovel: "",
-        incorporacao: "",
-        posicaoSolar: "",
-        selectTerreno: "",
-        proximoMar: "",
-        selectAverbado: "Não",
-        selectEscritura: "Não",
-        selectEsquina: "Não",
-        selectMobilia: "Não",
-
-        // ADD PROPRIETARIO
-        clienteNome: "",
-        clienteEmail: "",
-        clienteDocumento: "",
-        clienteTel: "",
-
-        // TAB COMODOS
-        dormitorio: "",
-        suite: "",
-        banheiro: "",
-        garagem: "",
-        selectGaragemCobertura: "",
-        selectBoxGaragem: "",
-        salaTv: "",
-        salaJantar: "",
-        salaEstar: "",
-        lavabo: "",
-        areaServico: "",
-        cozinha: "",
-        closet: "",
-        escritorio: "",
-        depEmpregada: "",
-
-        // TAB MEDIDAS
-        areaConstruida: "",
-        areaPrivativa: "",
-        areaTotal: "",
-
-        // TAB PREÇOS
-        tipoNegocio: "",
-        precoImovel: "",
-        precoNoSite: "Sim",
-        precoIptu: "",
-        periodoIptu: "Anual",
-        precoCondominio: "",
-        estaFinanciado: "Não",
-        aceitaFinanciamento: "Não",
-        mCasaMVida: "",
-        taxasTotal: "",
-        taxasDescricao: "",
-        aceitaPermuta: "Não",
-        permutaDescricao: "",
-
-        //TAB CARACTERISTICA
-        caracteristicaImovel: false,
-
-        // TAB LOCALIZAÇÃO
-        buscarCEP: "",
-        selectPais: "",
-        selectEstado: "",
-        selectCidade: "",
-        selectBairro: "",
-        selectZona: "",
-        logradouro: "",
-        nLogradouro: "",
-        complemento: "",
-        idUnidade: "",
-        selectAndar: "",
-        undPorAndar: "",
-        totalAndares: "",
-        totalTorres: "",
-        mostrarAndar: "Não",
-        mostrarNUnidade: "Não",
-        mostrarLogradouro: "Não",
-        mostrarBairro: "Não",
-        mostrarComplemento: "Não",
-        mostrarNumero: "Não",
-        mostrarNCondo: "Não",
-        mapaCondo: "Não",
-        selectMapSite: "Não",
-        selectLocalSite: "Não",
-        mapaStreetV: "Não",
-        selectStreetVSite: "Não",
-
-        // TAB PROXIMIDADES
-        proximidades: false,
-
-        // TAB DESCRIÇÃO
-        titleImovel: "",
-        apresentacaoImovel: "",
-
-        // TAB COMPLEMENTOS
-        urlYT: "",
-        url360: "",
-
-        // TAB IMAGEM
-
-        // TAB PUBLICAÇÃO
-        selectImovelSite: "Sim",
-        selectPageInit: "Sim",
-        textoTarja: "Em construção",
-        corTarja: "#563d7c",
-        enviarLinkProprietario: "Não",
-        emailProprietario: "",
-        periodoEnvio: "+30",
-        revisarCadastro: "Não",
-        proximaDataRevisao: "",
-        periodoRevisao: "+30",
-
-        idInfo: "",
-        idComodos: "",
-        idMedidas: "",
-        idPreco: "",
-        idCaracteristica: "",
-        idLocalizacao: "",
-        idProximidades: "",
-        idDescricao: "",
-        idComplemento: "",
-      };
+    mapaCondo(newValue) {
+      if (newValue == "Sim") {
+        this.mostrarMapa = true;
+      } else {
+        this.mostrarMapa = false;
+      }
     },
 
-    //Aqui está o MOSTRA e ESCONDE dos INPUTS do dashboard
-    watch: {
-      selectCondominio(newValue) {
-        if (newValue == "Sim") {
-          this.inputCondominio = true;
-        } else {
-          this.inputCondominio = false;
+    mapaStreetV(newValue) {
+      if (newValue == "Sim") {
+        this.mostrarStreetV = true;
+      } else {
+        this.mostrarStreetV = false;
+      }
+    },
+
+    // INFO
+    selectAverbado(y) {
+      this.selectAverbado = y;
+      console.log(this.selectAverbado);
+    },
+    selectEscritura(y) {
+      this.selectEscritura = y;
+      console.log(this.selectEscritura);
+    },
+    selectEsquina(y) {
+      this.selectEsquina = y;
+      console.log(this.selectEsquina);
+    },
+    selectMobilia(y) {
+      this.selectMobilia = y;
+      console.log(this.selectMobilia);
+    },
+    selectTerreno(y) {
+      this.selectTerreno = y;
+      console.log(this.selectTerreno);
+    },
+
+    // COMODOS
+    selectGaragemCobertura(y) {
+      this.selectGaragemCobertura = y;
+      console.log(this.selectGaragemCobertura);
+    },
+    selectBoxGaragem(y) {
+      this.selectBoxGaragem = y;
+      console.log(this.selectBoxGaragem);
+    },
+
+    // PREÇOS
+    precoNoSite(y) {
+      this.precoNoSite = y;
+      console.log(this.precoNoSite);
+    },
+    periodoIptu(y) {
+      this.periodoIptu = y;
+      console.log(this.periodoIptu);
+    },
+    estaFinanciado(y) {
+      this.estaFinanciado = y;
+      console.log(this.estaFinanciado);
+    },
+    aceitaFinanciamento(y) {
+      this.aceitaFinanciamento = y;
+      console.log(this.aceitaFinanciamento);
+    },
+    mCasaMVida(y) {
+      this.mCasaMVida = y;
+      console.log(this.mCasaMVida);
+    },
+    aceitaPermuta(y) {
+      this.aceitaPermuta = y;
+      console.log(this.aceitaPermuta);
+    },
+
+    // LOCALIZAÇÃO
+    mostrarAndar(y) {
+      this.mostrarAndar = y;
+      console.log(this.mostrarAndar);
+    },
+    mostrarNUnidade(y) {
+      this.mostrarNUnidade = y;
+      console.log(this.mostrarNUnidade);
+    },
+    mostrarLogradouro(y) {
+      this.mostrarLogradouro = y;
+      console.log(this.mostrarLogradouro);
+    },
+    mostrarBairro(y) {
+      this.mostrarBairro = y;
+      console.log(this.mostrarBairro);
+    },
+    mostrarComplemento(y) {
+      this.mostrarComplemento = y;
+      console.log(this.mostrarComplemento);
+    },
+    mostrarNumero(y) {
+      this.mostrarNumero = y;
+      console.log(this.mostrarNumero);
+    },
+    mostrarNCondo(y) {
+      this.mostrarNCondo = y;
+      console.log(this.mostrarNCondo);
+    },
+    selectMapSite(y) {
+      this.selectMapSite = y;
+      console.log(this.selectMapSite);
+    },
+    selectLocalSite(y) {
+      this.selectLocalSite = y;
+      console.log(this.selectLocalSite);
+    },
+    selectStreetVSite(y) {
+      this.selectStreetVSite = y;
+      console.log(this.selectStreetVSite);
+    },
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.mostrarSkeleton = false;
+    }, 2000);
+
+    let token = this.token;
+    let decode = jwtDecode(token);
+    this.id_user = decode.id_user;
+    let id_user = this.id_user;
+
+
+    api.listcondominio(id_user)
+      .then((res) => {
+        this.listsCondominios = res.data;
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar lista de condomínios:', error);
+      });
+
+    api.listproprietario(id_user)
+      .then((res) => {
+        this.listsProprietarios = res.data;
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar lista de condomínios:', error);
+      });
+
+    api.listcaracteristica().then((res) => {
+
+      this.listcaracteristicas = res.data;
+
+      console.log('Aqui está a lista de caracteristicas ====>', res.data.response)
+
+    })
+
+
+
+  },
+
+  methods: {
+    handleprop() {
+      this.addProp = true;
+      this.infoTab = false;
+    },
+
+    handlePropietario() {
+      let id_user = this.id_user;
+      let nomeProprietario = this.proprietarioNome
+      let telefonePropietario = this.proprietarioTelefone
+      let emailProprietario = this.proprietarioEmail
+      let documentoProprietario = this.proprietarioDocumento
+      this.autenticando = true
+      this.textoBotaoProprietario = "Aguarde..."
+
+      api.novoProprietario(nomeProprietario, emailProprietario, documentoProprietario, telefonePropietario, id_user).then((res) => {
+
+        if (res.status == 201) {
+          this.msgSuccessProprietario = true
+          this.textoBotaoProprietario = "Tudo certo!"
+
+          setTimeout(() => {
+            this.msgSuccessProprietario = false
+            this.addProp = false;
+            this.infoTab = true;
+            this.autenticando = false
+          }, 3000)
+
         }
-      },
 
-      mapaCondo(newValue) {
-        if (newValue == "Sim") {
-          this.mostrarMapa = true;
-        } else {
-          this.mostrarMapa = false;
-        }
-      },
-
-      mapaStreetV(newValue) {
-        if (newValue == "Sim") {
-          this.mostrarStreetV = true;
-        } else {
-          this.mostrarStreetV = false;
-        }
-      },
-
-      // INFO
-      selectAverbado(y) {
-        this.selectAverbado = y;
-        console.log(this.selectAverbado);
-      },
-      selectEscritura(y) {
-        this.selectEscritura = y;
-        console.log(this.selectEscritura);
-      },
-      selectEsquina(y) {
-        this.selectEsquina = y;
-        console.log(this.selectEsquina);
-      },
-      selectMobilia(y) {
-        this.selectMobilia = y;
-        console.log(this.selectMobilia);
-      },
-      selectTerreno(y) {
-        this.selectTerreno = y;
-        console.log(this.selectTerreno);
-      },
-
-      // COMODOS
-      selectGaragemCobertura(y) {
-        this.selectGaragemCobertura = y;
-        console.log(this.selectGaragemCobertura);
-      },
-      selectBoxGaragem(y) {
-        this.selectBoxGaragem = y;
-        console.log(this.selectBoxGaragem);
-      },
-
-      // PREÇOS
-      precoNoSite(y) {
-        this.precoNoSite = y;
-        console.log(this.precoNoSite);
-      },
-      periodoIptu(y) {
-        this.periodoIptu = y;
-        console.log(this.periodoIptu);
-      },
-      estaFinanciado(y) {
-        this.estaFinanciado = y;
-        console.log(this.estaFinanciado);
-      },
-      aceitaFinanciamento(y) {
-        this.aceitaFinanciamento = y;
-        console.log(this.aceitaFinanciamento);
-      },
-      mCasaMVida(y) {
-        this.mCasaMVida = y;
-        console.log(this.mCasaMVida);
-      },
-      aceitaPermuta(y) {
-        this.aceitaPermuta = y;
-        console.log(this.aceitaPermuta);
-      },
-
-      // LOCALIZAÇÃO
-      mostrarAndar(y) {
-        this.mostrarAndar = y;
-        console.log(this.mostrarAndar);
-      },
-      mostrarNUnidade(y) {
-        this.mostrarNUnidade = y;
-        console.log(this.mostrarNUnidade);
-      },
-      mostrarLogradouro(y) {
-        this.mostrarLogradouro = y;
-        console.log(this.mostrarLogradouro);
-      },
-      mostrarBairro(y) {
-        this.mostrarBairro = y;
-        console.log(this.mostrarBairro);
-      },
-      mostrarComplemento(y) {
-        this.mostrarComplemento = y;
-        console.log(this.mostrarComplemento);
-      },
-      mostrarNumero(y) {
-        this.mostrarNumero = y;
-        console.log(this.mostrarNumero);
-      },
-      mostrarNCondo(y) {
-        this.mostrarNCondo = y;
-        console.log(this.mostrarNCondo);
-      },
-      selectMapSite(y) {
-        this.selectMapSite = y;
-        console.log(this.selectMapSite);
-      },
-      selectLocalSite(y) {
-        this.selectLocalSite = y;
-        console.log(this.selectLocalSite);
-      },
-      selectStreetVSite(y) {
-        this.selectStreetVSite = y;
-        console.log(this.selectStreetVSite);
-      },
-    },
-    mounted() {
-      setTimeout(() => {
-        this.mostrarSkeleton = false;
-      }, 2000);
-
-      let token = localStorage.getItem("token");
-      this.token = token;
-      let decode = jwtDecode(token);
-
-      this.id_user = decode.avatar;
-      this.nome = decode.nome;
-      this.sobrenome = decode.sobrenome;
-      this.email = decode.email;
+      })
     },
 
-    methods: {
-      handleprop() {
-        this.addProp = true;
+    aplicaMascaraTelefone() {
+      let v = this.propietarioTelefone;
+
+      v = v.replace(/\D/g, "");
+      if (v.length > 11) {
+        v = v.substring(0, 11);
+      }
+      v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+      v = v.replace(/(\d{5})(\d)/, "$1-$2");
+
+      this.propietarioTelefone = v;
+    },
+
+    handlepropclose() {
+      this.addProp = false;
+      this.infoTab = true;
+    },
+
+    //Ação do botão Proximo de cada tab
+    handleProximoComodo() {
+      const campos = [
+        this.codigoref,
+        this.selectCondominio,
+        this.selectProprietario,
+        this.perfilImovel,
+        this.perfilImovel,
+        this.situacaoImovel,
+        this.anoImovel,
+        this.incorporacao,
+        this.posicaoSolar,
+        this.selectTerreno,
+        this.proximoMar,
+        this.selectAverbado,
+        this.selectEscritura,
+        this.selectEsquina,
+        this.selectMobilia,
+      ];
+
+      if (campos.every((campo) => campo !== "")) {
         this.infoTab = false;
-      },
+        this.comodosTab = true;
+        this.stepInfo = true;
+      } else {
+        this.msgNull = true;
+      }
+    },
 
-      handlepropclose() {
-        this.addProp = false;
-        this.infoTab = true;
-      },
+    handleProximoMedida() {
 
-      //Ação do botão Proximo de cada tab
-      handleProximoComodo() {
-        const campos = [
-          this.codigoref,
-          this.selectCondominio,
-          this.selectProprietario,
-          this.perfilImovel,
-          this.perfilImovel,
-          this.situacaoImovel,
-          this.anoImovel,
-          this.incorporacao,
-          this.posicaoSolar,
-          this.selectTerreno,
-          this.proximoMar,
-          this.selectAverbado,
-          this.selectEscritura,
-          this.selectEsquina,
-          this.selectMobilia,
-        ];
+      const campos = [
+        this.dormitorio,
+        this.suite,
+        this.banheiro,
+        this.garagem,
+        this.selectGaragemCobertura,
+        this.selectBoxGaragem,
+        this.salaTv,
+        this.salaJantar,
+        this.salaEstar,
+        this.lavabo,
+        this.areaServico,
+        this.cozinha,
+        this.closet,
+        this.escritorio,
+        this.depEmpregada,
+        this.salaJantar,
+      ];
 
-        if (campos.every((campo) => campo !== "")) {
-          this.infoTab = false;
-          this.comodosTab = true;
-          this.stepInfo = true;
-        } else {
-          this.msgNull = true;
-        }
-      },
-
-      handleProximoMedida() {
+      if (campos.every((campo) => campo !== "")) {
         this.comodosTab = false;
         this.medidaTab = true;
 
+        // Progressão
         this.stepInfo = true;
         this.stepComodos = true;
-      },
-
-      handleProximoPreco() {
-        this.medidaTab = false;
-        this.precoTab = true;
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-      },
-      handleProximoCaracteristica() {
-        this.precoTab = false;
-        this.caracteristicaTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-      },
-      handleProximoLocalizacao() {
-        this.caracteristicaTab = false;
-        this.localizacaoTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-      },
-      handleProximoProximidades() {
-        this.localizacaoTab = false;
-        this.proximidadesTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-        this.stepLocalizacao = true;
-      },
-      handleProximoDescricao() {
-        this.proximidadesTab = false;
-        this.descricaoTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-        this.stepLocalizacao = true;
-        this.stepProximidades = true;
-      },
-      handleProximoComplemento() {
-        this.descricaoTab = false;
-        this.complementoTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-        this.stepLocalizacao = true;
-        this.stepProximidades = true;
-        this.stepDescricao = true;
-      },
-      handleProximoImagem() {
-        this.complementoTab = false;
-        this.imagemTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-        this.stepLocalizacao = true;
-        this.stepProximidades = true;
-        this.stepDescricao = true;
-        this.stepComplemento = true;
-      },
-      handleProximoPublicacao() {
-        this.imagemTab = false;
-        this.publicacaoTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-        this.stepLocalizacao = true;
-        this.stepProximidades = true;
-        this.stepDescricao = true;
-        this.stepComplemento = true;
-        this.stepImagens = true;
-      },
-
-      //Evento de enviar para a API
-      handleProximoFinish() {
-        this.imagemTab = false;
-        this.publicacaoTab = true;
-
-        this.stepInfo = true;
-        this.stepComodos = true;
-        this.stepMedidas = true;
-        this.stepPreco = true;
-        this.stepCaracteristica = true;
-        this.stepLocalizacao = true;
-        this.stepProximidades = true;
-        this.stepDescricao = true;
-        this.stepComplemento = true;
-        this.stepImagens = true;
-        this.stepPublicacao = true;
-      },
-
-      async handleFinish() {
-        let codRef = this.codigoref;
-        let selecteCond = this.selectCondominio;
-        let selectProprietario = this.selectProprietario;
-        let tipoImovel = this.perfilImovel;
-        let perfilImovel = this.perfilImovel;
-        let situacaoImovel = this.situacaoImovel;
-        let anoImovel = this.anoImovel;
-        let incorporacao = this.incorporacao;
-        let posicaoSolar = this.posicaoSolar;
-        let selectTerreno = this.selectTerreno;
-        let proximoMar = this.proximoMar;
-        let selectAverbado = this.selectAverbado;
-        let selectEscritura = this.selectEscritura;
-        let selectEsquina = this.selectEsquina;
-        let selectMobilia = this.selectMobilia;
-
-        api
-          .novoImovel(
-            codRef,
-            selecteCond,
-            selectProprietario,
-            tipoImovel,
-            perfilImovel,
-            situacaoImovel,
-            anoImovel,
-            incorporacao,
-            posicaoSolar,
-            selectTerreno,
-            proximoMar,
-            selectAverbado,
-            selectEscritura,
-            selectEsquina,
-            selectMobilia
-          )
-          .then((res) => { });
-      },
-
-      //Evento do botão Voltar (Imcompleto)
-      handleAnteriorInfo() {
-        this.infoTab = true;
-        this.comodosTab = false;
-      },
-      handleAnteriorComodos() {
+      } else {
+        this.msgNullComodos = true;
         this.comodosTab = true;
         this.medidaTab = false;
-      },
-      handleAnteriorPreco() {
-        this.precoTab = false;
-        this.medidaTab = true;
-      },
+
+        // Progressão
+        this.stepInfo = true;
+        this.stepComodos = false;
+      }
+
+
     },
-  };
+
+    handleProximoPreco() {
+      this.medidaTab = false;
+      this.precoTab = true;
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+    },
+    handleProximoCaracteristica() {
+      this.precoTab = false;
+      this.caracteristicaTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+    },
+    handleProximoLocalizacao() {
+      this.caracteristicaTab = false;
+      this.localizacaoTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+    },
+    handleProximoProximidades() {
+      this.localizacaoTab = false;
+      this.proximidadesTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+      this.stepLocalizacao = true;
+    },
+    handleProximoDescricao() {
+      this.proximidadesTab = false;
+      this.descricaoTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+      this.stepLocalizacao = true;
+      this.stepProximidades = true;
+    },
+    handleProximoComplemento() {
+      this.descricaoTab = false;
+      this.complementoTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+      this.stepLocalizacao = true;
+      this.stepProximidades = true;
+      this.stepDescricao = true;
+    },
+    handleProximoImagem() {
+      this.complementoTab = false;
+      this.imagemTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+      this.stepLocalizacao = true;
+      this.stepProximidades = true;
+      this.stepDescricao = true;
+      this.stepComplemento = true;
+    },
+    handleProximoPublicacao() {
+      this.imagemTab = false;
+      this.publicacaoTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+      this.stepLocalizacao = true;
+      this.stepProximidades = true;
+      this.stepDescricao = true;
+      this.stepComplemento = true;
+      this.stepImagens = true;
+    },
+
+    //Evento de enviar para a API
+    handleProximoFinish() {
+      this.imagemTab = false;
+      this.publicacaoTab = true;
+
+      this.stepInfo = true;
+      this.stepComodos = true;
+      this.stepMedidas = true;
+      this.stepPreco = true;
+      this.stepCaracteristica = true;
+      this.stepLocalizacao = true;
+      this.stepProximidades = true;
+      this.stepDescricao = true;
+      this.stepComplemento = true;
+      this.stepImagens = true;
+      this.stepPublicacao = true;
+    },
+
+    async handleFinish() {
+      let codRef = this.codigoref;
+      let selecteCond = this.selectCondominio;
+      let selectProprietario = this.selectProprietario;
+      let tipoImovel = this.perfilImovel;
+      let perfilImovel = this.perfilImovel;
+      let situacaoImovel = this.situacaoImovel;
+      let anoImovel = this.anoImovel;
+      let incorporacao = this.incorporacao;
+      let posicaoSolar = this.posicaoSolar;
+      let selectTerreno = this.selectTerreno;
+      let proximoMar = this.proximoMar;
+      let selectAverbado = this.selectAverbado;
+      let selectEscritura = this.selectEscritura;
+      let selectEsquina = this.selectEsquina;
+      let selectMobilia = this.selectMobilia;
+
+      let dormitorio = this.dormitorio
+      let suite = this.suite
+      let banheiro = this.banheiro
+      let garagem = this.garagem
+      let selectGaragemCobertura = this.selectGaragemCobertura
+      let selectBoxGaragem = this.selectBoxGaragem
+      let salaTv = this.salaTv
+      let salaJantar = this.salaJantar
+      let lavabo = this.lavabo
+      let areaServico = this.areaServico
+      let cozinha = this.cozinha
+      let closet = this.closet
+      let escritorio = this.escritorio
+      let depEmpregada = this.depEmpregada
+      let copa = this.salaCopa
+
+      let areaConstruida = this.areaConstruida
+      let areaPrivativa = this.areaPrivativa
+      let areaTotal = this.areaTotal
+
+      let tipoNegocio = this.tipoNegocio
+      let precoImovel = this.precoImovel
+      let precoNoSite = this.precoNoSite
+      let precoIptu = this.precoIptu
+      let periodoIptu = this.periodoIptu
+      let precoCondominio = this.precoCondominio
+      let estaFinanciado = this.estaFinanciado
+      let aceitaFinanciamento = this.aceitaFinanciamento
+      let mCasaMVida = this.mCasaMVida
+      let taxasTotal = this.taxasTotal
+      let taxasDescricao = this.taxasDescricao
+      let aceitaPermuta = this.aceitaPermuta
+      let permutaDescricao = this.permutaDescricao
+
+
+      api.novoImovel(
+        codRef,
+        selecteCond,
+        selectProprietario,
+        tipoImovel,
+        perfilImovel,
+        situacaoImovel,
+        anoImovel,
+        incorporacao,
+        posicaoSolar,
+        selectTerreno,
+        proximoMar,
+        selectAverbado,
+        selectEscritura,
+        selectEsquina,
+        selectMobilia,
+        dormitorio,
+        suite,
+        banheiro,
+        garagem,
+        selectGaragemCobertura,
+        selectBoxGaragem,
+        salaTv,
+        salaJantar,
+        lavabo,
+        areaServico,
+        cozinha,
+        closet,
+        escritorio,
+        depEmpregada,
+        copa,
+        areaConstruida,
+        areaPrivativa,
+        areaTotal,
+        tipoNegocio,
+        precoImovel,
+        precoNoSite,
+        precoIptu,
+        periodoIptu,
+        precoCondominio,
+        estaFinanciado,
+        aceitaFinanciamento,
+        mCasaMVida,
+        taxasTotal,
+        taxasDescricao,
+        aceitaPermuta,
+        permutaDescricao,
+
+
+
+
+
+
+      )
+        .then((res) => { });
+    },
+
+    //Evento do botão Voltar (Imcompleto)
+    handleAnteriorInfo() {
+      this.infoTab = true;
+      this.comodosTab = false;
+    },
+    handleAnteriorComodos() {
+      this.comodosTab = true;
+      this.medidaTab = false;
+    },
+    handleAnteriorPreco() {
+      this.precoTab = false;
+      this.medidaTab = true;
+    },
+  },
+};
 </script>

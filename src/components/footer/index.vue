@@ -1,5 +1,11 @@
 <template>
+<div class="msgContato">
+<h6 class="text-contato"><img src="../../../assets/images/icons/iconContato.png" width="25" alt=""> Fale com a Zonu <a><i class="iconClose fa fa-close"></i></a></h6>
+</div>
+
     <footer class="footer">
+
+
         <div class="container-fluid">
             <div class="row text-muted">
                 <div class="col-6 text-start">
@@ -28,6 +34,7 @@
             </div>
         </div>
     </footer>
+
 
 </template>
 <script>

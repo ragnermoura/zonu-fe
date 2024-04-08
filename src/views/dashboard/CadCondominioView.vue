@@ -86,8 +86,8 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr v-for="item in CondominioOnCurrentPage" :key="item.id_condominio">
-                                      <td>{{item.nome_condominio}}</td>
+                                    <tr v-for="item in CondominioOnCurrentPage">
+                                      <td>{{ item.nome_condominio }}</td>
                                       <td>
                                         <button @click="handleDelete(item.id_condominio)" type="button"
                                           class="btn btn-danger" style="
@@ -107,9 +107,8 @@
                                     Anterior
                                   </button>
                                   <button class="btn btn-dark btn-sm" style="margin-right: 3% !important"
-                                    @click="nextPageCondominio()" :disabled="
-                                      currentPageCondominio >= totalPagesCondominio
-                                    ">
+                                    @click="nextPageCondominio()" :disabled="currentPageCondominio >= totalPagesCondominio
+                                      ">
                                     Proximo
                                   </button>
                                 </div>
@@ -131,120 +130,139 @@
   </div>
 </template>
 <script>
-  import Sidebar from "../../components/sidebar/index.vue";
-  import Navbar from "../../components/navbar/index.vue";
-  import Footer from "../../components/footer/index.vue";
+import Sidebar from "../../components/sidebar/index.vue";
+import Navbar from "../../components/navbar/index.vue";
+import Footer from "../../components/footer/index.vue";
+import api from "../../../service/api/index.js";
+import { jwtDecode } from "jwt-decode";
 
-  import api from "../../../service/api/index.js";
 
-  export default {
-    name: "CadCondominioView",
-    components: {
-      Sidebar,
-      Navbar,
-      Footer,
-    },
-    data() {
-      return {
-        mostrarSkeleton: true,
-        condNome: "",
+export default {
+  name: "CadCondominioView",
+  components: {
+    Sidebar,
+    Navbar,
+    Footer,
+  },
+  data() {
+    return {
+      mostrarSkeleton: true,
+      condNome: "",
+      msgSuccess: false,
+      listsCondominios: [],
+      token: localStorage.getItem("token"),
+      id_user: '',
+      msgSuccessDelete: false,
 
-        currentPageCondominio: 1,
-        perPageCondominio: 5,
-        searchCondominio: "",
-        id_user: '',
-        msgSuccess: false,
-        lists: [],
-      };
-    },
+      currentPageCondominio: 1,
+      perPageCondominio: 5,
+      searchCondominio: "",
 
-    mounted() {
-      setTimeout(() => {
-        this.mostrarSkeleton = false;
-      }, 2000);
-    },
+    };
+  },
 
-    methods: {
-      handleSalvar() {
-        let nome_condominio = this.condNome;
-        let id_user = this.id_user;
+  mounted() {
+    this.fetchList();
 
-        api.novoCondominio(nome_condominio, id_user).then((res) => {
-          if (res.status == 201) {
-            this.msgSuccess = true;
-            this.condNome = "";
-            this.fetchList();
+    let token = this.token;
+    let decode = jwtDecode(token);
+    this.id_user = decode.id_user;
 
-            setTimeout(() => {
-              this.msgSuccess = false;
-            }, 3000);
-          }
-        });
-      },
+    setTimeout(() => {
+      this.mostrarSkeleton = false;
+    }, 2000);
 
-      previousPageCondominio() {
-        if (this.currentPageCondominio > 1) {
-          this.currentPageCondominio -= 1;
+  },
+
+  methods: {
+
+    handleSalvar() {
+      let nome_condominio = this.condNome;
+      let id_user = this.id_user;
+
+      api.novoCondominio(nome_condominio, id_user).then((res) => {
+
+        if (res.status == 201) {
+          this.msgSuccess = true;
+          this.condNome = "";
+          this.fetchList();
+
+          setTimeout(() => {
+            this.msgSuccess = false;
+          }, 3000);
         }
-      },
-    
-      nextPageCondominio() {
-        if (this.currentPageCondominio < this.totalPagesCondominio) {
-          this.currentPageCondominio += 1;
-        }
-      },
+      });
 
-
-      handleDelete(id) {
-        let id_condominio = id;
-
-        api.deletecondominio(id_condominio).then((res) => {
-          if (res.status == 200) {
-            this.msgSuccessDelete = true;
-            this.fetchList();
-
-            setTimeout(() => {
-              this.msgSuccessDelete = false;
-            }, 3000);
-          }
-        });
-
-      },
-
-      fetchList() {
-
-        let id_user = this.id_user;
-        api.listcondominio(id_user).then((res) => {
-          this.lists = res.data.reponse;
-        });
-
-      },
     },
 
-    computed: {
+    previousPageCondominio() {
+      if (this.currentPageCondominio > 1) {
+        this.currentPageCondominio -= 1;
+      }
+    },
 
-      CondominioOnCurrentPage() {
-        const startIndex = (this.currentPageCondominio - 1) * this.perPageCondominio
-        const endIndex = startIndex + this.perPageCondominio
-        return this.lists
-          .filter((item) => {
-            return item.nome_condominio
-              .toLowerCase()
-              .includes(this.searchCondominio.toLowerCase())
-          })
-          .slice(startIndex, endIndex)
-      },
+    nextPageCondominio() {
+      if (this.currentPageCondominio < this.totalPagesCondominio) {
+        this.currentPageCondominio += 1;
+      }
+    },
 
-      totalPagesCondominio() {
-        return Math.ceil(
-          this.lists.filter((item) => {
-            this.currentPageCondominio = 1
-            return item.nome_condominio
-              .toLowerCase()
-              .includes(this.searchCondominio.toLowerCase())
-          }).length / this.perPageCondominio,
-        )
-      },
+
+    handleDelete(id) {
+      let id_condominio = id;
+
+      api.deletecondominio(id_condominio).then((res) => {
+        if (res.status == 200) {
+          this.msgSuccessDelete = true;
+          this.fetchList();
+
+          setTimeout(() => {
+            this.msgSuccessDelete = false;
+          }, 3000);
+        }
+      });
+
+    },
+
+    fetchList() {
+      let id_user = this.id_user;
+
+      api.listcondominio(id_user).then((res) => {
+        console.log('Aqui está a lista dos condomínios ===>', res.data.response);
+        this.listsCondominios = res.data.response
+
+
+      })
+
     }
-  };
+
+
+  },
+
+  computed: {
+
+    CondominioOnCurrentPage() {
+      const startIndex = (this.currentPageCondominio - 1) * this.perPageCondominio
+      const endIndex = startIndex + this.perPageCondominio
+      return this.listsCondominios
+        .filter((item) => {
+          return item.nome_condominio
+            .toLowerCase()
+            .includes(this.searchCondominio.toLowerCase())
+        })
+        .slice(startIndex, endIndex)
+    },
+
+    totalPagesCondominio() {
+      return Math.ceil(
+        this.listsCondominios.filter((item) => {
+          this.currentPageCondominio = 1
+          return item.nome_condominio
+            .toLowerCase()
+            .includes(this.searchCondominio.toLowerCase())
+        }).length / this.perPageCondominio,
+      )
+    },
+  }
+};
 </script>

@@ -158,7 +158,7 @@ export default {
     deletecaracteristica: async (id_caracteristica) => {
         try {
             const response = await http.delete(
-                `/caracteristica/delete/${id_caracteristica}`,
+                `/caracteristica/${id_caracteristica}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -263,10 +263,58 @@ export default {
             return error.response || error.message || error;
         }
     },
+
+  novoProprietario: async (nomeProprietario, emailProprietario, documentoProprietario, telefonePropietario, id_user) => {
+        try {
+            const response = await http.post(
+                "/proprietario/cadastro",
+                {
+                    nome: nomeProprietario,
+                    email: emailProprietario,
+                    documento: documentoProprietario,
+                    telefone: telefonePropietario,
+                    id_user: id_user,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
     listcondominio: async (id_user) => {
         try {
             const response = await http.get(
                 `/condominio/${id_user}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "Access-Control-Allow-Headers": "*",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                    },
+                }
+            );
+
+            return response;
+        } catch (error) {
+            return error.response || error.message || error;
+        }
+    },
+
+    listproprietario: async (id_user) => {
+        try {
+            const response = await http.get(
+                `/proprietario/${id_user}`,
                 {
                     headers: {
                         "Content-Type": "application/json",

@@ -3,15 +3,23 @@
         <div class="sidebar-content js-simplebar">
             <a class="sidebar-brand" href="index.html">
                 <span class="align-middle">
-                    <img src="../../../assets/images/logo.svg" class="logomin mb-3" alt="" srcset="">
+                    <img src="../../../assets/images/logo.svg" class="logomin" alt="" srcset="">
 
                 </span>
             </a>
+
+<hr>
+
+<div class="logoArea">
+<img class="logoEmpresa" src="../../../assets/images/logoEmpresa.jpg" alt="">
+</div>
 
             <ul class="sidebar-nav" style="margin-top: -30px !important;">
                 <li class="sidebar-header">
                     Administrador
                 </li>
+
+
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/dashboard">
@@ -28,12 +36,14 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/proximidades"> 
-                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades</span>
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades <span
+                                class="badge text-bg-success">Geral</span></span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/caracteristica">
-                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Caracteristica</span>
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Caracteristica <span
+                                class="badge text-bg-success">Geral</span></span>
                     </a>
                 </li>
                 <li class="sidebar-item">
