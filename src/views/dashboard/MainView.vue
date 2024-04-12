@@ -17,8 +17,6 @@
 
                                 <div class="row" style="margin-left: 2%; margin-top: 2%; margin-bottom: 3%;">
 
-                                    <div class="col-xl-1"></div>
-
                                     <div class="col-xl-1">
                                         <div v-if="mostrarSkeleton" class="skeleton-card"></div>
                                         <div class="card" v-if="!mostrarSkeleton">

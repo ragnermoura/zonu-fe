@@ -641,8 +641,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Dormitório
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="dormitorio" placeholder="Digite aqui..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="dormitorio" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -652,10 +652,10 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Sendo suíte
+                                  Suíte
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="suite"
-                                  placeholder="Digite aqui..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="suite" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -667,8 +667,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Banheiro
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="banheiro" placeholder="Digite aqui..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="banheiro" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -680,8 +680,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Garagem
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="garagem" placeholder="Digite aqui..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="garagem" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -740,7 +740,7 @@
                                   Sala de TV
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="salaTv" placeholder="Digite aqui..." />
+                                  v-model="salaTv" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -754,7 +754,7 @@
                                   Sala de jantar
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="salaJantar" placeholder="Digite aqui..." />
+                                  v-model="salaJantar" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -768,7 +768,7 @@
                                   Sala de estar
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="salaEstar" placeholder="Digite aqui..." />
+                                  v-model="salaEstar" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -782,7 +782,7 @@
                                   Lavabo
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="lavabo" placeholder="Digite aqui..." />
+                                  v-model="lavabo" placeholder="Digite a quantidade" />
                               </div>
 
                             </div>
@@ -795,7 +795,7 @@
                                   Área de serviço
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="areaServico" placeholder="Digite aqui..." />
+                                  v-model="areaServico" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -809,7 +809,7 @@
                                   Cozinha
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="cozinha" placeholder="Digite aqui..." />
+                                  v-model="cozinha" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -822,8 +822,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Closet
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="closet" placeholder="Digite aqui..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="closet" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -837,7 +837,7 @@
                                   Escritório
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="escritorio" placeholder="Digite aqui..." />
+                                  v-model="escritorio" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -851,7 +851,7 @@
                                   Dependência para empregada
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="depEmpregada" placeholder="Digite aqui..." />
+                                  v-model="depEmpregada" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -865,7 +865,7 @@
                                   Copa
                                 </label>
                                 <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="salaCopa" placeholder="Digite aqui..." />
+                                  v-model="salaCopa" placeholder="Digite a quantidade" />
                               </div>
                               <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i> Não
                                   deixe este campo vazio!</small></p>
@@ -1011,8 +1011,8 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="precoImovel" placeholder="Digite aqui..." />
-                                  <span class="input-group-text">R$</span>
+                                    v-model="precoImovel" placeholder="R$ 0,00" />
+                                  <span v-if="!mostrarSkeleton" class="input-group-text">R$</span>
                                 </div>
                               </div>
                             </div>
@@ -1027,19 +1027,20 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" name="precoNoSite"
-                                    id="btnradio1" autocomplete="off" value="Sim" v-model="precoNoSite" />
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
+                                  <input type="radio" class="btn-check" name="precoNoSite" id="btnradio1"
+                                    autocomplete="off" value="Sim" v-model="precoNoSite" />
                                   <label class="btn btn-outline-success" for="btnradio1">Sim</label>
 
-                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" value="Não"
-                                    v-model="precoNoSite" name="precoNoSite" id="btnradio2" autocomplete="off" />
+                                  <input type="radio" class="btn-check" value="Não" v-model="precoNoSite"
+                                    name="precoNoSite" id="btnradio2" autocomplete="off" />
                                   <label class="btn btn-outline-danger" for="btnradio2">Não</label>
                                 </div>
                               </div>
                             </div>
 
-                            <div class="col-3">
+                            <div v-if="textoLugarPrecoView" class="col-3">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1047,7 +1048,7 @@
                                   Mostrar no lugar do preço:
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="precoNoSite" placeholder="Consulte..." />
+                                  v-model="textoLugarPreco" placeholder="Texto exemplo: Consulte" />
                               </div>
                             </div>
 
@@ -1059,7 +1060,7 @@
                                   Preço do IPTU
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="precoIptu" placeholder="Consulte..." />
+                                  v-model="precoIptu" placeholder="R$ 0,00" />
                               </div>
                             </div>
 
@@ -1073,7 +1074,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="periodo" id="periodo1" autocomplete="off"
                                     value="Anual" v-model="periodoIptu" />
                                   <label class="btn btn-outline-success" for="periodo1">Anual</label>
@@ -1093,7 +1095,7 @@
                                   Preço Condomínio
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="precoCondominio" placeholder="Digite aqui..." />
+                                  v-model="precoCondominio" placeholder="R$ 0,00" />
                               </div>
                             </div>
 
@@ -1107,7 +1109,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="estaFinanciado" id="estaFinanciado1"
                                     autocomplete="off" value="Sim" v-model="estaFinanciado" />
                                   <label class="btn btn-outline-success" for="estaFinanciado1">Sim</label>
@@ -1129,7 +1132,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="aceitaFinanciamento"
                                     id="aceitaFinanciamento1" autocomplete="off" value="Sim"
                                     v-model="aceitaFinanciamento" />
@@ -1152,7 +1156,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="mCasaMVida" id="mCasaMVida1"
                                     autocomplete="off" value="Sim" v-model="mCasaMVida" />
                                   <label class="btn btn-outline-success" for="mCasaMVida1">Sim</label>
@@ -1172,7 +1177,7 @@
                                   Total mensal em taxas (se houver)
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="taxasTotal" placeholder="Digite aqui..." />
+                                  v-model="taxasTotal" placeholder="R$ 0,00" />
                               </div>
                             </div>
 
@@ -1198,7 +1203,8 @@
 
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div v-if="!mostrarSkeleton" class="btn-group" role="group"
+                                  aria-label="Basic radio toggle button group">
                                   <input type="radio" class="btn-check" name="aceitaPermuta" id="aceitaPermuta1"
                                     autocomplete="off" value="Sim" v-model="aceitaPermuta" />
                                   <label class="btn btn-outline-success" for="aceitaPermuta1">Sim</label>
@@ -1227,7 +1233,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorPreco()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorMedida()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -1259,21 +1265,15 @@
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <!-- <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                Mostrar preço no site?
-              </label> -->
-
-                                <div class="form-check">
-                                  <div class="form-check" v-for="caracteristica in listcaracteristicas"
-                                    :key="caracteristica.id_caracteristica">
-                                    <input class="form-check-input" v-model="caracteristicaImovel" type="checkbox"
-                                      :value="caracteristica.id_caracteristica"
-                                      :id="'flexCheck' + caracteristica.id_caracteristica" />
-                                    <label class="form-check-label"
-                                      :for="'flexCheck' + caracteristica.id_caracteristica">
-                                      {{ caracteristica.nome_caracteristica }}
-                                    </label>
-                                  </div>
+                                <div class="form-check" v-for="caracteristica in listcaracteristicas"
+                                  :key="caracteristica.id_caracteristica">
+                                  <input v-if="!mostrarSkeleton" class="form-check-input"
+                                    v-model="caracteristicaImovel[caracteristica.id_caracteristica]" type="checkbox"
+                                    :id="'flexCheck' + caracteristica.id_caracteristica" />
+                                  <label v-if="!mostrarSkeleton" class="form-check-label"
+                                    :for="'flexCheck' + caracteristica.id_caracteristica">
+                                    {{ caracteristica.nome_caracteristica }}
+                                  </label>
                                 </div>
                               </div>
                             </div>
@@ -1283,7 +1283,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorCaracteristica()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorPreco()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -1322,12 +1322,9 @@
                                   CEP
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="Digite aqui..."
-                                    v-model="buscarCEP" required v-if="!mostrarSkeleton"
+                                  <input type="text" @input="aplicaMascaraCEP" class="form-control"
+                                    placeholder="00000-00" v-model="buscarCEP" required v-if="!mostrarSkeleton"
                                     aria-label="Example text with button addon" aria-describedby="button-addon1" />
-                                  <button class="btn btn-success px-3" type="button" id="button-addon1">
-                                    Buscar
-                                  </button>
                                 </div>
                               </div>
                             </div>
@@ -1339,10 +1336,9 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">País
                                 </label>
 
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectPais">
-                                  <option selected disabled>Selecione</option>
-                                </select>
+                                <input type="text" placeholder="Brasil" required v-if="!mostrarSkeleton" disabled
+                                  class="form-control" v-model="selectPais" />
+
                               </div>
                             </div>
 
@@ -1353,10 +1349,9 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Estado
                                 </label>
 
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectEstado">
-                                  <option selected disabled>Selecione</option>
-                                </select>
+                                <input type="text" placeholder="SP" required v-if="!mostrarSkeleton" disabled
+                                  class="form-control" v-model="selectEstado" />
+
                               </div>
                             </div>
 
@@ -1367,10 +1362,9 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Cidade
                                 </label>
 
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectCidade">
-                                  <option selected disabled>Selecione</option>
-                                </select>
+                                <input type="text" placeholder="Ex.: Baurú" required v-if="!mostrarSkeleton"
+                                  class="form-control" disabled v-model="selectCidade" />
+
                               </div>
                             </div>
 
@@ -1381,10 +1375,9 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Bairro
                                 </label>
 
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
-                                  v-model="selectBairro">
-                                  <option selected disabled>Selecione</option>
-                                </select>
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="selectBairro" disabled placeholder="Ex.: Jardim Olímpia">
+
                               </div>
                             </div>
 
@@ -1395,8 +1388,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Logradouro
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="logradouro" placeholder="Consulte..." />
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control" disabled
+                                  v-model="logradouro" placeholder="Ex.: Rua das flores" />
                               </div>
                             </div>
                             <div class="col-2">
@@ -1406,8 +1399,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Número
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="nLogradouro" placeholder="Consulte..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="nLogradouro" placeholder="00" />
                               </div>
                             </div>
                             <div class="col-6">
@@ -1418,7 +1411,7 @@
                                   Complemento
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="complemento" placeholder="Consulte..." />
+                                  v-model="complemento" placeholder="Digite aqui o complemento, se houver." />
                               </div>
                             </div>
 
@@ -1430,7 +1423,7 @@
                                   Nº ou identificação da Unidade
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="idUnidade" placeholder="Consulte..." />
+                                  v-model="idUnidade" placeholder="Insira aqui" />
                               </div>
                             </div>
                             <div class="col-2">
@@ -1440,8 +1433,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Andar
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="selectAndar" placeholder="Consulte..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="selectAndar" placeholder="Insira aqui" />
                               </div>
                             </div>
                             <div class="col-4">
@@ -1451,8 +1444,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Unidades por andar
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="undPorAndar" placeholder="Consulte..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="undPorAndar" placeholder="Informe a quantidade..." />
                               </div>
                             </div>
                             <div class="col-4">
@@ -1462,8 +1455,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Total de andares
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="totalAndares" placeholder="Consulte..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="totalAndares" placeholder="Insira o total" />
                               </div>
                             </div>
                             <div class="col-4">
@@ -1473,8 +1466,8 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Total de torres
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="totalTorres" placeholder="Consulte..." />
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="totalTorres" placeholder="Se houver, insira aqui" />
                               </div>
                             </div>
 
@@ -1629,7 +1622,8 @@
                               </div>
                             </div>
 
-                            <hr />
+
+
                             <div class="col-4">
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
@@ -1651,6 +1645,9 @@
                                 </div>
                               </div>
                             </div>
+
+                            <hr />
+
 
                             <div class="col-12" v-if="mostrarMapa">
                               <iframe
@@ -1746,7 +1743,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorLocalizacao()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorCaracteristica()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -1766,29 +1763,110 @@
                       </div>
                     </div>
 
-                    <div class="card" v-if="proximidadesTab">
+                    <div class="card" v-if="addProximidades">
                       <div class="card-body">
                         <div class="col mt-0">
-                          <h1 class="title-login mt-2">Proximidades</h1>
-                          <p>Defina os estabelecimentos próximos a este imóvel.</p>
+                          <h1 class="title-login mt-2">Suas Proximidades</h1>
+                          <p>Deixe as suas preferencias de proximidades.</p>
                         </div>
                         <div>
                           <div class="row mt-4">
-                            <div class="col-3">
+                            <div class="col-12">
+                              <div v-if="msgSuccessProximidade" class="alert alert-success alert-dismissible fade show"
+                                role="alert">
+                                <strong><i class="fa fa-check"></i> Sucesso!</strong> Nova
+                                proximidade cadastrada.
+                              </div>
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
 
-                                <div class="form-check">
-                                  <input class="form-check-input" v-model="proximidades" type="checkbox" value=""
-                                    id="flexCheckDefault" />
-                                  <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
-                                  </label>
-                                </div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Proximidades
+                                  <small class="text-danger">*</small>
+                                </label>
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="inputProximidades" placeholder="Digite aqui..." />
+
+                              </div>
+                              <p v-if="msgNullProximidades" class="text-danger"><small><i class="fa fa-ban"></i> Não
+                                  deixe este campo vazio!</small></p>
+                            </div>
+
+
+                          </div>
+                          <hr />
+                          <div class="row mt-3">
+
+                            <div class="col-md-6">
+                              <div class="d-grid gap-2 d-md-block">
+                                <button @click="handleFecharProximidades()" class="btn btn-secondary" type="submit">
+                                  <i class="fa fa-close" aria-hidden="true"></i>
+                                  Fechar
+                                </button>
                               </div>
                             </div>
+
+
+
+                            <div class="col-md-6">
+                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-success" @click="handleSaveProximidades()" type="button">
+                                  Salvar
+
+                                </button>
+                              </div>
+                            </div>
+
+
                           </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card" v-if="proximidadesTab">
+                      <div class="card-body">
+                        <div class="col mt-0">
+                          <h1 class="title-login mt-2">Proximidades <span style="float: inline-end;"><button
+                                @click="handleAbrirProximidades()" type="button" class="btn btn-success btn-sm"><i
+                                  class="fa fa-plus"></i> Adicionar
+                                Proximidades</button></span></h1>
+                          <p>Defina os estabelecimentos próximos a este imóvel.</p>
+                        </div>
+                        <div>
+
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-check" v-for="proximidade in minhasProximidades"
+                                :key="proximidade.id_proximidade">
+                                <input v-if="!mostrarSkeleton" class="form-check-input"
+                                  v-model="proximidadesImovel[proximidade.id_proximidade]" type="checkbox"
+                                  :id="'flexCheck' + proximidade.id_proximidade" />
+                                <label v-if="!mostrarSkeleton" class="form-check-label"
+                                  :for="'flexCheck' + proximidade.id_proximidade">
+                                  {{ proximidade.nome_proximidade }}
+
+                                </label>
+                                <a style="margin-left: 2%;" href="#"
+                                  @click="handleDeleteProximidades(proximidade.id_proximidade)"><small><i
+                                      class="text-danger fa fa-trash"></i></small></a>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-check" v-for="item in listProximidades" :key="item.id_proximidade">
+                                <input v-if="!mostrarSkeleton" class="form-check-input"
+                                  v-model="proximidadesAllImovel[item.id_proximidade]" type="checkbox"
+                                  :id="'flexCheck' + item.id_proximidade" />
+                                <label v-if="!mostrarSkeleton" class="form-check-label"
+                                  :for="'flexCheck' + item.id_proximidade">
+                                  {{ item.nome_proximidade }}
+
+                                </label>
+                              </div>
+                            </div>
+
+                          </div>
+
+
                           <hr />
                           <div class="row mt-3">
                             <div class="col-md-6">
@@ -1844,7 +1922,7 @@
                                   Texto de apresentação do imóvel
                                 </label>
 
-                                <textarea class="form-control" v-if="!mostrarSkeleton" v-model="apresentacaoImovel"
+                                <textarea class="form-control" v-if="!mostrarSkeleton" v-model="descricaoImovel"
                                   style="height: 100px" placeholder="Digite aqui..."></textarea>
                               </div>
                             </div>
@@ -1854,7 +1932,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorLocalizacao()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorProximidade()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -1925,7 +2003,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorLocalizacao()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorDescricao()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -1955,43 +2033,61 @@
                         </div>
                         <div>
                           <div class="row mt-4">
-                            <ul class="nav nav-underline d-flex justify-content-center mb-5">
-                              <li class="nav-item">
-                                <a class="btn btn-outline-dark" aria-current="page" href="#">FOTOS DO IMÓVEL</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="btn btn-outline-dark" aria-current="page" href="#">PLANTAS DO IMÓVEL</a>
-                              </li>
-                            </ul>
+                            <li class="text-danger"><small> Envie até 10 imagens . </small></li>
+                            <li class="text-danger"><small> Formatos aceitos .PNG .JPG ou .JPEG</small></li>
+                            <li class="text-danger"><small> Tamanho máx. permitido é de até 3 mb por imagem.</small>
+                            </li>
 
-                            <div class="col-12 text-center">
-                              <i class="far fa-images mb-4" style="font-size: 7rem"></i>
-                              <h4>Você ainda não enviou nenhuma foto.</h4>
+                            <div class="row g-3">
+                              <div class="col-12">
+                                <div class="row row-cols-1 row-cols-md-5 g-4">
+                                  <div class="col" v-for="(image, index) in images" :key="index">
+                                    <div class="card bg-transparent border-0">
+                                      <div class="preview-photo-prato area-photo-prato">
+                                        <img :src="image.src" class="img-photo-prato" />
 
-                              <div class="mb-3 d-flex flex-column align-items-center mt-4">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
-                                  Que tal enviar agora?
-                                </label>
-                                <!-- <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                v-model="areaConstruida" placeholder="Digite aqui...">
-                <span class="input-group-text">m²</span> -->
+                                        <!-- Barra de Progresso -->
+                                        <div class="progress">
+                                          <div class="progress-bar" :style="{ width: image.progress + '%' }"></div>
+                                        </div>
 
-                                <label for="formFile" class="form-label bg-warning"><i class="fa fa-plus me-2"></i>
-                                  Enviar fotos
-                                </label>
-                                <input v-if="!mostrarSkeleton" class="form-control d-none" type="file" id="formFile"
-                                  multiple />
+                                        <button @click="removerImagem(index)" class="btn btn-danger btn-remover">
+                                          <i class="fa fa-minus"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!-- Botão para adicionar mais imagens -->
+                                  <div class="col" v-if="images.length < maxImages">
+                                    <div class="card bg-transparent border-0">
+                                      <div class="preview-photo-prato area-photo-prato">
+                                        <label for="inputGroupFile03"
+                                          class="btn btn-primary btn-photo my-4 rounded-2 py-2">
+                                          <i class="fa fa-plus"></i>
+                                        </label>
+                                        <input hidden type="file" class="form-control" id="inputGroupFile03"
+                                          @change="previewImage" aria-describedby="inputGroupFileAddon03"
+                                          aria-label="Upload" />
+
+                                        <div v-if="success"><i class="fa fa-check"></i></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
+
+
                             </div>
+
+
                           </div>
 
                           <hr />
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorLocalizacao()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorComplemento()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -2086,7 +2182,7 @@
                           <div class="row mt-3">
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-block">
-                                <button @click="handleAnteriorLocalizacao()" class="btn btn-secondary" type="button">
+                                <button @click="handleAnteriorImagem()" class="btn btn-secondary" type="button">
                                   <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                   Anterior
                                 </button>
@@ -2095,8 +2191,9 @@
 
                             <div class="col-md-6">
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn btn-success" @click="handleFinish()" type="button">
-                                  Finalizar<i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <button class="btn btn-success" :disabled="autenticando" @click="handleFinish()"
+                                  type="button">
+                                  {{ textoBotaoFinish }} &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
                                 </button>
                               </div>
                             </div>
@@ -2122,6 +2219,8 @@ import Navbar from "../../components/navbar/index.vue";
 import Footer from "../../components/footer/index.vue";
 import api from "../../../service/api/index.js";
 import { jwtDecode } from "jwt-decode";
+import axios from 'axios'
+import _ from 'lodash';
 
 
 export default {
@@ -2147,6 +2246,8 @@ export default {
       autenticando: false,
       textoBotaoProprietario: "Add Proprietário",
       msgSuccessProprietario: false,
+      autenticando: false,
+      textoBotaoFinish: "Salvar",
 
       proprietarioNome: '',
       proprietarioTelefone: '',
@@ -2155,13 +2256,14 @@ export default {
       msgNullPropietario: false,
 
       //Tabs - para ativar, mude de FALSE para TRUE
-      infoTab: false,
+      infoTab: true,
       comodosTab: false,
       medidaTab: false,
       precoTab: false,
-      caracteristicaTab: true,
+      caracteristicaTab: false,
       localizacaoTab: false,
       proximidadesTab: false,
+      descricaoTab: false,
       complementoTab: false,
       imagemTab: false,
       publicacaoTab: false,
@@ -2199,7 +2301,6 @@ export default {
       selectMobilia: "Não",
       msgNullComodos: false,
 
-
       // ADD PROPRIETARIO
       clienteNome: "",
       clienteEmail: "",
@@ -2233,6 +2334,8 @@ export default {
       tipoNegocio: "",
       precoImovel: "",
       precoNoSite: "Sim",
+      textoLugarPreco: '',
+      textoLugarPrecoView: false,
       precoIptu: "",
       periodoIptu: "Anual",
       precoCondominio: "",
@@ -2245,8 +2348,8 @@ export default {
       permutaDescricao: "",
 
       //TAB CARACTERISTICA
+      caracteristicaImovel: {},
       listcaracteristicas: [],
-      caracteristicaImovel: [],
 
       // TAB LOCALIZAÇÃO
       buscarCEP: "",
@@ -2254,7 +2357,6 @@ export default {
       selectEstado: "",
       selectCidade: "",
       selectBairro: "",
-      selectZona: "",
       logradouro: "",
       nLogradouro: "",
       complemento: "",
@@ -2278,16 +2380,28 @@ export default {
 
       // TAB PROXIMIDADES
       proximidades: false,
+      inputProximidades: "",
+      proximidadesImovel: {},
+      proximidadesAllImovel: {},
+      minhasProximidades: [],
+      listProximidades: [],
+      msgSuccessProximidade: false,
+      msgNullProximidades: false,
+      addProximidades: false,
 
       // TAB DESCRIÇÃO
       titleImovel: "",
-      apresentacaoImovel: "",
+      descricaoImovel: "",
 
       // TAB COMPLEMENTOS
       urlYT: "",
       url360: "",
 
       // TAB IMAGEM
+
+      images: [],
+      imageSrc: null,
+      maxImages: 10,
 
       // TAB PUBLICAÇÃO
       selectImovelSite: "Sim",
@@ -2313,8 +2427,17 @@ export default {
     };
   },
 
-  //Aqui está o MOSTRA e ESCONDE dos INPUTS do dashboard
+  created() {
+    this.debouncedCheckCEP = _.debounce(this.consultarCEP, 100);
+  },
+
   watch: {
+
+    buscarCEP(newVal, oldVal) {
+      if (newVal.length === 9 && newVal !== oldVal) {
+        this.debouncedCheckCEP();
+      }
+    },
     selectCondominio(newValue) {
       if (newValue == "Sim") {
         this.inputCondominio = true;
@@ -2339,105 +2462,97 @@ export default {
       }
     },
 
+
+
     // INFO
     selectAverbado(y) {
       this.selectAverbado = y;
-      console.log(this.selectAverbado);
     },
+
     selectEscritura(y) {
       this.selectEscritura = y;
-      console.log(this.selectEscritura);
     },
+
     selectEsquina(y) {
       this.selectEsquina = y;
-      console.log(this.selectEsquina);
     },
+
     selectMobilia(y) {
       this.selectMobilia = y;
-      console.log(this.selectMobilia);
     },
+
     selectTerreno(y) {
       this.selectTerreno = y;
-      console.log(this.selectTerreno);
     },
 
     // COMODOS
     selectGaragemCobertura(y) {
       this.selectGaragemCobertura = y;
-      console.log(this.selectGaragemCobertura);
     },
     selectBoxGaragem(y) {
       this.selectBoxGaragem = y;
-      console.log(this.selectBoxGaragem);
     },
 
     // PREÇOS
     precoNoSite(y) {
       this.precoNoSite = y;
-      console.log(this.precoNoSite);
+
+      if (this.precoNoSite == "Não") {
+        this.textoLugarPrecoView = false;
+      } else {
+        this.textoLugarPrecoView = true;
+      }
+
     },
     periodoIptu(y) {
       this.periodoIptu = y;
-      console.log(this.periodoIptu);
     },
     estaFinanciado(y) {
       this.estaFinanciado = y;
-      console.log(this.estaFinanciado);
     },
     aceitaFinanciamento(y) {
       this.aceitaFinanciamento = y;
-      console.log(this.aceitaFinanciamento);
     },
     mCasaMVida(y) {
       this.mCasaMVida = y;
-      console.log(this.mCasaMVida);
     },
     aceitaPermuta(y) {
       this.aceitaPermuta = y;
-      console.log(this.aceitaPermuta);
     },
 
     // LOCALIZAÇÃO
     mostrarAndar(y) {
       this.mostrarAndar = y;
-      console.log(this.mostrarAndar);
     },
     mostrarNUnidade(y) {
       this.mostrarNUnidade = y;
-      console.log(this.mostrarNUnidade);
     },
     mostrarLogradouro(y) {
       this.mostrarLogradouro = y;
-      console.log(this.mostrarLogradouro);
     },
     mostrarBairro(y) {
       this.mostrarBairro = y;
-      console.log(this.mostrarBairro);
     },
     mostrarComplemento(y) {
       this.mostrarComplemento = y;
-      console.log(this.mostrarComplemento);
     },
     mostrarNumero(y) {
       this.mostrarNumero = y;
-      console.log(this.mostrarNumero);
     },
     mostrarNCondo(y) {
       this.mostrarNCondo = y;
-      console.log(this.mostrarNCondo);
     },
     selectMapSite(y) {
       this.selectMapSite = y;
-      console.log(this.selectMapSite);
     },
     selectLocalSite(y) {
       this.selectLocalSite = y;
-      console.log(this.selectLocalSite);
     },
     selectStreetVSite(y) {
       this.selectStreetVSite = y;
-      console.log(this.selectStreetVSite);
     },
+
+
   },
 
   mounted() {
@@ -2450,6 +2565,8 @@ export default {
     this.id_user = decode.id_user;
     let id_user = this.id_user;
 
+    this.fetchProximidades();
+    this.fetchAllProximidades();
 
     api.listcondominio(id_user)
       .then((res) => {
@@ -2468,10 +2585,7 @@ export default {
       });
 
     api.listcaracteristica().then((res) => {
-
-      this.listcaracteristicas = res.data;
-
-      console.log('Aqui está a lista de caracteristicas ====>', res.data.response)
+      this.listcaracteristicas = res.data.response;
 
     })
 
@@ -2480,9 +2594,71 @@ export default {
   },
 
   methods: {
+
+
+    aplicaMascaraCEP() {
+      let v = this.buscarCEP;
+
+      v = v.replace(/\D/g, "");
+      if (v.length > 8) {
+        v = v.substring(0, 8);
+      }
+
+      v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+
+      this.buscarCEP = v;
+    },
+
+    async consultarCEP() {
+      if (this.buscarCEP.length === 9) {
+        const cep = this.buscarCEP.replace(/\D/g, '');
+
+        try {
+          const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+          // Correção nas propriedades de acordo com a resposta da API
+          let rua = res.data.logradouro;
+          let bairro = res.data.bairro;
+          let cidade = res.data.localidade;
+          let estado = res.data.uf;
+
+          this.selectPais = "Brasil"
+          this.selectEstado = estado
+          this.selectCidade = cidade
+          this.selectBairro = bairro
+          this.logradouro = rua
+
+
+        } catch (error) {
+          console.error("Erro ao consultar CEP: ", error);
+        }
+      }
+    },
+
+
     handleprop() {
       this.addProp = true;
       this.infoTab = false;
+    },
+
+    getSelectedCaracteristicasIDs() {
+      return Object.keys(this.caracteristicaImovel).filter(id => this.caracteristicaImovel[id]).map(Number);
+    },
+
+    getSelectedMinhasProximidadesIDs() {
+      return Object.keys(this.proximidadesImovel).filter(id => this.proximidadesImovel[id]).map(Number);
+    },
+
+    getSelectedAllProximidadesIDs() {
+      return Object.keys(this.proximidadesAllImovel).filter(id => this.proximidadesAllImovel[id]).map(Number);
+    },
+
+    getCombinedSelectedProximidadesIDs() {
+      const minhasIDs = this.getSelectedMinhasProximidadesIDs();
+      const allIDs = this.getSelectedAllProximidadesIDs();
+      const combinedIDs = [...new Set([...minhasIDs, ...allIDs])];
+
+      return combinedIDs;
     },
 
     handlePropietario() {
@@ -2530,13 +2706,79 @@ export default {
       this.infoTab = true;
     },
 
+    handleSaveProximidades() {
+      let nome_proximidade = this.inputProximidades;
+      let id_user = this.id_user;
+
+      if (nome_proximidade !== '') {
+        api.minhasProximidades(nome_proximidade, id_user).then((res) => {
+          if (res.status == 201) {
+            this.msgSuccessProximidade = true
+            this.inputProximidades = ''
+
+            this.fetchProximidades();
+
+            setTimeout(() => {
+
+              this.msgSuccessProximidade = false
+            }, 3000)
+          }
+        })
+
+      } else {
+
+        this.msgNullProximidades = true
+
+        setTimeout(() => {
+          this.msgNullProximidades = false
+        }, 3000)
+
+      }
+
+
+
+
+    },
+
+    fetchProximidades() {
+      let id_user = this.id_user;
+      api.listminhasproximidades(id_user).then((res) => {
+        this.minhasProximidades = res.data.response;
+      })
+
+    },
+
+    fetchAllProximidades() {
+      api.listproximidade().then((res) => {
+        const todasProximidades = res.data.response;
+        this.listProximidades = todasProximidades.filter(proximidade => proximidade.id_user === null);
+      });
+    },
+
+    handleFecharProximidades() {
+
+      this.addProximidades = false;
+    },
+    handleDeleteProximidades(id) {
+      let id_proximidade = id
+      api.deleteMinhaProximidades(id_proximidade).then((res) => {
+        if (res.status == 200) {
+          this.fetchProximidades();
+        }
+
+      })
+    },
+    handleAbrirProximidades() {
+      this.addProximidades = true;
+    },
     //Ação do botão Proximo de cada tab
     handleProximoComodo() {
       const campos = [
         this.codigoref,
         this.selectCondominio,
+        this.condominioEmpreendimento,
         this.selectProprietario,
-        this.perfilImovel,
+        this.tipoImovel,
         this.perfilImovel,
         this.situacaoImovel,
         this.anoImovel,
@@ -2550,6 +2792,8 @@ export default {
         this.selectMobilia,
       ];
 
+
+
       if (campos.every((campo) => campo !== "")) {
         this.infoTab = false;
         this.comodosTab = true;
@@ -2558,7 +2802,6 @@ export default {
         this.msgNull = true;
       }
     },
-
     handleProximoMedida() {
 
       const campos = [
@@ -2577,7 +2820,7 @@ export default {
         this.closet,
         this.escritorio,
         this.depEmpregada,
-        this.salaJantar,
+        this.salaCopa,
       ];
 
       if (campos.every((campo) => campo !== "")) {
@@ -2597,19 +2840,54 @@ export default {
         this.stepComodos = false;
       }
 
-
     },
-
     handleProximoPreco() {
-      this.medidaTab = false;
-      this.precoTab = true;
-      this.stepInfo = true;
-      this.stepComodos = true;
-      this.stepMedidas = true;
+      const campos = [
+        this.areaConstruida,
+        this.areaPrivativa,
+        this.areaTotal,
+      ]
+
+      if (campos.every((campo) => campo !== "")) {
+        this.medidaTab = false;
+        this.precoTab = true;
+        this.stepInfo = true;
+        this.stepComodos = true;
+        this.stepMedidas = true;
+
+      } else {
+        this.medidaTab = true;
+        this.precoTab = false;
+        this.stepInfo = false;
+
+        // Progressão
+        this.stepInfo = true;
+        this.stepComodos = true;
+        this.stepMedidas = false;
+      }
+
     },
     handleProximoCaracteristica() {
       this.precoTab = false;
       this.caracteristicaTab = true;
+
+      const campos = [
+        this.tipoNegocio,
+        this.precoImovel,
+        this.precoNoSite,
+        this.precoIptu,
+        this.periodoIptu,
+        this.precoCondominio,
+        this.estaFinanciado,
+        this.aceitaFinanciamento,
+        this.mCasaMVida,
+        this.taxasTotal,
+        this.taxasDescricao,
+        this.aceitaPermuta,
+        this.permutaDescricao,
+
+      ]
+
 
       this.stepInfo = true;
       this.stepComodos = true;
@@ -2620,6 +2898,8 @@ export default {
       this.caracteristicaTab = false;
       this.localizacaoTab = true;
 
+      console.log(this.getSelectedCaracteristicasIDs());
+
       this.stepInfo = true;
       this.stepComodos = true;
       this.stepMedidas = true;
@@ -2627,6 +2907,37 @@ export default {
       this.stepCaracteristica = true;
     },
     handleProximoProximidades() {
+
+      const campos = [
+        this.buscarCEP,
+        this.selectPais,
+        this.selectEstado,
+        this.selectCidade,
+        this.selectBairro,
+        this.logradouro,
+        this.nLogradouro,
+        this.complemento,
+        this.idUnidade,
+        this.selectAndar,
+        this.undPorAndar,
+        this.totalAndares,
+        this.totalTorres,
+        this.mostrarAndar,
+        this.mostrarNUnidade,
+        this.mostrarLogradouro,
+        this.mostrarBairro,
+        this.mostrarComplemento,
+        this.mostrarNumero,
+        this.mostrarNCondo,
+        this.mapaCondo,
+        this.selectMapSite,
+        this.selectLocalSite,
+        this.mapaStreetV,
+        this.selectStreetVSite,
+      ]
+
+      console.log(campos);
+
       this.localizacaoTab = false;
       this.proximidadesTab = true;
 
@@ -2640,6 +2951,8 @@ export default {
     handleProximoDescricao() {
       this.proximidadesTab = false;
       this.descricaoTab = true;
+
+      console.log(this.getCombinedSelectedProximidadesIDs());
 
       this.stepInfo = true;
       this.stepComodos = true;
@@ -2680,6 +2993,8 @@ export default {
       this.imagemTab = false;
       this.publicacaoTab = true;
 
+      console.log(this.images)
+
       this.stepInfo = true;
       this.stepComodos = true;
       this.stepMedidas = true;
@@ -2710,10 +3025,41 @@ export default {
       this.stepPublicacao = true;
     },
 
+    removerImagem(index) {
+      this.images.splice(index, 1);
+    },
+
+    previewImage(event) {
+      const files = event.target.files;
+      if (files && files[0]) {
+        const file = files[0];
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.push({
+            src: e.target.result,
+            file: file,
+            progress: 0,
+          });
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+
+    simulateUpload(imageIndex) {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        if (progress <= 100) {
+          this.$set(this.images[imageIndex], "progress", progress);
+        } else {
+          clearInterval(interval);
+        }
+      }, 100);
+    },
+
     async handleFinish() {
       let codRef = this.codigoref;
-      let selecteCond = this.selectCondominio;
-      let selectProprietario = this.selectProprietario;
       let tipoImovel = this.perfilImovel;
       let perfilImovel = this.perfilImovel;
       let situacaoImovel = this.situacaoImovel;
@@ -2750,6 +3096,7 @@ export default {
       let tipoNegocio = this.tipoNegocio
       let precoImovel = this.precoImovel
       let precoNoSite = this.precoNoSite
+      let textoLugarPreco = this.textoLugarPreco
       let precoIptu = this.precoIptu
       let periodoIptu = this.periodoIptu
       let precoCondominio = this.precoCondominio
@@ -2761,65 +3108,65 @@ export default {
       let aceitaPermuta = this.aceitaPermuta
       let permutaDescricao = this.permutaDescricao
 
-
-      api.novoImovel(
-        codRef,
-        selecteCond,
-        selectProprietario,
-        tipoImovel,
-        perfilImovel,
-        situacaoImovel,
-        anoImovel,
-        incorporacao,
-        posicaoSolar,
-        selectTerreno,
-        proximoMar,
-        selectAverbado,
-        selectEscritura,
-        selectEsquina,
-        selectMobilia,
-        dormitorio,
-        suite,
-        banheiro,
-        garagem,
-        selectGaragemCobertura,
-        selectBoxGaragem,
-        salaTv,
-        salaJantar,
-        lavabo,
-        areaServico,
-        cozinha,
-        closet,
-        escritorio,
-        depEmpregada,
-        copa,
-        areaConstruida,
-        areaPrivativa,
-        areaTotal,
-        tipoNegocio,
-        precoImovel,
-        precoNoSite,
-        precoIptu,
-        periodoIptu,
-        precoCondominio,
-        estaFinanciado,
-        aceitaFinanciamento,
-        mCasaMVida,
-        taxasTotal,
-        taxasDescricao,
-        aceitaPermuta,
-        permutaDescricao,
+      let buscarCEP = this.buscarCEP
+      let selectPais = this.selectPais
+      let selectEstado = this.selectEstado
+      let selectCidade = this.selectCidade
+      let selectBairro = this.selectBairro
+      let logradouro = this.logradouro
+      let nLogradouro = this.nLogradouro
+      let complemento = this.complemento
+      let idUnidade = this.idUnidade
+      let selectAndar = this.selectAndar
+      let undPorAndar = this.undPorAndar
+      let totalAndares = this.totalAndares
+      let totalTorres = this.totalTorres
+      let mostrarAndar = this.mostrarAndar
+      let mostrarNUnidade = this.mostrarNUnidade
+      let mostrarLogradouro = this.mostrarLogradouro
+      let mostrarBairro = this.mostrarBairro
+      let mostrarComplemento = this.mostrarComplemento
+      let mostrarNumero = this.mostrarNumero
+      let mostrarNCondo = this.mostrarNCondo
+      let selectMapSite = this.selectMapSite
 
 
+      let titleImovel = this.titleImovel
+      let descricaoImovel = this.descricaoImovel
 
+      let urlYT = this.urlYT
+      let url360 = this.url360
 
+      const formData = new FormData();
 
+      this.images.forEach((image, index) => {
+        if (image && image.file) {
+          formData.append(`foto`, image.file);
+        }
+      });
 
-      )
-        .then((res) => { });
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+      let caracteristicas = this.getSelectedCaracteristicasIDs()
+      let proximidades = this.getCombinedSelectedProximidadesIDs()
+
+      let selectImovelSite = this.selectImovelSite
+      let textoTarja = this.textoTarja
+      let corTarja = this.corTarja
+
+      let selecteCond = this.selectCondominio;
+      let idcondominio = this.condominioEmpreendimento;
+      let selectProprietario = this.selectProprietario;
+      let id_user = this.id_user;
+
+      api.novoImovel(codRef, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia, dormitorio, suite, banheiro, garagem, selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa, areaConstruida, areaPrivativa, areaTotal, tipoNegocio, precoImovel, precoNoSite, textoLugarPreco, precoIptu, periodoIptu, precoCondominio, estaFinanciado, aceitaFinanciamento, mCasaMVida, taxasTotal, taxasDescricao, aceitaPermuta, permutaDescricao, buscarCEP, selectPais, selectEstado, selectCidade, selectBairro, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, selectMapSite, titleImovel, descricaoImovel, urlYT, url360, formData, caracteristicas, proximidades, selectImovelSite, textoTarja, corTarja, selecteCond, idcondominio, selectProprietario, id_user).then((res) => { 
+
+        console.log(res)
+      });
     },
 
-    //Evento do botão Voltar (Imcompleto)
     handleAnteriorInfo() {
       this.infoTab = true;
       this.comodosTab = false;
@@ -2828,10 +3175,45 @@ export default {
       this.comodosTab = true;
       this.medidaTab = false;
     },
-    handleAnteriorPreco() {
-      this.precoTab = false;
+    handleAnteriorMedida() {
       this.medidaTab = true;
+      this.precoTab = false;
+    },
+    handleAnteriorPreco() {
+      this.caracteristicaTab = false;
+      this.precoTab = true;
+    },
+    handleAnteriorCaracteristica() {
+      this.caracteristicaTab = true;
+      this.localizacaoTab = false;
+    },
+
+    handleAnteriorLocalizacao() {
+      this.localizacaoTab = true;
+      this.proximidadesTab = false;
+    },
+
+    handleAnteriorProximidade() {
+      this.proximidadesTab = true;
+      this.descricaoTab = false;
+    },
+
+    handleAnteriorDescricao() {
+      this.complementoTab = false;
+      this.descricaoTab = true;
+    },
+
+    handleAnteriorComplemento() {
+      this.complementoTab = true;
+      this.imagemTab = false;
+    },
+
+    handleAnteriorImagem() {
+      this.publicacaoTab = false;
+      this.imagemTab = false;
     },
   },
+
+
 };
 </script>

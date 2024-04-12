@@ -182,7 +182,7 @@ export default {
 
       api.novoCondominio(nome_condominio, id_user).then((res) => {
 
-        if (res.status == 201) {
+        if (res.status == 200) {
           this.msgSuccess = true;
           this.condNome = "";
           this.fetchList();

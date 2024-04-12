@@ -185,9 +185,8 @@ export default {
     methods: {
         handleSalvar() {
             let nome_proximidade = this.proximidade;
-            let id_user = this.id_user;
 
-            api.proximidades(nome_proximidade, id_user).then((res) => {
+            api.proximidades(nome_proximidade).then((res) => {
 
                 if (res.status == 201) {
                     this.msgSuccess = true;
