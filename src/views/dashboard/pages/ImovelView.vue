@@ -3,7 +3,7 @@
         <div class="container">
             <div class="nav-itens-area">
                 <div class="nav-item">
-                    <h3>INFORMAÇÕES</h3>
+                    <h3><a href="#iddoelemento">INFORMAÇÕES</a></h3>
                 </div>
                 <div class="nav-item">
                     <h3>COMODOS</h3>
@@ -35,7 +35,7 @@
         <h2 class="text-center text-light"><strong>EMPREENDIMENTO EM CONSTRUÇÃO</strong></h2>
     </div>
     <div class="capa-area">
-        <div class="gradient"></div>
+        <div class="gradient-page-imovel"></div>
         <img class="capa" src="../../../../assets/images/05.png" alt="">
 
         <div class="logo-area">
@@ -54,19 +54,15 @@
                 voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                 voluptatem sequi nesciunt. Neque</h4>
         </div>
-        <div class="carrousel-area row">
+        <div id="iddoelemento" class="carrousel-area row">
 
             <img class="imagem-imovel" src="../../../../assets/images/exemple.png" alt="">
             <img class="imagem-imovel" src="../../../../assets/images/exemple.png" alt="">
             <img class="imagem-imovel" src="../../../../assets/images/exemple.png" alt="">
             <img class="imagem-imovel" src="../../../../assets/images/exemple.png" alt="">
             <img class="imagem-imovel" src="../../../../assets/images/exemple.png" alt="">
-
-
         </div>
-
     </div>
-
 
 </template>
 <script>
@@ -81,6 +77,14 @@ export default {
         Navbar,
         Footer,
     },
+    mounted(){
+        //Cola as funçoes aqui
+        function myFunction() {
+
+        }
+    },
+
+
 
 };
 </script>
