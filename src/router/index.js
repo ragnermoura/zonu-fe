@@ -8,6 +8,7 @@ import CadCondominioView from '../views/dashboard/CadCondominioView.vue'
 import MyPlanView from '../views/dashboard/MyPlanView.vue'
 import CaracteristicaView from '../views/dashboard/CaracteristicaView.vue'
 import ProximidadesView from '../views/dashboard/ProximidadesView.vue'
+import ImovelView from '../views/dashboard/pages/ImovelView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,7 +57,12 @@ const router = createRouter({
       path: '/meu-plano',
       name: 'meu-plano',
       component: MyPlanView
-    },  
+    },
+    {
+      path: '/imovel',
+      name: 'imovel',
+      component: ImovelView
+    },    
   ]
 })
 

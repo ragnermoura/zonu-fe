@@ -195,7 +195,7 @@ export default {
           },
         }
       );
-      
+
 
       return response;
     } catch (error) {
@@ -220,7 +220,7 @@ export default {
           },
         }
       );
-      
+
 
       return response;
     } catch (error) {
@@ -396,103 +396,14 @@ export default {
     }
   },
 
-  novoImovel: async (codRef, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia, dormitorio, suite, banheiro, garagem, selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa, areaConstruida, areaPrivativa, areaTotal, tipoNegocio, precoImovel, precoNoSite,textoLugarPreco,  precoIptu, periodoIptu, precoCondominio, estaFinanciado, aceitaFinanciamento, mCasaMVida, taxasTotal, taxasDescricao, aceitaPermuta, permutaDescricao, buscarCEP, selectPais, selectEstado, selectCidade, selectBairro, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, selectMapSite, titleImovel, descricaoImovel, urlYT, url360, formData, caracteristicas, proximidades, selectImovelSite, textoTarja, corTarja, selecteCond, idcondominio, selectProprietario, id_user) => {
+  novoImovel: async (formData) => {
     try {
       const response = await http.post(
-        "/imovel/cadastrar",
-        {
-          cod_referencia: codRef,
-          tipo: tipoImovel,
-          perfil_imovel: perfilImovel,
-          situacao_imovel: situacaoImovel,
-          ano_construcao: anoImovel,
-          incorporacao: incorporacao,
-          posicao_solar: posicaoSolar,
-          terreno: selectTerreno,
-          proximo_mar: proximoMar,
-          averbado: selectAverbado,
-          escriturado: selectEscritura, 
-          esquina: selectEsquina,
-          mobilia: selectMobilia,
-          dormitorio: dormitorio,
-          suite: suite,
-          banheiro: banheiro, 
-          garagem: garagem,
-          garagem_coberta: selectGaragemCobertura,
-          garagem_box: selectBoxGaragem, 
-          sala_tv: salaTv, 
-          sala_jantar: salaJantar,
-          lavabo: lavabo, 
-          area_servico: areaServico, 
-          cozinha: cozinha, 
-          closet: closet,
-          escritorio: escritorio,
-          casa_empregada: depEmpregada,
-          copa: copa,
-          area_contruida: areaConstruida,
-          area_privativa: areaPrivativa, 
-          area_total: areaTotal,
-          tipo_negocio: tipoNegocio, 
-          preco_imovel: precoImovel,
-          mostra_preco: precoNoSite, 
-          text_preco_opcao: textoLugarPreco, 
-          preco_iptu: precoIptu,
-          periodo: periodoIptu, 
-          preco_condominio: precoCondominio,
-          financiado: estaFinanciado,
-          aceita_financiamento: aceitaFinanciamento,
-          minhacasa_minhavida: mCasaMVida,
-          total_mensal_taxas: taxasTotal,
-          descricao_taxas: taxasDescricao,
-          aceita_permuta: aceitaPermuta,
-          descricao_permuta: permutaDescricao,
-          cep: buscarCEP,
-          pais: selectPais,
-          estado: selectEstado,
-          cidade: selectCidade,
-          bairro: selectBairro,
-          logradouro: logradouro,
-          numero: nLogradouro,
-          complemento: complemento,
-          numero_unidade: idUnidade,
-          andar: selectAndar,
-          unidade_por_andar: undPorAndar,
-          total_andar: totalAndares,
-          total_torres: totalTorres,
-          mostrar_andar_site: mostrarAndar,
-          mostrar_numero_unidade_site: mostrarNUnidade,
-          mostrar_logradouro_site: mostrarLogradouro,
-          mostrar_bairro_site: mostrarBairro,
-          mostrar_complemento_site: mostrarComplemento,
-          mostrar_numero_site: mostrarNumero,
-          mostrar_nome_condominio_site: mostrarNCondo,
-          mostrar_mapa_site: selectMapSite,
-          titulo: titleImovel,
-          apresentacao: descricaoImovel,
-          link_youtube: urlYT,
-          link_apresentacao: url360,
-          foto: formData,
-          caracteristicas: caracteristicas,
-          proximidades: proximidades,
-          mostrar_imovel_publi: selectImovelSite,
-          tarja_imovel_site_publi: textoTarja,
-          cor_tarja_publi: corTarja,
-          tem_condominio: selecteCond,
-          id_condominio: idcondominio,
-          id_proprietario: selectProprietario,
-          id_user: id_user,
-
-
-
-
-
-        },
+        "/imovel/cadastrar", formData,
         {
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
+            "Accept": "application/json",
             "Access-Control-Allow-Headers": "*",
-            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
           },
         }
@@ -503,4 +414,6 @@ export default {
       return error.response || error.message || error;
     }
   },
+
+
 };

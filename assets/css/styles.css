@@ -3,6 +3,7 @@
 @import url(auth.css);
 @import url(skeleton.css);
 @import url(app.css);
+@import url(imovelPage.css);
 
 body {
   margin: 0;
@@ -218,18 +219,7 @@ label[for="formFile"] {
   color: #a82323;
 }
 
-.area_capa {
-  width: 100% !important;
-}
 
-.capa {
-  width: 100vw;
-  height: 70vh;
-  position: absolute;
-
-
-
-}
 
 .linhacomplete {
   border: 3px solid #212e3c;
@@ -332,7 +322,7 @@ label[for="formFile"] {
   text-align: center;
 }
 
-.preview-photo-prato{
+.preview-photo-prato {
   width: 200px;
   height: 400px;
   background-color: rgb(245, 245, 245);
@@ -341,7 +331,7 @@ label[for="formFile"] {
   margin: 0;
 }
 
-.area-photo-prato{
+.area-photo-prato {
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -349,7 +339,7 @@ label[for="formFile"] {
   justify-content: center;
 }
 
-.img-photo-prato{
+.img-photo-prato {
   width: 200px;
   height: 400px;
   border: 2px solid #848484;
@@ -361,9 +351,9 @@ label[for="formFile"] {
   justify-content: center;
   align-items: center;
   position: absolute !important;
-  
+
 }
 
-.btn-remover{
+.btn-remover {
   position: absolute;
-} 
+}

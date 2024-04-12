@@ -2256,8 +2256,8 @@ export default {
       msgNullPropietario: false,
 
       //Tabs - para ativar, mude de FALSE para TRUE
-      infoTab: true,
-      comodosTab: false,
+      infoTab: false,
+      comodosTab: true,
       medidaTab: false,
       precoTab: false,
       caracteristicaTab: false,
@@ -2898,8 +2898,6 @@ export default {
       this.caracteristicaTab = false;
       this.localizacaoTab = true;
 
-      console.log(this.getSelectedCaracteristicasIDs());
-
       this.stepInfo = true;
       this.stepComodos = true;
       this.stepMedidas = true;
@@ -3133,21 +3131,8 @@ export default {
 
       let titleImovel = this.titleImovel
       let descricaoImovel = this.descricaoImovel
-
       let urlYT = this.urlYT
       let url360 = this.url360
-
-      const formData = new FormData();
-
-      this.images.forEach((image, index) => {
-        if (image && image.file) {
-          formData.append(`foto`, image.file);
-        }
-      });
-
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
 
       let caracteristicas = this.getSelectedCaracteristicasIDs()
       let proximidades = this.getCombinedSelectedProximidadesIDs()
@@ -3161,7 +3146,100 @@ export default {
       let selectProprietario = this.selectProprietario;
       let id_user = this.id_user;
 
-      api.novoImovel(codRef, tipoImovel, perfilImovel, situacaoImovel, anoImovel, incorporacao, posicaoSolar, selectTerreno, proximoMar, selectAverbado, selectEscritura, selectEsquina, selectMobilia, dormitorio, suite, banheiro, garagem, selectGaragemCobertura, selectBoxGaragem, salaTv, salaJantar, lavabo, areaServico, cozinha, closet, escritorio, depEmpregada, copa, areaConstruida, areaPrivativa, areaTotal, tipoNegocio, precoImovel, precoNoSite, textoLugarPreco, precoIptu, periodoIptu, precoCondominio, estaFinanciado, aceitaFinanciamento, mCasaMVida, taxasTotal, taxasDescricao, aceitaPermuta, permutaDescricao, buscarCEP, selectPais, selectEstado, selectCidade, selectBairro, logradouro, nLogradouro, complemento, idUnidade, selectAndar, undPorAndar, totalAndares, totalTorres, mostrarAndar, mostrarNUnidade, mostrarLogradouro, mostrarBairro, mostrarComplemento, mostrarNumero, mostrarNCondo, selectMapSite, titleImovel, descricaoImovel, urlYT, url360, formData, caracteristicas, proximidades, selectImovelSite, textoTarja, corTarja, selecteCond, idcondominio, selectProprietario, id_user).then((res) => { 
+      const formData = new FormData();
+
+      this.images.forEach((image, index) => {
+        if (image && image.file) {
+          formData.append(`foto`, image.file);
+        }
+      });
+
+      formData.append("cod_referencia", codRef);
+      formData.append("tipo_imovel", tipoImovel);
+      formData.append("perfil_imovel", perfilImovel);
+      formData.append("situacao_imovel", situacaoImovel);
+      formData.append("ano_construcao", anoImovel);
+      formData.append("incorporacao", incorporacao);
+      formData.append("posicao_solar", posicaoSolar);
+      formData.append("terreno", selectTerreno);
+      formData.append("proximo_mar", proximoMar);
+      formData.append("averbado", selectAverbado);
+      formData.append("escriturado", selectEscritura);
+      formData.append("esquina", selectEsquina);
+      formData.append("mobilia", selectMobilia);
+      formData.append("dormitorio", dormitorio);
+      formData.append("suite", suite);
+      formData.append("banheiro", banheiro);
+      formData.append("garagem", garagem);
+      formData.append("garagem_coberta", selectGaragemCobertura);
+      formData.append("garagem_box", selectBoxGaragem);
+      formData.append("sala_tv", salaTv);
+      formData.append("sala_jantar", salaJantar);
+      formData.append("lavabo", lavabo);
+      formData.append("area_servico", areaServico);
+      formData.append("cozinha", cozinha);
+      formData.append("closet", closet);
+      formData.append("escritorio", escritorio);
+      formData.append("casa_empregada", depEmpregada);
+      formData.append("copa", copa);
+      formData.append("area_construida", areaConstruida);
+      formData.append("area_privativa", areaPrivativa);
+      formData.append("area_total", areaTotal);
+      formData.append("tipo_negocio", tipoNegocio);
+      formData.append("preco_imovel", precoImovel);
+      formData.append("mostra_preco", precoNoSite);
+      formData.append("texto_preco_opcao", textoLugarPreco);
+      formData.append("preco_iptu", precoIptu);
+      formData.append("periodo_iptu", periodoIptu);
+      formData.append("preco_condominio", precoCondominio);
+      formData.append("financiado", estaFinanciado);
+      formData.append("aceita_financiamento", aceitaFinanciamento);
+      formData.append("minhacasa_minhavida", mCasaMVida);
+      formData.append("total_mensal_taxas", taxasTotal);
+      formData.append("descricao_taxas", taxasDescricao);
+      formData.append("aceita_permuta", aceitaPermuta);
+      formData.append("descricao_permuta", permutaDescricao);
+      formData.append("cep", buscarCEP);
+      formData.append("pais", selectPais);
+      formData.append("estado", selectEstado);
+      formData.append("cidade", selectCidade);
+      formData.append("bairro", selectBairro);
+      formData.append("logradouro", logradouro);
+      formData.append("numero_logradouro", nLogradouro);
+      formData.append("complemento", complemento);
+      formData.append("numero_unidade", idUnidade);
+      formData.append("andar", selectAndar);
+      formData.append("unidade_por_andar", undPorAndar);
+      formData.append("total_andar", totalAndares);
+      formData.append("total_torres", totalTorres);
+      formData.append("mostrar_andar_site", mostrarAndar);
+      formData.append("mostrar_numero_unidade_site", mostrarNUnidade);
+      formData.append("mostrar_logradouro_site", mostrarLogradouro);
+      formData.append("mostrar_bairro_site", mostrarBairro);
+      formData.append("mostrar_complemento_site", mostrarComplemento);
+      formData.append("mostrar_numero_site", mostrarNumero);
+      formData.append("mostrar_nome_condominio_site", mostrarNCondo);
+      formData.append("mostrar_mapa_site", selectMapSite);
+      formData.append("titulo", titleImovel);
+      formData.append("descricao", descricaoImovel);
+      formData.append("link_youtube", urlYT);
+      formData.append("link_apresentacao", url360);
+      formData.append("caracteristicas", JSON.stringify(caracteristicas));
+      formData.append("proximidades", JSON.stringify(proximidades));
+      formData.append("mostrar_imovel_publi", selectImovelSite);
+      formData.append("tarja_imovel_site_publi", textoTarja);
+      formData.append("cor_tarja_publi", corTarja);
+      formData.append("tem_condominio", selecteCond);
+      formData.append("id_condominio", idcondominio);
+      formData.append("id_proprietario", selectProprietario);
+      formData.append("id_user", id_user);
+
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+
+      api.novoImovel(formData).then((res) => {
 
         console.log(res)
       });
