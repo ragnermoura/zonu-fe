@@ -9,9 +9,12 @@
         <div class="container-fluid p-0">
           <h1 class="h3 mb-3"><strong>Cadastro |</strong> Novo Imóveis</h1>
 
+
           <div class="row d-flex flex-row justify-content-between">
+
             <div style="width: 19%; margin-right: 1%">
               <div class="col-xl-12 col-xxl-12 d-flex">
+
                 <div class="w-100">
                   <div class="row">
                     <div class="card">
@@ -154,6 +157,18 @@
 
             <!-- Aqui começa as TABS. Copie e cole da INFOTAB -->
             <div style="width: 79%; margin-left: 1%; margin-bottom: 4%;">
+
+              <div v-if="msgError" class="alert alert-danger" style="margin-top: -20px; margin-bottom: 10px;"
+                role="alert">
+                <strong><i class="fa fa-ban"></i> Desculpa, houve um erro para processar o seu pedido. Tente novamente
+                  mais tarde</strong>
+              </div>
+
+              <div v-if="msgSucesso" class="alert alert-success" style="margin-top: -20px; margin-bottom: 10px;"
+                role="alert">
+                <strong><i class="fa fa-check"></i> Sucesso! Imóvel cadastrado com sucesso!</strong>
+              </div>
+
               <div class="col-xl-12 col-xxl-12 d-flex">
                 <div class="w-100">
                   <div class="row">
@@ -1997,6 +2012,20 @@
                                   v-model="url360" placeholder="Digite aqui..." />
                               </div>
                             </div>
+
+                            <div class="col-12">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
+                                  Insira o link do Google Drive, Dropbox, Onedrive ou outro
+
+                                </label>
+                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                  v-model="link_drive" placeholder="Digite aqui..." />
+                              </div>
+                            </div>
+
                           </div>
 
                           <hr />
@@ -2256,8 +2285,8 @@ export default {
       msgNullPropietario: false,
 
       //Tabs - para ativar, mude de FALSE para TRUE
-      infoTab: false,
-      comodosTab: true,
+      infoTab: true,
+      comodosTab: false,
       medidaTab: false,
       precoTab: false,
       caracteristicaTab: false,
@@ -2396,6 +2425,7 @@ export default {
       // TAB COMPLEMENTOS
       urlYT: "",
       url360: "",
+      link_drive: "",
 
       // TAB IMAGEM
 
@@ -2415,15 +2445,9 @@ export default {
       proximaDataRevisao: "",
       periodoRevisao: "+30",
 
-      idInfo: "",
-      idComodos: "",
-      idMedidas: "",
-      idPreco: "",
-      idCaracteristica: "",
-      idLocalizacao: "",
-      idProximidades: "",
-      idDescricao: "",
-      idComplemento: "",
+      msgSucesso: false,
+      msgError: false,
+
     };
   },
 
@@ -2568,11 +2592,11 @@ export default {
     this.fetchProximidades();
     this.fetchAllProximidades();
 
-    api.listcondominio(id_user)
-      .then((res) => {
+    api.listcondominio(id_user).then((res) => {
         this.listsCondominios = res.data;
-      })
-      .catch((error) => {
+
+        console.log('Lista dos condomínios ===> ', this.listsCondominios)
+      }).catch((error) => {
         console.error('Erro ao carregar lista de condomínios:', error);
       });
 
@@ -2759,6 +2783,7 @@ export default {
 
       this.addProximidades = false;
     },
+
     handleDeleteProximidades(id) {
       let id_proximidade = id
       api.deleteMinhaProximidades(id_proximidade).then((res) => {
@@ -2802,6 +2827,7 @@ export default {
         this.msgNull = true;
       }
     },
+
     handleProximoMedida() {
 
       const campos = [
@@ -2841,6 +2867,7 @@ export default {
       }
 
     },
+
     handleProximoPreco() {
       const campos = [
         this.areaConstruida,
@@ -2867,6 +2894,7 @@ export default {
       }
 
     },
+
     handleProximoCaracteristica() {
       this.precoTab = false;
       this.caracteristicaTab = true;
@@ -2894,6 +2922,7 @@ export default {
       this.stepMedidas = true;
       this.stepPreco = true;
     },
+
     handleProximoLocalizacao() {
       this.caracteristicaTab = false;
       this.localizacaoTab = true;
@@ -2904,6 +2933,7 @@ export default {
       this.stepPreco = true;
       this.stepCaracteristica = true;
     },
+
     handleProximoProximidades() {
 
       const campos = [
@@ -2946,11 +2976,10 @@ export default {
       this.stepCaracteristica = true;
       this.stepLocalizacao = true;
     },
+
     handleProximoDescricao() {
       this.proximidadesTab = false;
       this.descricaoTab = true;
-
-      console.log(this.getCombinedSelectedProximidadesIDs());
 
       this.stepInfo = true;
       this.stepComodos = true;
@@ -2960,6 +2989,7 @@ export default {
       this.stepLocalizacao = true;
       this.stepProximidades = true;
     },
+
     handleProximoComplemento() {
       this.descricaoTab = false;
       this.complementoTab = true;
@@ -2973,6 +3003,7 @@ export default {
       this.stepProximidades = true;
       this.stepDescricao = true;
     },
+
     handleProximoImagem() {
       this.complementoTab = false;
       this.imagemTab = true;
@@ -2987,11 +3018,10 @@ export default {
       this.stepDescricao = true;
       this.stepComplemento = true;
     },
+
     handleProximoPublicacao() {
       this.imagemTab = false;
       this.publicacaoTab = true;
-
-      console.log(this.images)
 
       this.stepInfo = true;
       this.stepComodos = true;
@@ -3128,11 +3158,12 @@ export default {
       let mostrarNCondo = this.mostrarNCondo
       let selectMapSite = this.selectMapSite
 
-
       let titleImovel = this.titleImovel
       let descricaoImovel = this.descricaoImovel
+
       let urlYT = this.urlYT
       let url360 = this.url360
+      let link_drive = this.link_drive
 
       let caracteristicas = this.getSelectedCaracteristicasIDs()
       let proximidades = this.getCombinedSelectedProximidadesIDs()
@@ -3224,6 +3255,7 @@ export default {
       formData.append("descricao", descricaoImovel);
       formData.append("link_youtube", urlYT);
       formData.append("link_apresentacao", url360);
+      formData.append("link_drive", link_drive);
       formData.append("caracteristicas", JSON.stringify(caracteristicas));
       formData.append("proximidades", JSON.stringify(proximidades));
       formData.append("mostrar_imovel_publi", selectImovelSite);
@@ -3238,10 +3270,18 @@ export default {
         console.log(`${key}: ${value}`);
       }
 
-
       api.novoImovel(formData).then((res) => {
+        if (res.status === 200) {
 
-        console.log(res)
+
+
+        } else {
+          this.msgError = true;
+
+          setTimeout(() => {
+            this.msgError = false;
+          }, 3000);
+        }
       });
     },
 

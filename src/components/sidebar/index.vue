@@ -8,18 +8,16 @@
                 </span>
             </a>
 
-<hr>
+            <hr>
 
-<div class="logoArea">
-<img class="logoEmpresa" src="../../../assets/images/logoEmpresa.jpg" alt="">
-</div>
+            <div class="logoArea">
+                <img class="logoEmpresa" src="../../../assets/images/logoEmpresa.jpg" alt="">
+            </div>
 
-            <ul class="sidebar-nav" style="margin-top: -30px !important;">
+            <ul class="sidebar-nav" style="margin-top: -20px !important;">
                 <li class="sidebar-header">
                     Administrador
                 </li>
-
-
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/dashboard">
@@ -35,25 +33,17 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="/proximidades"> 
-                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades <span
-                                class="badge text-bg-success">Geral</span></span>
+                    <a class="sidebar-link" href="/proximidades">
+                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades
+                            <span class="badge text-bg-success">Geral</span></span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/caracteristica">
-                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Caracteristica <span
-                                class="badge text-bg-success">Geral</span></span>
+                        <i class="align-middle" data-feather="check-square"></i> <span
+                            class="align-middle">Caracteristica <span class="badge text-bg-success">Geral</span></span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="">
-                        <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Planos
-                        </span>
-                    </a>
-                </li>
-
-
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/clientes">
@@ -61,14 +51,7 @@
                         </span>
                     </a>
                 </li>
-              
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="/api-token-admin">
-                        <i class="align-middle" data-feather="code"></i> <span class="align-middle">Api <span
-                                class="badge text-bg-success">Tokens</span></span>
-                    </a>
-                </li>
 
                 <li class="sidebar-header">
                     Gestão
@@ -83,46 +66,14 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/novo-imovel">
-                        <i class="align-middle" data-feather="shield"></i> <span class="align-middle">Novo imóvel</span>
+                        <i class="align-middle" data-feather="home"></i> <span class="align-middle">Novo imóvel</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/novo-condominio">
-                        <i class="align-middle" data-feather="shield"></i> <span class="align-middle">Novo condomínio</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-forms.html">
-                        <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Meus
-                            históricos</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="ui-cards.html">
-                        <i class="align-middle" data-feather="layers"></i> <span class="align-middle">Meu plano</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="">
-                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Condomínios</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-profile.html">
-                        <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Usuários <span
-                                class="badge text-bg-info">Plataforma</span>
-                        </span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="pages-sign-in.html">
-                        <i class="align-middle" data-feather="home"></i> <span class="align-middle">Meus imóveis</span>
+                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Novo
+                            condomínio</span>
                     </a>
                 </li>
 
@@ -147,14 +98,14 @@ export default {
             isCollapsed: this.defaultCollapsed,
         }
     },
-  
+
     created() {
         if (this.$route.path === '/novo-imovel') {
             this.isCollapsed = true;
         }
     },
     mounted() {
-       
+
         let token = localStorage.getItem('token');
 
         if (!token || token === 'null') {
@@ -179,4 +130,4 @@ export default {
 
 
 }
-</script>        
+</script>

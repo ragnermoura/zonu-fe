@@ -226,7 +226,7 @@ label[for="formFile"] {
 }
 
 .iconCheck {
-  width: 50px !important;
+  width: 20px !important;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -253,7 +253,7 @@ label[for="formFile"] {
 
 .msgPerfil {
 
-  width: 25%;
+  width: 30%;
   margin-left: 2%;
   margin-top: 2%;
   padding: 5px;
@@ -262,6 +262,14 @@ label[for="formFile"] {
   color: #FFF !important;
   justify-content: center;
   align-items: center;
+
+}
+
+.thumbImovel{
+  width: 90px;
+  border-radius: 5%;
+  height: 90px;
+  object-fit: cover;
 
 }
 
@@ -289,7 +297,7 @@ label[for="formFile"] {
   justify-content: center;
   align-items: center;
   border: 2px solid #929292;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 
 }
 
@@ -356,4 +364,21 @@ label[for="formFile"] {
 
 .btn-remover {
   position: absolute;
+}
+
+.iconProgress{
+  width: 80px;
+margin-left: auto;
+margin-right: auto;
+display: block;
+}
+
+
+.nav-pills .nav-link.active{
+
+  background-color: #212e3c;
+}
+
+.nav-link {
+  color: #212e3c;
 }
