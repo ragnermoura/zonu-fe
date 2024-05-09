@@ -182,7 +182,7 @@ export default {
 
       api.novoCondominio(nome_condominio, id_user).then((res) => {
 
-        if (res.status == 200) {
+        if (res.status == 201) {
           this.msgSuccess = true;
           this.condNome = "";
           this.fetchList();
@@ -228,9 +228,7 @@ export default {
       let id_user = this.id_user;
 
       api.listcondominio(id_user).then((res) => {
-        console.log('Aqui está a lista dos condomínios ===>', res.data.response);
         this.listsCondominios = res.data.response
-
 
       })
 

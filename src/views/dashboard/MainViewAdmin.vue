@@ -9,111 +9,12 @@
         <div class="container-fluid p-0">
 
           <div v-if="mostrarSkeleton" class="skeleton-title-dashboard"></div>
-          <h1 v-if="!mostrarSkeleton" class="h3 mb-3"><strong>Dashboard |</strong> Construtora</h1>
+          <h1 v-if="!mostrarSkeleton" class="h3 mb-3"><strong>Dashboard |</strong> Administrador</h1>
 
-          <div class="col-xl-12 mt-2">
-            <div class="w-100">
-              <div class="row">
-
-                <div v-if="progressView" class="row" style="margin-left: 2%; margin-top: 2%; margin-bottom: 3%;">
-
-                  <div class="col-xl-2">
-                    <div v-if="mostrarSkeleton" class="skeleton-card"></div>
-                    <div class="card" v-if="!mostrarSkeleton">
-                      <div class="card-body">
-                        <div class="row">
-                          <h6 class="text-center"><small>Perfil</small></h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconPerfil.png" alt="">
-                          <div v-if="perfil === 0">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
-                          </div>
-                          <div v-if="perfil === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xl-1 mt-5">
-                    <hr class="linhacomplete">
-                  </div>
-
-                  <div class="col-xl-2">
-                    <div v-if="mostrarSkeleton" class="skeleton-card"></div>
-                    <div class="card" v-if="!mostrarSkeleton">
-                      <div class="card-body">
-                        <div class="row">
-                          <h6 class="text-center"><small>Logo</small></h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconLogo.png" alt="">
-                          <div v-if="capa === 0">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
-                          </div>
-                          <div v-if="capa === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-1 mt-5">
-                    <hr class="linhacomplete">
-                  </div>
-                  <div class="col-xl-2">
-                    <div v-if="mostrarSkeleton" class="skeleton-card"></div>
-                    <div class="card" v-if="!mostrarSkeleton">
-                      <div class="card-body">
-                        <div class="row">
-                          <h6 class="text-center"><small>Imóvel</small> </h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconImovel.png" alt="">
-
-                          <div v-if="imovel === 0">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
-                          </div>
-                          <div v-if="imovel === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xl-1 mt-5">
-                    <hr class="linhacomplete">
-                  </div>
-                  <div class="col-xl-2">
-                    <div v-if="mostrarSkeleton" class="skeleton-card"></div>
-                    <div class="card" v-if="!mostrarSkeleton">
-                      <div class="card-body">
-                        <div class="row">
-                          <h6 class="text-center"><small>Publicação</small> </h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconPublish.png" alt="">
-                          <div v-if="publicacao === 0">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
-                          </div>
-                          <div v-if="publicacao === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="col-xl-12 mt-5">
             <div class="w-100">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="row">
@@ -129,14 +30,37 @@
                       <h1 class="mt-1 mb-3">{{ totalImovel }}</h1>
                       <div class="mb-0">
                         <span class="text-danger">
-                          <i class="mdi mdi-arrow-bottom-right"></i> -3.65%
+                          <i class="mdi mdi-arrow-bottom-right"></i> 0
                         </span>
                         <span class="text-muted">Última semana</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col mt-0">
+                          <h5 class="card-title">Clientes <small class="text-success">Em uso</small></h5>
+                        </div>
+                        <div class="col-auto">
+                          <div class="stat text-primary">
+                            <i class="align-middle" data-feather="users"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <h1 class="mt-1 mb-3">{{ totalImovel }}</h1>
+                      <div class="mb-0">
+                        <span class="text-danger">
+                          <i class="mdi mdi-arrow-bottom-right"></i> 0
+                        </span>
+                        <span class="text-muted">Última semana</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="row">
@@ -152,7 +76,7 @@
                       <h1 class="mt-1 mb-3">0</h1>
                       <div class="mb-0">
                         <span class="text-danger">
-                          <i class="mdi mdi-arrow-bottom-right"></i> -3.65%
+                          <i class="mdi mdi-arrow-bottom-right"></i> 0
                         </span>
                         <span class="text-muted">Última semana</span>
                       </div>
@@ -857,7 +781,7 @@ export default {
     fetchMyImoveis() {
       let id_user = this.id_user;
 
-      api.listmyImoveis(id_user).then(res => {
+      api.listallImoveis(id_user).then(res => {
         this.myImoveis = res.data;
         console.log('Dados do Imóveis =====> ', this.myImoveis)
 
@@ -978,9 +902,6 @@ export default {
         imovel.pontuacaoQualidade = `${pontuacao}/10`;
         imovel.porcentagemQualidade = porcentagem;
         this.qualidade = imovel.pontuacaoQualidade;
-
-
-        console.log('Qualidade do Cadastro =====> ', imovel.porcentagemQualidade);
 
         if (porcentagem == 100) {
           this.estrelas = 5;

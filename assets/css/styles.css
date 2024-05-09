@@ -241,7 +241,7 @@ label[for="formFile"] {
   justify-content: center;
   align-items: center;
   margin-right: 2%;
-}
+} 
 
 .thumb {
   width: 100px;
@@ -332,7 +332,7 @@ label[for="formFile"] {
 
 .preview-photo-prato {
   width: 200px;
-  height: 400px;
+  height: 200px;
   background-color: rgb(245, 245, 245);
   border-radius: 10px;
   border: 2px solid #848484;
@@ -349,7 +349,7 @@ label[for="formFile"] {
 
 .img-photo-prato {
   width: 200px;
-  height: 400px;
+  height: 200px;
   border: 2px solid #848484;
   border-radius: 10px;
   background-image: url('../images/iconUpload.jpg');

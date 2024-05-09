@@ -94,6 +94,94 @@ export default {
     }
   },
 
+  listusuarios: async () => {
+    try {
+      const response = await http.get("/usuarios/", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  editStatusUser: async (id_user, status) => {
+    try {
+      const response = await http.patch(
+        "/usuarios/status",
+        {
+          id_user: id_user,
+          status: status,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  deleteUser: async (id_user) => {
+    try {
+      const response = await http.delete(`/usuarios/delete/${id_user}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETE",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  cadastrosample: async (nome, sobrenome, email, senha, selectNivel) => {
+    try {
+      const response = await http.post(
+        "/usuarios/cadastro-simples",
+        {
+          nome: nome,
+          sobrenome: sobrenome,
+          email: email,
+          senha: senha,
+          avatar: "",
+          nivel: selectNivel,
+          status: 1,
+          id_plano: 1,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
   sendNewAccount: async (email, nome) => {
     try {
       const response = await http.post(
@@ -132,6 +220,88 @@ export default {
             Accept: "application/json",
             "Access-Control-Allow-Headers": "*",
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  abritTicket: async (assunto, mensagem, id_user) => {
+    try {
+      const response = await http.post(
+        "/ticket/abrir",
+        {
+          assunto: assunto,
+          mensagem: mensagem,
+          id_user: id_user,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  listMyTickets: async (id_user) => {
+    try {
+      const response = await http.get(`/ticket/list/${id_user}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  listAllTickets: async () => {
+    try {
+      const response = await http.get("/ticket", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  RespondaTicket: async (id_ticket, resposta) => {
+    try {
+      const response = await http.patch(
+        `/ticket/${id_ticket}`,
+        {
+          resposta: resposta,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET, PATCH",
           },
         }
       );
@@ -196,7 +366,6 @@ export default {
         }
       );
 
-
       return response;
     } catch (error) {
       return error.response || error.message || error;
@@ -220,7 +389,6 @@ export default {
           },
         }
       );
-
 
       return response;
     } catch (error) {
@@ -247,17 +415,14 @@ export default {
 
   listminhasproximidades: async (id_user) => {
     try {
-      const response = await http.get(
-        `/proximidades/user/${id_user}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-          },
-        }
-      );
+      const response = await http.get(`/proximidades/user/${id_user}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
 
       return response;
     } catch (error) {
@@ -396,18 +561,33 @@ export default {
     }
   },
 
+
+  listBairro: async () => {
+    try {
+      const response = await http.get("/imovel/bairro", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
   novoImovel: async (formData) => {
     try {
-      const response = await http.post(
-        "/imovel/cadastrar", formData,
-        {
-          headers: {
-            "Accept": "application/json",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-          },
-        }
-      );
+      const response = await http.post("/imovel/cadastrar", formData, {
+        headers: {
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
 
       return response;
     } catch (error) {
@@ -432,5 +612,78 @@ export default {
     }
   },
 
+  listmyImoveis: async (id_user) => {
+    try {
+      const response = await http.get(`/imovel/user/${id_user}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
 
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  listallImoveis: async () => {
+    try {
+      const response = await http.get("/imovel", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  comentarioImovel: async (id_imovel) => {
+    try {
+      const response = await http.patch(
+        "/imovel/anotacao",
+        {
+          anotacao: anotacao,
+          id_imovel: id_imovel,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  deleteImovel: async (id_imovel) => {
+    try {
+      const response = await http.delete(`/imovel/delete/${id_imovel}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,DELETE",
+        },
+      });
+  
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
 };

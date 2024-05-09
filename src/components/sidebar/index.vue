@@ -10,55 +10,103 @@
 
             <hr>
 
-            <div class="logoArea">
+            <div v-if="viewLogo" class="logoArea">
                 <img class="logoEmpresa" src="../../../assets/images/logoEmpresa.jpg" alt="">
             </div>
 
-            <ul class="sidebar-nav" style="margin-top: -20px !important;">
+            <ul v-if="viewAdmin" class="sidebar-nav" style="margin-top: -20px !important;">
                 <li class="sidebar-header">
                     Administrador
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="/dashboard">
-                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    <a class="sidebar-link" href="/dashboard-admin">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard <span
+                                class="badge text-bg-warning">Zonu</span></span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/usuarios">
                         <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Usuários <span
-                                class="badge text-bg-info">Admin Zonu</span>
+                                class="badge text-bg-info">0</span>
                         </span>
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="/clientes">
+                        <i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Clientes <span
+                                class="badge text-bg-primary">0</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="sidebar-header">
+                    Configurações iniciais
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="/proximidades">
                         <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades
-                            <span class="badge text-bg-success">Geral</span></span>
+                            <span class="badge text-bg-success">0</span></span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/caracteristica">
                         <i class="align-middle" data-feather="check-square"></i> <span
-                            class="align-middle">Caracteristica <span class="badge text-bg-success">Geral</span></span>
+                            class="align-middle">Caracteristica <span class="badge text-bg-success">0</span></span>
+                    </a>
+                </li>
+                <li class="sidebar-header">
+                    Pedidos de suporte
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/list-ticket">
+                        <i class="align-middle" data-feather="tag"></i> <span class="align-middle">Tickets <span
+                                class="badge text-bg-danger">{{ totalTickets }}</span></span>
+                    </a>
+                </li>
+
+
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/termos">
+                        <i class="align-middle" data-feather="file"></i> <span class="align-middle">Termos & Condições
+                        </span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="/clientes">
-                        <i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Clientes
-                        </span>
+                    <a class="sidebar-link" href="/privacidade">
+                        <i class="align-middle" data-feather="file"></i> <span class="align-middle">Privacidade </span>
                     </a>
                 </li>
 
 
                 <li class="sidebar-header">
+                    Visão cliente
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/dashboard">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard Cliente</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-condominio">
+                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Novo
+                            condomínio</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul v-if="viewClient" class="sidebar-nav" style="margin-top: -20px !important;">
+                
+                <li class="sidebar-header">
                     Gestão
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="/dashboard-client">
+                    <a class="sidebar-link" href="/dashboard">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                     </a>
                 </li>
@@ -77,7 +125,16 @@
                     </a>
                 </li>
 
+                <li class="sidebar-header">
+                    Suporte
+                </li>
 
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-ticket">
+                        <i class="align-middle" data-feather="tag"></i> <span class="align-middle">Tickets <span
+                                class="badge text-bg-danger">0</span></span>
+                    </a>
+                </li>
 
             </ul>
 
@@ -87,15 +144,19 @@
 </template>
 
 <script>
-
+import api from "../../../service/api/index";
 import { jwtDecode } from "jwt-decode";
 export default {
     name: 'SideBar',
 
     data() {
         return {
-            token: '',
+            token: localStorage.getItem('token'),
             isCollapsed: this.defaultCollapsed,
+            totalTickets: 0,
+            viewClient: false,
+            viewAdmin: false,
+            viewLogo: false,
         }
     },
 
@@ -106,15 +167,25 @@ export default {
     },
     mounted() {
 
-        let token = localStorage.getItem('token');
+        let token = this.token
+        let decode = jwtDecode(token);
+
+        console.log(decode);
+
+        if(decode.id_nivel == 1){
+            this.viewAdmin = true;
+            this.viewClient = false;
+            this.viewLogo = false;
+        }else{
+            this.viewAdmin = false;
+            this.viewClient = true;
+            this.viewLogo = true;
+        }
 
         if (!token || token === 'null') {
             window.location.href = "/";
         } else {
             try {
-                let decode = jwtDecode(token);
-                this.token = decode;
-
                 if (decode.id_status == 2) {
 
                     console.log('Status do token inválido:', decode.id_status);
@@ -125,6 +196,24 @@ export default {
                 console.error('Erro ao decodificar token:', error);
             }
         }
+
+
+
+
+        api.listAllTickets().then(res => {
+
+            if (Array.isArray(res.data)) {
+                const filteredTickets = res.data.filter(ticket => ticket.status === 2);
+
+                this.totalTickets = filteredTickets.length;
+
+            } else {
+                console.log('Resposta não contém um array ou está em um formato não esperado');
+            }
+        }).catch(error => {
+            console.error('Erro ao buscar tickets: ', error);
+        });
+
     }
 
 

@@ -9,8 +9,8 @@
         <div class="container-fluid p-0">
           <h1 class="h3 mb-3"><strong>Cadastro |</strong> Novo Imóveis</h1>
 
-
           <div class="row d-flex flex-row justify-content-between">
+
 
             <div style="width: 19%; margin-right: 1%">
               <div class="col-xl-12 col-xxl-12 d-flex">
@@ -237,11 +237,12 @@
                                   </a>
                                 </label>
 
-                                <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
+                                <select required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="condominioEmpreendimento">
                                   <option selected disabled>Selecione</option>
-                                  <option v-for="item in listsCondominios" :value="item.id_condominio">{{
-                                    item.nome_condominio }}</option>
+
+                                  <option v-for="condominio in condominios" :value="condominio.id_condominio">{{
+                                    condominio.nome_condominio }}</option>
                                 </select>
                               </div>
                             </div>
@@ -281,7 +282,16 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="tipoImovel">
                                   <option selected disabled>Selecione</option>
-                                  <option value="Tipo/Subtipo">Tipo/Subtipo</option>
+                                  <option value="Casa">Casa</option>
+                                  <option value="Apartamento">Apartamento</option>
+                                  <option value="Flat">Flat</option>
+                                  <option value="Terreno">Terreno</option>
+                                  <option value="Sítio">Sítio</option>
+                                  <option value="Haras">Haras</option>
+                                  <option value="Kitnet">Kitnet</option>
+                                  <option value="Fazenda">Fazenda</option>
+                                  <option value="Galpão">Galpão</option>
+                                  <option value="Sala Comercial">Sala Comercial</option>
                                 </select>
                               </div>
                             </div>
@@ -298,7 +308,11 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="perfilImovel">
                                   <option selected disabled>Selecione</option>
-                                  <option value="Perfil do imóvel">Perfil do imóvel</option>
+                                  <option value="Residêncial">Residêncial</option>
+                                  <option value="Comercial">Comercial</option>
+                                  <option value="Industrial">Industrial</option>
+                                  <option value="Rural">Rural</option>
+                                  <option value="Temporada">Temporada</option>
                                 </select>
                               </div>
                             </div>
@@ -314,7 +328,12 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="situacaoImovel">
                                   <option selected disabled>Selecione</option>
-                                  <option value="Situação">Situação</option>
+                                  <option value="Pronto pra morar">Pronto pra morar</option>
+                                  <option value="Em construção">Em construção</option>
+                                  <option value="Lançamento">Lançamento</option>
+                                  <option value="Novo">Novo</option>
+                                  <option value="Usado">Usado</option>
+                                 
                                 </select>
                               </div>
                             </div>
@@ -341,16 +360,9 @@
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Incorporação
-                                  <small class="text-danger">* </small>
-                                </label>
-
-                                <input type="date" required v-if="!mostrarSkeleton" class="form-control"
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Incorporação</label>
+                                <input type="date"  v-if="!mostrarSkeleton" class="form-control"
                                   placeholder="Digite..." v-model="incorporacao" />
-
-                                <small v-if="msgNull" class="text-danger">
-                                  <li class="mt-2">Não deixe este campo vazio</li>
-                                </small>
                               </div>
                             </div>
 
@@ -364,10 +376,14 @@
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="posicaoSolar">
                                   <option selected disabled>Selecione</option>
-                                  <option value="posicao1">Posicao 1</option>
-                                  <option value="posicao2">Posicao 2</option>
-                                  <option value="posicao3">Posicao 3</option>
-
+                                  <option value="Norte">Norte</option>
+                                  <option value="Sul">Sul</option>
+                                  <option value="Leste">Leste</option>
+                                  <option value="Oeste">Oeste</option>
+                                  <option value="Sudeste">Sudeste</option>
+                                  <option value="Nordeste">Nordeste</option>
+                                  <option value="Sudoeste">Sudoeste</option>
+                                  <option value="Noroeste">Noroeste</option>
                                 </select>
                               </div>
                             </div>
@@ -713,14 +729,17 @@
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" name="garagemCoberta"
+                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" name="garagemCoberta"
                                     id="selectGaragemCobertura1" autocomplete="off" value="Sim"
                                     v-model="selectGaragemCobertura" />
-                                  <label class="btn btn-outline-success" for="selectGaragemCobertura1">Sim</label>
+                                  <label v-if="!mostrarSkeleton" class="btn btn-outline-success"
+                                    for="selectGaragemCobertura1">Sim</label>
 
-                                  <input type="radio" class="btn-check" value="Não" v-model="selectGaragemCobertura"
-                                    name="garagemCoberta" id="selectGaragemCobertura2" autocomplete="off" />
-                                  <label class="btn btn-outline-danger" for="selectGaragemCobertura2">Não</label>
+                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" value="Não"
+                                    v-model="selectGaragemCobertura" name="garagemCoberta" id="selectGaragemCobertura2"
+                                    autocomplete="off" />
+                                  <label v-if="!mostrarSkeleton" class="btn btn-outline-danger"
+                                    for="selectGaragemCobertura2">Não</label>
                                 </div>
                               </div>
                             </div>
@@ -736,13 +755,15 @@
                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                  <input type="radio" class="btn-check" name="boxGaragem" id="boxGaragemY"
-                                    autocomplete="off" value="Sim" v-model="selectBoxGaragem" />
-                                  <label class="btn btn-outline-success" for="boxGaragemY">Sim</label>
+                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" name="boxGaragem"
+                                    id="boxGaragemY" autocomplete="off" value="Sim" v-model="selectBoxGaragem" />
+                                  <label v-if="!mostrarSkeleton" class="btn btn-outline-success"
+                                    for="boxGaragemY">Sim</label>
 
-                                  <input type="radio" class="btn-check" value="Não" v-model="selectBoxGaragem"
-                                    name="boxGaragem" id="boxGaragemN" autocomplete="off" />
-                                  <label class="btn btn-outline-danger" for="boxGaragemN">Não</label>
+                                  <input v-if="!mostrarSkeleton" type="radio" class="btn-check" value="Não"
+                                    v-model="selectBoxGaragem" name="boxGaragem" id="boxGaragemN" autocomplete="off" />
+                                  <label v-if="!mostrarSkeleton" class="btn btn-outline-danger"
+                                    for="boxGaragemN">Não</label>
                                 </div>
                               </div>
                             </div>
@@ -928,8 +949,9 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaConstruida" placeholder="Digite aqui..." />
-                                  <span class="input-group-text">m²</span>
+                                    v-model="areaConstruida" placeholder="Digite aqui..."
+                                    @input="aplicaMascaraMedida" />
+                                  <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
                             </div>
@@ -943,8 +965,9 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaPrivativa" placeholder="Digite aqui..." />
-                                  <span class="input-group-text">m²</span>
+                                    v-model="areaPrivativa" placeholder="Digite aqui..."
+                                    @input="aplicaMascaraMedidaPrivativa" />
+                                  <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
                             </div>
@@ -958,8 +981,9 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaTotal" placeholder="Digite aqui..." />
-                                  <span class="input-group-text">m²</span>
+                                    v-model="areaTotal" disabled placeholder="Aguardando..."
+                                    @input="aplicaMascaraMedidaTotal" />
+                                  <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
                             </div>
@@ -1025,9 +1049,11 @@
                                   Preço Imóvel
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="precoImovel" placeholder="R$ 0,00" />
                                   <span v-if="!mostrarSkeleton" class="input-group-text">R$</span>
+                                  <input type="text" @input="aplicaMascaraDinheiroPrecoImovel"
+                                    @blur="aplicaMascaraDinheiroPrecoImovel" required v-if="!mostrarSkeleton"
+                                    class="form-control" v-model="precoImovel" placeholder="R$ 0,00" />
+
                                 </div>
                               </div>
                             </div>
@@ -1074,8 +1100,9 @@
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">
                                   Preço do IPTU
                                 </label>
-                                <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="precoIptu" placeholder="R$ 0,00" />
+                                <input type="text" @input="aplicaMascaraDinheiroPrecoIptu"
+                                  @blur="aplicaMascaraDinheiroPrecoIptu" required v-if="!mostrarSkeleton"
+                                  class="form-control" v-model="precoIptu" placeholder="R$ 0,00" />
                               </div>
                             </div>
 
@@ -1110,7 +1137,8 @@
                                   Preço Condomínio
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="precoCondominio" placeholder="R$ 0,00" />
+                                  v-model="precoCondominio" @input="aplicaMascaraDinheiroPrecoCondominio"
+                                  @blur="aplicaMascaraDinheiroPrecoCondominio" placeholder="R$ 0,00" />
                               </div>
                             </div>
 
@@ -1192,7 +1220,8 @@
                                   Total mensal em taxas (se houver)
                                 </label>
                                 <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                  v-model="taxasTotal" placeholder="R$ 0,00" />
+                                  v-model="taxasTotal" placeholder="R$ 0,00" @input="aplicaMascaraDinheiroTotalTaxas"
+                                  @blur="aplicaMascaraDinheiroTotalTaxas" />
                               </div>
                             </div>
 
@@ -2066,6 +2095,8 @@
                             <li class="text-danger"><small> Formatos aceitos .PNG .JPG ou .JPEG</small></li>
                             <li class="text-danger"><small> Tamanho máx. permitido é de até 3 mb por imagem.</small>
                             </li>
+                            <li class="text-danger"><small> A resolução ideal de w: 1342 h:768.</small>
+                            </li>
 
                             <div class="row g-3">
                               <div class="col-12">
@@ -2138,6 +2169,9 @@
 
                     <div class="card" v-if="publicacaoTab">
                       <div class="card-body">
+
+
+
                         <div class="col mt-0">
                           <h1 class="title-login mt-2">Publicação</h1>
                           <p>
@@ -2270,7 +2304,7 @@ export default {
       msgNull: false,
       mostrarSkeleton: true,
       token: localStorage.getItem("token"),
-      listsCondominios: [],
+      condominios: [],
       listsProprietarios: [],
       autenticando: false,
       textoBotaoProprietario: "Add Proprietário",
@@ -2375,6 +2409,7 @@ export default {
       taxasDescricao: "",
       aceitaPermuta: "Não",
       permutaDescricao: "",
+      valorMetroQuadrado: 0, 
 
       //TAB CARACTERISTICA
       caracteristicaImovel: {},
@@ -2412,8 +2447,10 @@ export default {
       inputProximidades: "",
       proximidadesImovel: {},
       proximidadesAllImovel: {},
+
       minhasProximidades: [],
       listProximidades: [],
+
       msgSuccessProximidade: false,
       msgNullProximidades: false,
       addProximidades: false,
@@ -2454,6 +2491,17 @@ export default {
   created() {
     this.debouncedCheckCEP = _.debounce(this.consultarCEP, 100);
   },
+
+  computed: {
+  areaTotal() {
+    // Converte os valores para float e soma. Se não for número, trata como 0.
+    const construida = parseFloat(this.areaConstruida) || 0;
+    const privativa = parseFloat(this.areaPrivativa) || 0;
+
+    this.areaTotal = construida + privativa;
+    return this.areaTotal
+  }
+},
 
   watch: {
 
@@ -2591,22 +2639,13 @@ export default {
 
     this.fetchProximidades();
     this.fetchAllProximidades();
+    this.fetchProprietatio();
 
     api.listcondominio(id_user).then((res) => {
-        this.listsCondominios = res.data;
+      this.condominios = res.data.response;
+    })
 
-        console.log('Lista dos condomínios ===> ', this.listsCondominios)
-      }).catch((error) => {
-        console.error('Erro ao carregar lista de condomínios:', error);
-      });
-
-    api.listproprietario(id_user)
-      .then((res) => {
-        this.listsProprietarios = res.data;
-      })
-      .catch((error) => {
-        console.error('Erro ao carregar lista de condomínios:', error);
-      });
+   
 
     api.listcaracteristica().then((res) => {
       this.listcaracteristicas = res.data.response;
@@ -2619,7 +2658,6 @@ export default {
 
   methods: {
 
-
     aplicaMascaraCEP() {
       let v = this.buscarCEP;
 
@@ -2631,6 +2669,103 @@ export default {
       v = v.replace(/^(\d{5})(\d)/, "$1-$2");
 
       this.buscarCEP = v;
+    },
+
+    aplicaMascaraMedida() {
+      let v = this.areaConstruida;
+
+      // Remove tudo o que não é dígito e ponto
+      v = v.replace(/[^0-9.]/g, "");
+
+      // Evita a entrada de mais de um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      // Limita a apenas duas casas decimais após o ponto
+      v = v.replace(/(\.\d{2})\d+/g, '$1');
+
+      this.areaConstruida = v;
+    },
+
+    aplicaMascaraMedidaPrivativa() {
+      let v = this.areaPrivativa;
+
+      // Remove tudo o que não é dígito e ponto
+      v = v.replace(/[^0-9.]/g, "");
+
+      // Evita a entrada de mais de um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      // Limita a apenas duas casas decimais após o ponto
+      v = v.replace(/(\.\d{2})\d+/g, '$1');
+
+      this.areaPrivativa = v;
+    },
+
+    aplicaMascaraMedidaTotal() {
+      let v = this.areaTotal;
+
+      // Remove tudo o que não é dígito e ponto
+      v = v.replace(/[^0-9.]/g, "");
+
+      // Evita a entrada de mais de um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      // Limita a apenas duas casas decimais após o ponto
+      v = v.replace(/(\.\d{2})\d+/g, '$1');
+
+      this.areaTotal = v;
+    },
+
+    aplicaMascaraDinheiroPrecoImovel() {
+      let v = this.precoImovel;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.precoImovel = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
+
+    aplicaMascaraDinheiroPrecoIptu() {
+      let v = this.precoIptu;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.precoIptu = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
+
+    aplicaMascaraDinheiroPrecoCondominio() {
+      let v = this.precoCondominio;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.precoCondominio = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
+
+    aplicaMascaraDinheiroTotalTaxas() {
+      let v = this.taxasTotal;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.taxasTotal = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     },
 
     async consultarCEP() {
@@ -2659,18 +2794,20 @@ export default {
       }
     },
 
-
     handleprop() {
       this.addProp = true;
       this.infoTab = false;
     },
 
     getSelectedCaracteristicasIDs() {
-      return Object.keys(this.caracteristicaImovel).filter(id => this.caracteristicaImovel[id]).map(Number);
+        const selectedIds = Object.keys(this.caracteristicaImovel).filter(id => this.caracteristicaImovel[id]).map(Number);
+        return selectedIds;
     },
 
     getSelectedMinhasProximidadesIDs() {
       return Object.keys(this.proximidadesImovel).filter(id => this.proximidadesImovel[id]).map(Number);
+
+      
     },
 
     getSelectedAllProximidadesIDs() {
@@ -2681,6 +2818,8 @@ export default {
       const minhasIDs = this.getSelectedMinhasProximidadesIDs();
       const allIDs = this.getSelectedAllProximidadesIDs();
       const combinedIDs = [...new Set([...minhasIDs, ...allIDs])];
+
+      console.log(combinedIDs);
 
       return combinedIDs;
     },
@@ -2699,10 +2838,13 @@ export default {
         if (res.status == 201) {
           this.msgSuccessProprietario = true
           this.textoBotaoProprietario = "Tudo certo!"
+          this.fetchProprietatio()
+          
 
           setTimeout(() => {
             this.msgSuccessProprietario = false
             this.addProp = false;
+           
             this.infoTab = true;
             this.autenticando = false
           }, 3000)
@@ -2772,6 +2914,13 @@ export default {
 
     },
 
+    fetchProprietatio() {
+      let id_user = this.id_user;
+      api.listproprietario(id_user).then((res) => {
+        this.listsProprietarios = res.data.response;
+      })
+    },
+
     fetchAllProximidades() {
       api.listproximidade().then((res) => {
         const todasProximidades = res.data.response;
@@ -2780,7 +2929,6 @@ export default {
     },
 
     handleFecharProximidades() {
-
       this.addProximidades = false;
     },
 
@@ -2793,9 +2941,11 @@ export default {
 
       })
     },
+
     handleAbrirProximidades() {
       this.addProximidades = true;
     },
+
     //Ação do botão Proximo de cada tab
     handleProximoComodo() {
       const campos = [
@@ -2807,7 +2957,6 @@ export default {
         this.perfilImovel,
         this.situacaoImovel,
         this.anoImovel,
-        this.incorporacao,
         this.posicaoSolar,
         this.selectTerreno,
         this.proximoMar,
@@ -3185,6 +3334,20 @@ export default {
         }
       });
 
+    
+  let valorImovelLimpo = this.precoImovel.replace("R$", "").trim().replace(/\./g, "").replace(",", ".");
+  let valorImovelFloat = parseFloat(valorImovelLimpo);
+  let areaConstruidaFloat = parseFloat(this.areaConstruida);
+  this.valorMetroQuadrado = valorImovelFloat / areaConstruidaFloat;
+  
+
+  let valorMetroQuadrado = this.valorMetroQuadrado.toFixed(2);
+
+  
+  
+      
+  
+
       formData.append("cod_referencia", codRef);
       formData.append("tipo_imovel", tipoImovel);
       formData.append("perfil_imovel", perfilImovel);
@@ -3213,7 +3376,7 @@ export default {
       formData.append("escritorio", escritorio);
       formData.append("casa_empregada", depEmpregada);
       formData.append("copa", copa);
-      formData.append("area_construida", areaConstruida);
+      formData.append("area_contruida", areaConstruida);
       formData.append("area_privativa", areaPrivativa);
       formData.append("area_total", areaTotal);
       formData.append("tipo_negocio", tipoNegocio);
@@ -3223,6 +3386,7 @@ export default {
       formData.append("preco_iptu", precoIptu);
       formData.append("periodo_iptu", periodoIptu);
       formData.append("preco_condominio", precoCondominio);
+      formData.append("valor_metro_quadrado", valorMetroQuadrado);
       formData.append("financiado", estaFinanciado);
       formData.append("aceita_financiamento", aceitaFinanciamento);
       formData.append("minhacasa_minhavida", mCasaMVida);
@@ -3236,7 +3400,7 @@ export default {
       formData.append("cidade", selectCidade);
       formData.append("bairro", selectBairro);
       formData.append("logradouro", logradouro);
-      formData.append("numero_logradouro", nLogradouro);
+      formData.append("numero", nLogradouro);
       formData.append("complemento", complemento);
       formData.append("numero_unidade", idUnidade);
       formData.append("andar", selectAndar);
@@ -3256,8 +3420,9 @@ export default {
       formData.append("link_youtube", urlYT);
       formData.append("link_apresentacao", url360);
       formData.append("link_drive", link_drive);
-      formData.append("caracteristicas", JSON.stringify(caracteristicas));
-      formData.append("proximidades", JSON.stringify(proximidades));
+      console.log('Características a enviar: ', caracteristicas);
+      formData.append("id_caracteristicas", JSON.stringify(caracteristicas));
+      formData.append("id_proximidades", JSON.stringify(proximidades));
       formData.append("mostrar_imovel_publi", selectImovelSite);
       formData.append("tarja_imovel_site_publi", textoTarja);
       formData.append("cor_tarja_publi", corTarja);
@@ -3270,9 +3435,24 @@ export default {
         console.log(`${key}: ${value}`);
       }
 
+      console.log('Aqui estão os dados enviados: ', formData);
+
       api.novoImovel(formData).then((res) => {
+
         if (res.status === 200) {
 
+
+
+          this.msgSucesso = true;
+
+          setTimeout(() => {
+            this.msgSucesso = false;
+
+            this.$router.push({
+              name: 'dashboard'
+            });
+            
+          }, 3000);
 
 
         } else {
@@ -3328,7 +3508,7 @@ export default {
 
     handleAnteriorImagem() {
       this.publicacaoTab = false;
-      this.imagemTab = false;
+      this.imagemTab = true;
     },
   },
 

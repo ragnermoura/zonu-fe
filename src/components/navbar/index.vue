@@ -10,26 +10,30 @@
                     <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                         <div class="position-relative">
                             <i class="align-middle" data-feather="bell"></i>
-                            <span class="indicator">0</span>
+                            <span class="indicator">{{ totalTickets }}</span>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
                         <div class="dropdown-menu-header">
-                            0 Novas Notificações
+                            {{ totalTickets }} Novas Notificações
                         </div>
-                        <div class="list-group">
-                            <!-- <a href="solicitacoes" class="list-group-item">
+                        <div class="list-group" v-for="item in listTikects">
+                            <a href="solicitacoes" class="list-group-item">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-2">
-                                        <i class="text-success" data-feather="user-plus"></i>
+                                        <div class="avatar-null img-fluid rounded me-1" alt="Avatar">{{ iniciaisUser }}
+                                        </div>
                                     </div>
                                     <div class="col-10">
-                                        <div class="text-dark">New connection</div>
-                                        <div class="text-muted small mt-1">Christina accepted your request.</div>
-                                        <div class="text-muted small mt-1">14h ago</div>
+                                        <div class="text-dark">{{ item.usuario.nome }} {{ item.usuario.sobrenome }}
+                                        </div>
+                                        <div class="text-muted small mt-1">{{ truncate(item.mensagem, 20) }}</div>
+
+                                        <div class="text-muted small mt-1">{{ formatDate(item.data_pergunta) }} <span
+                                                class="badge text-bg-warning">{{ item.assunto }}</span></div>
                                     </div>
                                 </div>
-                            </a> -->
+                            </a>
                         </div>
                         <div class="dropdown-menu-footer">
                             <a href="solicitacoes" class="text-muted">Mostrar todas as Solicitações</a>
@@ -81,38 +85,40 @@
                         <img :src="`https://www.zonu.com.br/api/public${image}`" class="avatar img-fluid rounded me-1"
                             alt="Imagem de perfil" /> <span class="text-dark">{{ nome }} {{ sobrenome }}</span>
                     </a>
-                    <a v-if="image == null || image == '/avatar/default-avatar.png'" class="nav-link dropdown-toggle d-flex align-items-center" href="#"
-                        data-bs-toggle="dropdown">
+                    <a v-if="image == null || image == '/avatar/default-avatar.png'"
+                        class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
                         <div class="avatar-null img-fluid rounded me-1" alt="Avatar">{{ iniciais }}</div>
                         <span class="text-dark">{{ nome }} {{ sobrenome }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="/perfil"><i class="align-middle me-1" data-feather="user"></i>
+                        <a class="dropdown-item" href="/seu-perfil"><i class="align-middle me-1"
+                                data-feather="user"></i>
                             Perfil</a>
-                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i>
-                            Meus Créditos</a>
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
-                                data-feather="settings"></i>
-                            Configuração & Privacidade</a>
+                        <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="file"></i>
+                            Termos & Condições</a>
                         <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i>
                             Help
                             Center</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" @click="handleLogout" href="#">Log out</a>
+                        <a class="dropdown-item" @click="handleLogout" href="#"><i class="fa fa-power-off"></i> Sair</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 
-<div class="msgPerfil">
-<h6 class="text-perfil"><img src="../../../assets/images/icons/iconStars.png" width="25" alt=""> Seu perfil não está completo <a><i class="iconClose fa fa-close"></i></a> </h6>
-</div>
-   
+    <div v-if="bannerProfile" class="msgPerfil">
+        <h6 class="text-perfil"><img src="../../../assets/images/icons/iconStars.png" width="25" alt=""> Seu perfil não
+            está completo <a><i class="iconClose fa fa-close"></i></a> </h6>
+    </div>
+
 </template>
 <script>
 import { jwtDecode } from "jwt-decode";
+import api from "../../../service/api/index";
+import { format, parseISO } from 'date-fns';
 
 export default {
     name: 'NavBar',
@@ -123,8 +129,11 @@ export default {
             sobrenome: '',
             email: '',
             iniciais: '',
-            token: localStorage.getItem('token')
-
+            token: localStorage.getItem('token'),
+            totalTickets: 0,
+            listTikects: [],
+            iniciaisUser: '',
+            bannerProfile: false
         }
     },
     mounted() {
@@ -135,18 +144,62 @@ export default {
         this.sobrenome = decode.sobrenome
         this.email = decode.email
 
+        if(decode.id_nivel == 1){
+            this.bannerProfile = false 
+        }else{
+            this.bannerProfile = true 
+        }
+
         const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
         this.iniciais = iniciais
+
+        api.listAllTickets().then(res => {
+            if (Array.isArray(res.data)) {
+                const filteredTickets = res.data.filter(ticket => ticket.status === 2);
+
+                this.totalTickets = filteredTickets.length;
+
+                this.listTikects = filteredTickets
+
+                if (filteredTickets.length > 0) {
+                    const firstTicketUser = filteredTickets[0].usuario;
+                    this.iniciaisUser = `${firstTicketUser.nome.charAt(0)}${firstTicketUser.sobrenome.charAt(0)}`.toUpperCase();
+                }
+
+            } else {
+                console.log('Resposta não contém um array ou está em um formato não esperado');
+            }
+        }).catch(error => {
+            console.error('Erro ao buscar tickets: ', error);
+        });
+
 
 
     },
     methods: {
+
+        truncate(text, length) {
+            if (text.length > length) {
+                return text.substring(0, length) + '...'; // Trunca o texto e adiciona reticências
+            }
+            return text;
+        },
+
+        formatDate(dateString) {
+            const date = parseISO(dateString);
+            return format(date, 'PPpp'); // 'PPpp' é um exemplo de formato que inclui a data completa e a hora
+        },
+
+
         handleLogout() {
             localStorage.clear();
 
             window.location.href = '/';
             return false;
-        }
+        },
+
+
+
     }
 }
 
