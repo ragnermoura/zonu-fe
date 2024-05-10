@@ -1,0 +1,35 @@
+name: Deploy Vue.js App to Cpanel
+
+on:
+  push:
+    branches:
+      - publish
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy to Cpanel
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: server35.integrator.com.br
+        username: ${{ secrets.FTP_USERNAME }} 
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: 21
+        protocol: ftp
+        local-dir: dist/
+        server-dir: /zonu.com.br/

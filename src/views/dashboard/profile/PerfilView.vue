@@ -12,7 +12,7 @@
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <h5 class="card-title mb-0"><i class="fa fa-user"></i> Detalhes do perfil <span
-                                            style="float: inline-end;"> 
+                                            style="float: inline-end;">
                                             <a data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                 class="btn btn-info btn-sm" style="margin-right: 3px;" href="#"><i
                                                     class="fa fa-refresh"></i> Trocar
@@ -38,8 +38,10 @@
                                                 <h5 class="text-muted mb-0">{{ email }}</h5>
 
                                                 <label for="" class="mt-2"><small><strong>Nivel</strong></small></label>
-                                                <h5 class="text-muted mb-0"><span
+                                                <h5 v-if="nivel == 1" class="text-muted mb-0"><span
                                                         class="badge text-bg-primary">Administrador</span></h5>
+                                                <h5 v-if="nivel == 2" class="text-muted mb-0"><span
+                                                        class="badge text-bg-primary">Construtora</span></h5>
 
 
                                             </div>
@@ -74,9 +76,7 @@
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <h5 class="card-title mb-0"><i class="fa fa-building"></i> Detalhes da empresa <span
-                                            style="float: inline-end;"><a class="btn btn-warning btn-sm"
-                                                style="margin-right: 3px;" href="#"><i class="fa fa-edit"></i> Editar
-                                                dados</a></span></h5>
+                                            style="float: inline-end;"></span></h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="container">
@@ -92,14 +92,14 @@
 
                                             <div class="col-md-8 text-left">
                                                 <label for=""><small><strong>Razão Social</strong></small></label>
-                                                <h5 class="text-muted mb-0">Empresa LTDA</h5>
+                                                <h5 class="text-muted mb-0">{{ razaoSocial }}</h5>
 
                                                 <label for="" class="mt-2"><small><strong>CNPJ</strong></small></label>
-                                                <h5 class="text-muted mb-0">00.000.000/0001-00</h5>
+                                                <h5 class="text-muted mb-0">{{ cnpj }}</h5>
 
                                                 <label for=""
                                                     class="mt-2"><small><strong>Endereço</strong></small></label>
-                                                <h5 class="text-muted mb-0">00.000.000/0001-00</h5>
+                                                <h5 class="text-muted mb-0">{{ endereco }}</h5>
 
 
                                             </div>
@@ -107,11 +107,7 @@
                                             <div class="col-md-12 text-left">
                                                 <label for=""><small><strong><i class="fa fa-link"></i> Token
                                                             único</strong></small></label>
-                                                <h5 class="text-muted mb-0">Empresa LTDA</h5>
-
-
-
-
+                                                <h5 class="text-muted mb-0">{{ myToken }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +124,7 @@
                                 <hr class="my-0" />
                                 <div class="card-body">
                                     <h5 class="h6 card-title"><i class="fa fa-qrcode"></i> Seu Qr-code</h5>
-
+                                    <img :src="qrcode" width="200" alt="">
                                 </div>
 
                             </div>
@@ -192,7 +188,11 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-success">Alterar</button>
+                                        <button type="button" :disabled="autenticando" @click="handledEdit()"
+                                            class="btn btn-success">{{ textoBotao }}
+                                            <span v-if="autenticando" class="spinner-border spinner-border-sm"
+                                                aria-hidden="true"></span>
+                                            <span v-if="autenticando" class="visually-hidden">Aguarde...</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -214,18 +214,29 @@ import SideBar from '../../../components/sidebar/index.vue';
 import NavBar from '../../../components/navbar/index.vue';
 import Footer from '../../../components/footer/index.vue';
 import { jwtDecode } from "jwt-decode";
+import api from '../../../../service/api/index';
+
 export default {
     name: 'PerfilView',
     data() {
         return {
+            textoBotao: "Alterar senha",
+            autenticando: false,
             image: '',
             nome: '',
             sobrenome: '',
             email: '',
+            nivel: '',
             iniciais: '',
             plano: '',
             senha: '',
             confimSenha: '',
+            razaoSocial: '',
+            cnpj: '',
+            endereco: '',
+            myToken: '',
+            qrcode: '',
+            idUser: '',
         }
     },
     components: {
@@ -244,14 +255,43 @@ export default {
         let decode = jwtDecode(token);
 
         this.image = decode.avatar
+        this.idUser = decode.id_user
         this.nome = decode.nome
         this.sobrenome = decode.sobrenome
         this.email = decode.email
-        this.email = decode.email
+        this.nivel = decode.id_nivel
         this.plano = decode.id_plano
+        this.razaoSocial = decode.perfil.razao_social
+        this.cnpj = decode.perfil.cnpj
+        this.endereco = decode.perfil.endereco
+        this.qrcode = decode.qrcode.qrcode
+        this.myToken = decode.token.token
 
         const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
         this.iniciais = iniciais
+    },
+
+    methods: {
+
+        async handledEdit() {
+            let id_user = this.idUser
+            let senha = this.senha
+            this.autenticando = true
+
+            await api.alteraSenha(senha, id_user).then((res) => {
+
+                if (res.status == 201) {
+                    this.textoBotao = 'Senha alterada com sucesso....'
+
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 3000)
+
+
+                }
+            })
+
+        }
     }
 }
 </script>

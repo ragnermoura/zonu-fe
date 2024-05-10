@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            <Editor api-key="dm33a7hu52sgb098539v20fd0fb9x13z7mkgpra2s6qiamsl" :init="{
+                                            <Editor api-key="a0eo66lpqzpu1anhsfgh9ru0bp7id447c6hsvz9cgexp82oh" :init="{
                                                 toolbar_mode: 'sliding',
                                                 plugins:
                                                     'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
@@ -114,8 +114,7 @@ export default {
         this.fetchTickets();
         this.fetchResposta();
 
-        feather.replace();
-        this.fetchTerms();
+  
     },
 
     methods: {

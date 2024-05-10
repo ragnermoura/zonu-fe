@@ -170,7 +170,7 @@
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Cep
                                     </label>
                                     <input type="text" required v-if="!mostrarSkeleton" @input="aplicaMascaraCEP"
-                                        class="form-control" v-model="cep" placeholder="000000-000" />
+                                        class="form-control" v-model="buscarCEP" placeholder="000000-000" />
                                     <p v-if="msgErrorCep" class="text-danger mt-2">
                                         <small><i class="fa fa-check"></i> Cep inválido</small>
                                     </p>
@@ -184,7 +184,7 @@
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Endereço
                                     </label>
                                     <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                        v-model="endereco" placeholder="Digite o endereço completo" />
+                                        v-model="logradouro" placeholder="Digite o endereço completo" />
                                 </div>
                             </div>
                         </div>
@@ -262,8 +262,8 @@ export default {
             senha: '',
             confimSenha: '',
             telefone: '',
-            cep: '',
-            endereco: '',
+            buscarCEP: '',
+            logradouro: '',
             id_user: '',
             campoNullError: false,
             textoBotao: "Salvar",
@@ -284,9 +284,11 @@ export default {
         cnpj(newVal) {
             this.debouncedCheckCNPJ();
         },
-        cep(newVal) {
-            this.debouncedCheckCEP();
-        },
+         buscarCEP(newVal, oldVal) {
+      if (newVal.length === 9 && newVal !== oldVal) {
+        this.debouncedCheckCEP();
+      }
+    },
     },
     created() {
         this.debouncedCheckCNPJ = _.debounce(this.consultarCNPJ, 100);
@@ -314,7 +316,7 @@ export default {
             this.cnpj = v;
         },
         aplicaMascaraCEP() {
-            let v = this.cep;
+            let v = this.buscarCEP;
 
             v = v.replace(/\D/g, "");
             if (v.length > 8) {
@@ -323,7 +325,7 @@ export default {
 
             v = v.replace(/^(\d{5})(\d)/, "$1-$2");
 
-            this.cep = v;
+            this.buscarCEP = v;
         },
         aplicaMascaraTelefone() {
             let v = this.telefone;
@@ -358,26 +360,25 @@ export default {
 
             }
         },
-        async consultarCEP() {
-            if (this.cep.length === 9) {
-                const cep = this.cep.replace(/\D/g, '');
 
-                try {
-                    const res = await axios.get(`https://brasilapi.com.br/api/cep/v2/${cep}`);
+         async consultarCEP() {
+      if (this.buscarCEP.length === 9) {
+        const cep = this.buscarCEP.replace(/\D/g, '');
 
-                    let rua = res.data.street
-                    let bairro = res.data.neighborhood
-                    let cidade = res.data.city
-                    let estado = res.data.state
+        try {
+          const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
 
-                    this.endereco = rua + ', ' + bairro + ', ' + cidade + ' - ' + estado
+          // Correção nas propriedades de acordo com a resposta da API
+          let rua = res.data.logradouro;
+   
+          this.logradouro = rua
 
-                } catch (error) {
-                    console.error("Erro ao consultar CEP: ", error);
 
-                }
-            }
-        },
+        } catch (error) {
+          console.error("Erro ao consultar CEP: ", error);
+        }
+      }
+    },
         handleAvancar() {
             this.cnpjTab = false
             this.dadosTab = true
@@ -399,8 +400,8 @@ export default {
             let email = this.email
             let senha = this.senha
             let telefone = this.telefone
-            let cep = this.cep
-            let endereco = this.endereco
+            let cep = this.buscarCEP
+            let endereco = this.logradouro
 
             if (nome !== '' && sobrenome !== '' && email !== '' && senha !== '' && telefone && cep && endereco != '') {
 

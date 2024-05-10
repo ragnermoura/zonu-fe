@@ -49,6 +49,32 @@ export default {
     }
   },
 
+
+ alteraSenha: async (senha, id_user) => {
+    try {
+      const response = await http.patch(
+        "/usuarios/dados/",
+        {
+          id_user: id_user,
+          senha: senha,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+
   cadastro: async (
     nome,
     sobrenome,
@@ -69,7 +95,7 @@ export default {
           email: email,
           senha: senha,
           avatar: "",
-          nivel: 1,
+          nivel: 2,
           status: 1,
           id_plano: 1,
           razao_social: razao_social,
