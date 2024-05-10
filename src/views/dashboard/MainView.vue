@@ -23,14 +23,14 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Perfil</small></h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconPerfil.png" alt="">
+                          <img class="iconProgress" src=".../../../assets/images/icons/iconPerfil.png" alt="">
                           <div v-if="perfil === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="perfil === 1">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckActive.png" alt="">
                           </div>
 
                         </div>
@@ -48,14 +48,14 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Logo</small></h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconLogo.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconLogo.png" alt="">
                           <div v-if="capa === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="capa === 1">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckActive.png" alt="">
                           </div>
                         </div>
                       </div>
@@ -70,15 +70,15 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Imóvel</small> </h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconImovel.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconImovel.png" alt="">
 
                           <div v-if="imovel === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="imovel === 1">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckActive.png" alt="">
                           </div>
                         </div>
                       </div>
@@ -93,14 +93,14 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Publicação</small> </h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconPublish.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconPublish.png" alt="">
                           <div v-if="publicacao === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="publicacao === 1">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckActive.png" alt="">
                           </div>
                         </div>
                       </div>
