@@ -23,7 +23,7 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Perfil</small></h6>
-                          <img class="iconProgress" src=".../../../assets/images/icons/iconPerfil.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconPerfil.png" alt="">
                           <div v-if="perfil === 0">
                             <img class="mt-3 iconCheck img-fluid"
                               src="../../../assets/images/icons/iconCheckInActive.png" alt="">
