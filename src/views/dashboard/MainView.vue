@@ -70,7 +70,7 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Imóvel</small> </h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconImovel.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconImovel.png" alt="">
 
                           <div v-if="imovel === 0">
                             <img class="mt-3 iconCheck img-fluid"
