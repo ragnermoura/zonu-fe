@@ -23,14 +23,14 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Perfil</small></h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconPerfil.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconPerfil.png" alt="">
                           <div v-if="perfil === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="perfil === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                            <img class="mt-3 iconCheck img-fluid" src="../../../assets/images/icons/iconCheckActive.png"
+                              alt="">
                           </div>
 
                         </div>
@@ -48,14 +48,14 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Logo</small></h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconLogo.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconLogo.png" alt="">
                           <div v-if="capa === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="capa === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                            <img class="mt-3 iconCheck img-fluid" src="../../../assets/images/icons/iconCheckActive.png"
+                              alt="">
                           </div>
                         </div>
                       </div>
@@ -74,11 +74,11 @@
 
                           <div v-if="imovel === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="imovel === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                            <img class="mt-3 iconCheck img-fluid" src="../../../assets/images/icons/iconCheckActive.png"
+                              alt="">
                           </div>
                         </div>
                       </div>
@@ -93,14 +93,14 @@
                       <div class="card-body">
                         <div class="row">
                           <h6 class="text-center"><small>Publicação</small> </h6>
-                          <img class="iconProgress" src="../../../../assets/images/icons/iconPublish.png" alt="">
+                          <img class="iconProgress" src="../../../assets/images/icons/iconPublish.png" alt="">
                           <div v-if="publicacao === 0">
                             <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckInActive.png" alt="">
+                              src="../../../assets/images/icons/iconCheckInActive.png" alt="">
                           </div>
                           <div v-if="publicacao === 1">
-                            <img class="mt-3 iconCheck img-fluid"
-                              src="../../../../assets/images/icons/iconCheckActive.png" alt="">
+                            <img class="mt-3 iconCheck img-fluid" src="../../../assets/images/icons/iconCheckActive.png"
+                              alt="">
                           </div>
                         </div>
                       </div>
@@ -129,9 +129,9 @@
                       <h1 class="mt-1 mb-3">{{ totalImovel }}</h1>
                       <div class="mb-0">
                         <span class="text-danger">
-                          <i class="mdi mdi-arrow-bottom-right"></i> -3.65%
+                          <i class="mdi mdi-arrow-bottom-right"></i>
                         </span>
-                        <span class="text-muted">Última semana</span>
+                        <span class="text-muted">Estimativa Geral</span>
                       </div>
                     </div>
                   </div>
@@ -149,12 +149,12 @@
                           </div>
                         </div>
                       </div>
-                      <h1 class="mt-1 mb-3">0</h1>
+                      <h1 class="mt-1 mb-3">{{ totalCondominios }}</h1>
                       <div class="mb-0">
                         <span class="text-danger">
-                          <i class="mdi mdi-arrow-bottom-right"></i> -3.65%
+                          <i class="mdi mdi-arrow-bottom-right"></i>
                         </span>
-                        <span class="text-muted">Última semana</span>
+                        <span class="text-muted">Estimativa Geral</span>
                       </div>
                     </div>
                   </div>
@@ -175,12 +175,12 @@
                     </div>
                     <div class="card-body py-3">
                       <input type="text" placeholder="Pesquise aqui" class="form-control mb-3"
-                        aria-describedby="passwordHelpBlock" v-model="searchCaracteristica" />
-                      <div class="mt-5" v-for="item in myImoveis" :key="item.id_imovel">
+                        aria-describedby="passwordHelpBlock" v-model="searchImovel" />
+                      <div class="mt-5" v-for="item in imoveisOnCurrentPage" :key="item.id_imovel">
 
                         <a class="row" style="text-decoration: none;">
                           <div class="col-3">
-                            <img class="thumbImovel" :src="`http://localhost:3000${item.fotos[0].foto}`" alt="">
+                            <img class="thumbImovel" :src="`https://zonu.com.br/public${item.fotos[0].foto}`" alt="">
                           </div>
 
                           <div class="col-9" style="margin-left: -10px;">
@@ -243,7 +243,7 @@
                                     <div class="container">
                                       <div class="row">
                                         <div class="col-md-2 mt-4" v-for="foto in item.fotos" :key="foto.id_imagem">
-                                          <img :src="`http://localhost:3000${foto.foto}`"
+                                          <img :src="`https://zonu.com.br/public${foto.foto}`"
                                             :alt="`Foto ${foto.id_imagem} do Imóvel ${item.id_imovel}`"
                                             class="thumbnail-modal">
                                         </div>
@@ -621,10 +621,11 @@
                       </div>
 
                       <div class="d-grid mt-3 mb-3 gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-dark btn-sm">
-                          Anterior
+                        <button class="btn btn-dark btn-sm" @click="previousPageImovel()"
+                          :disabled="currentPageImovel <= 1"> Anterior
                         </button>
-                        <button class=" btn btn-dark btn-sm" style="margin-right: 3% !important;">
+                        <button class=" btn btn-dark btn-sm" style="margin-right: 3% !important;"
+                          @click="nextPageImovel()" :disabled="currentPageImovel >= totalPagesImoveis">
                           Proximo
                         </button>
                       </div>
@@ -793,6 +794,12 @@ export default {
       selectedBairro: '',
       mediaValorMetroQuadrado: 0,
       chartInstance: null,
+
+      currentPageImovel: 1,
+      perPageImovel: 5,
+      searchImovel: '',
+
+      totalCondominios: 0
     }
   },
   components: {
@@ -840,6 +847,7 @@ export default {
     this.fetchMyImoveis();
     this.fetchAllImoveis();
     this.calcularMediaTodosBairros();
+    this.fetchMyCondominios();
 
   },
 
@@ -859,10 +867,7 @@ export default {
 
       api.listmyImoveis(id_user).then(res => {
         this.myImoveis = res.data;
-        console.log('Dados do Imóveis =====> ', this.myImoveis)
-
         this.totalImovel = this.myImoveis.length;
-
 
         this.avaliarQualidadeCadastro(this.myImoveis);
 
@@ -1096,12 +1101,56 @@ export default {
       });
     },
 
+    fetchMyCondominios() {
+      let id_user = this.id_user
+      api.listcondominio(id_user).then((res) => {
+      this.totalCondominios = res.data.response.length;
+    })
+    },
+
     fetchAllImoveis() {
       api.listallImoveis().then(res => {
         this.allImoveis = res.data;
       })
-    }
+    },
+
+    previousPageImovel() {
+      if (this.currentPageImovel > 1) {
+        this.currentPageImovel -= 1
+      }
+    },
+    nextPageImovel() {
+      if (this.currentPageImovel < this.totalPagesImoveis) {
+        this.currentPageImovel += 1
+      }
+    },
+
+
   },
+
+  computed: {
+    imoveisOnCurrentPage() {
+      const startIndex = (this.currentPageImovel - 1) * this.perPageImovel
+      const endIndex = startIndex + this.perPageImovel
+      return this.myImoveis
+        .filter((imovel) => {
+          return imovel.descricao.titulo
+            .toLowerCase()
+            .includes(this.searchImovel.toLowerCase())
+        })
+        .slice(startIndex, endIndex)
+    },
+    totalPagesImoveis() {
+      return Math.ceil(
+        this.myImoveis.filter((imovel) => {
+          this.currentPageConcept = 1
+          return imovel.descricao.titulo
+            .toLowerCase()
+            .includes(this.searchImovel.toLowerCase())
+        }).length / this.perPageImovel,
+      )
+    },
+  }
 
 }
 </script>

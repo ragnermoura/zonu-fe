@@ -1,7 +1,7 @@
 <template>
     <nav id="sidebar" class="sidebar js-sidebar" :class="{ 'collapsed': isCollapsed }">
         <div class="sidebar-content js-simplebar">
-            <a class="sidebar-brand" href="index.html">
+            <a class="sidebar-brand" href="">
                 <span class="align-middle">
                     <img src="../../../assets/images/logo.svg" class="logomin" alt="" srcset="">
 
@@ -10,10 +10,7 @@
 
             <hr>
 
-            <div v-if="viewLogo" class="logoArea">
-                <img class="logoEmpresa" src="../../../assets/images/logoEmpresa.jpg" alt="">
-            </div>
-
+        
             <ul v-if="viewAdmin" class="sidebar-nav" style="margin-top: -20px !important;">
                 <li class="sidebar-header">
                     Administrador

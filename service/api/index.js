@@ -52,18 +52,17 @@ export default {
 
  alteraSenha: async (senha, id_user) => {
     try {
-      const response = await http.patch(
-        "/usuarios/dados/",
+      const response = await http.put(
+        `/usuarios/dados/${id_user}`,
         {
-          id_user: id_user,
-          senha: senha,
+          senha: senha
         },
         {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
             "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
           },
         }
       );
@@ -301,6 +300,23 @@ export default {
   listAllTickets: async () => {
     try {
       const response = await http.get("/ticket", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  listMyTickets: async (id_user) => {
+    try {
+      const response = await http.get(`/ticket/my/${id_user}`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

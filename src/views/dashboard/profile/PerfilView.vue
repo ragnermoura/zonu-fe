@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 col-xl-7">
+                        <div class="col-md-12 col-xl-7" v-if="card">
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <h5 class="card-title mb-0"><i class="fa fa-building"></i> Detalhes da empresa <span
@@ -237,6 +237,7 @@ export default {
             myToken: '',
             qrcode: '',
             idUser: '',
+            card: true,
         }
     },
     components: {
@@ -254,6 +255,18 @@ export default {
         this.token = token;
         let decode = jwtDecode(token);
 
+        if (decode.perfil == null) {
+            this.card = false
+        }
+        else if (decode.perfil !== null) {
+            this.card = true
+            this.razaoSocial = decode.perfil.razao_social
+            this.cnpj = decode.perfil.cnpj
+            this.endereco = decode.perfil.endereco
+            this.qrcode = decode.qrcode.qrcode
+            this.myToken = decode.token.token
+        }
+
         this.image = decode.avatar
         this.idUser = decode.id_user
         this.nome = decode.nome
@@ -261,11 +274,7 @@ export default {
         this.email = decode.email
         this.nivel = decode.id_nivel
         this.plano = decode.id_plano
-        this.razaoSocial = decode.perfil.razao_social
-        this.cnpj = decode.perfil.cnpj
-        this.endereco = decode.perfil.endereco
-        this.qrcode = decode.qrcode.qrcode
-        this.myToken = decode.token.token
+
 
         const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
         this.iniciais = iniciais
@@ -280,7 +289,7 @@ export default {
 
             await api.alteraSenha(senha, id_user).then((res) => {
 
-                if (res.status == 201) {
+                if (res.status == 200) {
                     this.textoBotao = 'Senha alterada com sucesso....'
 
                     setTimeout(() => {

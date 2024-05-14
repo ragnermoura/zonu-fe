@@ -3,7 +3,7 @@ name: Deploy Vue.js App to Cpanel
 on:
   push:
     branches:
-      - publish
+      - integrate-novo-imovel
 
 jobs:
   build-and-deploy:

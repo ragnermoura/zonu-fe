@@ -133,7 +133,8 @@ export default {
             totalTickets: 0,
             listTikects: [],
             iniciaisUser: '',
-            bannerProfile: false
+            bannerProfile: false,
+            nivel: ''
         }
     },
     mounted() {
@@ -143,36 +144,63 @@ export default {
         this.nome = decode.nome
         this.sobrenome = decode.sobrenome
         this.email = decode.email
+        this.nivel = decode.id_nivel
+        this.idUser = decode.id_user
 
-        if(decode.id_nivel == 1){
-            this.bannerProfile = false 
-        }else{
-            this.bannerProfile = true 
+        if (decode.id_nivel == 1) {
+            this.bannerProfile = false
+        } else {
+            this.bannerProfile = true
         }
 
         const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
         this.iniciais = iniciais
 
-        api.listAllTickets().then(res => {
-            if (Array.isArray(res.data)) {
-                const filteredTickets = res.data.filter(ticket => ticket.status === 2);
 
-                this.totalTickets = filteredTickets.length;
+        if (this.nivel == 1) {
+            api.listAllTickets().then(res => {
+                if (Array.isArray(res.data)) {
+                    const filteredTickets = res.data.filter(ticket => ticket.status === 2);
 
-                this.listTikects = filteredTickets
+                    this.totalTickets = filteredTickets.length;
 
-                if (filteredTickets.length > 0) {
-                    const firstTicketUser = filteredTickets[0].usuario;
-                    this.iniciaisUser = `${firstTicketUser.nome.charAt(0)}${firstTicketUser.sobrenome.charAt(0)}`.toUpperCase();
+                    this.listTikects = filteredTickets
+
+                    if (filteredTickets.length > 0) {
+                        const firstTicketUser = filteredTickets[0].usuario;
+                        this.iniciaisUser = `${firstTicketUser.nome.charAt(0)}${firstTicketUser.sobrenome.charAt(0)}`.toUpperCase();
+                    }
+
+                } else {
+                    console.log('Resposta não contém um array ou está em um formato não esperado');
                 }
+            }).catch(error => {
+                console.error('Erro ao buscar tickets: ', error);
+            });
 
-            } else {
-                console.log('Resposta não contém um array ou está em um formato não esperado');
-            }
-        }).catch(error => {
-            console.error('Erro ao buscar tickets: ', error);
-        });
+        } else if (this.nivel == 2) {
 
+            let id_user = this.idUser;
+
+            api.listMyTickets(id_user).then(res => {
+                if (Array.isArray(res.data)) {
+                    const filteredTickets = res.data.filter(ticket => ticket.status === 1);
+
+                    this.totalTickets = filteredTickets.length;
+                    this.listTikects = filteredTickets
+
+                    if (filteredTickets.length > 0) {
+                        const firstTicketUser = filteredTickets[0].usuario;
+                        this.iniciaisUser = `${firstTicketUser.nome.charAt(0)}${firstTicketUser.sobrenome.charAt(0)}`.toUpperCase();
+                    }
+
+                } else {
+                    console.log('Resposta não contém um array ou está em um formato não esperado');
+                }
+            }).catch(error => {
+                console.error('Erro ao buscar tickets: ', error);
+            });
+        }
 
 
     },
