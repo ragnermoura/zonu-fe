@@ -183,7 +183,7 @@
                           </div>
 
                           <div class="col-9" style="margin-left: -10px;">
-                            <h5><i class="fa fa-building"></i> <strong>{{ item.descricao.titulo }}</strong> <span
+                            <h5><i class="fa fa-building"></i> <a href="#" style="text-decoration: none; color: #000;" data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"><strong>{{ item.descricao.titulo }}</strong></a> <span
                                 class="badge text-bg-success">{{ item.preco.tipo_negocio }}</span> <a
                                 @click="handledDelete(item.id_imovel)" style="float: inline-end;" class="text-danger"><i
                                   class="fa fa-trash"></i></a>
