@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css);
 @import url(auth.css);
 @import url(skeleton.css);
@@ -10,7 +10,14 @@ body {
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .logomin {
@@ -50,7 +57,7 @@ body {
   justify-content: center;
 
   background-color: #212e3c;
-  color: #FFF;
+  color: #fff;
   font-size: 18px;
   padding: 5px;
 }
@@ -87,8 +94,6 @@ body {
   border-radius: 0 5px 5px 0 !important;
 }
 
-
-
 .btn-group {
   width: 100%;
 }
@@ -101,7 +106,6 @@ body {
   margin-top: 20%;
 }
 
-
 input[type="file"] {
   display: none;
 }
@@ -109,7 +113,7 @@ input[type="file"] {
 label[for="formFile"] {
   padding: 20px 10px;
   width: 200px;
-  color: #FFF;
+  color: #fff;
   text-transform: uppercase;
   text-align: center;
   display: block;
@@ -117,9 +121,9 @@ label[for="formFile"] {
   border-radius: 5px;
 }
 
-
 /* PRICE CARDS */
-.pricing-table {}
+.pricing-table {
+}
 
 .pricing-table .block-heading {
   padding-top: 50px;
@@ -219,8 +223,6 @@ label[for="formFile"] {
   color: #a82323;
 }
 
-
-
 .linhacomplete {
   border: 3px solid #212e3c;
 }
@@ -241,7 +243,7 @@ label[for="formFile"] {
   justify-content: center;
   align-items: center;
   margin-right: 2%;
-} 
+}
 
 .thumb {
   width: 100px;
@@ -252,30 +254,27 @@ label[for="formFile"] {
 }
 
 .msgPerfil {
-
   width: 30%;
   margin-left: 2%;
   margin-top: 2%;
   padding: 5px;
   border-radius: 50px;
   background-color: #212e3c;
-  color: #FFF !important;
+  color: #fff !important;
   justify-content: center;
   align-items: center;
-
 }
 
-.thumbImovel{
+.thumbImovel {
   width: 90px;
   border-radius: 5%;
   height: 90px;
   object-fit: cover;
-
 }
 
 .text-perfil {
   margin-top: 10px;
-  color: #FFF;
+  color: #fff;
   font-size: 16px;
   margin-left: 2px;
 }
@@ -298,7 +297,6 @@ label[for="formFile"] {
   align-items: center;
   border: 2px solid #929292;
   margin-bottom: 5%;
-
 }
 
 .logoEmpresa {
@@ -317,14 +315,14 @@ label[for="formFile"] {
   padding: 5px;
   border-radius: 50px;
   background-color: #0ec55a;
-  color: #FFF !important;
+  color: #fff !important;
   justify-content: center;
   align-items: center;
 }
 
 .text-contato {
   margin-top: 10px;
-  color: #FFF;
+  color: #fff;
   font-size: 16px;
   margin-left: 2px;
   text-align: center;
@@ -352,30 +350,27 @@ label[for="formFile"] {
   height: 200px;
   border: 2px solid #848484;
   border-radius: 10px;
-  background-image: url('../images/iconUpload.jpg');
+  background-image: url("../images/iconUpload.jpg");
   background-size: cover;
   margin: 0 !important;
   display: flex !important;
   justify-content: center;
   align-items: center;
   position: absolute !important;
-
 }
 
 .btn-remover {
   position: absolute;
 }
 
-.iconProgress{
+.iconProgress {
   width: 80px;
-margin-left: auto;
-margin-right: auto;
-display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
-
-.nav-pills .nav-link.active{
-
+.nav-pills .nav-link.active {
   background-color: #212e3c;
 }
 

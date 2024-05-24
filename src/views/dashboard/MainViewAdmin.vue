@@ -556,18 +556,7 @@
                   </div>
                 </div>
 
-                <div class="col-xl-7 col-xxl-7">
-                  <div class="card flex-fill w-100">
-                    <div class="card-header">
-                      <h5 class="card-title mb-0">Meus imóveis</h5>
-                    </div>
-                    <div class="card-body py-3">
-                      <div class="chart chart-sm">
-                        <div id="map" style="height: 500px;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
 
                 <div class="col-xl-12 col-xxl-12">
                   <div class="card flex-fill w-100">
@@ -577,60 +566,74 @@
                     <div class="card-body py-3">
                       <div class="chart chart-sm">
 
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                          <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                              data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                              aria-selected="true">Bairro</button>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                              data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                              aria-selected="false">Tipo de Imóvel</button>
-                          </li>
-
-
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                          <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab" tabindex="0">
-                            <div class="container">
-
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <div>
-                                    <label for=""><small><strong>Escolha aqui o bairro</strong></small></label>
-                                    <select v-model="selectedBairro" class="form-select mt-2"
-                                      aria-label="Default select example">
-                                      <option selected>Escolha o bairro</option>
-                                      <option v-for="item in bairros"> {{ item }}
-                                      </option>
-                                    </select>
-                                    <div class="mt-2" v-if="selectedBairro">
-                                      <p><small><i class="fa fa-bell"></i> A Média do Valor do m² para o bairro
-                                          <strong>{{ selectedBairro
-                                            }}</strong> é: <strong> R$ {{
-                                              mediaValorMetroQuadrado.toFixed(2) }}</strong></small> </p>
-                                    </div>
-                                  </div>
-
-                                </div>
-                                <div class="col-md-7">
-                                  <canvas id="metroQuadrado" width="400" height="200"></canvas>
-                                </div>
-
-                              </div>
-
-
-                            </div>
-
+                        <div class="row">
+                          <div class="col-2">
+                            <label for="exampleInputEmail1" class="form-label">
+                              Tipo de negócio </label>
+                            <select class="form-select" aria-label="Default select example">
+                              <option selected>Escolha</option>
+                              <option value="1">Venda</option>
+                              <option value="2">Aluguél</option>
+                            </select>
                           </div>
-                          <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                            aria-labelledby="pills-profile-tab" tabindex="0">...</div>
-                          <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                            aria-labelledby="pills-contact-tab" tabindex="0">...</div>
-                          <div class="tab-pane fade" id="pills-disabled" role="tabpanel"
-                            aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
+                          <div class="col-2">
+                            <label for="exampleInputEmail1" class="form-label">
+                              Status </label>
+                            <select class="form-select" aria-label="Default select example">
+                              <option selected>Escolha</option>
+                              <option value="1">Publicado</option>
+                              <option value="2">Não publicado</option>
+                            </select>
+                          </div>
+                          <div class="col-2">
+                            <label for="exampleInputEmail1" class="form-label">
+                              Tipo do imóvel </label>
+                            <select class="form-select" aria-label="Default select example">
+                              <option selected disabled>Selecione</option>
+                              <option value="Casa">Casa</option>
+                              <option value="Apartamento">Apartamento</option>
+                              <option value="Flat">Flat</option>
+                              <option value="Terreno">Terreno</option>
+                              <option value="Sítio">Sítio</option>
+                              <option value="Haras">Haras</option>
+                              <option value="Kitnet">Kitnet</option>
+                              <option value="Fazenda">Fazenda</option>
+                              <option value="Galpão">Galpão</option>
+                              <option value="Sala Comercial">Sala Comercial</option>
+                            </select>
+                          </div>
+                          <div class="col-2">
+                            <label for="exampleInputEmail1" class="form-label">
+                              Bairro </label>
+                            <select class="form-select" aria-label="Default select example">
+                              <option selected disabled>Selecione</option>
+
+                            </select>
+                          </div>
+                          <div class="col-2">
+                            <label for="exampleInputEmail1" class="form-label">
+                              Proximo do Mar? </label>
+                            <select class="form-select" aria-label="Default select example">
+                              <option selected disabled>Selecione</option>
+                              <option value="Vista para o mar">Vista para o mar</option>
+                              <option value="Frente para o mar">Frente para o mar</option>
+                              <option value="Quadra do mar">Quadra do mar</option>
+                              <option value="Proximo ao mar">Proximo ao mar</option>
+                              <option value="Não">Não</option>
+                            </select>
+                          </div>
+
+                          <div class="col-1">
+                            <label for="exampleInputEmail1" class="form-label">
+                              Quartos </label>
+                              <input style="height: 34px;" type="number" class="form-control" id="exampleFormControlInput1" placeholder="00">
+                          </div>
+
+                          <div class="col-1 mt-4" style="margin-top: 3% !important;">
+                           
+                            <button type="button" class="btn btn-success btn-sm"><i class="fa fa-search"></i></button> 
+                          </div>
+
                         </div>
 
                       </div>
@@ -678,9 +681,6 @@ import Navbar from '../../components/navbar/index.vue'
 import Footer from '../../components/footer/index.vue'
 import api from '../../../service/api/index'
 import { jwtDecode } from "jwt-decode";
-import { LMap, LTileLayer, LMarker, LIcon } from '@vue-leaflet/vue-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 import axios from 'axios';
 import 'https://cdn.jsdelivr.net/npm/chart.js'
 

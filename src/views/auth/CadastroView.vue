@@ -130,9 +130,19 @@
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Crie uma
                                         senha
                                     </label>
-                                    <input type="password" required v-if="!mostrarSkeleton" class="form-control"
-                                        v-model="senha" :class="{ 'is-invalid': isEmailInvalid }"
-                                        placeholder="Digite sua senha" />
+                                    <div class="input-group">
+                                        <input type="password" required
+                                            v-if="!mostrarSkeleton" class="form-control" v-model="senha"
+                                            :class="{ 'is-invalid': !senhaValida && senha.length > 0 }"
+                                            @input="validarSenha" placeholder="Digite sua senha" />
+                                    </div>
+
+                                    <p class="text-warning mt-2" v-if="!senhaValida && senha.length > 0">
+                                        <small>
+                                            <i class="fa fa-bell"></i> Sua senha deve ter no mínimo 8 caracteres, número
+                                            e uma letra MAIÚSCULA.
+                                        </small>
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -177,16 +187,69 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-9">
                                 <div class="mb-3">
                                     <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                     <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                     <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Endereço
                                     </label>
-                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                    <input disabled type="text" required v-if="!mostrarSkeleton" class="form-control"
                                         v-model="logradouro" placeholder="Digite o endereço completo" />
                                 </div>
                             </div>
+                            <div class="col-3">
+                                <div class="mb-3">
+                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Número
+                                    </label>
+                                    <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="numero" placeholder="00" />
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="mb-3">
+                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
+                                        class="form-label">Complemento
+                                    </label>
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="complemento" placeholder="Digite um complemento" />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Bairro
+                                    </label>
+                                    <input disabled type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="bairro" placeholder="Digite um complemento" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Cidade
+                                    </label>
+                                    <input disabled type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="cidade" placeholder="Aguarde..." />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                    <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                    <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Estado
+                                    </label>
+                                    <input disabled type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="estado" placeholder="Aguarde..." />
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
@@ -205,7 +268,7 @@
 
                 <div v-if="validationTab" class="px-4">
                     <div v-if="mostrarSkeleton" class="skeleton-title"></div>
-                    <h1 v-if="!mostrarSkeleton" class="title-login mt-5">Perfeito...</h1>
+                    <h1 v-if="!mostrarSkeleton" class="title-login mt-5">Sucesso...</h1>
 
                     <div v-if="mostrarSkeleton" class="skeleton-title-subtitle"></div>
                     <p v-if="!mostrarSkeleton">Estamos validando tudo. Fique de olho no seu email.</p>
@@ -215,21 +278,30 @@
                     </div>
 
                     <div v-if="msgSuccess" class="alert alert-success mt-3" role="alert">
-                        <i class="fa fa-check"></i> Dados gravados com sucesso! Faça o login e use sua
-                        plataforma<strong>
-                            Zonu</strong>
+                        <i class="fa fa-check"></i> Dados gravados com sucesso! Aguarde até que sua conta seja liberada.
                     </div>
+
+                    <div v-if="iconLoading" style="margin-left: auto; margin-right: auto; display: block;"
+                        class="spinner-border text-center" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+
+                    <button v-if="!mostrarSkeleton" :disabled="autenticando" type="submit"
+                        class="btn btn-dark bot mt-4">
+                        {{ textoBotao }}
+                        <span v-if="autenticando" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span v-if="autenticando" class="visually-hidden">Aguarde...</span>
+                    </button>
                 </div>
             </div>
 
             <div class="col-lg-6 p-0 d-none d-lg-block">
-                <div class="bg-login">
-                    <div class="gradient d-flex flex-column justify-content-center align-items-center px-5">
-                        <img src="../../../assets/images/logo-transparente2.png" class="img-fluid" alt="" />
-                    </div>
-                </div>
+                <div v-if="mostrarSkeleton" class="skeleton-imagem"></div>
+                <img v-if="!mostrarSkeleton" src="../../../assets/images/bg-login.svg" class="bg-login" alt="">
+
             </div>
         </div>
+
     </div>
 </template>
 <script>
@@ -241,6 +313,8 @@ export default {
     data() {
         return {
             loading: false,
+            cnpjTab: true,
+            dadosTab: false,
             mostrarSkeleton: true,
             msgErrorCnpj: false,
             msgSuccessCnpj: false,
@@ -250,10 +324,10 @@ export default {
             msgErrorCep: false,
             msgCnpjActive: false,
 
-            msgSuccess: false,
+            msgSuccess: true,
             senhaValid: false,
             emailValid: false,
-
+            
             cnpj: '',
             razao_social: '',
             nome: '',
@@ -264,14 +338,21 @@ export default {
             telefone: '',
             buscarCEP: '',
             logradouro: '',
+            complemento: '',
+            numero: '',
+            cidade: '',
+            estado: '',
+            bairro: '',
             id_user: '',
             campoNullError: false,
             textoBotao: "Salvar",
             autenticando: false,
-            cnpjTab: true,
-            dadosTab: false,
+
             validationTab: false,
             erro: false,
+            iconLoading: false,
+
+            senhaValida: true
 
         }
     },
@@ -284,11 +365,11 @@ export default {
         cnpj(newVal) {
             this.debouncedCheckCNPJ();
         },
-         buscarCEP(newVal, oldVal) {
-      if (newVal.length === 9 && newVal !== oldVal) {
-        this.debouncedCheckCEP();
-      }
-    },
+        buscarCEP(newVal, oldVal) {
+            if (newVal.length === 9 && newVal !== oldVal) {
+                this.debouncedCheckCEP();
+            }
+        },
     },
     created() {
         this.debouncedCheckCNPJ = _.debounce(this.consultarCNPJ, 100);
@@ -361,24 +442,41 @@ export default {
             }
         },
 
-         async consultarCEP() {
-      if (this.buscarCEP.length === 9) {
-        const cep = this.buscarCEP.replace(/\D/g, '');
+        validarSenha() {
+            const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            this.senhaValida = regex.test(this.senha);
+        },
+        toggleMostrarSenha() {
+            this.mostrarSenha = !this.mostrarSenha;
+        },
 
-        try {
-          const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+        async consultarCEP() {
+            if (this.buscarCEP.length === 9) {
+                const cep = this.buscarCEP.replace(/\D/g, '');
 
-          // Correção nas propriedades de acordo com a resposta da API
-          let rua = res.data.logradouro;
-   
-          this.logradouro = rua
+                try {
+                    const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+                    console.log('Aqui está a resposta do CEP ======>', res);
+
+                    // Correção nas propriedades de acordo com a resposta da API
+                    let rua = res.data.logradouro;
+                    let bairro = res.data.bairro;
+                    let cidade = res.data.localidade;
+                    let estado = res.data.uf;
 
 
-        } catch (error) {
-          console.error("Erro ao consultar CEP: ", error);
-        }
-      }
-    },
+                    this.logradouro = rua
+                    this.bairro = bairro
+                    this.cidade = cidade
+                    this.estado = estado
+
+
+                } catch (error) {
+                    console.error("Erro ao consultar CEP: ", error);
+                }
+            }
+        },
         handleAvancar() {
             this.cnpjTab = false
             this.dadosTab = true
@@ -402,32 +500,38 @@ export default {
             let telefone = this.telefone
             let cep = this.buscarCEP
             let endereco = this.logradouro
+            let complemento = this.complemento
+            let numero = this.numero
+            let cidade = this.cidade
+            let estado = this.estado
+            let bairro = this.bairro
 
             if (nome !== '' && sobrenome !== '' && email !== '' && senha !== '' && telefone && cep && endereco != '') {
 
-                api.cadastro(nome, sobrenome, email, senha, razao_social, cnpj, telefone, cep, endereco).then((response) => {
+                api.cadastro(nome, sobrenome, email, senha, razao_social, cnpj, telefone, cep, endereco, complemento, numero, cidade, estado, bairro).then((response) => {
                     if (response.status == 202) {
-                        this.msgSuccess = true;
                         this.autenticando = false;
-                        this.textoBotao = "Sucesso, redirecionando...";
+                        this.textoBotao = "Só mais um pouco..."
 
-                        api.login(email, senha).then((res) => {
-
-                            let token = res.data.token;
-                            localStorage.setItem('token', token);
-
-                            setTimeout(() => {
-                                this.msgSuccess = false;
-                                this.autenticando = false;
-                                this.textoBotao = "Salvar";
-                                window.location.href = "/dashboard";
-                            }, 5000);
-
+                        api.sendNewAccountAdmin(nome, email).then((res)=>{
+                            console.log(res)
                         })
+
+                        setTimeout(() => {
+                            this.dadosTab = false;
+                            this.validationTab = true;
+                            this.textoBotao = "Você será redirecionado...";
+                            this.msgSuccess = true;
+                            this.iconLoading = true;
+                        }, 2000)
+
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 4000)
 
 
                     } else if (response.status == 409) {
-                        this.emailValid = true;
+                        this.msgCnpjActive = true
                         this.autenticando = false;
                         this.textoBotao = "Houve um problema....";
 
@@ -437,7 +541,7 @@ export default {
                             this.textoBotao = "Tente novamente...";
                         }, 5000);
                     } else if (response.status == 401) {
-                        this.msgCnpjActive = true
+                        this.emailValid = true;
                         this.autenticando = false;
                         this.textoBotao = "Salvar";
 

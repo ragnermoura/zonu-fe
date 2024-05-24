@@ -11,12 +11,10 @@
           <div v-if="mostrarSkeleton" class="skeleton-title-dashboard"></div>
           <h1 v-if="!mostrarSkeleton" class="h3 mb-3"><strong>Dashboard |</strong> Construtora</h1>
 
-          <div class="col-xl-12 mt-2">
+          <div class="col-xl-12 mt-2" v-if="progressView">
             <div class="w-100">
               <div class="row">
-
-                <div v-if="progressView" class="row" style="margin-left: 2%; margin-top: 2%; margin-bottom: 3%;">
-
+                <div class="row" style="margin-left: 2%; margin-top: 2%; margin-bottom: 3%;">
                   <div class="col-xl-2">
                     <div v-if="mostrarSkeleton" class="skeleton-card"></div>
                     <div class="card" v-if="!mostrarSkeleton">
@@ -47,8 +45,8 @@
                     <div class="card" v-if="!mostrarSkeleton">
                       <div class="card-body">
                         <div class="row">
-                          <h6 class="text-center"><small>Logo</small></h6>
-                          <img class="iconProgress" src="../../../assets/images/icons/iconLogo.png" alt="">
+                          <h6 class="text-center"><small>Qualidade 9/10</small></h6>
+                          <img class="iconProgress" src="../../../assets/images/icons/iconStar.png" alt="">
                           <div v-if="capa === 0">
                             <img class="mt-3 iconCheck img-fluid"
                               src="../../../assets/images/icons/iconCheckInActive.png" alt="">
@@ -110,6 +108,7 @@
               </div>
             </div>
           </div>
+
           <div class="col-xl-12 mt-5">
             <div class="w-100">
               <div class="row">
@@ -633,18 +632,6 @@
                   </div>
                 </div>
 
-                <div class="col-xl-7 col-xxl-7">
-                  <div class="card flex-fill w-100">
-                    <div class="card-header">
-                      <h5 class="card-title mb-0">Meus imóveis</h5>
-                    </div>
-                    <div class="card-body py-3">
-                      <div class="chart chart-sm">
-                        <div id="map" style="height: 500px;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
                 <div class="col-xl-12 col-xxl-12">
                   <div class="card flex-fill w-100">
@@ -654,61 +641,70 @@
                     <div class="card-body py-3">
                       <div class="chart chart-sm">
 
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                          <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                              data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                              aria-selected="true">Bairro</button>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                              data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                              aria-selected="false">Tipo de Imóvel</button>
-                          </li>
-
-
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                          <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                            aria-labelledby="pills-home-tab" tabindex="0">
-                            <div class="container">
-
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <div>
-                                    <label for=""><small><strong>Escolha aqui o bairro</strong></small></label>
-                                    <select v-model="selectedBairro" class="form-select mt-2"
-                                      aria-label="Default select example">
-                                      <option selected>Escolha o bairro</option>
-                                      <option v-for="item in bairros"> {{ item }}
-                                      </option>
-                                    </select>
-                                    <div class="mt-2" v-if="selectedBairro">
-                                      <p><small><i class="fa fa-bell"></i> A Média do Valor do m² para o bairro
-                                          <strong>{{ selectedBairro
-                                            }}</strong> é: <strong> R$ {{
-                                              mediaValorMetroQuadrado.toFixed(2) }}</strong></small> </p>
-                                    </div>
-                                  </div>
-
-                                </div>
-                                <div class="col-md-7">
-                                  <canvas id="metroQuadrado" width="400" height="200"></canvas>
-                                </div>
-
-                              </div>
-
-
-                            </div>
-
+                        <div class="row">
+                          <div class="col-2">
+                            <label for="tipoNegocio" class="form-label">Tipo de negócio</label>
+                            <select class="form-select" v-model="selectedTipoNegocio">
+                              <option value="">Escolha</option>
+                              <option value="Venda">Venda</option>
+                              <option value="Aluguél">Aluguél</option>
+                            </select>
                           </div>
-                          <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                            aria-labelledby="pills-profile-tab" tabindex="0">...</div>
-                          <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                            aria-labelledby="pills-contact-tab" tabindex="0">...</div>
-                          <div class="tab-pane fade" id="pills-disabled" role="tabpanel"
-                            aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
+                          <div class="col-2">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" v-model="selectedStatus">
+                              <option value="">Escolha</option>
+                              <option value="Publicado">Publicado</option>
+                              <option value="Não publicado">Não publicado</option>
+                            </select>
+                          </div>
+                          <div class="col-2">
+                            <label for="tipoImovel" class="form-label">Tipo do imóvel</label>
+                            <select class="form-select" v-model="selectedTipoImovel">
+                              <option value="" disabled>Selecione</option>
+                              <option value="Casa">Casa</option>
+                              <option value="Apartamento">Apartamento</option>
+                              <option value="Flat">Flat</option>
+                              <option value="Terreno">Terreno</option>
+                              <option value="Sítio">Sítio</option>
+                              <option value="Haras">Haras</option>
+                              <option value="Kitnet">Kitnet</option>
+                              <option value="Fazenda">Fazenda</option>
+                              <option value="Galpão">Galpão</option>
+                              <option value="Sala Comercial">Sala Comercial</option>
+                            </select>
+                          </div>
+                          <div class="col-2">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <select class="form-select" v-model="selectedBairro">
+                              <option value="" disabled>Selecione</option>
+                              <option v-for="bairro in bairros" :key="bairro" :value="bairro">{{ bairro }}</option>
+                            </select>
+                          </div>
+                          <div class="col-2">
+                            <label for="proximoMar" class="form-label">Proximo do Mar?</label>
+                            <select class="form-select" v-model="selectedProximoMar">
+                              <option value="" disabled>Selecione</option>
+                              <option value="Vista para o mar">Vista para o mar</option>
+                              <option value="Frente para o mar">Frente para o mar</option>
+                              <option value="Quadra do mar">Quadra do mar</option>
+                              <option value="Proximo ao mar">Proximo ao mar</option>
+                              <option value="Não">Não</option>
+                            </select>
+                          </div>
+                          <div class="col-1">
+                            <label for="quartos" class="form-label">Quartos</label>
+                            <input type="number" class="form-control" v-model="selectedQuartos" placeholder="00">
+                          </div>
+                          <div class="col-1 mt-4" style="margin-top: 3% !important;">
+                            <button type="button" class="btn btn-success btn-sm" @click="filtrarImoveis">
+                              <i class="fa fa-search"></i>
+                            </button>
+                          </div>
+
                         </div>
+                        <canvas id="myMetroQuadrado"></canvas>
+
 
                       </div>
                     </div>
@@ -755,9 +751,6 @@ import Navbar from '../../components/navbar/index.vue'
 import Footer from '../../components/footer/index.vue'
 import api from '../../../service/api/index'
 import { jwtDecode } from "jwt-decode";
-import { LMap, LTileLayer, LMarker, LIcon } from '@vue-leaflet/vue-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 import axios from 'axios';
 import 'https://cdn.jsdelivr.net/npm/chart.js'
 
@@ -773,7 +766,7 @@ export default {
       capa: 0,
       imovel: 0,
       publicacao: 0,
-      progressView: true,
+      progressView: false,
       iniciais: '',
       nome: '',
       sobrenome: '',
@@ -796,10 +789,17 @@ export default {
       chartInstance: null,
 
       currentPageImovel: 1,
-      perPageImovel: 5,
+      perPageImovel: 2,
       searchImovel: '',
 
-      totalCondominios: 0
+      totalCondominios: 0,
+
+      selectedTipoNegocio: '',
+      selectedStatus: '',
+      selectedTipoImovel: '',
+      selectedProximoMar: '',
+      selectedQuartos: null,
+      chart: null
     }
   },
   components: {
@@ -828,26 +828,18 @@ export default {
     const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
     this.iniciais = iniciais
 
-    api.progress(id_user).then(res => {
-      this.perfil = res.data.perfil;
-      this.capa = res.data.logo_capa;
-      this.imovel = res.data.imovel;
-      this.publicacao = res.data.publicacao;
-
-      if (this.perfil == 1 && this.capa == 1 && this.imovel == 1 && this.publicacao == 1) {
-        this.progressView = false;
-      } else {
-        this.progressView = true;
-      }
-
-    })
 
 
+    this.ferchProgress();
     this.fetchBairros();
     this.fetchMyImoveis();
     this.fetchAllImoveis();
     this.calcularMediaTodosBairros();
     this.fetchMyCondominios();
+
+
+
+   
 
   },
 
@@ -861,13 +853,14 @@ export default {
         year: 'numeric'
       });
     },
-
     fetchMyImoveis() {
       let id_user = this.id_user;
 
       api.listmyImoveis(id_user).then(res => {
         this.myImoveis = res.data;
         this.totalImovel = this.myImoveis.length;
+        this.bairros = this.extractBairros(res.data);
+        this.renderChart(res.data);
 
         this.avaliarQualidadeCadastro(this.myImoveis);
 
@@ -956,6 +949,80 @@ export default {
 
       })
     },
+
+    extractBairros(imoveis) {
+
+      const bairros = new Set();
+      imoveis.forEach(imovel => {
+        if (imovel.localizacao && imovel.localizacao.bairro) {
+          bairros.add(imovel.localizacao.bairro);
+        }
+      });
+      return Array.from(bairros);
+    },
+
+    filtrarImoveis() {
+    const filtrados = this.myImoveis.filter(imovel => {
+      return (
+        (this.selectedTipoNegocio === '' || imovel.preco.tipo_negocio === this.selectedTipoNegocio) &&
+        (this.selectedStatus === '' || (this.selectedStatus === 'Publicado' ? imovel.publicacao.mostrar_imovel_publi === 'Sim' : imovel.publicacao.mostrar_imovel_publi === 'Não')) &&
+        (this.selectedTipoImovel === '' || imovel.info.tipo === this.selectedTipoImovel) &&
+        (this.selectedBairro === '' || imovel.localizacao.bairro === this.selectedBairro) &&
+        (this.selectedProximoMar === '' || imovel.info.proximo_mar === this.selectedProximoMar) &&
+        (this.selectedQuartos === null || imovel.comodos.dormitorio === this.selectedQuartos.toString())
+      );
+    });
+
+    this.renderChart(filtrados);
+  },
+
+    renderChart(imoveis) {
+      const labels = imoveis.map(imovel => imovel.localizacao.bairro);
+      const data = imoveis.map(imovel => parseFloat(imovel.preco.valor_metro_quadrado));
+
+
+      const ctx = document.getElementById('myMetroQuadrado').getContext('2d');
+      if (this.chart) this.chart.destroy();
+
+      this.chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Média do m²',
+            data: data,
+            borderWidth: 1,
+            backgroundColor: "rgba(81, 229, 255, 0.2)",
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    },
+
+    ferchProgress() {
+      let id_user = this.id_user;
+
+      api.progress(id_user).then(res => {
+
+        this.perfil = res.data.perfil;
+        this.capa = res.data.logo_capa;
+        this.imovel = res.data.imovel;
+        this.publicacao = res.data.publicacao;
+
+        if (this.perfil == 1 && this.capa == 1 && this.imovel == 1 && this.publicacao == 1) {
+          this.progressView = false;
+        } else {
+          this.progressView = true;
+        }
+
+      })
+    },
     avaliarQualidadeCadastro(imoveis) {
       imoveis.forEach(imovel => {
         let totalCampos = 0;
@@ -984,8 +1051,6 @@ export default {
         imovel.porcentagemQualidade = porcentagem;
         this.qualidade = imovel.pontuacaoQualidade;
 
-
-        console.log('Qualidade do Cadastro =====> ', imovel.porcentagemQualidade);
 
         if (porcentagem == 100) {
           this.estrelas = 5;
@@ -1019,7 +1084,6 @@ export default {
 
       api.comentarioImovel(id_imovel).then(res => {
         this.comentario = res.data;
-        console.log('Dados do Comentário =====> ', this.comentario)
       })
     },
     handledDelete(id) {
@@ -1028,8 +1092,6 @@ export default {
 
       api.deleteImovel(id_imovel).then(res => {
         this.fetchMyImoveis();
-
-        console.log(res)
       })
 
     },
@@ -1073,7 +1135,6 @@ export default {
 
       this.updateChart(labels, data);
     },
-
     updateChart(labels, data) {
       const ctx = document.getElementById('metroQuadrado');
       if (this.chartInstance) {
@@ -1100,12 +1161,11 @@ export default {
         }
       });
     },
-
     fetchMyCondominios() {
       let id_user = this.id_user
       api.listcondominio(id_user).then((res) => {
-      this.totalCondominios = res.data.response.length;
-    })
+        this.totalCondominios = res.data.response.length;
+      })
     },
 
     fetchAllImoveis() {

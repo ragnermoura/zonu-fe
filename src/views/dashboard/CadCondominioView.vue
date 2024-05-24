@@ -157,6 +157,7 @@ export default {
       currentPageCondominio: 1,
       perPageCondominio: 5,
       searchCondominio: "",
+      id_progress: ''
 
     };
   },
@@ -172,9 +173,13 @@ export default {
       this.mostrarSkeleton = false;
     }, 2000);
 
+   
+
   },
 
   methods: {
+
+
 
     handleSalvar() {
       let nome_condominio = this.condNome;
@@ -186,6 +191,10 @@ export default {
           this.msgSuccess = true;
           this.condNome = "";
           this.fetchList();
+
+          let id_progressao = this.id_progress
+
+          api.editProgressCodominio(id_progressao).then((res) => {})
 
           setTimeout(() => {
             this.msgSuccess = false;

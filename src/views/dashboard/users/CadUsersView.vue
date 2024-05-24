@@ -296,7 +296,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr v-for="item in listUsers">
+                                                    <tr v-for="item in clientesOnCurrentPage">
                                                         <th scope="row"></th>
                                                         <td>{{ item.nome }} {{ item.sobrenome }}</td>
                                                         <td>{{ item.email }}</td>
@@ -337,6 +337,17 @@
 
                                                 </tbody>
                                             </table>
+
+                                            <div class="d-grid mt-3 mb-3 gap-2 d-md-flex justify-content-md-end">
+                                                <button class="btn btn-dark btn-sm" @click="previousPageCliente()"
+                                                    :disabled="currentPageCliente <= 1"> Anterior
+                                                </button>
+                                                <button class=" btn btn-dark btn-sm"
+                                                    style="margin-right: 3% !important;" @click="nextPageCliente()"
+                                                    :disabled="currentPageCliente >= totalPagesClientes">
+                                                    Proximo
+                                                </button>
+                                            </div>
 
 
 
@@ -394,7 +405,11 @@ export default {
             listUsers: [],
 
             msgSuccessEdit: false,
-            msgSuccessDelete: false
+            msgSuccessDelete: false,
+
+            currentPageCliente: 1,
+            perPageCliente: 5,
+            searchCliente: '',
         }
     },
     components: {
@@ -415,8 +430,33 @@ export default {
         this.debouncedCheckCEP = _.debounce(this.consultarCEP, 100);
     },
     computed: {
+        clientesOnCurrentPage() {
+            const startIndex = (this.currentPageCliente - 1) * this.perPageCliente;
+            const endIndex = startIndex + this.perPageCliente
+            return this.listUsers
+                .filter((usuario) => {
+                    return usuario.nome
+                        .toLowerCase()
+                        .includes(this.searchCliente.toLowerCase())
+                })
+                .slice(startIndex, endIndex)
+        },
+        totalPagesClientes() {
+            return Math.ceil(
+                this.listUsers.filter((usuario) => {
+                    this.currentPageCliente = 1
+                    return usuario.nome
+                        .toLowerCase()
+                        .includes(this.searchCliente.toLowerCase())
+                }).length / this.perPageCliente,
+            )
+        },
+
+
         passwordsMatch() {
             return this.senha === this.confirmSenha;
+
+
         },
 
         iniciais() {
@@ -532,7 +572,6 @@ export default {
                 }
             }
         },
-
         handleSalvarUserZonu() {
 
             this.textoBotao = "Salvando...";
@@ -582,7 +621,6 @@ export default {
 
 
         },
-
         handleSalvarUserConstrutora() {
 
             this.textoBotao = "Salvando...";
@@ -640,7 +678,11 @@ export default {
 
         fetcUsuarios() {
             api.listusuarios().then(res => {
-                this.listUsers = res.data.response;
+
+                let usuarios = res.data.response;
+                usuarios.filter(user => { user.id_nivel == 1 })
+
+                this.listUsers = usuarios;
             })
         },
 
@@ -698,7 +740,18 @@ export default {
                 }
             })
 
-        }
+        },
+
+        previousPageCliente() {
+            if (this.currentPageCliente > 1) {
+                this.currentPageCliente -= 1
+            }
+        },
+        nextPageCliente() {
+            if (this.currentPageCliente < this.totalPagesClientes) {
+                this.currentPageCliente += 1
+            }
+        },
     }
 }
 </script>

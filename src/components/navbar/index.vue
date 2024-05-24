@@ -202,9 +202,27 @@ export default {
             });
         }
 
+        this.fetchProgress();
+
 
     },
     methods: {
+
+        fetchProgress() {
+            let id_user = this.idUser;
+            api.progress(id_user).then((res) => {
+                let perfil = res.data.perfil;
+                let capa = res.data.logo_capa;
+                let imovel = res.data.imovel;
+                let publicacao = res.data.publicacao;
+
+                if (perfil == 1 && capa == 1 && imovel == 1 && publicacao == 1) {
+                    this.bannerProfile = false;
+                } else {
+                    this.bannerProfile = true;
+                }
+            });
+        },
 
         truncate(text, length) {
             if (text.length > length) {

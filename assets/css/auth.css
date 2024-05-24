@@ -1,13 +1,9 @@
-.bg-login {
+.bg-login{
+  width: 100%;
+  height: 110vh;
+  object-fit: cover;
   padding: 0;
   margin: 0;
-  object-fit: cover;
-  background-image: url(../images/bg-login.svg);
-  background-repeat: no-repeat;
-  position: fixed;
-  width: 50%;
-  height: 100%;
-  right: 0;
 }
 
 .gradient{
@@ -37,6 +33,9 @@
 }
 
 .area-dados{
+  max-height: 380px;
+overflow-y: scroll;
+
 }
 
 .title-login{

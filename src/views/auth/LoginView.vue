@@ -96,11 +96,8 @@
 			</div>
 
 			<div class="col-lg-6 p-0 d-none d-lg-block">
-				<div class="bg-login">
-					<div class="gradient px-5">
-						<img src="../../../assets/images/logo-transparente2.png" class="img-fluid" alt="">
-					</div>
-				</div>
+				<div v-if="mostrarSkeleton" class="skeleton-imagem"></div>
+                <img v-if="!mostrarSkeleton" src="../../../assets/images/bg-login.svg" class="bg-login" alt="">	
 			</div>
 
 		</div>
