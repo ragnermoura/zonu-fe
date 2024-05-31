@@ -158,16 +158,6 @@
             <!-- Aqui começa as TABS. Copie e cole da INFOTAB -->
             <div style="width: 79%; margin-left: 1%; margin-bottom: 4%;">
 
-              <div v-if="msgError" class="alert alert-danger" style="margin-top: -20px; margin-bottom: 10px;"
-                role="alert">
-                <strong><i class="fa fa-ban"></i> Desculpa, houve um erro para processar o seu pedido. Tente novamente
-                  mais tarde</strong>
-              </div>
-
-              <div v-if="msgSucesso" class="alert alert-success" style="margin-top: -20px; margin-bottom: 10px;"
-                role="alert">
-                <strong><i class="fa fa-check"></i> Sucesso! Imóvel cadastrado com sucesso!</strong>
-              </div>
 
               <div class="col-xl-12 col-xxl-12 d-flex">
                 <div class="w-100">
@@ -529,8 +519,6 @@
                         </div>
                       </div>
                     </div>
-
-
 
                     <div class="card" v-if="comodosTab">
                       <div class="card-body">
@@ -1304,7 +1292,6 @@
                         </div>
                       </div>
                     </div>
-
 
                     <div class="card" v-if="localizacaoTab">
                       <div class="card-body">
@@ -2230,6 +2217,21 @@
                                           aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
+
+                                        <div v-if="msgError" class="alert alert-danger mt-4 mb-4"
+                                          style="margin-top: -20px; margin-bottom: 10px;" role="alert">
+                                          <strong><i class="fa fa-ban"></i> Desculpa, houve um erro para processar o seu
+                                            pedido. Tente novamente
+                                            mais tarde</strong>
+                                        </div>
+
+                                        <div v-if="msgSucesso" class="alert alert-success mt-4 mb-4"
+                                          style="margin-top: -20px; margin-bottom: 10px;" role="alert">
+                                          <strong><i class="fa fa-check"></i> Sucesso! Imóvel cadastrado com
+                                            sucesso!</strong>
+                                        </div>
+
+
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                           <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
@@ -2293,6 +2295,9 @@
                                           </li>
 
                                         </ul>
+
+                                      
+
                                         <div class="tab-content" id="myTabContent">
                                           <div class="tab-pane fade show active" id="info-tab-pane" role="tabpanel"
                                             aria-labelledby="info-tab" tabindex="0">
@@ -4214,7 +4219,8 @@
                                         <button type="button" class="btn btn-secondary"
                                           data-bs-dismiss="modal">Fechar</button>
                                         <button type="button" class="btn btn-success" :disabled="autenticando"
-                                          @click="handleFinish()">Salvar &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                          @click="handleFinish()">Salvar &nbsp;<i class="fa fa-arrow-right"
+                                            aria-hidden="true"></i></button>
                                       </div>
                                     </div>
                                   </div>
@@ -4626,7 +4632,7 @@ export default {
     this.id_user = decode.id_user;
     let nome = decode.nome;
     let email = decode.email;
-    
+
     let id_user = this.id_user;
     this.nome = nome;
     this.email = email;
@@ -5537,8 +5543,8 @@ export default {
           let email = this.email;
           let nome = this.nome;
 
-          api.editProgressImovel(id_progressao).then((res) => {})
-          api.sendNovoImovel(email, nome).then((res) => {})
+          api.editProgressImovel(id_progressao).then((res) => { })
+          api.sendNovoImovel(email, nome).then((res) => { })
 
           setTimeout(() => {
             this.msgSucesso = false;
