@@ -179,13 +179,12 @@
 
                         <a class="row" style="text-decoration: none;">
                           <div class="col-3">
-                            <img class="thumbImovel" :src="`https://zonu.com.br/public${item.fotos[0].foto}`" alt="">
+                            <img class="thumbImovel" :src="`https://zonu.com.br/api/public${item.fotos[0].foto}`" alt="">
                           </div>
 
                           <div class="col-9" style="margin-left: -10px;">
-                            <h5><i class="fa fa-building"></i> <strong>{{ item.descricao.titulo }}</strong> <span
-                                class="badge text-bg-success">{{ item.preco.tipo_negocio }}</span> <a
-                                @click="handledDelete(item.id_imovel)" style="float: inline-end;" class="text-danger"><i
+                            <h5><i class="fa fa-building"></i> <a href="#" style="text-decoration: none; color: #000;" data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"><strong>{{ item.descricao.titulo }}</strong></a> <span
+                                class="badge text-bg-success">{{ item.preco.tipo_negocio }}</span><a @click="handledDelete(item.id_imovel)" style="float: inline-end;" class="text-danger"><i
                                   class="fa fa-trash"></i></a>
                             </h5>
                             <h5 class="text-info"><strong>{{ item.preco.preco_imovel }}</strong><a
@@ -242,7 +241,7 @@
                                     <div class="container">
                                       <div class="row">
                                         <div class="col-md-2 mt-4" v-for="foto in item.fotos" :key="foto.id_imagem">
-                                          <img :src="`https://zonu.com.br/public${foto.foto}`"
+                                          <img :src="`https://zonu.com.br/api/public${foto.foto}`"
                                             :alt="`Foto ${foto.id_imagem} do Imóvel ${item.id_imovel}`"
                                             class="thumbnail-modal">
                                         </div>

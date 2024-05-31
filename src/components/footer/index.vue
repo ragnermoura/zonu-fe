@@ -10,7 +10,7 @@
                     <p class="mb-0">
                         <a class="text-muted" href="#"
                             target="_blank"><strong>Zonu</strong></a> - <a class="text-muted"
-                            href="#" target="_blank"><strong>Zunu Tecnologia</strong></a> &copy;
+                            href="#" target="_blank"><strong>Zonu Tecnologia</strong></a> &copy;
                     </p>
                 </div>
                 <div class="col-6 text-end">
