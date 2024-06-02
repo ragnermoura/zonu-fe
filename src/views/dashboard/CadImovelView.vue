@@ -5427,7 +5427,7 @@ export default {
       let idcondominio
 
       if(selecteCond == 'Não'){
-        idcondominio = 0
+        idcondominio = 1
       }else if(selecteCond == 'Sim'){
         idcondominio = this.condominioEmpreendimento;
       }
