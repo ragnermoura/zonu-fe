@@ -14,15 +14,6 @@
                     <p v-if="!mostrarSkeleton">Siga os passos que tudo correrá bem!</p>
 
 
-                    <div v-if="msgNotActivate" class="alert text-danger " role="alert">
-                        😞 <strong>Ooops...</strong> Você ainda não está ativo. Aguarde até que algum administrador ative
-                        sua conta.
-                    </div>
-
-                    <div v-if="msgEmailErro" class="alert text-danger" role="alert">
-                        😞 <strong>Ooops...</strong> Seu e-mail ou sua senha estão errados, tente outro.
-                    </div>
-
                     <div class="mt-4">
                         <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                         <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -40,13 +31,13 @@
                     </div>
 
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
-                    <button v-if="!mostrarSkeleton" @click="handleAvancar()" :disabled="!msgSuccessCnpj" type="submit"
-                        class="btn btn-dark bot mt-4">Avançar</button>
+                    <button v-if="!mostrarSkeleton" @click="handleAvancar()" :disabled="autenticando" type="submit"
+                        class="btn btn-dark bot mt-4">{{ textoBotao }}</button>
 
                     <a href="/">
-                        <button type="button" v-if="!mostrarSkeleton" href="/" class="btn btn-outline-dark bot mt-4">Voltar
-                            ao
-                            login</button>
+                        <button type="button" v-if="!mostrarSkeleton" href="/"
+                            class="btn btn-outline-dark bot mt-4">Voltar
+                            ao login</button>
                     </a>
 
                 </div>
@@ -59,40 +50,53 @@
                     <div v-if="mostrarSkeleton" class="skeleton-title-subtitle"></div>
                     <p v-if="!mostrarSkeleton">Digite novas senhas e anote em um lugar seguro.</p>
 
+                    <p v-if="msgSuccessNewPass" class="text-success mt-2"><i class="fa fa-check"></i> Senha alterada com sucesso! </p>
+
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Crie uma nova
-                                    senha
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Crie uma
+                                    nova senha
                                 </label>
-                                <input type="password" required v-if="!mostrarSkeleton" class="form-control" v-model="senha"
-                                    placeholder="Digite sua senha">
+                                <div class="input-group">
+                                    <input type="password" required v-if="!mostrarSkeleton" class="form-control"
+                                        v-model="senha" :class="{ 'is-invalid': !senhaValida && senha.length > 0 }"
+                                        @input="validarSenha" placeholder="Digite sua senha" />
+                                </div>
+
+                                <p class="text-warning mt-2" v-if="!senhaValida && senha.length > 0">
+                                    <small>
+                                        <i class="fa fa-bell"></i> Sua senha deve ter no mínimo 8 caracteres, número
+                                        e uma letra MAIÚSCULA.
+                                    </small>
+                                </p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Confirme a
-                                    nova senha
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Confirme
+                                    a senha
                                 </label>
                                 <input type="password" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="confimSenha" placeholder="Digite a senha novamente">
+                                    v-model="confimSenha" placeholder="Digite a senha novamente" />
 
-                                <p v-if="msgErrorSenha" class="text-danger mt-2"><small><i class="fa fa-ban"></i> As
-                                        senhas não conferem</small> </p>
-                                <p v-if="msgSuccessSenha" class="text-success mt-2"><small><i class="fa fa-check"></i>
-                                        As
-                                        senhas conferem</small> </p>
+                                <p class="text-danger mt-2" v-if="confimSenha && !passwordsMatch">
+                                    <i class="fa fa-ban"></i> As senhas não conferem!
+                                </p>
+                                <p class="text-success mt-2" v-if="confimSenha && passwordsMatch">
+                                    <i class="fa fa-check"></i> As senhas conferem
+                                </p>
                             </div>
                         </div>
                     </div>
 
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
-                    <button v-if="!mostrarSkeleton" @click="handleValidar()" type="submit"
-                        class="btn btn-dark bot mt-4">Salvar</button>
+                    <button v-if="!mostrarSkeleton" :disabled="autenticando" @click="handleValidar()" type="submit"
+                        class="btn btn-dark bot mt-4">{{textoBotao}}</button>
 
                     <button v-if="!mostrarSkeleton" @click="handleVoltar()" type="button"
                         class="btn btn-outline-dark bot mt-4">Voltar</button>
@@ -114,6 +118,7 @@
 </template>
 <script>
 import _ from 'lodash';
+import api from '../../../service/api';
 export default {
     name: 'RecoveryView',
     data() {
@@ -132,14 +137,21 @@ export default {
             passwordTab: false,
             email: '',
             senha: '',
+            confimSenha: '',
             msgNotActivate: false,
             autenticando: false,
-            textoBotao: "Acessar sua conta",
+            textoBotao: "Avançar",
             emailValid: null,
             senhaValid: null,
             emailVazio: null,
             senhaVazio: null,
+            msgSuccessNewPass: false
         }
+    },
+    computed: {
+        passwordsMatch() {
+            return this.senha === this.confimSenha;
+        },
     },
     mounted() {
         setTimeout(() => {
@@ -148,38 +160,44 @@ export default {
     },
     methods: {
 
+        validarSenha() {
+            const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]{6,}$/;
+            this.senhaValida = regex.test(this.senha);
+        },
+
         handleAvancar() {
             this.autenticando = true;
             this.textoBotao = "Aguarde...";
 
             let email = this.emailRecovery;
 
-            if (email == '' && senha == '') {
-                this.emailVazio = false;
-                this.senhaVazio = false;
+            if (email !== '') {
 
-                setTimeout(() => {
+                api.varificaEmail(email).then((res) => {
 
-                    this.emailVazio = true;
-                    this.senhaVazio = true;
+                    if (res.status == 200) {
+                        this.msgSuccessEmail = true;
+                        this.msgErrorEmail = false;
 
-                }, 4000)
+                        setTimeout(() => {
+                            this.textoBotao = "Alterar senha";
+                            this.autenticando = false;
+                            this.emailTab = false;
+                            this.passwordTab = true;
+                        }, 3000)
 
-                setTimeout(() => {
-                    this.autenticando = false;
-                    this.textoBotao = "Acessar sua conta";
-                }, 2000)
+                    } else {
+                        this.emailTab = true;
+                        this.passwordTab = false;
+                        this.msgSuccessEmail = false;
+                        this.msgErrorEmail = true;
+                    }
 
+                })
 
-            } else {
-                api.recovery(newsenha).then((response) => {
-
-
-
-                }).catch(() => {
-
-                });
             }
+
+
 
 
         },
@@ -187,9 +205,28 @@ export default {
             this.emailTabTab = true
             this.passwordTabTab = false
         },
+
         handleValidar() {
-            this.emailTabTab = false
-            this.passwordTabTab = false
+            this.autenticando = true;
+            this.textoBotao = "Aguarde...";
+
+            let email = this.emailRecovery;
+            let senha = this.senha;
+
+            api.recovery(email, senha).then((res) => {
+
+                if(res.status == 200){
+                    this.msgSuccessNewPass = true;
+
+                    setTimeout(() => {
+                       window.location.href = '/';
+                    }, 3000)
+                }
+
+            });
+
+
+
         },
 
     },

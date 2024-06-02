@@ -117,7 +117,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-  const publicPages = ['/', '/cadastro', '/code', '/imovel'];
+  const publicPages = ['/', '/cadastro', '/code', '/imovel', '/recovery'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('token');
 

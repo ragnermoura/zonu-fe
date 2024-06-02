@@ -25,13 +25,36 @@ export default {
     }
   },
 
-  recovery: async (newsenha, id_user) => {
+  varificaEmail: async (email) => {
     try {
-      const response = await http.patch(
-        "/login",
+      const response = await http.post(
+        "/usuarios/verifica-email",
         {
-          id_user: id_user,
-          senha: newsenha,
+          email: email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  recovery: async (email, senha) => {
+    try {
+      const response = await http.put(
+        "/usuarios/edit/trocar-senha",
+        {
+          email: email,
+          senha: senha,
         },
         {
           headers: {
@@ -280,30 +303,6 @@ export default {
     try {
       const response = await http.post(
         "/email/boas-vindas",
-        {
-          email: email,
-          nome: nome,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-          },
-        }
-      );
-
-      return response;
-    } catch (error) {
-      return error.response || error.message || error;
-    }
-  },
-
-  sendNovoImovel: async (email, nome) => {
-    try {
-      const response = await http.post(
-        "/email/imovel",
         {
           email: email,
           nome: nome,
