@@ -5421,8 +5421,17 @@ export default {
       let textoTarja = this.textoTarja
       let corTarja = this.corTarja
 
+      
+
       let selecteCond = this.selectCondominio;
-      let idcondominio = this.condominioEmpreendimento;
+      let idcondominio
+
+      if(selecteCond == 'Não'){
+        idcondominio = 0
+      }else if(selecteCond == 'Sim'){
+        idcondominio = this.condominioEmpreendimento;
+      }
+   
 
       let id_user = this.id_user;
 
