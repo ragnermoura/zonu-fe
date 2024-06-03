@@ -5549,11 +5549,9 @@ export default {
           this.msgSucesso = true;
 
           let id_progressao = this.id_progressao;
-          let email = this.email;
-          let nome = this.nome;
-
+      
           api.editProgressImovel(id_progressao).then((res) => { })
-          api.sendNovoImovel(email, nome).then((res) => { })
+         
 
           setTimeout(() => {
             this.msgSucesso = false;
