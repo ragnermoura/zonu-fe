@@ -2296,7 +2296,7 @@
 
                                         </ul>
 
-                                      
+
 
                                         <div class="tab-content" id="myTabContent">
                                           <div class="tab-pane fade show active" id="info-tab-pane" role="tabpanel"
@@ -4819,27 +4819,22 @@ export default {
       }
     },
 
-
     handleprop() {
       this.addProp = true;
       this.infoTab = false;
     },
-
     getSelectedCaracteristicasIDs() {
       const selectedIds = Object.keys(this.caracteristicaImovel).filter(id => this.caracteristicaImovel[id]).map(Number);
       return selectedIds;
     },
-
     getSelectedMinhasProximidadesIDs() {
       return Object.keys(this.proximidadesImovel).filter(id => this.proximidadesImovel[id]).map(Number);
 
 
     },
-
     getSelectedAllProximidadesIDs() {
       return Object.keys(this.proximidadesAllImovel).filter(id => this.proximidadesAllImovel[id]).map(Number);
     },
-
     getCombinedSelectedProximidadesIDs() {
       const minhasIDs = this.getSelectedMinhasProximidadesIDs();
       const allIDs = this.getSelectedAllProximidadesIDs();
@@ -4849,15 +4844,12 @@ export default {
 
       return combinedIDs;
     },
-
     getSelectedMinhasCaracteristicasIDs() {
       return Object.keys(this.caracteristicaImovel).filter(id => this.caracteristicaImovel[id]).map(Number);
     },
-
     getSelectedAllCaracteristicasIDs() {
       return Object.keys(this.caracteristicaAllImovel).filter(id => this.caracteristicaAllImovel[id]).map(Number);
     },
-
     getCombinedSelectedCaracteristicasIDs() {
       const minhasIDss = this.getSelectedMinhasCaracteristicasIDs();
       const allIDss = this.getSelectedAllCaracteristicasIDs();
@@ -4865,8 +4857,6 @@ export default {
 
       return combinedIDss;
     },
-
-
     handlePropietario() {
       let id_user = this.id_user;
       let nomeProprietario = this.proprietarioNome
@@ -4896,7 +4886,6 @@ export default {
 
       })
     },
-
     aplicaMascaraTelefone() {
       let v = this.propietarioTelefone;
 
@@ -4909,12 +4898,10 @@ export default {
 
       this.propietarioTelefone = v;
     },
-
     handlepropclose() {
       this.addProp = false;
       this.infoTab = true;
     },
-
     handleSaveProximidades() {
       let nome_proximidade = this.inputProximidades;
       let id_user = this.id_user;
@@ -4948,7 +4935,6 @@ export default {
 
 
     },
-
     handleSaveCaracteristicas() {
 
       let nome_caracteristica = this.inputCaracteristicas;
@@ -4980,7 +4966,6 @@ export default {
       }
 
     },
-
     fetchCaracteristicas() {
       let id_user = this.id_user;
       api.listminhascaracteristicas(id_user).then((res) => {
@@ -4989,7 +4974,6 @@ export default {
         console.log(this.minhasCaracteristicas)
       })
     },
-
     fetchProximidades() {
       let id_user = this.id_user;
       api.listminhasproximidades(id_user).then((res) => {
@@ -4997,36 +4981,30 @@ export default {
       })
 
     },
-
     fetchProprietatio() {
       let id_user = this.id_user;
       api.listproprietario(id_user).then((res) => {
         this.listsProprietarios = res.data.response;
       })
     },
-
     fetchAllProximidades() {
       api.listproximidade().then((res) => {
         const todasProximidades = res.data.response;
         this.listProximidades = todasProximidades.filter(proximidade => proximidade.id_user === null);
       });
     },
-
     fetchAllCaracteristicas() {
       api.listcaracteristica().then((res) => {
         const todasCaracteristicas = res.data.response;
         this.listcaracteristicas = todasCaracteristicas.filter(caracteristica => caracteristica.id_user === null);
       });
     },
-
     handleFecharProximidades() {
       this.addProximidades = false;
     },
-
     handleFecharCaracteristicas() {
       this.addCaracteristicas = false;
     },
-
     handleDeleteProximidades(id) {
       let id_proximidade = id
       api.deleteMinhaProximidades(id_proximidade).then((res) => {
@@ -5036,7 +5014,6 @@ export default {
 
       })
     },
-
     handleDeleteCaracacteristicas(id) {
 
       let id_caracteristicas = id
@@ -5047,11 +5024,9 @@ export default {
 
       })
     },
-
     handleAbrirProximidades() {
       this.addProximidades = true;
     },
-
     handleAbrirCaracteristicas() {
       this.addCaracteristicas = true;
     },
@@ -5082,7 +5057,6 @@ export default {
 
 
     },
-
     handleProximoMedida() {
 
       const campos = [
@@ -5113,7 +5087,6 @@ export default {
 
 
     },
-
     handleProximoPreco() {
       const campos = [
         this.areaConstruida,
@@ -5140,7 +5113,6 @@ export default {
       }
 
     },
-
     handleProximoCaracteristica() {
       this.precoTab = false;
       this.caracteristicaTab = true;
@@ -5168,9 +5140,9 @@ export default {
       this.stepMedidas = true;
       this.stepPreco = true;
     },
-
     handleProximoLocalizacao() {
       this.caracteristicaTab = false;
+      this.addCaracteristicas = false;
       this.localizacaoTab = true;
 
       this.stepInfo = true;
@@ -5179,7 +5151,6 @@ export default {
       this.stepPreco = true;
       this.stepCaracteristica = true;
     },
-
     handleProximoProximidades() {
 
       const campos = [
@@ -5222,7 +5193,6 @@ export default {
       this.stepCaracteristica = true;
       this.stepLocalizacao = true;
     },
-
     handleProximoDescricao() {
       this.proximidadesTab = false;
       this.descricaoTab = true;
@@ -5236,7 +5206,6 @@ export default {
       this.stepLocalizacao = true;
       this.stepProximidades = true;
     },
-
     handleProximoComplemento() {
       this.descricaoTab = false;
       this.complementoTab = true;
@@ -5250,7 +5219,6 @@ export default {
       this.stepProximidades = true;
       this.stepDescricao = true;
     },
-
     handleProximoImagem() {
       this.complementoTab = false;
       this.imagemTab = true;
@@ -5265,7 +5233,6 @@ export default {
       this.stepDescricao = true;
       this.stepComplemento = true;
     },
-
     handleProximoPublicacao() {
       this.imagemTab = false;
       this.publicacaoTab = true;
@@ -5299,11 +5266,9 @@ export default {
       this.stepImagens = true;
       this.stepPublicacao = true;
     },
-
     removerImagem(index) {
       this.images.splice(index, 1);
     },
-
     previewImage(event) {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
@@ -5322,7 +5287,6 @@ export default {
         reader.readAsDataURL(file);
       }
     },
-
     simulateUpload(imageIndex) {
       let progress = 0;
       const interval = setInterval(() => {
@@ -5334,7 +5298,6 @@ export default {
         }
       }, 100);
     },
-
     async handleFinish() {
       let codRef = this.codigoref;
       let tipoImovel = this.perfilImovel;
@@ -5421,17 +5384,17 @@ export default {
       let textoTarja = this.textoTarja
       let corTarja = this.corTarja
 
-      
+
 
       let selecteCond = this.selectCondominio;
       let idcondominio
 
-      if(selecteCond == 'Não'){
+      if (selecteCond == 'Não') {
         idcondominio = 1
-      }else if(selecteCond == 'Sim'){
+      } else if (selecteCond == 'Sim') {
         idcondominio = this.condominioEmpreendimento;
       }
-   
+
 
       let id_user = this.id_user;
 
@@ -5549,10 +5512,10 @@ export default {
           this.msgSucesso = true;
 
           let id_progressao = this.id_progressao;
-         
+
 
           api.editProgressImovel(id_progressao).then((res) => { })
-        
+
           setTimeout(() => {
             this.msgSucesso = false;
             window.location.reload();
@@ -5573,7 +5536,6 @@ export default {
         }
       });
     },
-
     handleAnteriorInfo() {
       this.infoTab = true;
       this.comodosTab = false;
@@ -5606,12 +5568,10 @@ export default {
       this.complementoTab = false;
       this.descricaoTab = true;
     },
-
     handleAnteriorComplemento() {
       this.complementoTab = true;
       this.imagemTab = false;
     },
-
     handleAnteriorImagem() {
       this.publicacaoTab = false;
       this.imagemTab = true;
