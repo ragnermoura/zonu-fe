@@ -231,6 +231,7 @@ export default {
     methods: {
 
         handleValidaCod() {
+            this.autenticando = true;
 
             let code = this.number1 + this.number2 + this.number3 + this.number4;
 
@@ -238,7 +239,7 @@ export default {
 
                 if (res.status == 200) {
 
-                    this.autenticando = true;
+                    this.autenticando = false;
                     this.textoBotao = "Aguarde...";
 
                     setTimeout(() => {
@@ -278,6 +279,7 @@ export default {
                         this.msgErrorEmail = false;
 
                         setTimeout(() => {
+
                             this.textoBotao = "Validar código...";
                             this.autenticando = false;
                             this.emailTab = false;
