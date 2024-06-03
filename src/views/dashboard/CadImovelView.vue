@@ -5549,10 +5549,10 @@ export default {
           this.msgSucesso = true;
 
           let id_progressao = this.id_progressao;
-      
-          api.editProgressImovel(id_progressao).then((res) => { })
          
 
+          api.editProgressImovel(id_progressao).then((res) => { })
+        
           setTimeout(() => {
             this.msgSucesso = false;
             window.location.reload();

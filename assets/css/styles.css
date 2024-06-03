@@ -20,6 +20,20 @@ body {
   width: 100%;
 }
 
+.number-code-input{
+
+  width: 45px;
+  height: 40px;
+  text-align: center;
+  font-weight: 700;
+
+
+
+
+
+
+}
+
 .logomin {
   width: 100px;
   margin-left: auto;
