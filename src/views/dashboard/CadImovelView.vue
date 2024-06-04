@@ -4678,7 +4678,6 @@ export default {
 
   methods: {
     initMap() {
-      console.log("update", this.latitude, this,longitude)
       this.map = L.map(this.$refs.mapElement).setView([this.latitude, this.longitude], 15);
 
       // Adiciona os tiles do OpenStreetMap
@@ -4830,6 +4829,7 @@ export default {
     },
 
     async buscarCoordenadas(cep, cidade, estado) {
+    console.log(cep, cidade, estado)
       const apiKey = '1f64d822c44341f38692b2b37ec70e64';
 
       try {
@@ -4842,6 +4842,7 @@ export default {
 
 
         if (res.data && res.data.results && res.data.results.length > 0) {
+        console.log(res.data.results)
           const location = res.data.results[0].geometry;
           const latitude = location.lat;
           const longitude = location.lng;
