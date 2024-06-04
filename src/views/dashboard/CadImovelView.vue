@@ -1640,9 +1640,10 @@
 
                             <div class="col-12" v-if="mostrarMapa">
 
-                              <iframe :src="mapUrl" width="100%" height="350" style="border: 0" allowfullscreen=""
+                              <!-- <iframe :src="mapUrl" width="100%" height="350" style="border: 0" allowfullscreen=""
                                 loading="lazy" class="my-3" referrerpolicy="no-referrer-when-downgrade">
-                              </iframe>
+                              </iframe> -->
+                              <div id="map" ref="mapElement" style="height: 350px; width:100%; border: 0;"></div>
 
                               <div class="row">
 
@@ -4253,6 +4254,7 @@ import api from "../../../service/api/index.js";
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios'
 import _ from 'lodash';
+import L from 'leaflet';
 
 
 export default {
@@ -4419,6 +4421,8 @@ export default {
       selectLocalSite: "Não",
       mapaStreetV: "Não",
       selectStreetVSite: "Não",
+      latitude: '',
+      longitude: '',
 
       // TAB PROXIMIDADES
       proximidades: false,
@@ -4480,10 +4484,9 @@ export default {
 
   computed: {
 
-    mapUrl() {
-      return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14725.435606724364!2d${this.longitude}!3d${this.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1707888543130!5m2!1spt-BR!2sbr`;
-    },
-
+    // mapUrl() {
+    //   return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14725.435606724364!2d${this.longitude}!3d${this.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1707888543130!5m2!1spt-BR!2sbr`;
+    // },
 
     areaTotal() {
       // Converte os valores para float e soma. Se não for número, trata como 0.
@@ -4513,11 +4516,31 @@ export default {
       }
     },
 
-    mapaCondo(newValue) {
-      if (newValue == "Sim") {
+    // mapaCondo(newValue) {
+    //   if (newValue == "Sim") {
+    //     this.mostrarMapa = true;
+    //     this.$nextTick(() => {
+    //       if (!this.map) {
+    //         this.initMap();
+    //       } else {
+    //         this.updateMap();
+    //       }
+    //     })
+    //   } else {
+    //     this.mostrarMapa = false;
+    //   }
+    // },
+
+    mapaCondo(val) {
+      if (val == "Sim") {
         this.mostrarMapa = true;
-      } else {
-        this.mostrarMapa = false;
+        this.$nextTick(() => {
+          if (this.map) {
+            this.updateMap();
+          } else {
+            this.initMap();
+          }
+        });
       }
     },
 
@@ -4651,10 +4674,21 @@ export default {
       this.id_progress = res.data.id_progressao;
     });
 
-
   },
 
   methods: {
+    initMap() {
+      console.log("update", this.latitude, this,longitude)
+      this.map = L.map(this.$refs.mapElement).setView([this.latitude, this.longitude], 15);
+
+      // Adiciona os tiles do OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(this.map);
+
+      this.addMarker();
+    },
 
     aplicaMascaraCEP() {
       let v = this.buscarCEP;
@@ -4808,14 +4842,37 @@ export default {
 
 
         if (res.data && res.data.results && res.data.results.length > 0) {
-          this.latitude = res.data.results[0].geometry.lat;
-          this.longitude = res.data.results[0].geometry.lng;
-          console.log("Latitude e Longitude encontradas:", this.latitude, this.longitude);
+          const location = res.data.results[0].geometry;
+          const latitude = location.lat;
+          const longitude = location.lng;
+          this.latitude = latitude;
+          this.longitude = longitude;
+
+          console.log("Latitude e Longitude encontradas:", latitude, longitude);
+          return { latitude, longitude };
         } else {
           console.error("Coordenadas não encontradas para o CEP informado.");
+          return null;
         }
       } catch (error) {
         console.error("Erro ao buscar coordenadas:", error);
+        return null;
+      }
+    },
+
+    updateMap() {
+      this.map.setView([this.latitude, this.longitude], 15);
+      this.addMarker();
+    },
+    addMarker() {
+      const lat = this.latitude;
+      const lng = this.longitude;
+
+      if (!isNaN(lat) && !isNaN(lng)) {
+        L.marker([lat, lng]).addTo(this.map)
+          .bindPopup(`Latitude: ${lat}, Longitude: ${lng}`).openPopup();
+      } else {
+        console.error('Coordenadas inválidas');
       }
     },
 

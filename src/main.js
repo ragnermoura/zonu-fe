@@ -1,13 +1,12 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import vue3GoogleLogin from "vue3-google-login";
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import vue3GoogleLogin from 'vue3-google-login'
 
 
+import App from './App.vue'
+import router from './router'
 
-import App from "./App.vue";
-import router from "./router";
-
-const app = createApp(App);
+const app = createApp(App)
 
 
 app.use(vue3GoogleLogin, {
