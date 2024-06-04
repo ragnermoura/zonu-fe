@@ -1638,12 +1638,12 @@
 
                             <hr />
 
-                            <div class="col-12" v-if="mostrarMapa">
+                            <div class="col-12" style="position: relative;" v-if="mostrarMapa">
 
                               <!-- <iframe :src="mapUrl" width="100%" height="350" style="border: 0" allowfullscreen=""
                                 loading="lazy" class="my-3" referrerpolicy="no-referrer-when-downgrade">
                               </iframe> -->
-                              <div id="map" ref="mapElement" style="height: 350px; width:100%; border: 0;"></div>
+                              <div id="map" ref="mapElement" style="height: 350px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
 
                               <div class="row">
 
@@ -4516,23 +4516,9 @@ export default {
       }
     },
 
-    // mapaCondo(newValue) {
-    //   if (newValue == "Sim") {
-    //     this.mostrarMapa = true;
-    //     this.$nextTick(() => {
-    //       if (!this.map) {
-    //         this.initMap();
-    //       } else {
-    //         this.updateMap();
-    //       }
-    //     })
-    //   } else {
-    //     this.mostrarMapa = false;
-    //   }
-    // },
-
-    mapaCondo(val) {
-      if (val == "Sim") {
+    mapaCondo(newValue) {
+      // console.log(newValue)
+      if (newValue == "Sim") {
         this.mostrarMapa = true;
         this.$nextTick(() => {
           if (this.map) {
@@ -4541,6 +4527,8 @@ export default {
             this.initMap();
           }
         });
+      } else {
+        this.mostrarMapa = false;
       }
     },
 
@@ -4829,7 +4817,7 @@ export default {
     },
 
     async buscarCoordenadas(cep, cidade, estado) {
-    console.log(cep, cidade, estado)
+    // console.log(cep, cidade, estado)
       const apiKey = '1f64d822c44341f38692b2b37ec70e64';
 
       try {
@@ -4842,7 +4830,7 @@ export default {
 
 
         if (res.data && res.data.results && res.data.results.length > 0) {
-        console.log(res.data.results)
+        // console.log(res.data.results)
           const location = res.data.results[0].geometry;
           const latitude = location.lat;
           const longitude = location.lng;
