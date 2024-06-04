@@ -328,8 +328,8 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                   class="form-label">Incorporação</label>
-                                <input type="number" v-if="!mostrarSkeleton" class="form-control"
-                                  placeholder="Digite..." v-model="incorporacao" />
+                                <input type="text" v-if="!mostrarSkeleton" class="form-control"
+                                  placeholder="RI" v-model="incorporacao" />
                               </div>
                             </div>
 
