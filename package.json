@@ -24,6 +24,7 @@
     "ua-parser-js": "^1.0.37",
     "vue": "^3.3.11",
     "vue-google-oauth2": "^1.5.10",
+    "vue-recaptcha": "^3.0.0-alpha.2",
     "vue-router": "^4.2.5",
     "vue3-google-login": "^2.0.25"
   },

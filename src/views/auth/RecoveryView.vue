@@ -157,6 +157,9 @@
                         </div>
                     </div>
 
+              
+
+
                     <div v-if="mostrarSkeleton" class="skeleton-button mt-5"></div>
                     <button v-if="!mostrarSkeleton" :disabled="autenticando" @click="handleValidar()" type="submit"
                         class="btn btn-dark bot mt-4">{{ textoBotao }}</button>

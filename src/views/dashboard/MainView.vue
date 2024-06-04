@@ -183,9 +183,11 @@
                           </div>
 
                           <div class="col-9" style="margin-left: -10px;">
-                            <h5><i class="fa fa-building"></i> <a href="#" style="text-decoration: none; color: #000;" data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"><strong>{{ item.descricao.titulo }}</strong></a> <span
-                                class="badge text-bg-success">{{ item.preco.tipo_negocio }}</span><a @click="handledDelete(item.id_imovel)" style="float: inline-end;" class="text-danger"><i
-                                  class="fa fa-trash"></i></a>
+                            <h5><i class="fa fa-building"></i> <a href="#" style="text-decoration: none; color: #000;"
+                                data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"><strong>{{
+                                  item.descricao.titulo }}</strong></a> <span class="badge text-bg-success">{{
+                                item.preco.tipo_negocio }}</span><a data-bs-toggle="modal" :data-bs-target="`#exampleModal${item.id_imovel}`"
+                                style="float: inline-end;" class="text-danger"><i class="fa fa-trash"></i></a>
                             </h5>
                             <h5 class="text-info"><strong>{{ item.preco.preco_imovel }}</strong><a
                                 data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"
@@ -200,6 +202,26 @@
                                 {{ qualidade }}</span></h5>
                           </div>
                         </a>
+
+                        <div class="modal fade" :id="`exampleModal${item.id_imovel}`" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa fa-trash"></i> Apagar imóvel</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                              <h3 class="text-center">Você tem certeza que deseja apagar este imóvel?</h3>  
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button @click="handledDelete(item.id_imovel)" type="button" class="btn btn-success"><i class="fa fa-trash"></i> Sim, apagar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
                         <hr class="mt-3">
                         <!-- Modal -->
@@ -838,7 +860,7 @@ export default {
 
 
 
-   
+
 
   },
 
@@ -961,19 +983,19 @@ export default {
     },
 
     filtrarImoveis() {
-    const filtrados = this.myImoveis.filter(imovel => {
-      return (
-        (this.selectedTipoNegocio === '' || imovel.preco.tipo_negocio === this.selectedTipoNegocio) &&
-        (this.selectedStatus === '' || (this.selectedStatus === 'Publicado' ? imovel.publicacao.mostrar_imovel_publi === 'Sim' : imovel.publicacao.mostrar_imovel_publi === 'Não')) &&
-        (this.selectedTipoImovel === '' || imovel.info.tipo === this.selectedTipoImovel) &&
-        (this.selectedBairro === '' || imovel.localizacao.bairro === this.selectedBairro) &&
-        (this.selectedProximoMar === '' || imovel.info.proximo_mar === this.selectedProximoMar) &&
-        (this.selectedQuartos === null || imovel.comodos.dormitorio === this.selectedQuartos.toString())
-      );
-    });
+      const filtrados = this.myImoveis.filter(imovel => {
+        return (
+          (this.selectedTipoNegocio === '' || imovel.preco.tipo_negocio === this.selectedTipoNegocio) &&
+          (this.selectedStatus === '' || (this.selectedStatus === 'Publicado' ? imovel.publicacao.mostrar_imovel_publi === 'Sim' : imovel.publicacao.mostrar_imovel_publi === 'Não')) &&
+          (this.selectedTipoImovel === '' || imovel.info.tipo === this.selectedTipoImovel) &&
+          (this.selectedBairro === '' || imovel.localizacao.bairro === this.selectedBairro) &&
+          (this.selectedProximoMar === '' || imovel.info.proximo_mar === this.selectedProximoMar) &&
+          (this.selectedQuartos === null || imovel.comodos.dormitorio === this.selectedQuartos.toString())
+        );
+      });
 
-    this.renderChart(filtrados);
-  },
+      this.renderChart(filtrados);
+    },
 
     renderChart(imoveis) {
       const labels = imoveis.map(imovel => imovel.localizacao.bairro);
