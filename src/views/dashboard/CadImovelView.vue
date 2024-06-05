@@ -4522,6 +4522,7 @@ export default {
         this.mostrarMapa = true;
         this.$nextTick(() => {
           if (this.map) {
+            this.initMap();
             this.updateMap();
           } else {
             this.initMap();
@@ -4808,7 +4809,8 @@ export default {
           this.selectBairro = bairro
           this.logradouro = rua
 
-          await this.buscarCoordenadas(cep, cidade, estado);
+          // await this.buscarCoordenadas(cep, cidade, estado);
+          await this.buscarCoordenadas(cep, rua, estado, cidade);
 
         } catch (error) {
           console.error("Erro ao consultar CEP: ", error);
@@ -4816,22 +4818,21 @@ export default {
       }
     },
 
-    async buscarCoordenadas(cep, cidade, estado) {
-    // console.log(cep, cidade, estado)
-      const apiKey = '1f64d822c44341f38692b2b37ec70e64';
+    async buscarCoordenadas(cep, rua) {
+      // trocar pela apiKey do cliente
+      const apiKey = 'AIzaSyAASYgAApUrIKnyEc9ykVzP7-s_-g2ldRU';
 
       try {
-        const res = await axios.get(`https://api.opencagedata.com/geocode/v1/json`, {
-          params: {
-            q: `${cep}, ${cidade}, ${estado}, Brasil`,
-            key: apiKey
-          }
-        });
-
+        const res = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params: {
+        address: `${cep}, ${rua}`,
+        key: apiKey
+      }
+    });
+        // console.log(res)
 
         if (res.data && res.data.results && res.data.results.length > 0) {
-        // console.log(res.data.results)
-          const location = res.data.results[0].geometry;
+          const location = res.data.results[0].geometry.location;
           const latitude = location.lat;
           const longitude = location.lng;
           this.latitude = latitude;
