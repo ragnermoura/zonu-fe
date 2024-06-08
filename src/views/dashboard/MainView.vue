@@ -186,8 +186,9 @@
                             <h5><i class="fa fa-building"></i> <a href="#" style="text-decoration: none; color: #000;"
                                 data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"><strong>{{
                                   item.descricao.titulo }}</strong></a> <span class="badge text-bg-success">{{
-                                item.preco.tipo_negocio }}</span><a data-bs-toggle="modal" :data-bs-target="`#exampleModal${item.id_imovel}`"
-                                style="float: inline-end;" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    item.preco.tipo_negocio }}</span><a data-bs-toggle="modal"
+                                :data-bs-target="`#exampleModal${item.id_imovel}`" style="float: inline-end;"
+                                class="text-danger"><i class="fa fa-trash"></i></a>
                             </h5>
                             <h5 class="text-info"><strong>{{ item.preco.preco_imovel }}</strong><a
                                 data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"
@@ -203,21 +204,23 @@
                           </div>
                         </a>
 
-                        <div class="modal fade" :id="`exampleModal${item.id_imovel}`" tabindex="-1" aria-labelledby="exampleModalLabel"
-                          aria-hidden="true">
+                        <div class="modal fade" :id="`exampleModal${item.id_imovel}`" tabindex="-1"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa fa-trash"></i> Apagar imóvel</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa fa-trash"></i> Apagar
+                                  imóvel</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                   aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
-                              <h3 class="text-center">Você tem certeza que deseja apagar este imóvel?</h3>  
+                                <h3 class="text-center">Você tem certeza que deseja apagar este imóvel?</h3>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button @click="handledDelete(item.id_imovel)" type="button" class="btn btn-success"><i class="fa fa-trash"></i> Sim, apagar</button>
+                                <button @click="handledDelete(item.id_imovel)" type="button" class="btn btn-success"><i
+                                    class="fa fa-trash"></i> Sim, apagar</button>
                               </div>
                             </div>
                           </div>
@@ -663,8 +666,38 @@
                       <div class="chart chart-sm">
 
                         <div class="row">
+
+                          <div class="col-2 mb-3">
+                            <label for="tipoNegocio" class="form-label">UF <small><i class="fa fa-filter"></i></small>
+                            </label>
+                            <select class="form-select" v-model="selectedTipoNegocio">
+                              <option value="">Escolha</option>
+
+                            </select>
+                          </div>
+
                           <div class="col-2">
-                            <label for="tipoNegocio" class="form-label">Tipo de negócio</label>
+                            <label for="tipoNegocio" class="form-label">Cidade <small><i
+                                  class="fa fa-filter"></i></small></label>
+                            <select class="form-select">
+                              <option value="">Escolha</option>
+                           
+
+                            </select>
+                          </div>
+
+                          <div class="col-2">
+                            <label for="bairro" class="form-label">Bairro <small><i
+                                  class="fa fa-filter"></i></small></label>
+                            <select class="form-select" v-model="selectedBairro">
+                              <option value="" disabled>Selecione</option>
+                              <option v-for="bairro in bairros" :key="bairro" :value="bairro">{{ bairro }}</option>
+                            </select>
+                          </div>
+
+                          <div class="col-2">
+                            <label for="tipoNegocio" class="form-label">Tipo de negócio <small><i
+                                  class="fa fa-filter"></i></small></label>
                             <select class="form-select" v-model="selectedTipoNegocio">
                               <option value="">Escolha</option>
                               <option value="Venda">Venda</option>
@@ -672,7 +705,8 @@
                             </select>
                           </div>
                           <div class="col-2">
-                            <label for="status" class="form-label">Status</label>
+                            <label for="status" class="form-label">Status <small><i
+                                  class="fa fa-filter"></i></small></label>
                             <select class="form-select" v-model="selectedStatus">
                               <option value="">Escolha</option>
                               <option value="Publicado">Publicado</option>
@@ -680,7 +714,8 @@
                             </select>
                           </div>
                           <div class="col-2">
-                            <label for="tipoImovel" class="form-label">Tipo do imóvel</label>
+                            <label for="tipoImovel" class="form-label">Tipo do imóvel <small><i
+                                  class="fa fa-filter"></i></small></label>
                             <select class="form-select" v-model="selectedTipoImovel">
                               <option value="" disabled>Selecione</option>
                               <option value="Casa">Casa</option>
@@ -695,15 +730,10 @@
                               <option value="Sala Comercial">Sala Comercial</option>
                             </select>
                           </div>
+
                           <div class="col-2">
-                            <label for="bairro" class="form-label">Bairro</label>
-                            <select class="form-select" v-model="selectedBairro">
-                              <option value="" disabled>Selecione</option>
-                              <option v-for="bairro in bairros" :key="bairro" :value="bairro">{{ bairro }}</option>
-                            </select>
-                          </div>
-                          <div class="col-2">
-                            <label for="proximoMar" class="form-label">Proximo do Mar?</label>
+                            <label for="proximoMar" class="form-label">Proximo do Mar? <small><i
+                                  class="fa fa-filter"></i></small></label>
                             <select class="form-select" v-model="selectedProximoMar">
                               <option value="" disabled>Selecione</option>
                               <option value="Vista para o mar">Vista para o mar</option>
@@ -713,15 +743,13 @@
                               <option value="Não">Não</option>
                             </select>
                           </div>
-                          <div class="col-1">
-                            <label for="quartos" class="form-label">Quartos</label>
-                            <input type="number" class="form-control" v-model="selectedQuartos" placeholder="00">
+                          <div class="col-2">
+                            <label for="quartos" class="form-label">Quartos <small><i
+                                  class="fa fa-filter"></i></small></label>
+                            <input style="height: 34px;" type="number" class="form-control" v-model="selectedQuartos"
+                              placeholder="00">
                           </div>
-                          <div class="col-1 mt-4" style="margin-top: 3% !important;">
-                            <button type="button" class="btn btn-success btn-sm" @click="filtrarImoveis">
-                              <i class="fa fa-search"></i>
-                            </button>
-                          </div>
+
 
                         </div>
                         <canvas id="myMetroQuadrado"></canvas>
@@ -806,6 +834,8 @@ export default {
       totalImovel: '',
       bairros: [],
       selectedBairro: '',
+
+
       mediaValorMetroQuadrado: 0,
       chartInstance: null,
 
@@ -836,7 +866,9 @@ export default {
       } else {
         this.calcularMediaTodosBairros();  // Recalcula para todos quando não há seleção
       }
-    }
+    },
+
+   
   },
 
   mounted() {
@@ -849,19 +881,14 @@ export default {
     const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
     this.iniciais = iniciais
 
-
-
     this.ferchProgress();
     this.fetchBairros();
+
     this.fetchMyImoveis();
     this.fetchAllImoveis();
     this.calcularMediaTodosBairros();
+
     this.fetchMyCondominios();
-
-
-
-
-
   },
 
   methods: {
@@ -880,7 +907,7 @@ export default {
       api.listmyImoveis(id_user).then(res => {
         this.myImoveis = res.data;
         this.totalImovel = this.myImoveis.length;
-        this.bairros = this.extractBairros(res.data);
+        this.cidades = this.extractCidades(res.data);
         this.renderChart(res.data);
 
         this.avaliarQualidadeCadastro(this.myImoveis);
@@ -988,7 +1015,7 @@ export default {
           (this.selectedTipoNegocio === '' || imovel.preco.tipo_negocio === this.selectedTipoNegocio) &&
           (this.selectedStatus === '' || (this.selectedStatus === 'Publicado' ? imovel.publicacao.mostrar_imovel_publi === 'Sim' : imovel.publicacao.mostrar_imovel_publi === 'Não')) &&
           (this.selectedTipoImovel === '' || imovel.info.tipo === this.selectedTipoImovel) &&
-          (this.selectedBairro === '' || imovel.localizacao.bairro === this.selectedBairro) &&
+          (this.selectedBairro === '' || imovel.localizacao.bairro === this.selectedBairro) &&  
           (this.selectedProximoMar === '' || imovel.info.proximo_mar === this.selectedProximoMar) &&
           (this.selectedQuartos === null || imovel.comodos.dormitorio === this.selectedQuartos.toString())
         );
@@ -1125,6 +1152,8 @@ export default {
         console.error('Erro ao buscar bairros', error);
       });
     },
+
+    
     calcularMediaTodosBairros() {
       const bairroMedia = {};
       this.allImoveis.forEach(imovel => {

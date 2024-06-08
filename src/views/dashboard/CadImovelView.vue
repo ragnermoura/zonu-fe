@@ -328,8 +328,8 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                   class="form-label">Incorporação</label>
-                                <input type="text" v-if="!mostrarSkeleton" class="form-control"
-                                  placeholder="RI" v-model="incorporacao" />
+                                <input type="text" v-if="!mostrarSkeleton" class="form-control" placeholder="RI"
+                                  v-model="incorporacao" />
                               </div>
                             </div>
 
@@ -805,21 +805,39 @@
                         <div>
                           <div class="row mt-4">
 
-                            <div class="col-4">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="areaConstruida" class="form-label">
-                                  Área Construída
-                                </label>
-                                <div class="input-group">
-                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaConstruida" placeholder="Digite aqui..."
-                                    @input="aplicaMascaraMedida('areaConstruida')" />
-                                  <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
+
+                            <div class="row mt-4">
+                              <div class="col-4">
+                                <div class="mb-3">
+                                  <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                  <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                  <label v-if="!mostrarSkeleton" for="areaConstruida" class="form-label">Área
+                                    Construída</label>
+                                  <div class="input-group">
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                      v-model="areaConstruida" placeholder="Digite aqui..."
+                                      @input="aplicaMascaraMedida('areaConstruida')" />
+                                    <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+
+                            <!-- <div class="col-4">
+                                <div class="mb-3">
+                                  <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                  <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                  <label v-if="!mostrarSkeleton" for="areaConstruida" class="form-label">
+                                    Área Construída
+                                  </label>
+                                  <div class="input-group">
+                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                      v-model="areaConstruida" placeholder="Digite aqui..."
+                                      @input="aplicaMascaraMedida('areaConstruida')" />
+                                    <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
+                                  </div>
+                                </div>
+                              </div> -->
 
                             <div class="col-4">
                               <div class="mb-3">
@@ -829,9 +847,7 @@
                                   Área Privativa
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaPrivativa" placeholder="Digite aqui..."
-                                    @input="aplicaMascaraMedida('areaPrivativa')" />
+                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="areaPrivativa" placeholder="Digite aqui..." @input="aplicaMascaraMedida('areaPrivativa')" />
                                   <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -845,8 +861,7 @@
                                   Área Total
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaTotal" disabled placeholder="Aguardando..." />
+                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="areaTotal" disabled placeholder="Aguardando..." />
                                   <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -1643,7 +1658,8 @@
                               <!-- <iframe :src="mapUrl" width="100%" height="350" style="border: 0" allowfullscreen=""
                                 loading="lazy" class="my-3" referrerpolicy="no-referrer-when-downgrade">
                               </iframe> -->
-                              <div id="map" ref="mapElement" style="height: 350px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
+                              <div id="map" ref="mapElement"
+                                style="height: 350px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
 
                               <div class="row">
 
@@ -2221,7 +2237,8 @@
 
                                         <div v-if="msgError" class="alert alert-danger mt-4 mb-4"
                                           style="margin-top: -20px; margin-bottom: 10px;" role="alert">
-                                          <strong><i class="fa fa-ban"></i> Desculpa, houve um erro para processar o seu
+                                          <strong><i class="fa fa-ban"></i> Desculpa, houve um erro para processar o
+                                            seu
                                             pedido. Tente novamente
                                             mais tarde</strong>
                                         </div>
@@ -4079,7 +4096,8 @@
                                                 <li class="text-danger"><small> Envie até 10 imagens . </small></li>
                                                 <li class="text-danger"><small> Formatos aceitos .PNG .JPG ou
                                                     .JPEG</small></li>
-                                                <li class="text-danger"><small> Tamanho máx. permitido é de até 3 mb por
+                                                <li class="text-danger"><small> Tamanho máx. permitido é de até 3 mb
+                                                    por
                                                     imagem.</small>
                                                 </li>
                                                 <li class="text-danger"><small> A resolução ideal de w: 1342
@@ -4489,13 +4507,10 @@ export default {
     // },
 
     areaTotal() {
-      // Converte os valores para float e soma. Se não for número, trata como 0.
-      const construida = parseFloat(this.areaConstruida) || 0;
-      const privativa = parseFloat(this.areaPrivativa) || 0;
-
-      this.areaTotal = construida + privativa;
-      return this.areaTotal
-    }
+      const construida = parseFloat(this.areaConstruida.replace(/\./g, '').replace(',', '.')) || 0;
+      const privativa = parseFloat(this.areaPrivativa.replace(/\./g, '').replace(',', '.')) || 0;
+      return (construida + privativa).toFixed(2);
+    },
   },
 
   watch: {
@@ -4824,11 +4839,11 @@ export default {
 
       try {
         const res = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-      params: {
-        address: `${cep}, ${rua}`,
-        key: apiKey
-      }
-    });
+          params: {
+            address: `${cep}, ${rua}`,
+            key: apiKey
+          }
+        });
         // console.log(res)
 
         if (res.data && res.data.results && res.data.results.length > 0) {
@@ -5491,11 +5506,11 @@ export default {
       formData.append("escritorio", escritorio);
       formData.append("casa_empregada", depEmpregada);
       formData.append("copa", copa);
-      formData.append("area_contruida", areaConstruida);
-      formData.append("area_privativa", areaPrivativa);
-      formData.append("area_total", areaTotal);
+      formData.append("area_contruida", parseFloat(this.areaConstruida.replace(/\./g, '').replace(',', '.')));
+      formData.append("area_privativa", parseFloat(this.areaPrivativa.replace(/\./g, '').replace(',', '.')));
+      formData.append("area_total", parseFloat(this.areaTotal.replace(/\./g, '').replace(',', '.')));
       formData.append("tipo_negocio", tipoNegocio);
-      formData.append("preco_imovel", precoImovel);
+      formData.append("preco_imovel", parseFloat(this.precoImovel.replace(/\./g, '').replace(',', '.')));
       formData.append("mostra_preco", precoNoSite);
       formData.append("texto_preco_opcao", textoLugarPreco);
       formData.append("preco_iptu", precoIptu);
