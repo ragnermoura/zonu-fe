@@ -406,7 +406,7 @@
                                                 <strong>Privativa: {{ item.medidas.area_privativa }} m²</strong>
                                               </h6>
                                               <h6 style="font-size: 12px;">
-                                                <strong>Preço m²: R$ {{ item.preco.valor_metro_quadrado }}</strong>
+                                                <strong>Preço m²: R$ {{ item.medidas.media_metro_quadrado }}</strong>
                                               </h6>
                                             </div>
                                           </div>
