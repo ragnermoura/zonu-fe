@@ -806,22 +806,22 @@
                           <div class="row mt-4">
 
 
-                           
-                              <div class="col-4">
-                                <div class="mb-3">
-                                  <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                  <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                  <label v-if="!mostrarSkeleton" for="areaConstruida" class="form-label">Área
-                                    Construída</label>
-                                  <div class="input-group">
-                                    <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                      v-model="areaConstruida" placeholder="Digite aqui..."
-                                      @input="aplicaMascaraMedida('areaConstruida')" />
-                                    <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
-                                  </div>
+
+                            <div class="col-4">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="areaConstruida" class="form-label">Área
+                                  Construída</label>
+                                <div class="input-group">
+                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                    v-model="areaConstruida" placeholder="Digite aqui..."
+                                    @input="aplicaMascaraMedida('areaConstruida')" />
+                                  <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
-                        
+                            </div>
+
 
                             <!-- <div class="col-4">
                                 <div class="mb-3">
@@ -847,7 +847,9 @@
                                   Área Privativa
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="areaPrivativa" placeholder="Digite aqui..." @input="aplicaMascaraMedida('areaPrivativa')" />
+                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                    v-model="areaPrivativa" placeholder="Digite aqui..."
+                                    @input="aplicaMascaraMedida('areaPrivativa')" />
                                   <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -861,7 +863,8 @@
                                   Área Total
                                 </label>
                                 <div class="input-group">
-                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control" v-model="areaTotal" disabled placeholder="Aguardando..." />
+                                  <input type="text" required v-if="!mostrarSkeleton" class="form-control"
+                                    v-model="areaTotal" disabled placeholder="Aguardando..." />
                                   <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
                               </div>
@@ -5577,7 +5580,7 @@ export default {
 
           setTimeout(() => {
             this.msgSucesso = false;
-            window.location.reload();
+            window.location.href = "/dashboard";
 
             this.$router.push({
               name: 'dashboard'
