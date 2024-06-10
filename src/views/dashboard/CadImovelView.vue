@@ -806,7 +806,7 @@
                           <div class="row mt-4">
 
 
-                            <div class="row mt-4">
+                           
                               <div class="col-4">
                                 <div class="mb-3">
                                   <div v-if="mostrarSkeleton" class="skeleton-label"></div>
@@ -821,7 +821,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                        
 
                             <!-- <div class="col-4">
                                 <div class="mb-3">
@@ -4556,8 +4556,6 @@ export default {
       }
     },
 
-
-
     // INFO
     selectAverbado(y) {
       this.selectAverbado = y;
@@ -4763,7 +4761,7 @@ export default {
       let valorDecimal = parseInt(v) / 100;
 
       // Formata o número como valor monetário
-      this.precoImovel = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      this.precoImovel = valorDecimal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     },
 
     aplicaMascaraDinheiroPrecoIptu() {
@@ -5310,7 +5308,6 @@ export default {
       this.stepComplemento = true;
       this.stepImagens = true;
     },
-
     //Evento de enviar para a API
     handleProximoFinish() {
       this.imagemTab = false;

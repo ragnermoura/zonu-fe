@@ -666,39 +666,34 @@
                       <div class="chart chart-sm">
 
                         <div class="row">
-
                           <div class="col-2 mb-3">
-                            <label for="tipoNegocio" class="form-label">UF <small><i class="fa fa-filter"></i></small>
-                            </label>
-                            <select class="form-select" v-model="selectedTipoNegocio">
-                              <option value="">Escolha</option>
-
-                            </select>
-                          </div>
-
-                          <div class="col-2">
-                            <label for="tipoNegocio" class="form-label">Cidade <small><i
+                            <label for="tipoNegocio" class="form-label">UF <small><i
                                   class="fa fa-filter"></i></small></label>
-                            <select class="form-select">
+                            <select class="form-select" v-model="selectedUf" @change="filtrarImoveis">
                               <option value="">Escolha</option>
-                           
-
+                              <option v-for="uf in ufs" :key="uf" :value="uf">{{ uf }}</option>
                             </select>
                           </div>
-
+                          <div class="col-2">
+                            <label for="cidade" class="form-label">Cidade <small><i
+                                  class="fa fa-filter"></i></small></label>
+                            <select class="form-select" v-model="selectedCidade" @change="filtrarImoveis">
+                              <option value="">Escolha</option>
+                              <option v-for="cidade in cidades" :key="cidade" :value="cidade">{{ cidade }}</option>
+                            </select>
+                          </div>
                           <div class="col-2">
                             <label for="bairro" class="form-label">Bairro <small><i
                                   class="fa fa-filter"></i></small></label>
-                            <select class="form-select" v-model="selectedBairro">
+                            <select class="form-select" v-model="selectedBairro" @change="filtrarImoveis">
                               <option value="" disabled>Selecione</option>
                               <option v-for="bairro in bairros" :key="bairro" :value="bairro">{{ bairro }}</option>
                             </select>
                           </div>
-
                           <div class="col-2">
                             <label for="tipoNegocio" class="form-label">Tipo de negócio <small><i
                                   class="fa fa-filter"></i></small></label>
-                            <select class="form-select" v-model="selectedTipoNegocio">
+                            <select class="form-select" v-model="selectedTipoNegocio" @change="filtrarImoveis">
                               <option value="">Escolha</option>
                               <option value="Venda">Venda</option>
                               <option value="Aluguél">Aluguél</option>
@@ -707,7 +702,7 @@
                           <div class="col-2">
                             <label for="status" class="form-label">Status <small><i
                                   class="fa fa-filter"></i></small></label>
-                            <select class="form-select" v-model="selectedStatus">
+                            <select class="form-select" v-model="selectedStatus" @change="filtrarImoveis">
                               <option value="">Escolha</option>
                               <option value="Publicado">Publicado</option>
                               <option value="Não publicado">Não publicado</option>
@@ -716,7 +711,7 @@
                           <div class="col-2">
                             <label for="tipoImovel" class="form-label">Tipo do imóvel <small><i
                                   class="fa fa-filter"></i></small></label>
-                            <select class="form-select" v-model="selectedTipoImovel">
+                            <select class="form-select" v-model="selectedTipoImovel" @change="filtrarImoveis">
                               <option value="" disabled>Selecione</option>
                               <option value="Casa">Casa</option>
                               <option value="Apartamento">Apartamento</option>
@@ -730,11 +725,10 @@
                               <option value="Sala Comercial">Sala Comercial</option>
                             </select>
                           </div>
-
                           <div class="col-2">
                             <label for="proximoMar" class="form-label">Proximo do Mar? <small><i
                                   class="fa fa-filter"></i></small></label>
-                            <select class="form-select" v-model="selectedProximoMar">
+                            <select class="form-select" v-model="selectedProximoMar" @change="filtrarImoveis">
                               <option value="" disabled>Selecione</option>
                               <option value="Vista para o mar">Vista para o mar</option>
                               <option value="Frente para o mar">Frente para o mar</option>
@@ -747,15 +741,24 @@
                             <label for="quartos" class="form-label">Quartos <small><i
                                   class="fa fa-filter"></i></small></label>
                             <input style="height: 34px;" type="number" class="form-control" v-model="selectedQuartos"
-                              placeholder="00">
+                              @input="filtrarImoveis" placeholder="00">
                           </div>
+                          <div v-if="!filteredImoveis.length">
+                            <div class="alert alert-primary mt-3" role="alert">
+                              😔 Desculpe, não achamos nenhum imóvel com essas características.
+                            </div>
+                            <div>
+                              <img style="margin-left: auto; margin-right: auto; display: block;"
+                                src="../../../assets/images/filterImage.svg" alt="">
+                            </div>
+                          </div>
+                          <canvas id="myMetroQuadrado" v-if="filteredImoveis.length"></canvas>
 
 
                         </div>
-                        <canvas id="myMetroQuadrado"></canvas>
-
-
+                        
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -832,8 +835,21 @@ export default {
       estrelas: 0,
       porcentagemQualidade: 0,
       totalImovel: '',
+
+
+      filteredImoveis: [],
+      ufs: [],
+      cidades: [],
       bairros: [],
+      selectedUf: '',
+      selectedCidade: '',
       selectedBairro: '',
+      selectedTipoNegocio: '',
+      selectedStatus: '',
+      selectedTipoImovel: '',
+      selectedProximoMar: '',
+      selectedQuartos: '',
+      chart: null,
 
 
       mediaValorMetroQuadrado: 0,
@@ -845,12 +861,8 @@ export default {
 
       totalCondominios: 0,
 
-      selectedTipoNegocio: '',
-      selectedStatus: '',
-      selectedTipoImovel: '',
-      selectedProximoMar: '',
-      selectedQuartos: null,
-      chart: null
+
+
     }
   },
   components: {
@@ -868,7 +880,7 @@ export default {
       }
     },
 
-   
+
   },
 
   mounted() {
@@ -882,12 +894,8 @@ export default {
     this.iniciais = iniciais
 
     this.ferchProgress();
-    this.fetchBairros();
-
     this.fetchMyImoveis();
     this.fetchAllImoveis();
-    this.calcularMediaTodosBairros();
-
     this.fetchMyCondominios();
   },
 
@@ -998,40 +1006,32 @@ export default {
       })
     },
 
-    extractBairros(imoveis) {
-
-      const bairros = new Set();
-      imoveis.forEach(imovel => {
-        if (imovel.localizacao && imovel.localizacao.bairro) {
-          bairros.add(imovel.localizacao.bairro);
-        }
-      });
-      return Array.from(bairros);
-    },
-
     filtrarImoveis() {
-      const filtrados = this.myImoveis.filter(imovel => {
+      this.filteredImoveis = this.allImoveis.filter(imovel => {
         return (
-          (this.selectedTipoNegocio === '' || imovel.preco.tipo_negocio === this.selectedTipoNegocio) &&
-          (this.selectedStatus === '' || (this.selectedStatus === 'Publicado' ? imovel.publicacao.mostrar_imovel_publi === 'Sim' : imovel.publicacao.mostrar_imovel_publi === 'Não')) &&
-          (this.selectedTipoImovel === '' || imovel.info.tipo === this.selectedTipoImovel) &&
-          (this.selectedBairro === '' || imovel.localizacao.bairro === this.selectedBairro) &&  
-          (this.selectedProximoMar === '' || imovel.info.proximo_mar === this.selectedProximoMar) &&
-          (this.selectedQuartos === null || imovel.comodos.dormitorio === this.selectedQuartos.toString())
+          (!this.selectedUf || imovel.localizacao.estado === this.selectedUf) &&
+          (!this.selectedCidade || imovel.localizacao.cidade === this.selectedCidade) &&
+          (!this.selectedBairro || imovel.localizacao.bairro === this.selectedBairro) &&
+          (!this.selectedTipoNegocio || imovel.preco.tipo_negocio === this.selectedTipoNegocio) &&
+          (!this.selectedStatus || imovel.publicacao.mostrar_imovel_publi === this.selectedStatus) &&
+          (!this.selectedTipoImovel || imovel.info.tipo === this.selectedTipoImovel) &&
+          (!this.selectedProximoMar || imovel.info.proximo_mar === this.selectedProximoMar) &&
+          (!this.selectedQuartos || imovel.comodos.dormitorio == this.selectedQuartos)
         );
       });
 
-      this.renderChart(filtrados);
+      this.atualizarGrafico();
     },
 
-    renderChart(imoveis) {
-      const labels = imoveis.map(imovel => imovel.localizacao.bairro);
-      const data = imoveis.map(imovel => parseFloat(imovel.preco.valor_metro_quadrado));
-
-
-      const ctx = document.getElementById('myMetroQuadrado').getContext('2d');
+    atualizarGrafico() {
       if (this.chart) this.chart.destroy();
 
+      if (!this.filteredImoveis.length) return;
+
+      const labels = this.filteredImoveis.map(imovel => imovel.localizacao.bairro);
+      const data = this.filteredImoveis.map(imovel => parseFloat(imovel.medidas.media_metro_quadrado));
+
+      const ctx = document.getElementById('myMetroQuadrado').getContext('2d');
       this.chart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -1052,7 +1052,6 @@ export default {
         }
       });
     },
-
     ferchProgress() {
       let id_user = this.id_user;
 
@@ -1143,74 +1142,8 @@ export default {
       })
 
     },
-    fetchBairros() {
-      api.listBairro().then(res => {
-        const bairros = res.data.map(item => item.bairro);
-        const uniqueBairros = Array.from(new Set(bairros));
-        this.bairros = uniqueBairros;
-      }).catch(error => {
-        console.error('Erro ao buscar bairros', error);
-      });
-    },
 
-    
-    calcularMediaTodosBairros() {
-      const bairroMedia = {};
-      this.allImoveis.forEach(imovel => {
-        const bairro = imovel.localizacao.bairro;
-        if (!bairroMedia[bairro]) {
-          bairroMedia[bairro] = {
-            somaPreco: 0,
-            somaArea: 0,
-            count: 0
-          };
-        }
-        bairroMedia[bairro].somaPreco += parseFloat(imovel.preco.valor_metro_quadrado.replace(/[^\d.-]/g, ''));
-        bairroMedia[bairro].somaArea += parseFloat(imovel.medidas.area_total);
-        bairroMedia[bairro].count += 1;
-      });
 
-      // Calcular média para cada bairro e armazenar
-      const labels = [];
-      const data = [];
-      Object.keys(bairroMedia).forEach(bairro => {
-        if (bairroMedia[bairro].somaArea > 0) {
-          bairroMedia[bairro].media = bairroMedia[bairro].somaPreco / bairroMedia[bairro].somaArea;
-        } else {
-          bairroMedia[bairro].media = 0;
-        }
-        labels.push(bairro);
-        data.push(bairroMedia[bairro].media);
-      });
-
-      this.updateChart(labels, data);
-    },
-    updateChart(labels, data) {
-      const ctx = document.getElementById('metroQuadrado');
-      if (this.chartInstance) {
-        this.chartInstance.destroy();
-      }
-      this.chartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Média do Valor do Metro Quadrado por m²',
-            data: data,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    },
     fetchMyCondominios() {
       let id_user = this.id_user
       api.listcondominio(id_user).then((res) => {
@@ -1221,7 +1154,15 @@ export default {
     fetchAllImoveis() {
       api.listallImoveis().then(res => {
         this.allImoveis = res.data;
+        this.atualizarOpcoesFiltro();
+        this.filtrarImoveis();
       })
+    },
+
+    atualizarOpcoesFiltro() {
+      this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
+      this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
+      this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
     },
 
     previousPageImovel() {
