@@ -5362,7 +5362,7 @@ export default {
     },
     async handleFinish() {
       let codRef = this.codigoref;
-      let tipoImovel = this.perfilImovel;
+      let tipoImovel = this.tipoImovel;
       let perfilImovel = this.perfilImovel;
       let situacaoImovel = this.situacaoImovel;
       let anoImovel = this.anoImovel;
