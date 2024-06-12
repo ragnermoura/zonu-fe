@@ -936,7 +936,9 @@ export default {
       api.listmyImoveis(id_user).then(res => {
         this.myImoveis = res.data;
         this.totalImovel = this.myImoveis.length;
-        this.renderChart(res.data);
+        //this.renderChart(res.data);
+
+        console.log('Aqui estão os imóveis do Usuário ====> ', res.data)
 
         this.avaliarQualidadeCadastro(this.myImoveis);
 
