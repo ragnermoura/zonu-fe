@@ -2689,7 +2689,7 @@
                     </div>
                     <div class="card-body py-3">
                       <div id="mapImoveis" ref="mapElement"
-                                style="height: 438px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
+                        style="height: 438px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
                     </div>
                   </div>
                 </div>
@@ -2699,8 +2699,8 @@
                   <div class="card flex-fill w-100">
                     <div class="card-header">
                       <h5 class="card-title mb-0"><i class="fa fa-ruler"></i> Média do m2 <button
-                          style="float: inline-end;" type="button" class="btn btn-warning btn-sm"><i
-                            class="fa fa-filter"></i> Reiniciar filtros</button></h5>
+                          style="float: inline-end;" type="button" @click="resetFilters"
+                          class="btn btn-warning btn-sm"><i class="fa fa-filter"></i> Reiniciar filtros</button></h5>
                     </div>
                     <div class="card-body py-3">
                       <div class="chart chart-sm">
@@ -2783,14 +2783,12 @@
                             <input style="height: 34px;" type="number" class="form-control" v-model="selectedQuartos"
                               @input="filtrarImoveis" placeholder="00">
                           </div>
+
+
                           <canvas id="myMetroQuadrado" v-if="filteredImoveis.length"></canvas>
                           <div v-if="!filteredImoveis.length">
                             <div class="alert alert-primary mt-3" role="alert">
                               😔 Desculpe, não achamos nenhum imóvel com essas características.
-                            </div>
-                            <div>
-                              <img style="margin-left: auto; margin-right: auto; display: block;"
-                                src="../../../assets/images/filterImage.svg" alt="">
                             </div>
                           </div>
 
@@ -2878,6 +2876,7 @@ export default {
       totalImovel: '',
 
 
+      allImoveis: [],
       filteredImoveis: [],
       ufs: [],
       cidades: [],
@@ -2891,7 +2890,6 @@ export default {
       selectedProximoMar: '',
       selectedQuartos: '',
       chart: null,
-
 
       mediaValorMetroQuadrado: 0,
       chartInstance: null,
@@ -2930,6 +2928,8 @@ export default {
         this.atualizarOpcoesFiltro();
       }
     }
+
+
   },
 
   mounted() {
@@ -2986,10 +2986,10 @@ export default {
           attribution: '© OpenStreetMap contributors'
         }).addTo(this.mapImoveis);
 
-        res.data.map( async (imovel) => {
+        res.data.map(async (imovel) => {
           // console.log(imovel)
           await this.buscarCoordenadas(imovel.localizacao.cep, imovel.localizacao.rua).then((res) => {
-            if(res) {
+            if (res) {
               // addMarker()
               this.updateMap()
             }
@@ -3084,7 +3084,6 @@ export default {
 
       })
     },
-
     async buscarCoordenadas(cep, rua) {
       // trocar pela apiKey do cliente
       const apiKey = 'AIzaSyAASYgAApUrIKnyEc9ykVzP7-s_-g2ldRU';
@@ -3116,36 +3115,40 @@ export default {
         return null;
       }
     },
-
     updateMap() {
       this.mapImoveis.setView([this.latitudeImoveis, this.longitudeImoveis], 4);
       this.addMarker();
     },
-
     addMarker() {
       const lat = this.latitudeImoveis;
       const lng = this.longitudeImoveis;
 
       if (!isNaN(lat) && !isNaN(lng)) {
         L.marker([lat, lng]).addTo(this.mapImoveis)
-          // .bindPopup(`Latitude: ${lat}, Longitude: ${lng}`).openPopup();
+        // .bindPopup(`Latitude: ${lat}, Longitude: ${lng}`).openPopup();
       } else {
         console.error('Coordenadas inválidas');
       }
     },
-
     atualizarGrafico() {
+      console.log("Atualizando gráfico");
       const ctx = document.getElementById('myMetroQuadrado');
       if (ctx) {
-        if (this.chart) this.chart.destroy();
+        if (this.chart) {
+          this.chart.destroy();
+        }
 
         if (!this.filteredImoveis.length) {
-          // Mostrar mensagem e imagem aqui
+          console.log("Nenhum imóvel filtrado");
+          this.chart = null;
           return;
         }
 
         const labels = this.filteredImoveis.map(imovel => imovel.localizacao.bairro);
         const data = this.filteredImoveis.map(imovel => parseFloat(imovel.medidas.media_metro_quadrado));
+
+        console.log("Labels do gráfico:", labels);
+        console.log("Dados do gráfico:", data);
 
         this.chart = new Chart(ctx.getContext('2d'), {
           type: 'bar',
@@ -3268,22 +3271,30 @@ export default {
       api.listallImoveis().then(res => {
         this.allImoveis = res.data;
         this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
-        this.atualizarOpcoesFiltro();
-        this.filtrarImoveis();
-      })
+        this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
+        this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
+        this.filteredImoveis = this.allImoveis; // Inicializar os imóveis filtrados com todos os imóveis
+        this.atualizarOpcoesFiltro(); // Atualizar as opções de filtro
+        this.atualizarGrafico(); // Atualizar o gráfico
+      });
     },
     atualizarOpcoesFiltro() {
       if (this.selectedUf) {
-        const imoveisFiltrados = this.allImoveis.filter(imovel => imovel.localizacao.estado === this.selectedUf);
-        this.cidades = [...new Set(imoveisFiltrados.map(imovel => imovel.localizacao.cidade))];
-        this.bairros = [...new Set(imoveisFiltrados.map(imovel => imovel.localizacao.bairro))];
+        const imoveisFiltradosPorUf = this.allImoveis.filter(imovel => imovel.localizacao.estado === this.selectedUf);
+        this.cidades = [...new Set(imoveisFiltradosPorUf.map(imovel => imovel.localizacao.cidade))];
+        if (this.selectedCidade) {
+          const imoveisFiltradosPorCidade = imoveisFiltradosPorUf.filter(imovel => imovel.localizacao.cidade === this.selectedCidade);
+          this.bairros = [...new Set(imoveisFiltradosPorCidade.map(imovel => imovel.localizacao.bairro))];
+        } else {
+          this.bairros = [...new Set(imoveisFiltradosPorUf.map(imovel => imovel.localizacao.bairro))];
+        }
       } else {
-        this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
-        this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
+        this.cidades = [];
+        this.bairros = [];
       }
     },
-
     filtrarImoveis() {
+      console.log("Filtrando imóveis");
       this.filteredImoveis = this.allImoveis.filter(imovel => {
         return (
           (!this.selectedUf || imovel.localizacao.estado === this.selectedUf) &&
@@ -3297,10 +3308,10 @@ export default {
         );
       });
 
+      console.log("Imóveis filtrados:", this.filteredImoveis);
       this.atualizarOpcoesFiltro();
       this.atualizarGrafico();
     },
-
     previousPageImovel() {
       if (this.currentPageImovel > 1) {
         this.currentPageImovel -= 1
@@ -3311,8 +3322,25 @@ export default {
         this.currentPageImovel += 1
       }
     },
+    resetFilters() {
+      console.log("Resetando filtros");
+      this.selectedUf = '';
+      this.selectedCidade = '';
+      this.selectedBairro = '';
+      this.selectedTipoNegocio = '';
+      this.selectedStatus = '';
+      this.selectedTipoImovel = '';
+      this.selectedProximoMar = '';
+      this.selectedQuartos = '';
+      this.filteredImoveis = this.allImoveis; // Resetar para todos os imóveis
+      this.atualizarOpcoesFiltro();
+      this.atualizarGrafico();
+    }
 
+  },
 
+  created() {
+    this.fetchAllImoveis();
   },
 
   computed: {
