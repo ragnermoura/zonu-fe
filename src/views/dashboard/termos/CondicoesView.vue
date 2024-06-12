@@ -19,7 +19,7 @@
                                     <div v-if="msgSuccess" class="alert alert-success alert-dismissible fade show"
                                         role="alert">
                                         <strong><i class="align-middle" data-feather="check"></i> Sucesso!</strong>
-                                        Termo de Responsabilidade acabou de ser criado.
+                                        Termo de Responsabilidade acabou de ser atualizado.
                                         <button type="button" class="btn-close" data-bs-dismiss="alert"
                                             aria-label="Close"></button>
                                     </div>
@@ -31,11 +31,11 @@
                                                     'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                                                 toolbar:
                                                     'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                                            }" v-model="editorContent" @editorChange="handleEditorChange" />
+                                            }" v-model="termos" @editorChange="handleEditorChange" />
                                         </div>
                                         <div class="col-12 mt-4">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <button :disabled="autenticando" @click="handleSaveTermo"
+                                                <button :disabled="autenticando" @click="handleSaveTermo()"
                                                     class="btn btn-success" type="button">
                                                     {{ textoBotao }}
                                                     <span v-if="autenticando" class="spinner-border spinner-border-sm"
@@ -81,18 +81,17 @@ export default {
             assunto: '',
             textotikets: '',
             id_user: '',
-            resposta: '',
+      
 
-            textoBotao: "Abrir Ticket",
+            textoBotao: "Atualizar Termos e condições",
             autenticando: false,
-
-            listTiketsOpen: [],
-            listTiketsClose: [],
 
             msgSuccess: false,
             msgErrorNull: false,
             msgSuccessEdit: false,
-            msgSuccessDelete: false
+            msgSuccessDelete: false,
+            termos: '',
+
         }
     },
     components: {
@@ -111,11 +110,11 @@ export default {
         let id_user = decode.id_user;
         this.id_user = id_user;
 
-        this.fetchTickets();
-        this.fetchResposta();
 
-        feather.replace();
-        this.fetchTerms();
+        this.fetchTermos();
+
+
+
     },
 
     methods: {
@@ -136,67 +135,36 @@ export default {
             return text;
         },
 
-        handledResposta(id) {
-            let id_ticket = id;
-            let resposta = this.resposta
-
-            api.RespondaTicket(id_ticket, resposta).then(res => {
-
-                if (res.status == 200) {
-                    this.resposta = '';
-                    this.fetchTickets();
-                    this.fetchResposta();
-                    $(`#modalResposta${id_ticket}`).modal('hide');
-
-
-                }
+        handleSaveTermo() {
+            let id_termos = 1
+            let termos = this.termos
+            api.editTermos(id_termos, termos).then(res => {
+                this.msgSuccess = true;
+                this.textoBotao = "Atualizar Termos e condições";
+                this.autenticando = false;
+                this.fetchTermos();
             })
+
         },
 
-        fetchTickets() {
-            api.listAllTickets().then(res => {
 
-                if (Array.isArray(res.data)) {
-                    const filteredTickets = res.data.filter(ticket => ticket.status === 2);
-
-                    this.totalTickets = filteredTickets.length;
-
-                    this.listTiketsOpen = filteredTickets
-
-                    if (filteredTickets.length > 0) {
-                        const firstTicketUser = filteredTickets[0].usuario;
-                        this.iniciaisUser = `${firstTicketUser.nome.charAt(0)}${firstTicketUser.sobrenome.charAt(0)}`.toUpperCase();
-                    }
-
-                } else {
-                    console.log('Resposta não contém um array ou está em um formato não esperado');
-                }
+        fetchTermos() {
+            api.termos().then(res => {
+                this.termos = res.data.response[0].texto;
             }).catch(error => {
                 console.error('Erro ao buscar tickets: ', error);
             });
 
         },
-
-        fetchResposta() {
-            api.listAllTickets().then(res => {
-
-                if (Array.isArray(res.data)) {
-                    const filteredTicketsClose = res.data.filter(ticket => ticket.status === 1);
-                    this.listTiketsClose = filteredTicketsClose
-
-                } else {
-                    console.log('Resposta não contém um array ou está em um formato não esperado');
-                }
-            }).catch(error => {
-                console.error('Erro ao buscar tickets: ', error);
-            });
-        }
-
-
-
-
-
 
     }
+
+
+
+
+
+
+
+
 }
 </script>

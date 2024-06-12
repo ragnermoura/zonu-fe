@@ -3194,6 +3194,8 @@ export default {
         this.imovel = res.data.imovel;
         this.publicacao = res.data.publicacao;
 
+        console.log('Aqui é a progressão da Main ===> ', res.data);
+
         if (this.perfil == 1 && this.capa == 1 && this.imovel == 1 && this.publicacao == 1) {
           this.progressView = false;
         } else {

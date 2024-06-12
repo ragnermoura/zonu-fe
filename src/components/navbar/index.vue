@@ -96,9 +96,10 @@
                             Perfil</a>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="file"></i>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                        data-bs-target="#termosModal" ><i class="align-middle me-1" data-feather="file"></i>
                             Termos & Condições</a>
-                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i>
+                        <a class="dropdown-item" target="_blank" href="https://wa.me/5583996795816?text=Ol%C3%A1%2C%20preciso%20de%20um%20suporte%20na%20plataforma%20Zonu%20%3A)"><i class="align-middle me-1" data-feather="help-circle"></i>
                             Help
                             Center</a>
                         <div class="dropdown-divider"></div>
@@ -112,6 +113,41 @@
     <div v-if="bannerProfile" class="msgPerfil">
         <h6 class="text-perfil"><img src="../../../assets/images/icons/iconStars.png" width="25" alt=""> Seu perfil não
             está completo <a><i class="iconClose fa fa-close"></i></a> </h6>
+    </div>
+
+
+    <div style="position: absolute !important;" class="modal fade" id="termosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"  id="exampleModalLabel">Termos e Condições</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div v-html="termos"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="position: absolute !important;" class="modal fade" id="privacidadeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"  id="exampleModalLabel">Privacidade</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div v-html="privacidade"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </template>
@@ -134,7 +170,9 @@ export default {
             listTikects: [],
             iniciaisUser: '',
             bannerProfile: false,
-            nivel: ''
+            nivel: '',
+            termos: [],
+            
         }
     },
     mounted() {
@@ -203,6 +241,8 @@ export default {
         }
 
         this.fetchProgress();
+        this.fetchTermos();
+        this.fetchPrivacidade();
 
 
     },
@@ -223,6 +263,22 @@ export default {
                 }
             });
         },
+
+        fetchTermos() {
+            
+            api.termos().then((res) => {
+                this.termos = res.data.response[0].texto;
+            });
+        },
+
+
+        fetchPrivacidade() {
+           
+            api.privacidade().then((res) => {
+                this.privacidade = res.data.response[0].texto;
+            });
+        },
+
 
         truncate(text, length) {
             if (text.length > length) {

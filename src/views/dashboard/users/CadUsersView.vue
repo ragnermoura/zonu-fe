@@ -115,7 +115,7 @@
                                                                     placeholder="Digite seu nome">
                                                                     <option disabled selected>Escolha</option>
                                                                     <option value="1">Administrador</option>
-                                                                    <option value="4">Suporte</option>
+                                                                    <option value="4" disabled>Suporte</option>
                                                                 </select>
                                                             </div>
 
@@ -473,7 +473,10 @@ export default {
         this.tabZonu = true;
         this.selectTab = true;
 
-        this.fetcUsuarios();
+    },
+
+    created() {
+        this.fetchUsuarios();
     },
 
     methods: {
@@ -676,14 +679,17 @@ export default {
 
         },
 
-        fetcUsuarios() {
+        fetchUsuarios() {
             api.listusuarios().then(res => {
-
                 let usuarios = res.data.response;
-                usuarios.filter(user => { user.id_nivel == 1 })
-
-                this.listUsers = usuarios;
-            })
+                // Filtrar os usuários com id_nivel igual a 1
+                let usuariosFiltrados = usuarios.filter((user, index, self) =>
+                    user.id_nivel === 1 &&
+                    index === self.findIndex((u) => u.id_user === user.id_user)
+                );
+                // Atribuir os usuários filtrados ao estado listUsers
+                this.listUsers = usuariosFiltrados;
+            });
         },
 
         handleEditStatusBlock(id) {
@@ -693,7 +699,7 @@ export default {
             api.editStatusUser(id_user, status).then(res => {
 
                 if (res.status == 201) {
-                    this.fetcUsuarios();
+                    this.fetchUsuarios();
                     this.msgSuccessEdit = true;
 
                     setTimeout(() => {
@@ -712,7 +718,7 @@ export default {
             api.editStatusUser(id_user, status).then(res => {
 
                 if (res.status == 201) {
-                    this.fetcUsuarios();
+                    this.fetchUsuarios();
                     this.msgSuccessEdit = true;
 
                     setTimeout(() => {
@@ -729,8 +735,8 @@ export default {
 
             api.deleteUser(id_user).then(res => {
 
-                if (res.status == 200) {
-                    this.fetcUsuarios();
+                if (res.status == 202) {
+                    this.fetchUsuarios();
                     this.msgSuccessDelete = true;
 
                     setTimeout(() => {

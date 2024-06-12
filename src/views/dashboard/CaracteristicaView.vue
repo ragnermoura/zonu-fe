@@ -238,7 +238,7 @@ export default {
             api.listcaracteristica().then((res) => {
                 this.lists = res.data.response;
 
-                console.log(this.lists);
+                
             });
         },
     },
