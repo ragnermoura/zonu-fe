@@ -664,8 +664,8 @@
                       <h5 class="card-title mb-0"><i class="fa fa-map-marker"></i> Localize seus imóveis</h5>
                     </div>
                     <div class="card-body py-3">
-
-
+                      <div id="mapImoveis" ref="mapElement"
+                                style="height: 438px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
                     </div>
                   </div>
                 </div>
@@ -821,6 +821,7 @@ import api from '../../../service/api/index'
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 import 'https://cdn.jsdelivr.net/npm/chart.js'
+import L from 'leaflet';
 
 export default {
   name: 'MainView',
@@ -877,7 +878,11 @@ export default {
 
       totalCondominios: 0,
 
-
+      // caso nao marque todos os pins transformar a latitude e longitude me array e o que mais precisar tambem 
+      latitudeImoveis: '-15.7934',
+      longitudeImoveis: '-47.8823',
+      mapImoveis: null,
+      markerIMoveis: null,
 
     }
   },
@@ -938,7 +943,24 @@ export default {
         this.totalImovel = this.myImoveis.length;
         //this.renderChart(res.data);
 
-        console.log('Aqui estão os imóveis do Usuário ====> ', res.data)
+        // console.log('Aqui estão os imóveis do Usuário ====> ', res.data)
+
+        this.mapImoveis = L.map(this.$refs.mapElement).setView([this.latitudeImoveis, this.longitudeImoveis], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(this.mapImoveis);
+
+        res.data.map( async (imovel) => {
+          // console.log(imovel)
+          await this.buscarCoordenadas(imovel.localizacao.cep, imovel.localizacao.rua).then((res) => {
+            if(res) {
+              // addMarker()
+              this.updateMap()
+            }
+          })
+
+        })
 
         this.avaliarQualidadeCadastro(this.myImoveis);
 
@@ -1027,6 +1049,56 @@ export default {
 
       })
     },
+
+    async buscarCoordenadas(cep, rua) {
+      // trocar pela apiKey do cliente
+      const apiKey = 'AIzaSyAASYgAApUrIKnyEc9ykVzP7-s_-g2ldRU';
+
+      try {
+        const res = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+          params: {
+            address: `${cep}, ${rua}`,
+            key: apiKey
+          }
+        });
+        // console.log(res)
+
+        if (res.data && res.data.results && res.data.results.length > 0) {
+          const location = res.data.results[0].geometry.location;
+          const latitude = location.lat;
+          const longitude = location.lng;
+          this.latitudeImoveis = latitude;
+          this.longitudeImoveis = longitude;
+
+          // console.log("Latitude e Longitude encontradas:", latitude, longitude);
+          return { latitude, longitude };
+        } else {
+          console.error("Coordenadas não encontradas para o CEP informado.");
+          return null;
+        }
+      } catch (error) {
+        console.error("Erro ao buscar coordenadas:", error);
+        return null;
+      }
+    },
+
+    updateMap() {
+      this.mapImoveis.setView([this.latitudeImoveis, this.longitudeImoveis], 4);
+      this.addMarker();
+    },
+
+    addMarker() {
+      const lat = this.latitudeImoveis;
+      const lng = this.longitudeImoveis;
+
+      if (!isNaN(lat) && !isNaN(lng)) {
+        L.marker([lat, lng]).addTo(this.mapImoveis)
+          // .bindPopup(`Latitude: ${lat}, Longitude: ${lng}`).openPopup();
+      } else {
+        console.error('Coordenadas inválidas');
+      }
+    },
+
     atualizarGrafico() {
       const ctx = document.getElementById('myMetroQuadrado');
       if (ctx) {
