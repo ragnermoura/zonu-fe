@@ -214,6 +214,86 @@ export default {
     }
   },
 
+  editTermos: async (id_termos, termos) => {
+    try {
+      const response = await http.patch(
+        `/termos/${id_termos}`,
+        {
+          texto: termos,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  termos: async () => {
+    try {
+      const response = await http.get("/termos/", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  editProvacidade: async (id_privacidade, privacidade) => {
+    try {
+      const response = await http.patch(
+        `/privacidade/${id_privacidade}`,
+        {
+          texto: privacidade,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+          },
+        }
+      );
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
+  privacidade: async () => {
+    try {
+      const response = await http.get("/privacidade/", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
+      });
+
+      return response;
+    } catch (error) {
+      return error.response || error.message || error;
+    }
+  },
+
   editStatusUser: async (id_user, status) => {
     try {
       const response = await http.patch(
@@ -238,7 +318,22 @@ export default {
     }
   },
 
-  editUser: async (id_user, nome, sobrenome, email, razao_social, cnpj, telefone, cep, endereco, numero, complemento, cidade, estado, bairro) => {
+  editUser: async (
+    id_user,
+    nome,
+    sobrenome,
+    email,
+    razao_social,
+    cnpj,
+    telefone,
+    cep,
+    endereco,
+    numero,
+    complemento,
+    cidade,
+    estado,
+    bairro
+  ) => {
     try {
       const response = await http.patch(
         "/usuarios/editar",
@@ -257,7 +352,6 @@ export default {
           cidade: cidade,
           estado: estado,
           bairro: bairro,
-         
         },
         {
           headers: {
@@ -831,19 +925,23 @@ export default {
 
   editProgressImovel: async (id_progresso) => {
     try {
-      const response = await http.patch("/progressao/editar", {
-        id_progresso: id_progresso,
-        imovel: 1,
-        publicacao: 1
-
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Headers": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      const response = await http.patch(
+        "/progressao/editar",
+        {
+          id_progresso: id_progresso,
+          imovel: 1,
+          publicacao: 1,
+          logo_capa: 1,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
 
       return response;
     } catch (error) {
@@ -853,18 +951,21 @@ export default {
 
   editProgressCodominio: async (id_progresso) => {
     try {
-      const response = await http.patch("/progressao/editar", {
-        id_progresso: id_progresso,
-        logo_capa: 1
-
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Headers": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      const response = await http.patch(
+        "/progressao/editar",
+        {
+          id_progresso: id_progresso,
+          logo_capa: 1,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      );
 
       return response;
     } catch (error) {

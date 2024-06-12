@@ -4240,7 +4240,7 @@
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                           data-bs-dismiss="modal">Fechar</button>
-                                        <button type="button" class="btn btn-success" :disabled="autenticando"
+                                        <button type="button" class="btn btn-success" :disabled="autenticandoBtn"
                                           @click="handleFinish()">Salvar &nbsp;<i class="fa fa-arrow-right"
                                             aria-hidden="true"></i></button>
                                       </div>
@@ -4309,6 +4309,8 @@ export default {
       proprietarioEmail: '',
       proprietarioDocumento: '',
       msgNullPropietario: false,
+
+      autenticandoBtn: false,
 
       //Tabs - para ativar, mude de FALSE para TRUE
       infoTab: true,
@@ -4662,6 +4664,9 @@ export default {
     let email = decode.email;
 
     let id_user = this.id_user;
+
+    console.log('este é meu usuário ===> ', id_user);
+
     this.nome = nome;
     this.email = email;
 
@@ -4902,8 +4907,6 @@ export default {
       const minhasIDs = this.getSelectedMinhasProximidadesIDs();
       const allIDs = this.getSelectedAllProximidadesIDs();
       const combinedIDs = [...new Set([...minhasIDs, ...allIDs])];
-
-      console.log(combinedIDs);
 
       return combinedIDs;
     },
@@ -5361,6 +5364,9 @@ export default {
       }, 100);
     },
     async handleFinish() {
+
+      this.autenticandoBtn = true;
+
       let codRef = this.codigoref;
       let tipoImovel = this.tipoImovel;
       let perfilImovel = this.perfilImovel;
@@ -5390,10 +5396,6 @@ export default {
       let escritorio = this.escritorio
       let depEmpregada = this.depEmpregada
       let copa = this.salaCopa
-
-      let areaConstruida = this.areaConstruida
-      let areaPrivativa = this.areaPrivativa
-      let areaTotal = this.areaTotal
 
       let tipoNegocio = this.tipoNegocio
       let precoImovel = this.precoImovel
@@ -5591,6 +5593,7 @@ export default {
 
         } else {
           this.msgError = true;
+          this.autenticandoBtn = false;
 
           setTimeout(() => {
             this.msgError = false;

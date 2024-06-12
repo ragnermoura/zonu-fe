@@ -10,7 +10,7 @@
 
             <hr>
 
-        
+
             <ul v-if="viewAdmin" class="sidebar-nav" style="margin-top: -20px !important;">
                 <li class="sidebar-header">
                     Administrador
@@ -26,14 +26,14 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/usuarios">
                         <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Usuários <span
-                                class="badge text-bg-info">0</span>
+                                class="badge text-bg-info">{{ totalUsers }}</span>
                         </span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/clientes">
                         <i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Clientes <span
-                                class="badge text-bg-primary">0</span>
+                                class="badge text-bg-primary">{{ totalClientes }}</span>
                         </span>
                     </a>
                 </li>
@@ -43,13 +43,13 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/proximidades">
                         <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Proximidades
-                            <span class="badge text-bg-success">0</span></span>
+                            <span class="badge text-bg-success">{{ totalProximidades }}</span></span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/caracteristica">
                         <i class="align-middle" data-feather="check-square"></i> <span
-                            class="align-middle">Caracteristica <span class="badge text-bg-success">0</span></span>
+                            class="align-middle">Caracteristica <span class="badge text-bg-success">{{ totalCaracteristica }}</span></span>
                     </a>
                 </li>
                 <li class="sidebar-header">
@@ -84,7 +84,8 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="/dashboard">
-                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard Cliente</span>
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard
+                            Cliente</span>
                     </a>
                 </li>
 
@@ -94,10 +95,16 @@
                             condomínio</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-imovel">
+                        <i class="align-middle" data-feather="home"></i> <span class="align-middle">Novo imóvel</span>
+                    </a>
+                </li>
             </ul>
 
             <ul v-if="viewClient" class="sidebar-nav" style="margin-top: -20px !important;">
-                
+
                 <li class="sidebar-header">
                     Gestão
                 </li>
@@ -154,6 +161,10 @@ export default {
             viewClient: false,
             viewAdmin: false,
             viewLogo: false,
+            totalUsers: 0,
+            totalClientes: 0,
+            totalCaracteristica: 0,
+            totalProximidades: 0
         }
     },
 
@@ -161,6 +172,11 @@ export default {
         if (this.$route.path === '/novo-imovel') {
             this.isCollapsed = true;
         }
+
+        this.fetchUsuarios();
+        this.fetchClientes();
+        this.fetchCaracteristica();
+        this.fetchProximidades();
     },
     mounted() {
 
@@ -169,11 +185,11 @@ export default {
 
         console.log(decode);
 
-        if(decode.id_nivel == 1){
+        if (decode.id_nivel == 1) {
             this.viewAdmin = true;
             this.viewClient = false;
             this.viewLogo = false;
-        }else{
+        } else {
             this.viewAdmin = false;
             this.viewClient = true;
             this.viewLogo = true;
@@ -211,6 +227,48 @@ export default {
             console.error('Erro ao buscar tickets: ', error);
         });
 
+    },
+
+    methods: {
+        fetchUsuarios() {
+            api.listusuarios().then(res => {
+                let usuarios = res.data.response;
+                // Filtrar os usuários com id_nivel igual a 1
+                let usuariosFiltrados = usuarios.filter((user, index, self) =>
+                    user.id_nivel === 1 &&
+                    index === self.findIndex((u) => u.id_user === user.id_user)
+                );
+                // Atribuir os usuários filtrados ao estado listUsers
+                this.listUsers = usuariosFiltrados;
+                // Atualizar o total de usuários filtrados
+                this.totalUsers = usuariosFiltrados.length;
+            });
+        },
+
+        fetchClientes() {
+            api.listusuarios().then(res => {
+                let clientes = res.data.response;
+                // Filtrar os usuários com id_nivel igual a 1
+                let clientesFiltrados = clientes.filter(cliente => cliente.id_nivel === 2);
+                // Atribuir os usuários filtrados ao estado listUsers
+                this.totalClientes = clientesFiltrados.length;
+            });
+        },
+
+        fetchCaracteristica() {
+            api.listcaracteristica().then((res) => {
+                this.lists = res.data.response;
+
+                this.totalCaracteristica = this.lists.length;
+            });
+        },
+
+        fetchProximidades() {
+            api.listproximidade().then((res) => {
+                this.listsProximidades = res.data.response;
+                this.totalProximidades = this.listsProximidades.length;
+            });
+        },
     }
 
 

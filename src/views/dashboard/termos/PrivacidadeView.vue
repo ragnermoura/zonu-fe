@@ -31,11 +31,11 @@
                                                     'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                                                 toolbar:
                                                     'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                                            }" v-model="editorContent" @editorChange="handleEditorChange" />
+                                            }" v-model="privacidade" @editorChange="handleEditorChange" />
                                         </div>
                                         <div class="col-12 mt-4">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <button :disabled="autenticando" @click="handleSaveTermo"
+                                                <button :disabled="autenticando" @click="handleSavePrivacidade()"
                                                     class="btn btn-success" type="button">
                                                     {{ textoBotao }}
                                                     <span v-if="autenticando" class="spinner-border spinner-border-sm"
@@ -83,7 +83,7 @@ export default {
             id_user: '',
             resposta: '',
 
-            textoBotao: "Abrir Ticket",
+            textoBotao: "Atualizar Termos de Privacidade",
             autenticando: false,
 
             listTiketsOpen: [],
@@ -92,7 +92,8 @@ export default {
             msgSuccess: false,
             msgErrorNull: false,
             msgSuccessEdit: false,
-            msgSuccessDelete: false
+            msgSuccessDelete: false,
+            privacidade: ''
         }
     },
     components: {
@@ -110,9 +111,8 @@ export default {
 
         let id_user = decode.id_user;
         this.id_user = id_user;
-
-        this.fetchTickets();
-        this.fetchResposta();
+        
+        this.fetchPrivacidade();
 
   
     },
@@ -135,66 +135,27 @@ export default {
             return text;
         },
 
-        handledResposta(id) {
-            let id_ticket = id;
-            let resposta = this.resposta
-
-            api.RespondaTicket(id_ticket, resposta).then(res => {
-
-                if (res.status == 200) {
-                    this.resposta = '';
-                    this.fetchTickets();
-                    this.fetchResposta();
-                    $(`#modalResposta${id_ticket}`).modal('hide');
-
-
-                }
+        handleSavePrivacidade() {
+            let id_privacidade = 1
+            let privacidade = this.privacidade
+            api.editTermos(id_privacidade, privacidade).then(res => {
+                this.msgSuccess = true;
+                this.textoBotao = "Atualizar Privacidade";
+                this.autenticando = false;
+                this.fetchPrivacidade();
             })
+
         },
 
-        fetchTickets() {
-            api.listAllTickets().then(res => {
 
-                if (Array.isArray(res.data)) {
-                    const filteredTickets = res.data.filter(ticket => ticket.status === 2);
-
-                    this.totalTickets = filteredTickets.length;
-
-                    this.listTiketsOpen = filteredTickets
-
-                    if (filteredTickets.length > 0) {
-                        const firstTicketUser = filteredTickets[0].usuario;
-                        this.iniciaisUser = `${firstTicketUser.nome.charAt(0)}${firstTicketUser.sobrenome.charAt(0)}`.toUpperCase();
-                    }
-
-                } else {
-                    console.log('Resposta não contém um array ou está em um formato não esperado');
-                }
+        fetchPrivacidade() {
+            api.privacidade().then(res => {
+                this.privacidade = res.data.response[0].texto;
             }).catch(error => {
                 console.error('Erro ao buscar tickets: ', error);
             });
 
         },
-
-        fetchResposta() {
-            api.listAllTickets().then(res => {
-
-                if (Array.isArray(res.data)) {
-                    const filteredTicketsClose = res.data.filter(ticket => ticket.status === 1);
-                    this.listTiketsClose = filteredTicketsClose
-
-                } else {
-                    console.log('Resposta não contém um array ou está em um formato não esperado');
-                }
-            }).catch(error => {
-                console.error('Erro ao buscar tickets: ', error);
-            });
-        }
-
-
-
-
-
 
     }
 }

@@ -77,8 +77,8 @@
 
                                                             </div>
                                                             <div class="col-4">
-                                                                <button @click="openEditModal(item)"
-                                                                    type="button" class="btn btn-warning"
+                                                                <button @click="openEditModal(item)" type="button"
+                                                                    class="btn btn-warning"
                                                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin-right: 6px !important;">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
@@ -336,37 +336,20 @@ export default {
             }
 
         },
-
         fetcUsuarios() {
             api.listusuarios().then(res => {
-
                 let usuarios = res.data.response;
-                usuarios.filter(user => user.id_nivel === 2);
-
-                this.listUsers = usuarios;
-            })
+                // Filtrar os usuários com id_nivel igual a 1
+                let usuariosFiltrados = usuarios.filter((user, index, self) =>
+                    user.id_nivel === 2 &&
+                    index === self.findIndex((u) => u.id_user === user.id_user)
+                );
+                // Atribuir os usuários filtrados ao estado listUsers
+                this.listUsers = usuariosFiltrados;
+                // Atualizar o total de usuários filtrados
+                this.totalUsers = usuariosFiltrados.length;
+            });
         },
-
-        handleEditStatusBlock(id) {
-            let id_user = id;
-            let status = 2
-
-            api.editStatusUser(id_user, status).then(res => {
-
-                if (res.status == 201) {
-                    this.fetcUsuarios();
-                    this.msgSuccessEdit = true;
-
-                    setTimeout(() => {
-                        this.msgSuccessEdit = false;
-
-                    }, 3000);
-                }
-            })
-
-        },
-
-
         openEditModal(user) {
             this.selectedUser = user;
             this.nome = user.nome;
@@ -385,8 +368,6 @@ export default {
             // Abrir o modal usando jQuery ou Bootstrap
             $('#modalEdit' + user.id_user).modal('show');
         },
-
-
         handleEditUsuario() {
             const updatedUser = {
                 id_user: this.selectedUser.id_user,
@@ -438,12 +419,50 @@ export default {
 
         },
 
+        handleEditStatusBlock(id) {
+            let id_user = id;
+            let status = 2
+
+            api.editStatusUser(id_user, status).then(res => {
+
+                if (res.status == 201) {
+                    this.fetcUsuarios();
+                    this.msgSuccessEdit = true;
+
+                    setTimeout(() => {
+                        this.msgSuccessEdit = false;
+
+                    }, 3000);
+                }
+            })
+
+        },
+
+        handleEditStatusAtivate(id) {
+            let id_user = id;
+            let status = 1
+
+            api.editStatusUser(id_user, status).then(res => {
+
+                if (res.status == 201) {
+                    this.fetcUsuarios();
+                    this.msgSuccessEdit = true;
+
+                    setTimeout(() => {
+                        this.msgSuccessEdit = false;
+
+                    }, 3000);
+                }
+            })
+
+        },
+
         handleDeleteUser(id) {
             let id_user = id;
 
             api.deleteUser(id_user).then(res => {
 
-                if (res.status == 200) {
+                if (res.status == 202) {
                     this.fetcUsuarios();
                     this.msgSuccessDelete = true;
 
@@ -455,6 +474,8 @@ export default {
             })
 
         },
+
+
 
         previousPageCliente() {
             if (this.currentPageCliente > 1) {
