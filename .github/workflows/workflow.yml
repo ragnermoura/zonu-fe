@@ -1,4 +1,4 @@
-name: Deploy Vue.js App to Cpanel
+name: Novo Deploy Zonu
 
 on:
   push:
