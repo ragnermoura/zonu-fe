@@ -473,6 +473,8 @@ export default {
         this.tabZonu = true;
         this.selectTab = true;
 
+        this.fetchUsuarios();
+
     },
 
     created() {
@@ -595,10 +597,14 @@ export default {
                         this.sobrenome = '';
                         this.email = '';
                         this.senha = '';
+                        this.confirmSenha = '';
                         this.selectNivel = '';
                         this.msgSuccess = true;
                         this.textoBotao = "Criar novo usuário";
                         this.autenticando = false;
+
+                        this.fetchUsuarios();
+
                     }
 
                     setTimeout(() => {

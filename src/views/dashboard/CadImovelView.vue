@@ -259,6 +259,9 @@
                                   <option value="Galpão">Galpão</option>
                                   <option value="Sala Comercial">Sala Comercial</option>
                                 </select>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -280,6 +283,9 @@
                                   <option value="Rural">Rural</option>
                                   <option value="Temporada">Temporada</option>
                                 </select>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -301,21 +307,6 @@
                                   <option value="Usado">Usado</option>
 
                                 </select>
-                              </div>
-                            </div>
-
-                            <div class="col-3">
-                              <div class="mb-3">
-                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
-                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
-                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Ano da
-                                  construção
-                                  <small class="text-danger">* </small>
-                                </label>
-
-                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                  placeholder="Ex.: 2015" v-model="anoImovel" />
-
                                 <small v-if="msgNull" class="text-danger">
                                   <li class="mt-2">Não deixe este campo vazio</li>
                                 </small>
@@ -326,10 +317,27 @@
                               <div class="mb-3">
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
+                                <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Ano da
+                                  construção
+
+                                </label>
+
+                                <input type="number" required v-if="!mostrarSkeleton" class="form-control"
+                                  placeholder="Ex.: 2015" v-model="anoImovel" />
+                              </div>
+                            </div>
+
+                            <div class="col-3">
+                              <div class="mb-3">
+                                <div v-if="mostrarSkeleton" class="skeleton-label"></div>
+                                <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
-                                  class="form-label">Incorporação</label>
+                                  class="form-label">Incorporação <small class="text-danger">* </small></label>
                                 <input type="text" v-if="!mostrarSkeleton" class="form-control" placeholder="RI"
                                   v-model="incorporacao" />
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -352,7 +360,11 @@
                                   <option value="Sudoeste">Sudoeste</option>
                                   <option value="Noroeste">Noroeste</option>
                                 </select>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
+
                             </div>
 
                             <div class="col-3">
@@ -360,7 +372,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Terreno
-                                  <small class="text-danger">* </small>
+
                                 </label>
                                 <div v-if="!mostrarSkeleton" class="btn-group" role="group"
                                   aria-label="Basic radio toggle button group">
@@ -376,9 +388,7 @@
                                     value="Declive" name="selectTerreno" v-model="selectTerreno" />
                                   <label class="btn btn-outline-success" for="btnTerreno3">Declive</label>
                                 </div>
-                                <small v-if="msgNull" class="text-danger">
-                                  <li class="mt-2">Não deixe este campo vazio</li>
-                                </small>
+
                               </div>
                             </div>
 
@@ -387,7 +397,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Próximo ao
-                                  mar?<small class="text-danger">* </small>
+                                  mar? <small class="text-danger">* </small>
                                 </label>
                                 <select type="text" required v-if="!mostrarSkeleton" class="form-control form-select"
                                   v-model="proximoMar">
@@ -399,6 +409,9 @@
                                   <option value="Não">Não</option>
 
                                 </select>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -407,7 +420,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Averbado
-                                </label>
+                                  <small class="text-danger">* </small></label>
 
                                 <br />
 
@@ -423,6 +436,9 @@
                                     name="selectAverbado" id="selectAverbado2" autocomplete="off" />
                                   <label class="btn btn-outline-danger" for="selectAverbado2">Não</label>
                                 </div>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -431,7 +447,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Escriturado
-                                </label>
+                                 <small class="text-danger">* </small></label>
 
                                 <br />
 
@@ -447,6 +463,9 @@
                                     name="selectEscritura" id="selectEscritura2" autocomplete="off" />
                                   <label class="btn btn-outline-danger" for="selectEscritura2">Não</label>
                                 </div>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -455,7 +474,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Esquina
-                                </label>
+                                 <small class="text-danger">* </small></label>
 
                                 <br />
 
@@ -471,6 +490,9 @@
                                     name="selectEsquina" id="selectEsquina2" autocomplete="off" />
                                   <label class="btn btn-outline-danger" for="selectEsquina2">Não</label>
                                 </div>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
 
@@ -479,7 +501,7 @@
                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1" class="form-label">Tem mobília
-                                </label>
+                                 <small class="text-danger">* </small></label>
 
                                 <br />
 
@@ -495,6 +517,9 @@
                                     name="selectMobilia" id="selectMobilia2" autocomplete="off" />
                                   <label class="btn btn-outline-danger" for="selectMobilia2">Não</label>
                                 </div>
+                                <small v-if="msgNull" class="text-danger">
+                                  <li class="mt-2">Não deixe este campo vazio</li>
+                                </small>
                               </div>
                             </div>
                           </div>
@@ -5107,9 +5132,7 @@ export default {
         this.tipoImovel,
         this.perfilImovel,
         this.situacaoImovel,
-        this.anoImovel,
         this.posicaoSolar,
-        this.selectTerreno,
         this.proximoMar,
         this.selectAverbado,
         this.selectEscritura,
@@ -5117,9 +5140,22 @@ export default {
         this.selectMobilia,
       ];
 
-      this.infoTab = false;
-      this.comodosTab = true;
-      this.stepInfo = true;
+      const algumCampoVazio = campos.some(campo => campo === null || campo === '');
+
+      if (algumCampoVazio) {
+        this.msgNull = true;
+        this.infoTab = true;
+        this.comodosTab = false;
+        this.stepInfo = false;
+      } else {
+        this.msgNull = false;
+        this.infoTab = false;
+        this.comodosTab = true;
+        this.stepInfo = true;
+      }
+
+
+
 
 
     },
