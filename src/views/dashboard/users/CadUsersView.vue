@@ -86,24 +86,38 @@
                                                             <div class="form-group col-md-6 mt-3">
                                                                 <label
                                                                     for="nome"><small><strong>Senha</strong></small></label>
-                                                                <input type="password" v-model="senha"
-                                                                    class="form-control mt-2" id="nome"
-                                                                    placeholder="Digite uma senha forte">
+                                                                <input type="password" required v-if="!mostrarSkeleton"
+                                                                    class="form-control" v-model="senha"
+                                                                    :class="{ 'is-invalid': !senhaValida && senha.length > 0 }"
+                                                                    @input="validarSenha"
+                                                                    placeholder="Digite sua senha" />
+
+                                                                <p class="text-warning mt-2"
+                                                                    v-if="!senhaValida && senha.length > 0">
+                                                                    <small>
+                                                                        <i class="fa fa-bell"></i> Sua senha deve ter no
+                                                                        mínimo 8 caracteres, número
+                                                                        e uma letra MAIÚSCULA.
+                                                                    </small>
+                                                                </p>
                                                             </div>
                                                             <div class="form-group col-md-6 mt-3">
                                                                 <label for="nome"><small><strong>Confirme a
                                                                             senha</strong></small></label>
-                                                                <input type="password" v-model="confirmSenha"
-                                                                    class="form-control mt-2" id="nome"
-                                                                    placeholder="Digite novamente a senha">
+
+                                                                <input type="password" required v-if="!mostrarSkeleton"
+                                                                    class="form-control" v-model="confimSenha"
+                                                                    placeholder="Digite a senha novamente" />
+
                                                                 <p class="text-danger mt-2"
-                                                                    v-if="confirmSenha && !passwordsMatch">
+                                                                    v-if="confimSenha && !passwordsMatch">
                                                                     <i class="fa fa-ban"></i> As senhas não conferem!
                                                                 </p>
                                                                 <p class="text-success mt-2"
-                                                                    v-if="confirmSenha && passwordsMatch">
+                                                                    v-if="confimSenha && passwordsMatch">
                                                                     <i class="fa fa-check"></i> As senhas conferem
                                                                 </p>
+
                                                             </div>
 
 
@@ -141,6 +155,28 @@
                                                     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
                                                         aria-labelledby="profile-tab" tabindex="0">
 
+
+                                                        <p v-if="msgCnpjActive" class="text-danger mt-2">
+                                                            <i class="fa fa-circle-exclamation"></i> Desculpe, mas já
+                                                            temos esse CNPJ em nossa base de
+                                                            dados. Volte e insira outro.
+                                                        </p>
+
+                                                        <div v-if="emailValid"
+                                                            class="alert alert-warning alert-dismissible fade show"
+                                                            role="alert">
+                                                            <strong><i class="fa fa-bell"></i> Atenção!</strong> Já
+                                                            temos esse E-mail cadastrado.
+                                                        </div>
+
+                                                        <div v-if="erro"
+                                                            class="alert alert-danger alert-dismissible fade show"
+                                                            role="alert">
+                                                            <strong><i class="fa fa-ban"></i> Desculpe!</strong> Houve
+                                                            um problema ao cadastrar, tente
+                                                            novamente!
+                                                        </div>
+
                                                         <div class="row mt-4">
 
                                                             <label for="nome" class="mb-4"><small><strong><i
@@ -165,29 +201,46 @@
                                                             <div class="form-group col-md-12 mt-3">
                                                                 <label
                                                                     for="nome"><small><strong>E-mail</strong></small></label>
-                                                                <input type="email" v-model="email"
-                                                                    class="form-control mt-2" id="nome"
-                                                                    placeholder="Insira um e-mail válido">
+                                                                <input type="email" required v-if="!mostrarSkeleton"
+                                                                    class="form-control" v-model="email"
+                                                                    placeholder="Digite um e-mail válido" />
+
+                                                                <p v-if="emailValid" class="text-danger mt-2">
+                                                                    <i class="fa fa-circle-exclamation"></i>
+                                                                    Por favor, forneça um e-mail válido.
+                                                                </p>
                                                             </div>
                                                             <div class="form-group col-md-6 mt-3">
                                                                 <label
                                                                     for="nome"><small><strong>Senha</strong></small></label>
-                                                                <input type="password" v-model="senha"
-                                                                    class="form-control mt-2" id="nome"
-                                                                    placeholder="Digite uma senha forte">
+                                                                <input type="password" required v-if="!mostrarSkeleton"
+                                                                    class="form-control" v-model="senha"
+                                                                    :class="{ 'is-invalid': !senhaValida && senha.length > 0 }"
+                                                                    @input="validarSenha"
+                                                                    placeholder="Digite sua senha" />
+
+                                                                <p class="text-warning mt-2"
+                                                                    v-if="!senhaValida && senha.length > 0">
+                                                                    <small>
+                                                                        <i class="fa fa-bell"></i> Sua senha deve ter no
+                                                                        mínimo 8 caracteres, número
+                                                                        e uma letra MAIÚSCULA.
+                                                                    </small>
+                                                                </p>
                                                             </div>
                                                             <div class="form-group col-md-6 mt-3">
                                                                 <label for="nome"><small><strong>Confirme a
                                                                             senha</strong></small></label>
-                                                                <input type="password" v-model="confirmSenha"
-                                                                    class="form-control mt-2" id="nome"
-                                                                    placeholder="Digite novamente a senha">
+                                                                <input type="password" required v-if="!mostrarSkeleton"
+                                                                    class="form-control" v-model="confimSenha"
+                                                                    placeholder="Digite a senha novamente" />
+
                                                                 <p class="text-danger mt-2"
-                                                                    v-if="confirmSenha && !passwordsMatch">
+                                                                    v-if="confimSenha && !passwordsMatch">
                                                                     <i class="fa fa-ban"></i> As senhas não conferem!
                                                                 </p>
                                                                 <p class="text-success mt-2"
-                                                                    v-if="confirmSenha && passwordsMatch">
+                                                                    v-if="confimSenha && passwordsMatch">
                                                                     <i class="fa fa-check"></i> As senhas conferem
                                                                 </p>
                                                             </div>
@@ -208,17 +261,30 @@
                                                             <div class="form-group col-md-3 mt-3">
                                                                 <label
                                                                     for="nome"><small><strong>CEP</strong></small></label>
-                                                                <input type="text" v-model="cep"
+                                                                <input type="text" required v-if="!mostrarSkeleton"
                                                                     @input="aplicaMascaraCEP" class="form-control mt-2"
-                                                                    id="nome" placeholder="Digite o cep">
+                                                                    v-model="buscarCEP" placeholder="000000-000" />
+                                                                <p v-if="msgErrorCep" class="text-danger mt-2">
+                                                                    <small><i class="fa fa-check"></i> Cep
+                                                                        inválido</small>
+                                                                </p>
                                                             </div>
                                                             <div class="form-group col-md-6 mt-3">
                                                                 <label
                                                                     for="nome"><small><strong>Endereço</strong></small></label>
-                                                                <input type="text" disabled v-model="razao_social"
+                                                                <input type="text" disabled v-model="logradouro"
                                                                     class="form-control mt-2" id="nome"
                                                                     placeholder="Aguardando">
                                                             </div>
+
+                                                            <div v-if="msgErrorCnpj"
+                                                                class="mt-2 alert alert-danger alert-dismissible fade show"
+                                                                role="alert">
+                                                                <strong><i class="fa fa-ban"></i> Lamentamos...</strong>
+                                                                Seu CNPJ não é válido, tenho
+                                                                outro.
+                                                            </div>
+
                                                             <div class="form-group col-md-6 mt-3">
                                                                 <label
                                                                     for="nome"><small><strong>CNPJ</strong></small></label>
@@ -232,14 +298,15 @@
                                                                             Social</strong></small></label>
                                                                 <input type="text" v-model="razao_social" disabled
                                                                     class="form-control mt-2" id="nome"
-                                                                    placeholder="Digite seu nome">
+                                                                    placeholder="...">
                                                             </div>
 
                                                             <div
                                                                 class="mt-4 d-grid gap-2 d-md-flex justify-content-md-end">
                                                                 <button :disabled="autenticando"
                                                                     @click="handleSalvarUserConstrutora()"
-                                                                    class="btn btn-success" type="button"> {{ textoBotao
+                                                                    class="btn btn-success" type="button"> {{
+                                                                        textoBotaoEmpresa
                                                                     }}
                                                                     <span v-if="autenticando"
                                                                         class="spinner-border spinner-border-sm"
@@ -384,22 +451,39 @@ export default {
             tabZonu: false,
             selectTab: false,
 
+            msgErrorCnpj: false,
+            msgSuccessCnpj: false,
+            msgSuccessSenha: false,
+            msgErrorSenha: false,
+            campoNullError: false,
+            msgErrorCep: false,
+            msgCnpjActive: false,
+
+            msgSuccess: true,
+            senhaValid: false,
+            emailValid: false,
+
             cnpj: '',
             razao_social: '',
             nome: '',
             sobrenome: '',
-            iniciais: '',
             email: '',
             senha: '',
-            confirmSenha: '',
+            confimSenha: '',
             telefone: '',
-            cep: '',
-            endereco: '',
+            buscarCEP: '',
+            logradouro: '',
+            complemento: '',
+            numero: '',
+            cidade: '',
+            estado: '',
+            bairro: '',
             selectNivel: '',
             msgSuccess: false,
             msgErrorNull: false,
 
             textoBotao: "Criar novo usuário",
+            textoBotaoEmpresa: "Criar uma nova construtora",
             autenticando: false,
 
             listUsers: [],
@@ -410,6 +494,8 @@ export default {
             currentPageCliente: 1,
             perPageCliente: 5,
             searchCliente: '',
+
+            senhaValida: true
         }
     },
     components: {
@@ -421,8 +507,10 @@ export default {
         cnpj(newVal) {
             this.debouncedCheckCNPJ();
         },
-        cep(newVal) {
-            this.debouncedCheckCEP();
+        buscarCEP(newVal, oldVal) {
+            if (newVal.length === 9 && newVal !== oldVal) {
+                this.debouncedCheckCEP();
+            }
         },
     },
     created() {
@@ -451,14 +539,9 @@ export default {
                 }).length / this.perPageCliente,
             )
         },
-
-
         passwordsMatch() {
-            return this.senha === this.confirmSenha;
-
-
+            return this.senha === this.confimSenha;
         },
-
         iniciais() {
             let inicialNome = this.nome.charAt(0);
             let inicialSobrenome = this.sobrenome.charAt(0);
@@ -466,6 +549,10 @@ export default {
         }
     },
     mounted() {
+        setTimeout(() => {
+            this.mostrarSkeleton = false;
+        }, 2000)
+
         let token = localStorage.getItem('token')
         this.token = token;
         let decode = jwtDecode(token);
@@ -495,7 +582,6 @@ export default {
             }
 
         },
-
         aplicaMascaraCNPJ() {
             let v = this.cnpj;
 
@@ -512,7 +598,7 @@ export default {
             this.cnpj = v;
         },
         aplicaMascaraCEP() {
-            let v = this.cep;
+            let v = this.buscarCEP;
 
             v = v.replace(/\D/g, "");
             if (v.length > 8) {
@@ -521,7 +607,7 @@ export default {
 
             v = v.replace(/^(\d{5})(\d)/, "$1-$2");
 
-            this.cep = v;
+            this.buscarCEP = v;
         },
         aplicaMascaraTelefone() {
             let v = this.telefone;
@@ -556,12 +642,23 @@ export default {
 
             }
         },
+
+        validarSenha() {
+            const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]{6,}$/;
+            this.senhaValida = regex.test(this.senha);
+        },
+        toggleMostrarSenha() {
+            this.mostrarSenha = !this.mostrarSenha;
+        },
+
         async consultarCEP() {
-            if (this.cep.length === 9) {
-                const cep = this.cep.replace(/\D/g, '');
+            if (this.buscarCEP.length === 9) {
+                const cep = this.buscarCEP.replace(/\D/g, '');
 
                 try {
                     const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+                    console.log('Aqui está a resposta do CEP ======>', res);
 
                     // Correção nas propriedades de acordo com a resposta da API
                     let rua = res.data.logradouro;
@@ -569,7 +666,11 @@ export default {
                     let cidade = res.data.localidade;
                     let estado = res.data.uf;
 
-                    this.endereco = rua + ' - ' + bairro + ' - ' + cidade + ' - ' + estado
+
+                    this.logradouro = rua
+                    this.bairro = bairro
+                    this.cidade = cidade
+                    this.estado = estado
 
 
                 } catch (error) {
@@ -577,6 +678,7 @@ export default {
                 }
             }
         },
+
         handleSalvarUserZonu() {
 
             this.textoBotao = "Salvando...";
@@ -681,7 +783,6 @@ export default {
 
 
         },
-
         fetchUsuarios() {
             api.listusuarios().then(res => {
                 let usuarios = res.data.response;
@@ -694,7 +795,6 @@ export default {
                 this.listUsers = usuariosFiltrados;
             });
         },
-
         handleEditStatusBlock(id) {
             let id_user = id;
             let status = 2
@@ -713,7 +813,6 @@ export default {
             })
 
         },
-
         handleEditStatusAtivate(id) {
             let id_user = id;
             let status = 1
@@ -760,6 +859,11 @@ export default {
             if (this.currentPageCliente < this.totalPagesClientes) {
                 this.currentPageCliente += 1
             }
+        },
+
+        validarSenha() {
+            const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]{6,}$/;
+            this.senhaValida = regex.test(this.senha);
         },
     }
 }

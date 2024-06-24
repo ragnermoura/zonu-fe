@@ -2629,14 +2629,11 @@ export default {
       perPageImovel: 2,
       searchImovel: '',
       totalCondominios: 0,
-      // caso nao marque todos os pins transformar a latitude e longitude me array e o que mais precisar tambem 
       latitudeImoveis: '-15.7934',
       longitudeImoveis: '-47.8823',
       mapImoveis: null,
       markerIMoveis: null,
       mostrarResumo: false,
-      // editar imovel
-      // TAB IMAGEM
       images: [],
       imageSrc: null,
       maxImages: 10,

@@ -95,7 +95,8 @@
                   <div class="card flex-fill w-100">
                     <div class="card-header">
                       <h5 class="card-title mb-0"><i class="fa fa-plus"></i> Ultimos imóveis
-                        cadastrados</h5>
+                        cadastrados <a style="float: inline-end;" type="button" class="btn btn-info btn-sm"
+                         ><i class="fa fa-list"></i></a></h5>
                     </div>
                     <div class="card-body py-3">
                       <input type="text" placeholder="Pesquise aqui" class="form-control mb-3"
@@ -105,17 +106,20 @@
                         <a class="row" style="text-decoration: none;">
                           <div class="col-3">
                             <img class="thumbImovel" :src="`https://zonu.com.br/api${item.fotos[0].foto}`" alt="">
+                            <span style="width: 100%; margin-left: 5%; color: #FFF !important;" class="badge text-bg-success">{{
+                              item.preco.tipo_negocio }}</span>
                           </div>
 
                           <div class="col-9" style="margin-left: -10px;">
-                            <h5><i class="fa fa-building"></i> <strong>{{ item.descricao.titulo }}</strong> <span
-                                class="badge text-bg-success">{{ item.preco.tipo_negocio }}</span> <a
+                            <h5><i class="fa fa-building"></i> <strong>{{ item.descricao.titulo }}</strong> <a
                                 @click="handledDelete(item.id_imovel)" style="float: inline-end;" class="text-danger"><i
                                   class="fa fa-trash"></i></a>
                             </h5>
-                            <h5 class="text-info"><strong>{{ item.preco.preco_imovel }}</strong><a
+                            <h5 class="text-info"><strong>{{ formatCurrency(item.preco.preco_imovel) }}</strong><a
                                 data-bs-toggle="modal" :data-bs-target="`#modalImovel${item.id_imovel}`"
                                 style="float: inline-end;" class="text-warning"><i class="fa fa-eye"></i></a></h5>
+                            <h5><small><i class="fa fa-user"></i> {{ item.usuario.nome }} {{ item.usuario.sobrenome
+                                }}</small></h5>
                             <h5 class="text-dark"><small><i class="fa fa-map-marker "></i>
                                 {{ item.localizacao.logradouro }}, {{ item.localizacao.numero }} | {{
                                   item.localizacao.bairro }}, {{ item.localizacao.cidade }}</small> </h5>
@@ -689,13 +693,11 @@ export default {
     this.fetchMyImoveis();
     this.fetchMyCondominios();
 
-
-
   },
   methods: {
 
     mostrarTeste(event) {
-      event.preventDefault(); // Previne o comportamento padrão do link
+      event.preventDefault();
       this.mostrarResumo = true;
     },
     formatCurrency(value) {
@@ -719,9 +721,8 @@ export default {
       api.listmyImoveis(id_user).then(res => {
         this.myImoveis = res.data;
         this.totalImovel = this.myImoveis.length;
-        //this.renderChart(res.data);
 
-        // console.log('Aqui estão os imóveis do Usuário ====> ', res.data)
+
 
         this.mapImoveis = L.map(this.$refs.mapElement).setView([this.latitudeImoveis, this.longitudeImoveis], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

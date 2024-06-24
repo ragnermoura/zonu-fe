@@ -11,6 +11,14 @@
         <div class="card-body py-3">
             <div class="chart chart-sm">
                 <div class="row">
+                    <div class="col-2">
+                        <label for="tipoNegocio" class="form-label">Tipo de negócio <small><i
+                                    class="fa fa-filter"></i></small></label>
+                        <select class="form-select"v-model="selectedTipoNegocio" @change="filtrarImoveis">
+                            <option value="">Escolha</option>
+                            <option v-for="tipo in tiposNegocio" :key="tipo" :value="tipo">{{ tipo }}</option>
+                        </select>
+                    </div>
                     <div class="col-1 mb-3">
                         <label for="tipoNegocio" class="form-label">UF <small><i
                                     class="fa fa-filter"></i></small></label>
@@ -35,15 +43,7 @@
                             <option v-for="bairro in bairros" :key="bairro" :value="bairro">{{ bairro }}</option>
                         </select>
                     </div>
-                    <div class="col-2">
-                        <label for="tipoNegocio" class="form-label">Tipo de negócio <small><i
-                                    class="fa fa-filter"></i></small></label>
-                        <select class="form-select" v-model="selectedTipoNegocio" @change="filtrarImoveis">
-                            <option value="">Escolha</option>
-                            <option value="Venda">Venda</option>
-                            <option value="Aluguel">Aluguel</option>
-                        </select>
-                    </div>
+                  
                     <div class="col-2">
                         <label for="status" class="form-label">Status <small><i
                                     class="fa fa-filter"></i></small></label>
@@ -113,10 +113,11 @@ export default {
             ufs: [],
             cidades: [],
             bairros: [],
+            tiposNegocio: [],
+            selectedTipoNegocio: '',
             selectedUf: '',
             selectedCidade: '',
             selectedBairro: '',
-            selectedTipoNegocio: '',
             selectedStatus: '',
             selectedTipoImovel: '',
             selectedProximoMar: '',
@@ -139,6 +140,7 @@ export default {
                 this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
                 this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
                 this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
+                this.tiposNegocio = [...new Set(this.allImoveis.map(imovel => imovel.preco.tipo_negocio))];
                 this.filteredImoveis = this.allImoveis;
                 this.atualizarOpcoesFiltro();
                 this.atualizarGraficoPorUF();
