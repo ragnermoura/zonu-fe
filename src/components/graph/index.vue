@@ -135,12 +135,13 @@ export default {
             try {
                 const res = await api.listallImoveis();
                 this.allImoveis = res.data;
+                console.log('Aqui estão os imóveis ====>', this.allImoveis);
                 this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
                 this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
                 this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
-                this.filteredImoveis = this.allImoveis; // Inicializar os imóveis filtrados com todos os imóveis
-                this.atualizarOpcoesFiltro(); // Atualizar as opções de filtro
-                this.atualizarGraficoPorUF(); // Atualizar o gráfico para mostrar a média inicial por UF
+                this.filteredImoveis = this.allImoveis;
+                this.atualizarOpcoesFiltro();
+                this.atualizarGraficoPorUF();
             } catch (error) {
                 console.error('Erro ao buscar imóveis: ', error);
             }
@@ -161,7 +162,6 @@ export default {
             }
         },
         filtrarImoveis() {
-            console.log("Filtrando imóveis");
             this.filteredImoveis = this.allImoveis.filter(imovel => {
                 return (
                     (!this.selectedUf || imovel.localizacao.estado === this.selectedUf) &&
@@ -175,9 +175,8 @@ export default {
                 );
             });
 
-            console.log("Imóveis filtrados:", this.filteredImoveis);
             this.atualizarOpcoesFiltro();
-            this.atualizarGrafico(); // Atualizar o gráfico com base nos filtros aplicados
+            this.atualizarGrafico();
         },
         calcularMedia(imoveis) {
             const totalArea = imoveis.reduce((sum, imovel) => sum + parseFloat(imovel.medidas.area_total || 0), 0);
@@ -188,7 +187,6 @@ export default {
             return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         },
         atualizarGrafico() {
-            console.log("Atualizando gráfico");
             const canvas = document.getElementById('myMetroQuadrado');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -227,8 +225,6 @@ export default {
                     const labels = medias.map(item => item.label);
                     const data = medias.map(item => item.media);
 
-                    console.log("Médias:", medias);
-
                     this.chart = new Chart(ctx, {
                         type: 'bar',
                         data: {
@@ -262,7 +258,6 @@ export default {
             }
         },
         atualizarGraficoPorCidade() {
-            console.log("Atualizando gráfico por Cidade");
             const canvas = document.getElementById('myMetroQuadrado');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -316,9 +311,7 @@ export default {
                 }
             }
         },
-
         atualizarGraficoPorUF() {
-            console.log("Atualizando gráfico por UF");
             const canvas = document.getElementById('myMetroQuadrado');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
@@ -337,8 +330,6 @@ export default {
 
                     const labels = mediasPorUF.map(item => item.uf);
                     const data = mediasPorUF.map(item => item.media);
-
-                    console.log("Médias por UF:", mediasPorUF);
 
                     this.chart = new Chart(ctx, {
                         type: 'bar',
@@ -373,7 +364,6 @@ export default {
             }
         },
         resetFilters() {
-            console.log("Resetando filtros");
             this.selectedUf = '';
             this.selectedCidade = '';
             this.selectedBairro = '';
@@ -382,9 +372,9 @@ export default {
             this.selectedTipoImovel = '';
             this.selectedProximoMar = '';
             this.selectedQuartos = '';
-            this.filteredImoveis = this.allImoveis; // Resetar para todos os imóveis
+            this.filteredImoveis = this.allImoveis;
             this.atualizarOpcoesFiltro();
-            this.atualizarGrafico(); // Atualizar o gráfico para mostrar a média inicial por UF
+            this.atualizarGrafico();
         }
     },
     watch: {

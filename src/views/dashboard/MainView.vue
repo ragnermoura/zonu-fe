@@ -647,7 +647,7 @@
                         <!-- fazer esse modal funcionar -->
                         <div class="modal fade" :id="`modalEditImovel${item.id_imovel}`" tabindex="-1"
                           aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          {{ console.log(item) }}
+                          <!-- {{ console.log(item) }} -->
                           <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -2689,6 +2689,8 @@ export default {
 
       api.listmyImoveis(id_user).then(res => {
         this.myImoveis = res.data;
+
+        console.log('Aqui estão os imóveis do Usuário ====> ', res.data)
         this.totalImovel = this.myImoveis.length;
         //this.renderChart(res.data);
 

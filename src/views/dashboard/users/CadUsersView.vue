@@ -34,7 +34,7 @@
                                                             type="button" role="tab" aria-controls="home-tab-pane"
                                                             aria-selected="true">Team Zonu</button>
                                                     </li>
-                                                    <li class="nav-item" hidden role="presentation">
+                                                    <li class="nav-item" role="presentation">
                                                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                             data-bs-target="#profile-tab-pane" type="button" role="tab"
                                                             aria-controls="profile-tab-pane"
@@ -625,9 +625,6 @@ export default {
                 }, 3000);
 
             }
-
-
-
 
         },
         handleSalvarUserConstrutora() {
