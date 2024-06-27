@@ -196,7 +196,7 @@
                             <h5 class="text-dark"><small><i class="fa fa-map-marker "></i>
                                 {{ item.localizacao.logradouro }}, {{ item.localizacao.numero }} | {{
                                   item.localizacao.bairro }}, {{ item.localizacao.cidade }}</small> <a
-                                data-bs-toggle="modal" :data-bs-target="`#modalEditImovel${item.id_imovel}`"
+                                data-bs-toggle="modal" :data-bs-target="`#modalEditImovel${item.id_imovel}`" @click="openModal(item.id_imovel)"
                                 style="float: inline-end;" class="text-warning"><i class="fa fa-edit"></i></a></h5>
                             <h5 class="text-dark"><small><i class="fa fa-calendar "></i>
                                 Atualizado: {{ formatarData(item.updatedAt) }}</small> <i v-for="star in estrelas"
@@ -646,7 +646,7 @@
 
                         <!-- fazer esse modal funcionar -->
                         <div class="modal fade" :id="`modalEditImovel${item.id_imovel}`" tabindex="-1"
-                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          aria-labelledby="exampleModalLabel" aria-hidden="true" v-if="currentImovel">
                           <!-- {{ console.log(item) }} -->
                           <div class="modal-dialog modal-xl">
                             <div class="modal-content">
@@ -654,7 +654,7 @@
                                 <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa fa-file"></i>
                                   Resumo</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                  aria-label="Close"></button>
+                                  aria-label="Close" @click="closeModal()"></button>
                               </div>
                               <div class="modal-body">
 
@@ -755,8 +755,7 @@
                                               <small class="text-danger">*</small>
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="codigoref" placeholder="Digite aqui..." />
-
+                                            v-model="currentImovel.info.cod_referencia" placeholder="Digite aqui..." />
                                             <small v-if="msgNull" class="text-danger">
                                               <li class="mt-2">Não deixe este campo vazio</li>
                                             </small>
@@ -775,21 +774,19 @@
 
                                             <div v-if="!mostrarSkeleton" class="btn-group" role="group"
                                               aria-label="Basic radio toggle button group">
-                                              <input type="radio" class="btn-check" name="selectCondominio"
-                                                id="selectCondominio1" autocomplete="off" value="Sim"
-                                                v-model="selectCondominio" />
-                                              <label class="btn btn-outline-success" for="selectCondominio1">Sim</label>
+                                              <!-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group"> -->
+                                                <input type="radio" class="btn-check" name="selectCondominio" id="selectCondominio1" autocomplete="off" value="Sim" v-model="currentImovel.tem_condominio" />
+                                                <label class="btn btn-outline-success" :class="{ active: currentImovel.tem_condominio === 'Sim' }" for="selectCondominio1">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não"
-                                                v-model="selectCondominio" name="selectCondominio"
-                                                id="selectCondominio2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="selectCondominio2">Não</label>
+                                                <input type="radio" class="btn-check" value="Não" v-model="currentImovel.tem_condominio" name="selectCondominio" id="selectCondominio2" autocomplete="off" />
+                                                <label class="btn btn-outline-danger" :class="{ active: currentImovel.tem_condominio === 'Não' }" for="selectCondominio2">Não</label>
+                                              <!-- </div> -->
                                             </div>
                                           </div>
                                         </div>
 
                                         <div class="col-6">
-                                          <div class="mb-3">
+                                          <div class="mb-3"  v-if="currentImovel.tem_condominio === 'Sim'">
                                             <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                             <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                             <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
@@ -825,7 +822,7 @@
                                             </label>
 
                                             <select type="text" required v-if="!mostrarSkeleton"
-                                              class="form-control form-select" v-model="tipoImovel">
+                                              class="form-control form-select" v-model="currentImovel.info.tipo">
                                               <option selected disabled>Selecione</option>
                                               <option value="Casa">Casa</option>
                                               <option value="Apartamento">Apartamento</option>
@@ -852,7 +849,7 @@
                                             </label>
 
                                             <select type="text" required v-if="!mostrarSkeleton"
-                                              class="form-control form-select" v-model="perfilImovel">
+                                              class="form-control form-select" v-model="currentImovel.info.perfil_imovel">
                                               <option selected disabled>Selecione</option>
                                               <option value="Residêncial">Residêncial</option>
                                               <option value="Comercial">Comercial</option>
@@ -873,7 +870,7 @@
                                             </label>
 
                                             <select type="text" required v-if="!mostrarSkeleton"
-                                              class="form-control form-select" v-model="situacaoImovel">
+                                              class="form-control form-select" v-model="currentImovel.info.situacao_imovel">
                                               <option selected disabled>Selecione</option>
                                               <option value="Pronto pra morar">Pronto pra morar</option>
                                               <option value="Em construção">Em construção</option>
@@ -896,7 +893,7 @@
                                             </label>
 
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              placeholder="Ex.: 2015" v-model="anoImovel" />
+                                              placeholder="Ex.: 2015" v-model="currentImovel.info.ano_construcao" />
 
                                             <small v-if="msgNull" class="text-danger">
                                               <li class="mt-2">Não deixe este campo vazio</li>
@@ -910,8 +907,9 @@
                                             <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                             <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                               class="form-label">Incorporação</label>
-                                            <input type="number" v-if="!mostrarSkeleton" class="form-control"
-                                              placeholder="Digite..." v-model="incorporacao" />
+                                              <!-- para funcionar precisa alterar para text o type do input  -->
+                                            <input type="text" v-if="!mostrarSkeleton" class="form-control"
+                                              placeholder="Digite..." v-model="currentImovel.info.incorporacao" />
                                           </div>
                                         </div>
 
@@ -924,7 +922,7 @@
                                               <small class="text-danger">* </small>
                                             </label>
                                             <select type="text" required v-if="!mostrarSkeleton"
-                                              class="form-control form-select" v-model="posicaoSolar">
+                                              class="form-control form-select" v-model="currentImovel.info.posicao_solar">
                                               <option selected disabled>Selecione</option>
                                               <option value="Norte">Norte</option>
                                               <option value="Sul">Sul</option>
@@ -949,16 +947,16 @@
                                             <div v-if="!mostrarSkeleton" class="btn-group" role="group"
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" id="btnTerreno1" autocomplete="off"
-                                                value="Plano" name="selectTerreno" v-model="selectTerreno" />
-                                              <label class="btn btn-outline-success" for="btnTerreno1">Plano</label>
+                                                value="Plano" name="selectTerreno" v-model="currentImovel.info.terreno" />
+                                              <label class="btn btn-outline-success" :class="{ active: currentImovel.info.terreno === 'Plano' }" for="btnTerreno1">Plano</label>
 
                                               <input type="radio" class="btn-check" id="btnTerreno2" autocomplete="off"
-                                                value="Aclive" name="selectTerreno" v-model="selectTerreno" />
-                                              <label class="btn btn-outline-success" for="btnTerreno2">Aclive</label>
+                                                value="Aclive" name="selectTerreno" v-model="currentImovel.info.terreno" />
+                                              <label class="btn btn-outline-success" :class="{ active: currentImovel.info.terreno === 'Aclive' }" for="btnTerreno2">Aclive</label>
 
                                               <input type="radio" class="btn-check" id="btnTerreno3" autocomplete="off"
-                                                value="Declive" name="selectTerreno" v-model="selectTerreno" />
-                                              <label class="btn btn-outline-success" for="btnTerreno3">Declive</label>
+                                                value="Declive" name="selectTerreno" v-model="currentImovel.info.terreno" />
+                                              <label class="btn btn-outline-success" :class="{ active: currentImovel.info.terreno === 'Declive' }" for="btnTerreno3">Declive</label>
                                             </div>
                                             <small v-if="msgNull" class="text-danger">
                                               <li class="mt-2">Não deixe este campo vazio</li>
@@ -975,7 +973,7 @@
                                               mar?<small class="text-danger">* </small>
                                             </label>
                                             <select type="text" required v-if="!mostrarSkeleton"
-                                              class="form-control form-select" v-model="proximoMar">
+                                              class="form-control form-select" v-model="currentImovel.info.proximo_mar">
                                               <option selected disabled>Selecione</option>
                                               <option value="Vista para o mar">Vista para o mar</option>
                                               <option value="Frente para o mar">Frente para o mar</option>
@@ -1003,12 +1001,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="selectAverbado"
                                                 id="selectAverbado1" autocomplete="off" value="Sim"
-                                                v-model="selectAverbado" />
-                                              <label class="btn btn-outline-success" for="selectAverbado1">Sim</label>
+                                                v-model="currentImovel.info.averbado" />
+                                              <label class="btn btn-outline-success" for="selectAverbado1" :class="{ active: currentImovel.info.averbado === 'Sim' }" >Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="selectAverbado"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.info.averbado"
                                                 name="selectAverbado" id="selectAverbado2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="selectAverbado2">Não</label>
+                                              <label class="btn btn-outline-danger" for="selectAverbado2" :class="{ active: currentImovel.info.averbado === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1029,13 +1027,13 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="selectEscritura"
                                                 id="selectEscritura1" autocomplete="off" value="Sim"
-                                                v-model="selectEscritura" />
-                                              <label class="btn btn-outline-success" for="selectEscritura1">Sim</label>
+                                                v-model="currentImovel.info.escriturado" />
+                                              <label class="btn btn-outline-success" for="selectEscritura1" :class="{ active: currentImovel.info.escriturado === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não"
-                                                v-model="selectEscritura" name="selectEscritura" id="selectEscritura2"
+                                                v-model="currentImovel.info.escriturado" name="selectEscritura" id="selectEscritura2"
                                                 autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="selectEscritura2">Não</label>
+                                              <label class="btn btn-outline-danger" for="selectEscritura2" :class="{ active: currentImovel.info.escriturado === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1056,12 +1054,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="selectEsquina"
                                                 id="selectEsquina1" autocomplete="off" value="Sim"
-                                                v-model="selectEsquina" />
-                                              <label class="btn btn-outline-success" for="selectEsquina1">Sim</label>
+                                                v-model="currentImovel.info.esquina" />
+                                              <label class="btn btn-outline-success" for="selectEsquina1" :class="{ active: currentImovel.info.esquina === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="selectEsquina"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.info.esquina"
                                                 name="selectEsquina" id="selectEsquina2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="selectEsquina2">Não</label>
+                                              <label class="btn btn-outline-danger" for="selectEsquina2" :class="{ active: currentImovel.info.esquina === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1082,12 +1080,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="selectMobilia"
                                                 id="selectMobilia1" autocomplete="off" value="Sim"
-                                                v-model="selectMobilia" />
-                                              <label class="btn btn-outline-success" for="selectMobilia1">Sim</label>
+                                                v-model="currentImovel.info.mobilia" />
+                                              <label class="btn btn-outline-success" for="selectMobilia1" :class="{ active: currentImovel.info.mobilia === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="selectMobilia"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.info.mobilia"
                                                 name="selectMobilia" id="selectMobilia2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="selectMobilia2">Não</label>
+                                              <label class="btn btn-outline-danger" for="selectMobilia2" :class="{ active: currentImovel.info.mobilia === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1111,7 +1109,7 @@
                                               Dormitório
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="dormitorio" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.dormitorio" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1125,7 +1123,7 @@
                                               Suíte
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="suite" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.suite" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1139,7 +1137,7 @@
                                               Banheiro
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="banheiro" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.banheiro" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1153,7 +1151,7 @@
                                               Garagem
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="garagem" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.garagem" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1175,15 +1173,15 @@
                                               aria-label="Basic radio toggle button group">
                                               <input v-if="!mostrarSkeleton" type="radio" class="btn-check"
                                                 name="garagemCoberta" id="selectGaragemCobertura1" autocomplete="off"
-                                                value="Sim" v-model="selectGaragemCobertura" />
+                                                value="Sim" v-model="currentImovel.comodos.garagem_coberta" />
                                               <label v-if="!mostrarSkeleton" class="btn btn-outline-success"
-                                                for="selectGaragemCobertura1">Sim</label>
+                                                for="selectGaragemCobertura1" :class="{ active: currentImovel.comodos.garagem_coberta === 'Sim' }">Sim</label>
 
                                               <input v-if="!mostrarSkeleton" type="radio" class="btn-check" value="Não"
-                                                v-model="selectGaragemCobertura" name="garagemCoberta"
+                                                v-model="currentImovel.comodos.garagem_coberta" name="garagemCoberta"
                                                 id="selectGaragemCobertura2" autocomplete="off" />
                                               <label v-if="!mostrarSkeleton" class="btn btn-outline-danger"
-                                                for="selectGaragemCobertura2">Não</label>
+                                                for="selectGaragemCobertura2" :class="{ active: currentImovel.comodos.garagem_coberta === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1203,15 +1201,15 @@
                                               aria-label="Basic radio toggle button group">
                                               <input v-if="!mostrarSkeleton" type="radio" class="btn-check"
                                                 name="boxGaragem" id="boxGaragemY" autocomplete="off" value="Sim"
-                                                v-model="selectBoxGaragem" />
+                                                v-model="currentImovel.comodos.garagem_box" />
                                               <label v-if="!mostrarSkeleton" class="btn btn-outline-success"
-                                                for="boxGaragemY">Sim</label>
+                                                for="boxGaragemY" :class="{ active: currentImovel.comodos.garagem_box === 'Sim' }">Sim</label>
 
                                               <input v-if="!mostrarSkeleton" type="radio" class="btn-check" value="Não"
-                                                v-model="selectBoxGaragem" name="boxGaragem" id="boxGaragemN"
+                                                v-model="currentImovel.comodos.garagem_box" name="boxGaragem" id="boxGaragemN"
                                                 autocomplete="off" />
                                               <label v-if="!mostrarSkeleton" class="btn btn-outline-danger"
-                                                for="boxGaragemN">Não</label>
+                                                for="boxGaragemN" :class="{ active: currentImovel.comodos.garagem_box === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1224,7 +1222,7 @@
                                               Sala de TV
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="salaTv" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.sala_tv" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1239,7 +1237,7 @@
                                               Sala de jantar
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="salaJantar" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.sala_jantar" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1254,7 +1252,7 @@
                                               Sala de estar
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="salaEstar" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.sala_estar" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1269,7 +1267,7 @@
                                               Lavabo
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="lavabo" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.lavabo" placeholder="Digite a quantidade" />
                                           </div>
 
                                         </div>
@@ -1282,7 +1280,7 @@
                                               Área de serviço
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="areaServico" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.area_servico" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1297,7 +1295,7 @@
                                               Cozinha
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="cozinha" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.cozinha" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1312,7 +1310,7 @@
                                               Closet
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="closet" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.closet" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1327,7 +1325,7 @@
                                               Escritório
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="escritorio" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.escritorio" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1342,7 +1340,7 @@
                                               Dependência para empregada
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="depEmpregada" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.casa_empregada" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1357,7 +1355,7 @@
                                               Copa
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="salaCopa" placeholder="Digite a quantidade" />
+                                              v-model="currentImovel.comodos.copa" placeholder="Digite a quantidade" />
                                           </div>
                                           <p v-if="msgNullComodos" class="text-danger"><small><i class="fa fa-ban"></i>
                                               Não
@@ -1439,7 +1437,7 @@
                                             </label>
 
                                             <select type="text" required v-if="!mostrarSkeleton"
-                                              class="form-control form-select" v-model="tipoNegocio">
+                                              class="form-control form-select" v-model="currentImovel.preco.tipo_negocio">
                                               <option selected disabled>Selecione</option>
                                               <option value="Aluguel">Aluguel</option>
                                               <option value="Venda">Venda</option>
@@ -1478,17 +1476,17 @@
                                             <div v-if="!mostrarSkeleton" class="btn-group" role="group"
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="precoNoSite" id="btnradio1"
-                                                autocomplete="off" value="Sim" v-model="precoNoSite" />
-                                              <label class="btn btn-outline-success" for="btnradio1">Sim</label>
+                                                autocomplete="off" value="Sim" v-model="currentImovel.preco.mostra_preco" />
+                                              <label class="btn btn-outline-success" for="btnradio1" :class="{ active: currentImovel.preco.mostra_preco === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="precoNoSite"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.preco.mostra_preco"
                                                 name="precoNoSite" id="btnradio2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="btnradio2">Não</label>
+                                              <label class="btn btn-outline-danger" for="btnradio2" :class="{ active: currentImovel.preco.mostra_preco === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
 
-                                        <div v-if="textoLugarPrecoView" class="col-3">
+                                        <div v-if="currentImovel.preco.mostra_preco == 'Não'" class="col-3">
                                           <div class="mb-3">
                                             <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                             <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1496,7 +1494,7 @@
                                               Mostrar no lugar do preço:
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="textoLugarPreco" placeholder="Texto exemplo: Consulte" />
+                                              v-model="currentImovel.preco.textoLugarPreco" placeholder="Texto exemplo: Consulte" />
                                           </div>
                                         </div>
 
@@ -1513,7 +1511,7 @@
                                           </div>
                                         </div>
 
-                                        <div class="col-3" v-if="tipoNegocio === 'Aluguel'">
+                                        <div class="col-3" v-if="currentImovel.preco.tipo_negocio === 'Aluguel'">
                                           <div class="mb-3">
                                             <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                             <div v-if="mostrarSkeleton" class="skeleton-input"></div>
@@ -1526,12 +1524,12 @@
                                             <div v-if="!mostrarSkeleton" class="btn-group" role="group"
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="periodo" id="periodo1"
-                                                autocomplete="off" value="Anual" v-model="periodoIptu" />
-                                              <label class="btn btn-outline-success" for="periodo1">Anual</label>
+                                                autocomplete="off" value="Anual" v-model="currentImovel.preco.periodo" />
+                                              <label class="btn btn-outline-success" for="periodo1" :class="{ active: currentImovel.preco.periodo === 'Anual' }">Anual</label>
 
-                                              <input type="radio" class="btn-check" value="Mensal" v-model="periodoIptu"
+                                              <input type="radio" class="btn-check" value="Mensal" v-model="currentImovel.preco.periodo"
                                                 name="periodo" id="periodo2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="periodo2">Mensal</label>
+                                              <label class="btn btn-outline-danger" for="periodo2" :class="{ active: currentImovel.preco.periodo === 'Mensal' }">Mensal</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1563,12 +1561,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="estaFinanciado"
                                                 id="estaFinanciado1" autocomplete="off" value="Sim"
-                                                v-model="estaFinanciado" />
-                                              <label class="btn btn-outline-success" for="estaFinanciado1">Sim</label>
+                                                v-model="currentImovel.preco.financiado " />
+                                              <label class="btn btn-outline-success" for="estaFinanciado1" :class="{ active: currentImovel.preco.financiado === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="estaFinanciado"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.preco.financiado "
                                                 name="estaFinanciado" id="estaFinanciado2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="estaFinanciado2">Não</label>
+                                              <label class="btn btn-outline-danger" for="estaFinanciado2" :class="{ active: currentImovel.preco.financiado === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1587,15 +1585,15 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="aceitaFinanciamento"
                                                 id="aceitaFinanciamento1" autocomplete="off" value="Sim"
-                                                v-model="aceitaFinanciamento" />
+                                                v-model="currentImovel.preco.aceita_financiamento" />
                                               <label class="btn btn-outline-success"
-                                                for="aceitaFinanciamento1">Sim</label>
+                                                for="aceitaFinanciamento1" :class="{ active: currentImovel.preco.aceita_financiamento === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não"
-                                                v-model="aceitaFinanciamento" name="aceitaFinanciamento"
+                                                v-model="currentImovel.preco.aceita_financiamento" name="aceitaFinanciamento"
                                                 id="aceitaFinanciamento2" autocomplete="off" />
                                               <label class="btn btn-outline-danger"
-                                                for="aceitaFinanciamento2">Não</label>
+                                                for="aceitaFinanciamento2" :class="{ active: currentImovel.preco.aceita_financiamento === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1613,12 +1611,12 @@
                                             <div v-if="!mostrarSkeleton" class="btn-group" role="group"
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mCasaMVida" id="mCasaMVida1"
-                                                autocomplete="off" value="Sim" v-model="mCasaMVida" />
-                                              <label class="btn btn-outline-success" for="mCasaMVida1">Sim</label>
+                                                autocomplete="off" value="Sim" v-model="currentImovel.preco.minhacasa_minhavida" />
+                                              <label class="btn btn-outline-success" for="mCasaMVida1" :class="{ active: currentImovel.preco.minhacasa_minhavida === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="mCasaMVida"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.preco.minhacasa_minhavida"
                                                 name="mCasaMVida" id="mCasaMVida2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mCasaMVida2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mCasaMVida2" :class="{ active: currentImovel.preco.minhacasa_minhavida === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1645,7 +1643,7 @@
                                               Descrição das Taxas
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="taxasDescricao" placeholder="Digite aqui..." />
+                                              v-model="currentImovel.preco.descricao_taxas" placeholder="Digite aqui..." />
                                           </div>
                                         </div>
 
@@ -1663,12 +1661,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="aceitaPermuta"
                                                 id="aceitaPermuta1" autocomplete="off" value="Sim"
-                                                v-model="aceitaPermuta" />
-                                              <label class="btn btn-outline-success" for="aceitaPermuta1">Sim</label>
+                                                v-model="currentImovel.preco.aceita_permuta" />
+                                              <label class="btn btn-outline-success" for="aceitaPermuta1" :class="{ active: currentImovel.preco.aceita_permuta === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="aceitaPermuta"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.preco.aceita_permuta"
                                                 name="aceitaPermuta" id="aceitaPermuta2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="aceitaPermuta2">Não</label>
+                                              <label class="btn btn-outline-danger" for="aceitaPermuta2" :class="{ active: currentImovel.preco.aceita_permuta === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1681,7 +1679,7 @@
                                               Descrição das Permutas
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="permutaDescricao" placeholder="Digite aqui..." />
+                                              v-model="currentImovel.preco.descricao_permuta" placeholder="Digite aqui..." />
                                           </div>
                                         </div>
                                       </div>
@@ -1699,14 +1697,14 @@
                                       <div class="row mt-3">
 
                                         <div class="col-md-6">
-                                          <div class="form-check" v-for="caracteristica in minhasCaracteristicas"
+                                          <div class="form-check" v-for="caracteristica in currentImovel.caracteristicas"
                                             :key="caracteristica.id_caracteristica">
                                             <input v-if="!mostrarSkeleton" class="form-check-input"
-                                              v-model="caracteristicaImovel[caracteristica.id_caracteristica]"
+                                              v-model="currentImovel.caracteristicas[caracteristica.id_caracteristica]"
                                               type="checkbox" :id="'flexCheck' + caracteristica.id_caracteristica" />
                                             <label v-if="!mostrarSkeleton" class="form-check-label"
                                               :for="'flexCheck' + caracteristica.id_caracteristica">
-                                              {{ caracteristica.nome_caracteristica }}
+                                              {{ caracteristica.detalhesCaracteristica.nome_caracteristica }}
                                             </label>
 
                                             <a style="margin-left: 2%;" href="#"
@@ -1716,6 +1714,7 @@
 
                                         </div>
 
+                                        <!-- dando erro aqui -->
                                         <div class="col-md-6">
                                           <div class="form-check" v-for="item in listcaracteristicas"
                                             :key="item.id_caracteristica">
@@ -1833,7 +1832,7 @@
                                               Número
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="nLogradouro" placeholder="00" />
+                                              v-model="currentImovel.localizacao.numero" placeholder="00" />
                                           </div>
                                         </div>
                                         <div class="col-6">
@@ -1844,7 +1843,7 @@
                                               Complemento
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="complemento"
+                                              v-model="currentImovel.localizacao.complemento"
                                               placeholder="Digite aqui o complemento, se houver." />
                                           </div>
                                         </div>
@@ -1857,7 +1856,7 @@
                                               Nº ou identificação da Unidade
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="idUnidade" placeholder="Insira aqui" />
+                                              v-model="currentImovel.localizacao.numero_unidade" placeholder="Insira aqui" />
                                           </div>
                                         </div>
                                         <div class="col-2">
@@ -1868,7 +1867,7 @@
                                               Andar
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="selectAndar" placeholder="Insira aqui" />
+                                              v-model="currentImovel.localizacao.andar" placeholder="Insira aqui" />
                                           </div>
                                         </div>
                                         <div class="col-4">
@@ -1879,7 +1878,7 @@
                                               Unidades por andar
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="undPorAndar" placeholder="Informe a quantidade..." />
+                                              v-model="currentImovel.localizacao.unidade_por_andar" placeholder="Informe a quantidade..." />
                                           </div>
                                         </div>
                                         <div class="col-4">
@@ -1890,7 +1889,7 @@
                                               Total de andares
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="totalAndares" placeholder="Insira o total" />
+                                              v-model="currentImovel.localizacao.total_andar" placeholder="Insira o total" />
                                           </div>
                                         </div>
                                         <div class="col-4">
@@ -1901,7 +1900,7 @@
                                               Total de torres
                                             </label>
                                             <input type="number" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="totalTorres" placeholder="Se houver, insira aqui" />
+                                              v-model="currentImovel.localizacao.total_torres" placeholder="Se houver, insira aqui" />
                                           </div>
                                         </div>
 
@@ -1921,12 +1920,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mostrarAndar"
                                                 id="mostrarAndar1" autocomplete="off" value="Sim"
-                                                v-model="mostrarAndar" />
-                                              <label class="btn btn-outline-success" for="mostrarAndar1">Sim</label>
+                                                v-model="currentImovel.localizacao.mostrar_andar_site" />
+                                              <label class="btn btn-outline-success" for="mostrarAndar1" :class="{ active: currentImovel.localizacao.mostrar_andar_site === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="mostrarAndar"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.localizacao.mostrar_andar_site"
                                                 name="mostrarAndar" id="mostrarAndar2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mostrarAndar2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mostrarAndar2" :class="{ active: currentImovel.localizacao.mostrar_andar_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1944,13 +1943,13 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mostrarNUnidade"
                                                 id="mostrarNUnidade1" autocomplete="off" value="Sim"
-                                                v-model="mostrarNUnidade" />
-                                              <label class="btn btn-outline-success" for="mostrarNUnidade1">Sim</label>
+                                                v-model="currentImovel.localizacao.mostrar_numero_unidade_site" />
+                                              <label class="btn btn-outline-success" for="mostrarNUnidade1" :class="{ active: currentImovel.localizacao.mostrar_numero_unidade_site === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não"
-                                                v-model="mostrarNUnidade" name="mostrarNUnidade" id="mostrarNUnidade2"
+                                                v-model="currentImovel.localizacao.mostrar_numero_unidade_site" name="mostrarNUnidade" id="mostrarNUnidade2"
                                                 autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mostrarNUnidade2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mostrarNUnidade2" :class="{ active: currentImovel.localizacao.mostrar_numero_unidade_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1968,14 +1967,14 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mostrarLogradouro"
                                                 id="mostrarLogradouro1" autocomplete="off" value="Sim"
-                                                v-model="mostrarLogradouro" />
+                                                v-model="currentImovel.localizacao.mostrar_logradouro_site" />
                                               <label class="btn btn-outline-success"
-                                                for="mostrarLogradouro1">Sim</label>
+                                                for="mostrarLogradouro1" :class="{ active: currentImovel.localizacao.mostrar_logradouro_site === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não"
-                                                v-model="mostrarLogradouro" name="mostrarLogradouro"
+                                                v-model="currentImovel.localizacao.mostrar_logradouro_site" name="mostrarLogradouro"
                                                 id="mostrarLogradouro2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mostrarLogradouro2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mostrarLogradouro2" :class="{ active: currentImovel.localizacao.mostrar_logradouro_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -1993,12 +1992,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mostrarBairro"
                                                 id="mostrarBairro1" autocomplete="off" value="Sim"
-                                                v-model="mostrarBairro" />
-                                              <label class="btn btn-outline-success" for="mostrarBairro1">Sim</label>
+                                                v-model="currentImovel.localizacao.mostrar_bairro_site" />
+                                              <label class="btn btn-outline-success" for="mostrarBairro1" :class="{ active: currentImovel.localizacao.mostrar_bairro_site === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="mostrarBairro"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.localizacao.mostrar_bairro_site"
                                                 name="mostrarBairro" id="mostrarBairro2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mostrarBairro2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mostrarBairro2" :class="{ active: currentImovel.localizacao.mostrar_bairro_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -2016,15 +2015,15 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mostrarComplemento"
                                                 id="mostrarComplemento1" autocomplete="off" value="Sim"
-                                                v-model="mostrarComplemento" />
+                                                v-model="currentImovel.localizacao.mostrar_complemento_site" />
                                               <label class="btn btn-outline-success"
-                                                for="mostrarComplemento1">Sim</label>
+                                                for="mostrarComplemento1" :class="{ active: currentImovel.localizacao.mostrar_complemento_site === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não"
-                                                v-model="mostrarComplemento" name="mostrarComplemento"
+                                                v-model="currentImovel.localizacao.mostrar_complemento_site" name="mostrarComplemento"
                                                 id="mostrarComplemento2" autocomplete="off" />
                                               <label class="btn btn-outline-danger"
-                                                for="mostrarComplemento2">Não</label>
+                                                for="mostrarComplemento2" :class="{ active: currentImovel.localizacao.mostrar_complemento_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -2042,12 +2041,12 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mostrarNumero"
                                                 id="mostrarNumero1" autocomplete="off" value="Sim"
-                                                v-model="mostrarNumero" />
-                                              <label class="btn btn-outline-success" for="mostrarNumero1">Sim</label>
+                                                v-model="currentImovel.localizacao.mostrar_numero_site" />
+                                              <label class="btn btn-outline-success" for="mostrarNumero1" :class="{ active: currentImovel.localizacao.mostrar_numero_site === 'Sim' }">Sim</label>
 
-                                              <input type="radio" class="btn-check" value="Não" v-model="mostrarNumero"
+                                              <input type="radio" class="btn-check" value="Não" v-model="currentImovel.localizacao.mostrar_numero_site"
                                                 name="mostrarNumero" id="mostrarNumero2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mostrarNumero2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mostrarNumero2" :class="{ active: currentImovel.localizacao.mostrar_numero_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -2066,11 +2065,11 @@
                                               <input type="radio" class="btn-check" name="mostrarNCondo"
                                                 id="mostrarNCondo1" autocomplete="off" value="Sim"
                                                 v-model="mostrarNCondo" />
-                                              <label class="btn btn-outline-success" for="mostrarNCondo1">Sim</label>
+                                              <label class="btn btn-outline-success" for="mostrarNCondo1" :class="{ active: currentImovel.localizacao.mostrar_nome_condominio_site === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não" v-model="mostrarNCondo"
                                                 name="mostrarNCondo" id="mostrarNCondo2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mostrarNCondo2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mostrarNCondo2" :class="{ active: currentImovel.localizacao.mostrar_nome_condominio_site === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
@@ -2091,23 +2090,20 @@
                                               aria-label="Basic radio toggle button group">
                                               <input type="radio" class="btn-check" name="mapaCondo" id="mapaCondo1"
                                                 autocomplete="off" value="Sim" v-model="mapaCondo" />
-                                              <label class="btn btn-outline-success" for="mapaCondo1">Sim</label>
+                                              <label class="btn btn-outline-success" for="mapaCondo1" :class="{ active: mapaCondo === 'Sim' }">Sim</label>
 
                                               <input type="radio" class="btn-check" value="Não" v-model="mapaCondo"
                                                 name="mapaCondo" id="mapaCondo2" autocomplete="off" />
-                                              <label class="btn btn-outline-danger" for="mapaCondo2">Não</label>
+                                              <label class="btn btn-outline-danger" for="mapaCondo2" :class="{ active: mapaCondo === 'Não' }">Não</label>
                                             </div>
                                           </div>
                                         </div>
 
                                         <hr />
 
-                                        <div class="col-12">
+                                        <div class="col-12" style="position: relative;" v-if="mostrarMapa">
 
-                                          <iframe :src="mapUrl" width="100%" height="350" style="border: 0"
-                                            allowfullscreen="" loading="lazy" class="my-3"
-                                            referrerpolicy="no-referrer-when-downgrade">
-                                          </iframe>
+                                          <div id="map" ref="mapElements" style="height: 350px; width:100%; border: 0; position: sticky; bottom: 0;"></div>
 
                                           <div class="row">
 
@@ -2128,28 +2124,28 @@
                                                     id="selectMapSite1" autocomplete="off" value="Sim"
                                                     v-model="selectMapSite" />
                                                   <label class="btn btn-outline-success"
-                                                    for="selectMapSite1">Sim</label>
+                                                    for="selectMapSite1" :class="{ active: currentImovel.localizacao.mostrar_mapa_site === 'Sim' }">Sim</label>
 
                                                   <input type="radio" class="btn-check" value="Não"
                                                     v-model="selectMapSite" name="selectMapSite" id="selectMapSite2"
                                                     autocomplete="off" />
-                                                  <label class="btn btn-outline-danger" for="selectMapSite2">Não</label>
+                                                  <label class="btn btn-outline-danger" for="selectMapSite2" :class="{ active: currentImovel.localizacao.mostrar_mapa_site === 'Não' }">Não</label>
                                                 </div>
                                               </div>
                                             </div>
 
-                                            <div class="col-4">
+                                            <!-- <div class="col-4">
                                               <div class="mb-3">
                                                 <div v-if="mostrarSkeleton" class="skeleton-label"></div>
                                                 <div v-if="mostrarSkeleton" class="skeleton-input"></div>
                                                 <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                                   class="form-label">
                                                   Ativar StreetView?
-                                                </label>
+                                                </label> -->
 
                                                 <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                                <div class="btn-group" role="group"
+                                                <!-- <div class="btn-group" role="group"
                                                   aria-label="Basic radio toggle button group">
                                                   <input type="radio" class="btn-check" name="mapaStreetV"
                                                     id="mapaStreetV1" autocomplete="off" value="Sim"
@@ -2162,9 +2158,9 @@
                                                   <label class="btn btn-outline-danger" for="mapaStreetV2">Não</label>
                                                 </div>
                                               </div>
-                                            </div>
+                                            </div> -->
 
-                                            <div class="col-12" v-if="mostrarStreetV">
+                                            <!-- <div class="col-12" v-if="mostrarStreetV">
 
 
                                               <div class="col-12 mb-3">
@@ -2179,11 +2175,11 @@
                                                   <label v-if="!mostrarSkeleton" for="exampleInputEmail1"
                                                     class="form-label">
                                                     Mostrar StreetView no site?
-                                                  </label>
+                                                  </label> -->
 
                                                   <!-- O CSS DESSE BUTTON ESTÁ NO STYLE.CSS -->
 
-                                                  <div class="btn-group" role="group"
+                                                  <!-- <div class="btn-group" role="group"
                                                     aria-label="Basic radio toggle button group">
                                                     <input type="radio" class="btn-check" name="selectStreetVSite"
                                                       id="selectStreetVSite1" autocomplete="off" value="Sim"
@@ -2199,7 +2195,7 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                            </div>
+                                            </div> -->
                                           </div>
                                         </div>
 
@@ -2221,14 +2217,14 @@
 
                                       <div class="row">
                                         <div class="col-md-6">
-                                          <div class="form-check" v-for="proximidade in minhasProximidades"
+                                          <div class="form-check" v-for="proximidade in currentImovel.proximidades"
                                             :key="proximidade.id_proximidade">
                                             <input v-if="!mostrarSkeleton" class="form-check-input"
-                                              v-model="proximidadesImovel[proximidade.id_proximidade]" type="checkbox"
+                                              v-model="currentImovel.proximidades[proximidade.id_proximidade]" type="checkbox"
                                               :id="'flexCheck' + proximidade.id_proximidade" />
                                             <label v-if="!mostrarSkeleton" class="form-check-label"
                                               :for="'flexCheck' + proximidade.id_proximidade">
-                                              {{ proximidade.nome_proximidade }}
+                                              {{ proximidade.detalhesProximidade.nome_proximidade }}
 
                                             </label>
                                             <a style="margin-left: 2%;" href="#"
@@ -2271,7 +2267,7 @@
                                               Titulo da página de detalhamento do imóvel
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="titleImovel" placeholder="Digite aqui..." />
+                                              v-model="currentImovel.descricao.titulo" placeholder="Digite aqui..." />
                                           </div>
                                         </div>
 
@@ -2284,7 +2280,7 @@
                                             </label>
 
                                             <textarea class="form-control" v-if="!mostrarSkeleton"
-                                              v-model="descricaoImovel" style="height: 100px"
+                                              v-model="currentImovel.descricao.apresentacao" style="height: 100px"
                                               placeholder="Digite aqui..."></textarea>
                                           </div>
                                         </div>
@@ -2315,7 +2311,7 @@
                                               </button>
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="urlYT" placeholder="Digite aqui..." />
+                                              v-model="currentImovel.complemento.link_youtube" placeholder="Digite aqui..." />
                                           </div>
                                         </div>
 
@@ -2334,7 +2330,7 @@
                                               </button>
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="url360" placeholder="Digite aqui..." />
+                                              v-model="currentImovel.complemento.link_apresentacao" placeholder="Digite aqui..." />
                                           </div>
                                         </div>
 
@@ -2347,7 +2343,7 @@
 
                                             </label>
                                             <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                              v-model="link_drive" placeholder="Digite aqui..." />
+                                              v-model="currentImovel.complemento.link_drive" placeholder="Digite aqui..." />
                                           </div>
                                         </div>
 
@@ -2380,8 +2376,8 @@
                                               <div class="col" v-for="(image, index) in images" :key="index">
                                                 <div class="card bg-transparent border-0">
                                                   <div class="preview-photo-prato area-photo-prato">
-                                                    <img :src="image.src" class="img-photo-prato" />
-
+                                                    <img :src="getImageUrl(image.foto)" class="img-photo-prato" />                                                  
+                                                    <!-- {{ console.log(image.foto) }} -->
                                                     <!-- Barra de Progresso -->
                                                     <div class="progress">
                                                       <div class="progress-bar"
@@ -2449,11 +2445,11 @@
                                             <input type="radio" class="btn-check" name="selectImovelSite"
                                               id="selectImovelSite1" autocomplete="off" value="Sim"
                                               v-model="selectImovelSite" />
-                                            <label class="btn btn-outline-success" for="selectImovelSite1">Sim</label>
+                                            <label class="btn btn-outline-success" for="selectImovelSite1" :class="{ active: currentImovel.publicacao.mostrar_imovel_publi === 'Sim' }">Sim</label>
 
                                             <input type="radio" class="btn-check" value="Não" v-model="selectImovelSite"
                                               name="selectImovelSite" id="selectImovelSite2" autocomplete="off" />
-                                            <label class="btn btn-outline-danger" for="selectImovelSite2">Não</label>
+                                            <label class="btn btn-outline-danger" for="selectImovelSite2" :class="{ active: currentImovel.publicacao.mostrar_imovel_publi === 'Não' }">Não</label>
                                           </div>
                                         </div>
                                       </div>
@@ -2475,7 +2471,7 @@
                                                 Texto da tarja
                                               </label>
                                               <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                                v-model="textoTarja" placeholder="Em construção" />
+                                                v-model="currentImovel.publicacao.tarja_imovel_site_publi" placeholder="Em construção" />
                                             </div>
                                           </div>
                                           <div class="col-4">
@@ -2486,7 +2482,7 @@
                                                 class="form-label">
                                                 Cor da tarja
                                               </label>
-                                              <input type="color" v-if="!mostrarSkeleton" v-model="corTarja"
+                                              <input type="color" v-if="!mostrarSkeleton" v-model="currentImovel.publicacao.cor_tarja_publi"
                                                 class="form-control" id="exampleColorInput" value="#563d7c"
                                                 title="Escolha a cor" />
                                             </div>
@@ -2499,9 +2495,9 @@
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="button" class="btn btn-success" :disabled="autenticando"
-                                  @click="handleFinish()">Salvar &nbsp;<i class="fa fa-arrow-right"
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeModal()">Fechar</button>
+                                <button type="button" class="btn btn-warning" :disabled="autenticando"
+                                  @click="handleFinish()">Salvar alterações &nbsp;<i class="fa fa-arrow-right"
                                     aria-hidden="true"></i></button>
                               </div>
                             </div>
@@ -2583,6 +2579,7 @@ import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 import 'https://cdn.jsdelivr.net/npm/chart.js'
 import L from 'leaflet';
+import _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -2615,6 +2612,9 @@ export default {
       sobrenome: '',
       id_user: '',
       myImoveis: [],
+      currentImovel: null,
+      originalImovelIndex: null,
+      modalInstance: null,
       qualidade: '',
       aluguel: 0,
       venda: 0,
@@ -2640,6 +2640,43 @@ export default {
       images: [],
       imageSrc: null,
       maxImages: 10,
+
+      // TAB MEDIDAS
+      areaConstruida: "",
+      areaPrivativa: "",
+      areaTotal: "",
+      precoImovel: "",
+      precoCondominio: "",
+      precoIptu: "",
+      taxasTotal: "",
+      textoLugarPrecoView: false,
+
+      // TAB LOCALIZAÇÃO
+      buscarCEP: "",
+      selectPais: "",
+      selectEstado: "",
+      selectCidade: "",
+      selectBairro: "",
+      logradouro: "",
+      mostrarMapa: false,
+      latitude: '-15.7934',
+      longitude: '-47.8823',
+      map: null,
+      marker: null,
+      mapaCondo: "Não",
+
+      infoTab: true,
+      comodosTab: false,
+      medidaTab: false,
+      precoTab: false,
+      caracteristicaTab: false,
+      localizacaoTab: false,
+      proximidadesTab: false,
+      descricaoTab: false,
+      complementoTab: false,
+      imagemTab: false,
+      publicacaoTab: false,
+      addProp: false,
     }
   },
   components: {
@@ -2648,6 +2685,11 @@ export default {
     Footer,
     FilterGraph,
   },
+
+  created() {
+    this.debouncedCheckCEP = _.debounce(this.consultarCEP, 100);
+  },
+
   mounted() {
     let token = this.token;
     let decode = jwtDecode(token);
@@ -2663,7 +2705,120 @@ export default {
     this.fetchMyCondominios();
   },
 
+  watch: {
+    buscarCEP(newVal, oldVal) {
+      if (newVal.length === 9 && newVal !== oldVal) {
+        this.debouncedCheckCEP();
+      }
+    },
+    mapaCondo(newValue) {
+      // console.log(newValue)
+      if (newValue == "Sim") {
+        this.mostrarMapa = true;
+        this.$nextTick(() => {
+          if (this.map) {
+            this.initMap();
+            this.updateMap();
+          } else {
+            this.initMap();
+          }
+        });
+      } else {
+        this.mostrarMapa = false;
+      }
+    },
+  },
+  
+
   methods: {
+    initMap() {
+      this.map = L.map("map").setView([this.latitude, this.longitude], 15);
+
+      // Adiciona os tiles do OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(this.map);
+
+      this.addMarker();
+    },
+
+    updateMap() {
+      this.map.setView([this.latitude, this.longitude], 15);
+      this.addMarker();
+    },
+    addMarker() {
+      const lat = this.latitude;
+      const lng = this.longitude;
+
+      if (!isNaN(lat) && !isNaN(lng)) {
+        L.marker([lat, lng]).addTo(this.map)
+          .bindPopup(`Latitude: ${lat}, Longitude: ${lng}`).openPopup();
+      } else {
+        console.error('Coordenadas inválidas');
+      }
+    },
+    async consultarCEPLoc() {
+      if (this.buscarCEP.length === 9) {
+        const cep = this.buscarCEP.replace(/\D/g, '');
+
+        try {
+          const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+          // Correção nas propriedades de acordo com a resposta da API
+          let rua = res.data.logradouro;
+          let bairro = res.data.bairro;
+          let cidade = res.data.localidade;
+          let estado = res.data.uf;
+
+          this.selectPais = "Brasil"
+          this.selectEstado = estado
+          this.selectCidade = cidade
+          this.selectBairro = bairro
+          this.logradouro = rua
+
+          // await this.buscarCoordenadas(cep, cidade, estado);
+          await this.buscarCoordenadasLoc(cep, rua);
+
+        } catch (error) {
+          console.error("Erro ao consultar CEP: ", error);
+        }
+      }
+    },
+
+    async buscarCoordenadasLoc(cep, rua) {
+      // trocar pela apiKey do cliente
+      const apiKey = 'AIzaSyAASYgAApUrIKnyEc9ykVzP7-s_-g2ldRU';
+
+      try {
+        const res = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+          params: {
+            address: `${cep}, ${rua}`,
+            key: apiKey
+          }
+        });
+
+        console.log(res.data)
+        
+        if (res.data && res.data.results && res.data.results.length > 0) {
+          const location = res.data.results[0].geometry.location;
+          const latitude = location.lat;
+          const longitude = location.lng;
+
+          this.latitude = latitude;
+          this.longitude = longitude;
+
+          // console.log("Latitude e Longitude encontradas:", latitude, longitude);
+          return { latitude, longitude };
+        } else {
+          console.error("Coordenadas não encontradas para o CEP informado.");
+          return null;
+        }
+      } catch (error) {
+        console.error("Erro ao buscar coordenadas:", error);
+        return null;
+      }
+    },
 
     mostrarTeste(event) {
       event.preventDefault(); // Previne o comportamento padrão do link
@@ -2707,7 +2862,7 @@ export default {
           await this.buscarCoordenadas(imovel.localizacao.cep, imovel.localizacao.rua).then((res) => {
             if (res) {
               // addMarker()
-              this.updateMap()
+              this.updateMapImoveis()
             }
           })
 
@@ -2770,11 +2925,11 @@ export default {
         let latitude
         let longitude
 
-        const map = L.map('map').setView([latitude, longitude], 4);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+        // const map = L.map('map').setView([latitude, longitude], 4);
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //   maxZoom: 19,
+        //   attribution: '© OpenStreetMap contributors'
+        // }).addTo(map);
 
         res.data.forEach(imovel => {
           let cep = imovel.localizacao.cep;
@@ -2800,6 +2955,81 @@ export default {
 
       })
     },
+    openModal(id_imovel) {
+      // console.log(this.myImoveis)
+      this.originalImovelIndex = this.myImoveis.findIndex(imovel => imovel.id_imovel === id_imovel);
+      if (this.originalImovelIndex !== -1) {
+        this.currentImovel = JSON.parse(JSON.stringify(this.myImoveis[this.originalImovelIndex]));
+        this.$nextTick(() => {
+          const modalElement = document.getElementById(`modalEditImovel${this.currentImovel.id_imovel}`);
+          this.modalInstance = new bootstrap.Modal(modalElement);
+          this.modalInstance.show();
+        });
+      } else {
+        console.error('Imóvel não encontrado');
+      }
+      this.areaTotal = this.currentImovel.medidas.area_total
+      this.areaConstruida = this.currentImovel.medidas.area_contruida
+      this.areaPrivativa = this.currentImovel.medidas.area_privativa
+      this.precoImovel = this.currentImovel.preco.preco_imovel
+      this.precoCondominio = this.currentImovel.preco.preco_condominio
+      this.precoIptu = this.currentImovel.preco.preco_iptu
+      this.taxasTotal = this.currentImovel.preco.total_mensal_taxas
+      this.buscarCEP = this.currentImovel.localizacao.cep
+      this.selectPais= this.currentImovel.localizacao.pais
+      this.selectEstado= this.currentImovel.localizacao.estado
+      this.selectCidade= this.currentImovel.localizacao.cidade
+      this.selectBairro=this.currentImovel.localizacao.bairro
+      this.logradouro= this.currentImovel.localizacao.logradouro
+      this.images = this.currentImovel.fotos
+      this.aplicaMascaraMedidaTotal()
+      this.aplicaMascaraMedidaConstruida()
+      this.aplicaMascaraMedidaPrivativa()
+      this.aplicaMascaraDinheiroPrecoImovel()
+      this.consultarCEPLoc()
+
+      console.log(this.currentImovel)
+    },
+    closeModal() {
+      if (this.modalInstance) {
+        this.modalInstance.hide();
+        this.modalInstance = null;
+      }
+      this.currentImovel = null;
+      this.originalImovelIndex = null;
+      this.areaTotal = ""
+      this.areaConstruida = ""
+      this.areaPrivativa = ""
+    },
+
+    async consultarCEP() {
+      if (this.buscarCEP.length === 9) {
+        const cep = this.buscarCEP.replace(/\D/g, '');
+
+        try {
+          const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+          // Correção nas propriedades de acordo com a resposta da API
+          let rua = res.data.logradouro;
+          let bairro = res.data.bairro;
+          let cidade = res.data.localidade;
+          let estado = res.data.uf;
+
+          this.selectPais = "Brasil"
+          this.selectEstado = estado
+          this.selectCidade = cidade
+          this.selectBairro = bairro
+          this.logradouro = rua
+
+          // await this.buscarCoordenadas(cep, cidade, estado);
+          await this.buscarCoordenadas(cep, rua);
+
+        } catch (error) {
+          console.error("Erro ao consultar CEP: ", error);
+        }
+      }
+    },
+
     async buscarCoordenadas(cep, rua) {
       // trocar pela apiKey do cliente
       const apiKey = 'AIzaSyAASYgAApUrIKnyEc9ykVzP7-s_-g2ldRU';
@@ -2811,12 +3041,12 @@ export default {
             key: apiKey
           }
         });
-        // console.log(res)
-
+        
         if (res.data && res.data.results && res.data.results.length > 0) {
           const location = res.data.results[0].geometry.location;
           const latitude = location.lat;
           const longitude = location.lng;
+
           this.latitudeImoveis = latitude;
           this.longitudeImoveis = longitude;
 
@@ -2831,11 +3061,11 @@ export default {
         return null;
       }
     },
-    updateMap() {
+    updateMapImoveis() {
       this.mapImoveis.setView([this.latitudeImoveis, this.longitudeImoveis], 4);
-      this.addMarker();
+      this.addMarkerImoveis();
     },
-    addMarker() {
+    addMarkerImoveis() {
       const lat = this.latitudeImoveis;
       const lng = this.longitudeImoveis;
 
@@ -2938,6 +3168,26 @@ export default {
       })
 
     },
+    // handleDeleteCaracacteristicas(id) {
+    //   // ver ser e isso mesmo
+    // let id_caracteristicas = id
+    // api.deleteMinhaCaracteristicas(id_caracteristicas).then((res) => {
+    //   if (res.status == 200) {
+    //     this.fetchCaracteristicas();
+    //   }
+
+    // })
+    // },
+    // handleDeleteProximidades(id) {
+    //   // ver ser e isso mesmo
+    //   let id_proximidade = id
+    //   api.deleteMinhaProximidades(id_proximidade).then((res) => {
+    //     if (res.status == 200) {
+    //       this.fetchProximidades();
+    //     }
+
+    //   })
+    // },
     fetchMyCondominios() {
       let id_user = this.id_user
       api.listcondominio(id_user).then((res) => {
@@ -2955,8 +3205,184 @@ export default {
         this.currentPageImovel += 1
       }
     },
+    aplicaMascaraMedida(campo) {
+      this.calcularAreaTotal()
+      // console.log(campo)
+      this[campo] = this.formatarDecimal(this[campo]);
+      // console.log(this.areaConstruida, this.areaPrivativa, this.areaTotal)
+      // console.log(this.currentImovel)
+    },
 
+    formatarDecimal(valor) {
+      // console.log(valor)
+      let valorNumerico = valor.replace(/\D/g, '');
+      valorNumerico = (valorNumerico / 100).toFixed(2).replace('.', ',');
+      return valorNumerico.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    },
 
+    calcularAreaTotal() {
+      // Converte os valores para números e calcula a área total
+      let areaConstruida = parseFloat(this.areaConstruida) || 0;
+      let areaPrivativa = parseFloat(this.areaPrivativa) || 0;
+      this.areaTotal = (areaConstruida + areaPrivativa).toFixed(2); // Calcula a área total
+      this.currentImovel.medidas.area_contruida = this.areaConstruida
+      this.currentImovel.medidas.area_privativa = this.areaPrivativa
+      this.currentImovel.medidas.area_total = this.areaTotal
+      // console.log(this.myImoveis, this.currentImovel)
+    },
+
+    // calcularAreaTotal() {
+    //   const areaConstruidaNum = parseFloat(this.areaConstruida.replace(/\./g, '').replace(',', '.')) || 0;
+    //   const areaPrivativaNum = parseFloat(this.areaPrivativa.replace(/\./g, '').replace(',', '.')) || 0;
+    //   const areaTotalNum = (areaConstruidaNum + areaPrivativaNum).toFixed(2);
+    //   this.areaTotal = areaTotalNum.toString().replace('.', ',');
+    // },
+
+    aplicaMascaraMedidaPrivativa() {
+      let v = this.areaPrivativa;
+
+      // Remove tudo o que não é dígito e ponto
+      v = v.replace(/[^0-9.]/g, "");
+
+      // Evita a entrada de mais de um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      // Limita a apenas duas casas decimais após o ponto
+      v = v.replace(/(\.\d{2})\d+/g, '$1');
+
+      this.areaPrivativa = v;
+    },
+    aplicaMascaraMedidaConstruida() {
+      let v = this.areaConstruida;
+
+      // Remove tudo o que não é dígito e ponto
+      v = v.replace(/[^0-9.]/g, "");
+
+      // Evita a entrada de mais de um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      // Limita a apenas duas casas decimais após o ponto
+      v = v.replace(/(\.\d{2})\d+/g, '$1');
+
+      this.areaConstruida = v;
+    },
+
+    aplicaMascaraMedidaTotal() {
+      let v = this.areaTotal;
+
+      // Remove tudo o que não é dígito e ponto
+      v = v.replace(/[^0-9.]/g, "");
+
+      // Evita a entrada de mais de um ponto
+      v = v.replace(/(\..*)\./g, '$1');
+
+      // Limita a apenas duas casas decimais após o ponto
+      v = v.replace(/(\.\d{2})\d+/g, '$1');
+
+      this.areaTotal = v;
+    },
+
+    aplicaMascaraDinheiroPrecoImovel() {
+      let v = this.precoImovel;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.precoImovel = valorDecimal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      // console.log(this.currentImovel)
+    },
+
+    aplicaMascaraDinheiroPrecoIptu() {
+      let v = this.precoIptu;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.precoIptu = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
+
+    aplicaMascaraDinheiroPrecoCondominio() {
+      let v = this.precoCondominio;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.precoCondominio = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
+
+    aplicaMascaraDinheiroTotalTaxas() {
+      let v = this.taxasTotal;
+
+      // Remove tudo o que não é dígito
+      v = v.replace(/\D/g, "");
+
+      // Divide o número para preparar a adição de vírgula e ponto
+      let valorDecimal = parseInt(v) / 100;
+
+      // Formata o número como valor monetário
+      this.taxasTotal = valorDecimal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
+    aplicaMascaraCEP() {
+      let v = this.buscarCEP;
+
+      v = v.replace(/\D/g, "");
+      if (v.length > 8) {
+        v = v.substring(0, 8);
+      }
+
+      v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+
+      this.buscarCEP = v;
+    },
+    removerImagem(index) {
+      this.images.splice(index, 1);
+    },
+    previewImage(event) {
+      const files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        // console.log("arquivo: ", file)
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.push({
+            foto: e.target.result,
+            file: file,
+            progress: 0,
+          });
+          // Simulate the upload for each image
+          this.simulateUpload(this.images.length - 1);
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    simulateUpload(index) {
+      const interval = setInterval(() => {
+        if (this.images[index].progress < 100) {
+          this.images[index].progress += 10;
+        } else {
+          clearInterval(interval);
+        }
+      }, 100);
+    },
+    getImageUrl(imagePath) {
+      if(imagePath.startsWith("/foto")) {
+        return `https://zonu.com.br/api/${imagePath}`
+      } else {
+        return imagePath
+      }
+    },
 
   },
 
