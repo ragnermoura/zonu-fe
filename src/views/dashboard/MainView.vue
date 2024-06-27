@@ -280,7 +280,7 @@
                                                 style="font-size: 10px;" class="text-secondary">({{
                                                   item.preco.tipo_negocio }})</small></strong>
                                           </h5>
-                                          <h4 class="text-success"><strong>{{ item.preco.preco_imovel }} </strong>
+                                          <h4 class="text-success"><strong>{{ formatCurrency(item.preco.preco_imovel) }} </strong>
                                           </h4>
                                         </div>
                                         <div class="col-md-2">
@@ -2629,14 +2629,11 @@ export default {
       perPageImovel: 2,
       searchImovel: '',
       totalCondominios: 0,
-      // caso nao marque todos os pins transformar a latitude e longitude me array e o que mais precisar tambem 
       latitudeImoveis: '-15.7934',
       longitudeImoveis: '-47.8823',
       mapImoveis: null,
       markerIMoveis: null,
       mostrarResumo: false,
-      // editar imovel
-      // TAB IMAGEM
       images: [],
       imageSrc: null,
       maxImages: 10,
@@ -2818,6 +2815,11 @@ export default {
         console.error("Erro ao buscar coordenadas:", error);
         return null;
       }
+    },
+
+    formatCurrencyPreco(value) {
+      if (!value) return '';
+      return parseFloat(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     },
 
     mostrarTeste(event) {
