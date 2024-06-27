@@ -14,7 +14,7 @@
                     <div class="col-2">
                         <label for="tipoNegocio" class="form-label">Tipo de negócio <small><i
                                     class="fa fa-filter"></i></small></label>
-                        <select class="form-select"v-model="selectedTipoNegocio" @change="filtrarImoveis">
+                        <select class="form-select" v-model="selectedTipoNegocio" @change="filtrarImoveis">
                             <option value="">Escolha</option>
                             <option v-for="tipo in tiposNegocio" :key="tipo" :value="tipo">{{ tipo }}</option>
                         </select>
@@ -43,7 +43,7 @@
                             <option v-for="bairro in bairros" :key="bairro" :value="bairro">{{ bairro }}</option>
                         </select>
                     </div>
-                  
+                    <!-- 
                     <div class="col-2">
                         <label for="status" class="form-label">Status <small><i
                                     class="fa fa-filter"></i></small></label>
@@ -52,22 +52,13 @@
                             <option value="Sim">Publicado</option>
                             <option value="Não">Não publicado</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-2">
                         <label for="tipoImovel" class="form-label">Tipo do imóvel <small><i
                                     class="fa fa-filter"></i></small></label>
                         <select class="form-select" v-model="selectedTipoImovel" @change="filtrarImoveis">
                             <option value="">Selecione</option>
-                            <option value="Casa">Casa</option>
-                            <option value="Apartamento">Apartamento</option>
-                            <option value="Flat">Flat</option>
-                            <option value="Terreno">Terreno</option>
-                            <option value="Sítio">Sítio</option>
-                            <option value="Haras">Haras</option>
-                            <option value="Kitnet">Kitnet</option>
-                            <option value="Fazenda">Fazenda</option>
-                            <option value="Galpão">Galpão</option>
-                            <option value="Sala Comercial">Sala Comercial</option>
+                            <option v-for="tipo in tiposImovel" :key="tipo" :value="tipo">{{ tipo }}</option>
                         </select>
                     </div>
                     <div class="col-2">
@@ -75,11 +66,8 @@
                                     class="fa fa-filter"></i></small></label>
                         <select class="form-select" v-model="selectedProximoMar" @change="filtrarImoveis">
                             <option value="">Selecione</option>
-                            <option value="Vista para o mar">Vista para o mar</option>
-                            <option value="Frente para o mar">Frente para o mar</option>
-                            <option value="Quadra do mar">Quadra do mar</option>
-                            <option value="Proximo ao mar">Proximo ao mar</option>
-                            <option value="Não">Não</option>
+                            <option v-for="proximidade in proximidadesMar" :key="proximidade" :value="proximidade">{{
+                                proximidade }}</option>
                         </select>
                     </div>
                     <div class="col-1">
@@ -114,6 +102,8 @@ export default {
             cidades: [],
             bairros: [],
             tiposNegocio: [],
+            tiposImovel: [],
+            proximidadesMar: [],
             selectedTipoNegocio: '',
             selectedUf: '',
             selectedCidade: '',
@@ -140,7 +130,7 @@ export default {
                 this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
                 this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
                 this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
-                this.tiposNegocio = [...new Set(this.allImoveis.map(imovel => imovel.preco.tipo_negocio))];
+                this.tiposNegocio = [...new Set(this.allImoveis.map(imovel => imovel.preco.tipo_negocio).filter(tipo => tipo))];
                 this.filteredImoveis = this.allImoveis;
                 this.atualizarOpcoesFiltro();
                 this.atualizarGraficoPorUF();
@@ -149,18 +139,127 @@ export default {
             }
         },
         atualizarOpcoesFiltro() {
+            let imoveisFiltrados = this.allImoveis;
+
             if (this.selectedUf) {
-                const imoveisFiltradosPorUf = this.allImoveis.filter(imovel => imovel.localizacao.estado === this.selectedUf);
-                this.cidades = [...new Set(imoveisFiltradosPorUf.map(imovel => imovel.localizacao.cidade))];
-                if (this.selectedCidade) {
-                    const imoveisFiltradosPorCidade = imoveisFiltradosPorUf.filter(imovel => imovel.localizacao.cidade === this.selectedCidade);
-                    this.bairros = [...new Set(imoveisFiltradosPorCidade.map(imovel => imovel.localizacao.bairro))];
-                } else {
-                    this.bairros = [...new Set(imoveisFiltradosPorUf.map(imovel => imovel.localizacao.bairro))];
+                imoveisFiltrados = imoveisFiltrados.filter(imovel => imovel.localizacao.estado === this.selectedUf);
+            }
+            if (this.selectedCidade) {
+                imoveisFiltrados = imoveisFiltrados.filter(imovel => imovel.localizacao.cidade === this.selectedCidade);
+            }
+            if (this.selectedBairro) {
+                imoveisFiltrados = imoveisFiltrados.filter(imovel => imovel.localizacao.bairro === this.selectedBairro);
+            }
+            if (this.selectedTipoNegocio) {
+                imoveisFiltrados = imoveisFiltrados.filter(imovel => imovel.preco.tipo_negocio === this.selectedTipoNegocio);
+            }
+            if (this.selectedTipoImovel) {
+                imoveisFiltrados = imoveisFiltrados.filter(imovel => imovel.info.tipo === this.selectedTipoImovel);
+            }
+            if (this.selectedProximoMar) {
+                imoveisFiltrados = imoveisFiltrados.filter(imovel => imovel.info.proximo_mar === this.selectedProximoMar);
+            }
+
+            this.ufs = [...new Set(imoveisFiltrados.map(imovel => imovel.localizacao.estado))];
+            this.cidades = [...new Set(imoveisFiltrados.map(imovel => imovel.localizacao.cidade))];
+            this.bairros = [...new Set(imoveisFiltrados.map(imovel => imovel.localizacao.bairro))];
+            this.tiposNegocio = [...new Set(imoveisFiltrados.map(imovel => imovel.preco.tipo_negocio).filter(tipo => tipo))];
+            this.tiposImovel = [...new Set(imoveisFiltrados.map(imovel => imovel.info.tipo))];
+            this.proximidadesMar = [...new Set(imoveisFiltrados.map(imovel => imovel.info.proximo_mar))];
+        },
+        atualizarGraficoPorTipoNegocio() {
+            const canvas = document.getElementById('myMetroQuadrado');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                if (ctx) {
+                    if (this.chart) {
+                        this.chart.destroy();
+                    }
+
+                    let labels = [];
+                    let datasets = [];
+
+                    if (this.selectedBairro) {
+                        // Filtrar por bairro
+                        const mediasPorBairro = this.bairros.map(bairro => {
+                            const imoveisPorBairro = this.filteredImoveis.filter(imovel => imovel.localizacao.bairro === bairro);
+                            const media = this.calcularMedia(imoveisPorBairro, this.selectedTipoNegocio);
+                            return { label: bairro, media };
+                        }).filter(item => item.media > 0);
+
+                        labels = mediasPorBairro.map(item => item.label);
+                        datasets = [{
+                            label: `Média do m² (${this.selectedTipoNegocio || 'Todos'}) - Bairro (R$)`,
+                            data: mediasPorBairro.map(item => item.media),
+                            borderWidth: 1,
+                            backgroundColor: this.selectedTipoNegocio === 'Venda' ? "rgba(81, 229, 255, 0.2)" : "rgba(255, 99, 132, 0.2)",
+                        }];
+                    } else if (this.selectedCidade) {
+                        // Filtrar por cidade
+                        const mediasPorCidade = this.cidades.map(cidade => {
+                            const imoveisPorCidade = this.filteredImoveis.filter(imovel => imovel.localizacao.cidade === cidade);
+                            const media = this.calcularMedia(imoveisPorCidade, this.selectedTipoNegocio);
+                            return { label: cidade, media };
+                        }).filter(item => item.media > 0);
+
+                        labels = mediasPorCidade.map(item => item.label);
+                        datasets = [{
+                            label: `Média do m² (${this.selectedTipoNegocio || 'Todos'}) - Cidade (R$)`,
+                            data: mediasPorCidade.map(item => item.media),
+                            borderWidth: 1,
+                            backgroundColor: this.selectedTipoNegocio === 'Venda' ? "rgba(81, 229, 255, 0.2)" : "rgba(255, 99, 132, 0.2)",
+                        }];
+                    } else {
+                        // Filtrar por UF
+                        const mediasPorUF = this.ufs.map(uf => {
+                            const imoveisPorUF = this.filteredImoveis.filter(imovel => imovel.localizacao.estado === uf);
+                            const venda = this.calcularMedia(imoveisPorUF, 'Venda');
+                            const aluguel = this.calcularMedia(imoveisPorUF, 'Aluguel');
+                            return { label: uf, venda, aluguel };
+                        }).filter(item => item.venda > 0 || item.aluguel > 0);
+
+                        labels = mediasPorUF.map(item => item.label);
+                        datasets = [
+                            {
+                                label: 'Média do m² (Venda) - UF (R$)',
+                                data: mediasPorUF.map(item => item.venda),
+                                borderWidth: 1,
+                                backgroundColor: "rgba(81, 229, 255, 0.2)",
+                            },
+                            {
+                                label: 'Média do m² (Aluguel) - UF (R$)',
+                                data: mediasPorUF.map(item => item.aluguel),
+                                borderWidth: 1,
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                            }
+                        ];
+                    }
+
+                    this.chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: datasets
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: (value) => this.formatarMoeda(value)
+                                    }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: (context) => `Média: ${this.formatarMoeda(context.raw)}`
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
-            } else {
-                this.cidades = [];
-                this.bairros = [];
             }
         },
         filtrarImoveis() {
@@ -174,15 +273,18 @@ export default {
                     (!this.selectedTipoImovel || imovel.info.tipo === this.selectedTipoImovel) &&
                     (!this.selectedProximoMar || imovel.info.proximo_mar === this.selectedProximoMar) &&
                     (!this.selectedQuartos || imovel.comodos.dormitorio == this.selectedQuartos)
+
                 );
             });
 
             this.atualizarOpcoesFiltro();
-            this.atualizarGrafico();
+            this.atualizarGraficoPorUF();
+
         },
-        calcularMedia(imoveis) {
-            const totalArea = imoveis.reduce((sum, imovel) => sum + parseFloat(imovel.medidas.area_total || 0), 0);
-            const totalValor = imoveis.reduce((sum, imovel) => sum + parseFloat(imovel.medidas.media_metro_quadrado || 0) * parseFloat(imovel.medidas.area_total || 0), 0);
+        calcularMedia(imoveis, tipoNegocio) {
+            const imoveisFiltrados = imoveis.filter(imovel => imovel.preco.tipo_negocio === tipoNegocio);
+            const totalArea = imoveisFiltrados.reduce((sum, imovel) => sum + parseFloat(imovel.medidas.area_total || 0), 0);
+            const totalValor = imoveisFiltrados.reduce((sum, imovel) => sum + parseFloat(imovel.medidas.media_metro_quadrado || 0) * parseFloat(imovel.medidas.area_total || 0), 0);
             return totalArea ? (totalValor / totalArea) : 0;
         },
         formatarMoeda(valor) {
@@ -322,27 +424,74 @@ export default {
                         this.chart.destroy();
                     }
 
-                    const mediasPorUF = this.ufs.map(uf => {
-                        const imoveisPorUF = this.filteredImoveis.filter(imovel => imovel.localizacao.estado === uf);
-                        return {
-                            uf,
-                            media: this.calcularMedia(imoveisPorUF)
-                        };
-                    });
+                    let medias;
 
-                    const labels = mediasPorUF.map(item => item.uf);
-                    const data = mediasPorUF.map(item => item.media);
+                    if (this.selectedUf && this.selectedCidade && this.selectedBairro) {
+                        // Mostrar a média por tipos de imóvel no bairro
+                        medias = this.tiposImovel.map(tipo => {
+                            const imoveisPorTipo = this.filteredImoveis.filter(imovel => imovel.localizacao.bairro === this.selectedBairro && imovel.info.tipo === tipo);
+                            return {
+                                label: tipo,
+                                venda: this.calcularMedia(imoveisPorTipo, 'Venda'),
+                                aluguel: this.calcularMedia(imoveisPorTipo, 'Aluguel')
+                            };
+                        });
+                    } else if (this.selectedUf && this.selectedCidade) {
+                        // Mostrar a média por bairros
+                        medias = this.bairros.map(bairro => {
+                            const imoveisPorBairro = this.filteredImoveis.filter(imovel => imovel.localizacao.bairro === bairro);
+                            return {
+                                label: bairro,
+                                venda: this.calcularMedia(imoveisPorBairro, 'Venda'),
+                                aluguel: this.calcularMedia(imoveisPorBairro, 'Aluguel')
+                            };
+                        });
+                    } else if (this.selectedUf) {
+                        // Mostrar a média por cidades
+                        medias = this.cidades.map(cidade => {
+                            const imoveisPorCidade = this.filteredImoveis.filter(imovel => imovel.localizacao.cidade === cidade);
+                            return {
+                                label: cidade,
+                                venda: this.calcularMedia(imoveisPorCidade, 'Venda'),
+                                aluguel: this.calcularMedia(imoveisPorCidade, 'Aluguel')
+                            };
+                        });
+                    } else {
+                        // Mostrar a média por estados
+                        medias = this.ufs.map(uf => {
+                            const imoveisPorUf = this.filteredImoveis.filter(imovel => imovel.localizacao.estado === uf);
+                            return {
+                                label: uf,
+                                venda: this.calcularMedia(imoveisPorUf, 'Venda'),
+                                aluguel: this.calcularMedia(imoveisPorUf, 'Aluguel')
+                            };
+                        });
+                    }
+
+                    const labels = medias.map(item => item.label);
+                    const dataVenda = medias.map(item => item.venda);
+                    const dataAluguel = medias.map(item => item.aluguel);
+
+                    const datasets = [
+                        {
+                            label: 'Média do m² (Venda) (R$)',
+                            data: dataVenda,
+                            borderWidth: 1,
+                            backgroundColor: "rgba(81, 229, 255, 0.2)",
+                        },
+                        {
+                            label: 'Média do m² (Aluguel) (R$)',
+                            data: dataAluguel,
+                            borderWidth: 1,
+                            backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        }
+                    ];
 
                     this.chart = new Chart(ctx, {
                         type: 'bar',
                         data: {
                             labels: labels,
-                            datasets: [{
-                                label: 'Média do m² (R$)',
-                                data: data,
-                                borderWidth: 1,
-                                backgroundColor: "rgba(81, 229, 255, 0.2)",
-                            }]
+                            datasets: datasets
                         },
                         options: {
                             scales: {
@@ -375,8 +524,16 @@ export default {
             this.selectedProximoMar = '';
             this.selectedQuartos = '';
             this.filteredImoveis = this.allImoveis;
-            this.atualizarOpcoesFiltro();
-            this.atualizarGrafico();
+
+            // Atualiza as opções de filtro para mostrar todas as opções disponíveis novamente
+            this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
+            this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
+            this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];
+            this.tiposNegocio = [...new Set(this.allImoveis.map(imovel => imovel.preco.tipo_negocio).filter(tipo => tipo))];
+            this.tiposImovel = [...new Set(this.allImoveis.map(imovel => imovel.info.tipo))];
+            this.proximidadesMar = [...new Set(this.allImoveis.map(imovel => imovel.info.proximo_mar))];
+
+            this.atualizarGraficoPorUF();
         }
     },
     watch: {
@@ -391,6 +548,23 @@ export default {
             if (newVal !== oldVal) {
                 this.selectedBairro = "";
                 this.atualizarOpcoesFiltro();
+            }
+        },
+        selectedTipoNegocio(newVal, oldVal) {
+            if (newVal !== oldVal) {
+                this.atualizarOpcoesFiltro();
+            }
+        },
+        selectedTipoImovel(newVal, oldVal) {
+            if (newVal !== oldVal) {
+                this.atualizarOpcoesFiltro();
+
+            }
+        },
+        selectedProximoMar(newVal, oldVal) {
+            if (newVal !== oldVal) {
+                this.atualizarOpcoesFiltro();
+
             }
         }
     },

@@ -280,7 +280,7 @@
                                                 style="font-size: 10px;" class="text-secondary">({{
                                                   item.preco.tipo_negocio }})</small></strong>
                                           </h5>
-                                          <h4 class="text-success"><strong>{{ item.preco.preco_imovel }} </strong>
+                                          <h4 class="text-success"><strong>{{ formatCurrency(item.preco.preco_imovel) }} </strong>
                                           </h4>
                                         </div>
                                         <div class="col-md-2">
@@ -2661,6 +2661,11 @@ export default {
   },
 
   methods: {
+
+    formatCurrencyPreco(value) {
+      if (!value) return '';
+      return parseFloat(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    },
 
     mostrarTeste(event) {
       event.preventDefault(); // Previne o comportamento padrão do link

@@ -863,7 +863,7 @@
                                 </label>
                                 <div class="input-group">
                                   <input type="text" required v-if="!mostrarSkeleton" class="form-control"
-                                    v-model="areaPrivativa" placeholder="Digite aqui..."
+                                    v-model="areaPrivativa" placeholder="0,00"
                                     @input="aplicaMascaraMedida('areaPrivativa')" />
                                   <span v-if="!mostrarSkeleton" class="input-group-text">m²</span>
                                 </div>
@@ -4399,7 +4399,7 @@ export default {
 
       // TAB MEDIDAS
       areaConstruida: "",
-      areaPrivativa: "",
+      areaPrivativa: "0",
       areaTotal: "",
 
       // TAB PREÇOS

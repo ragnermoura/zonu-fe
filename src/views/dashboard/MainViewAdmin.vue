@@ -715,6 +715,7 @@ export default {
         year: 'numeric'
       });
     },
+    //Mude aqui para todos os imoveis listallImoveis
     fetchMyImoveis() {
       let id_user = this.id_user;
 
