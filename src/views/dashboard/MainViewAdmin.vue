@@ -2575,7 +2575,7 @@ export default {
     this.id_user = id_user
     const iniciais = this.nome.charAt(0) + this.sobrenome.charAt(0);
     this.iniciais = iniciais
-
+ 
     this.ferchProgress();
     this.fetchMyImoveis();
     this.fetchMyCondominios();
