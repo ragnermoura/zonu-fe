@@ -27,7 +27,7 @@
                             <option v-for="uf in ufs" :key="uf" :value="uf">{{ uf }}</option>
                         </select>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label for="cidade" class="form-label">Cidade <small><i
                                     class="fa fa-filter"></i></small></label>
                         <select class="form-select" v-model="selectedCidade" @change="filtrarImoveis">
@@ -70,7 +70,7 @@
                                 proximidade }}</option>
                         </select>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label for="quartos" class="form-label">Quartos <small><i
                                     class="fa fa-filter"></i></small></label>
                         <input style="height: 34px;" type="number" class="form-control" v-model="selectedQuartos"
@@ -126,7 +126,7 @@ export default {
             try {
                 const res = await api.listallImoveis();
                 this.allImoveis = res.data;
-                console.log('Aqui estão os imóveis ====>', this.allImoveis);
+             
                 this.ufs = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.estado))];
                 this.cidades = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.cidade))];
                 this.bairros = [...new Set(this.allImoveis.map(imovel => imovel.localizacao.bairro))];

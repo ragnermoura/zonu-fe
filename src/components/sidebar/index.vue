@@ -142,6 +142,46 @@
 
             </ul>
 
+            <ul v-if="viewSuporte" class="sidebar-nav" style="margin-top: -20px !important;">
+                <li class="sidebar-header">
+                    Atendimento & Suporte
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/list-ticket">
+                        <i class="align-middle" data-feather="tag"></i> <span class="align-middle">Tickets <span
+                                class="badge text-bg-danger">{{ totalTickets }}</span></span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-header">
+                    Visão cliente
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/dashboard">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard <span
+                            class="badge text-bg-info">Teste</span> </span> 
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-condominio">
+                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Novo
+                            condomínio</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/novo-imovel">
+                        <i class="align-middle" data-feather="home"></i> <span class="align-middle">Novo imóvel</span>
+                    </a>
+                </li>
+            </ul>
+
+            
+
 
         </div>
     </nav>
@@ -160,6 +200,7 @@ export default {
             totalTickets: 0,
             viewClient: false,
             viewAdmin: false,
+            viewSuporte: false,
             viewLogo: false,
             totalUsers: 0,
             totalClientes: 0,
@@ -183,15 +224,22 @@ export default {
         let token = this.token
         let decode = jwtDecode(token);
 
-        console.log(decode);
+       
 
         if (decode.id_nivel == 1) {
             this.viewAdmin = true;
             this.viewClient = false;
+            this.viewSuporte = false;
+            this.viewLogo = false;
+        } else if(decode.id_nivel == 2){
+            this.viewAdmin = false;
+            this.viewClient = false;
+            this.viewSuporte = true;
             this.viewLogo = false;
         } else {
             this.viewAdmin = false;
             this.viewClient = true;
+            this.viewSuporte = false;
             this.viewLogo = true;
         }
 
@@ -200,8 +248,6 @@ export default {
         } else {
             try {
                 if (decode.id_status == 2) {
-
-                    console.log('Status do token inválido:', decode.id_status);
                     window.location.href = "/";
 
                 }

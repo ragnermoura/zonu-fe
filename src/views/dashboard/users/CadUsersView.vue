@@ -38,7 +38,7 @@
                                                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                             data-bs-target="#profile-tab-pane" type="button" role="tab"
                                                             aria-controls="profile-tab-pane"
-                                                            aria-selected="false">Cliente Zonu</button>
+                                                            aria-selected="false" hidden>Cliente Zonu</button>
                                                     </li>
 
                                                 </ul>

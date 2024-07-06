@@ -18,7 +18,7 @@
                             {{ totalTickets }} Novas Notificações
                         </div>
                         <div class="list-group" v-for="item in listTikects">
-                            <a href="solicitacoes" class="list-group-item">
+                            <a href="#" class="list-group-item">
                                 <div class="row g-0 align-items-center">
                                     <div class="col-2">
                                         <div class="avatar-null img-fluid rounded me-1" alt="Avatar">{{ iniciaisUser }}
@@ -36,7 +36,7 @@
                             </a>
                         </div>
                         <div class="dropdown-menu-footer">
-                            <a href="solicitacoes" class="text-muted">Mostrar todas as Solicitações</a>
+                            <a href="#" class="text-muted">Mostrar todas as Solicitações</a>
                         </div>
                     </div>
                 </li>
